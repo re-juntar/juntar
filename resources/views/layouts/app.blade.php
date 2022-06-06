@@ -37,6 +37,44 @@
             <main>
                 {{ $slot }}
             </main>
+            <footer>
+                <div class="container flex flex-col ">
+                    <div>
+                        <img class="w-80 h-20" src="{{asset('/images/logos/juntar-logo-w.svg')}}" alt="">
+                    </div>
+
+                    <div>
+                        <h5>Juntar</h5>
+                        <p>
+                            Somos una plataforma web para gestión de eventos libre y
+                            gratuita. El sitio permite a los usuarios navegar, crear y participar de eventos. Nació como un
+                            desafío universitario y podemos asegurar que hemos llegado a la meta que teníamos como objetivo
+                            e incluso la hemos superado gracias a un gran equipo de trabajo. Licencia GNU GPL version 3
+                        </p>
+
+                        <div>
+                            <h5 class="white-text">Contacto</h5>
+                            <a href="">Escribinos un mensaje</a>
+
+                            <h5 class="white-text">Sobre Nosotros</h5>
+                            <a href="">Sobre Nosotros</a>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div>
+                            Logo unco
+                        </div>
+
+                        <div>
+                            Logo fai
+                        </div>
+                    </div>
+
+
+                </div>
+            </footer>
         </div>
 
         @stack('modals')
