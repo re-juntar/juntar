@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('pages.home');
 });
 
 /* Route::middleware([
@@ -29,5 +29,5 @@ Route::get('/', function () {
 
 
 Route::get('/home', function () {
-    return view('home');
+    return view('pages.home');
 })->name('home');
