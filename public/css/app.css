@@ -1538,10 +1538,6 @@ select {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
-.py-\[7vh\] {
-  padding-top: 7vh;
-  padding-bottom: 7vh;
-}
 .py-\[4vh\] {
   padding-top: 4vh;
   padding-bottom: 4vh;
@@ -1549,6 +1545,10 @@ select {
 .py-\[3vh\] {
   padding-top: 3vh;
   padding-bottom: 3vh;
+}
+.py-\[7vh\] {
+  padding-top: 7vh;
+  padding-bottom: 7vh;
 }
 .pt-6 {
   padding-top: 1.5rem;
