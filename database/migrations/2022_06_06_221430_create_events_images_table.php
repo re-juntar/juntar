@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('event_images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('event_id')->nullable()->constrained()->onDelete('set null');
+            $table->tinyInteger('category');
+            $table->string('file_route', 200);
+            $table->timestamp('creation_date');
             $table->timestamps();
+
+            // $table->foreign('events_id')->references('id')->on('events')->onDelete('set null');
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('event_images');
     }
 };
