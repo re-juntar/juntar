@@ -13,7 +13,17 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @auth
-
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                            {{ __('Inicio') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                            {{ __('Registrarse') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                            {{ __('Ingresar') }}
+                        </x-jet-nav-link>
+                    </div>
                     <!-- Settings Dropdown -->
                     <div class="ml-3 relative">
                         <x-jet-dropdown align="right" width="48">
