@@ -13,6 +13,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(ellipse at center, #0B0D19 10%, #FE1355 100%)',
+            }
         },
     },
 
