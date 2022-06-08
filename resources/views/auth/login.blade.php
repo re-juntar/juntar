@@ -1,3 +1,10 @@
+{{-- <style data-emotion="css"></style>
+<style>
+    html * {
+        background: rgba(255, 0, 0, .1);
+        box-shadow: 0 0 0 1px red;
+    }
+</style> --}}
 <x-app-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
