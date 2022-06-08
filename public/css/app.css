@@ -1854,15 +1854,6 @@ select {
   content: var(--tw-content);
   background-image: radial-gradient(ellipse at center, #0B0D19 10%, #FE1355 100%);
 }
-.before\:from-\[\#0B0D19\]::before {
-  content: var(--tw-content);
-  --tw-gradient-from: #0B0D19;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(11 13 25 / 0));
-}
-.before\:to-\[\#FE1355\]::before {
-  content: var(--tw-content);
-  --tw-gradient-to: #FE1355;
-}
 .before\:opacity-80::before {
   content: var(--tw-content);
   opacity: 0.8;
