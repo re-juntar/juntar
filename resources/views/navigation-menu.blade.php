@@ -118,6 +118,18 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             @auth
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                        {{ __('Inicio') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                        {{ __('Registrarse') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="{{ route('login') }}" :active="request()->routeIs('login')">
+                        {{ __('Ingresar') }}
+                    </x-jet-responsive-nav-link>
+                </div>
+
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="shrink-0 mr-3">
