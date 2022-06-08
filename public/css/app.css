@@ -1182,6 +1182,9 @@ select {
 .max-w-6xl {
   max-width: 72rem;
 }
+.max-w-full {
+  max-width: 100%;
+}
 .max-w-\[40\%\] {
   max-width: 40%;
 }
@@ -1310,6 +1313,16 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-7 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.75rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .overflow-hidden {
   overflow: hidden;
@@ -1449,6 +1462,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
+.bg-\[\#FE1355\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 19 85 / var(--tw-bg-opacity));
+}
 .bg-\[\#0B0D19\] {
   --tw-bg-opacity: 1;
   background-color: rgb(11 13 25 / var(--tw-bg-opacity));
@@ -1538,6 +1555,10 @@ select {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
+.py-\[7vh\] {
+  padding-top: 7vh;
+  padding-bottom: 7vh;
+}
 .py-\[4vh\] {
   padding-top: 4vh;
   padding-bottom: 4vh;
@@ -1545,10 +1566,6 @@ select {
 .py-\[3vh\] {
   padding-top: 3vh;
   padding-bottom: 3vh;
-}
-.py-\[7vh\] {
-  padding-top: 7vh;
-  padding-bottom: 7vh;
 }
 .pt-6 {
   padding-top: 1.5rem;
@@ -1582,6 +1599,12 @@ select {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pl-\[10vw\] {
+  padding-left: 10vw;
+}
+.pr-\[10vh\] {
+  padding-right: 10vh;
 }
 .pt-16 {
   padding-top: 4rem;
@@ -1898,6 +1921,10 @@ select {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.hover\:bg-\[\#050714\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(5 7 20 / var(--tw-bg-opacity));
 }
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
