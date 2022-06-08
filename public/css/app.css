@@ -1194,6 +1194,9 @@ select {
 .max-w-\[50\%\] {
   max-width: 50%;
 }
+.max-w-full {
+  max-width: 100%;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1454,6 +1457,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(5 7 20 / var(--tw-bg-opacity));
 }
+.bg-\[\#FE1355\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 19 85 / var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -1582,6 +1589,12 @@ select {
 }
 .pt-16 {
   padding-top: 4rem;
+}
+.pl-\[10vw\] {
+  padding-left: 10vw;
+}
+.pr-\[10vh\] {
+  padding-right: 10vh;
 }
 .text-left {
   text-align: left;
@@ -1900,6 +1913,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.hover\:bg-\[\#050714\]:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(5 7 20 / var(--tw-bg-opacity));
+}
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1923,6 +1940,10 @@ select {
 .hover\:text-gray-200:hover {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+.hover\:text-\[\#050714\]:hover {
+  --tw-text-opacity: 1;
+  color: rgb(5 7 20 / var(--tw-text-opacity));
 }
 .hover\:subpixel-antialiased:hover {
   -webkit-font-smoothing: auto;
