@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+Route::post('/', [HomeController::class, 'filteredIndex'])->name('home.filter');
+
 /* Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
