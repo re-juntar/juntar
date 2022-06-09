@@ -8,22 +8,25 @@
     <section class="pt-16 pb-5 px-4 bg-[#0B0D19]">
         <div class="w-full px-1 py-[1vh] mx-auto">
             <form action="">
-                
+
             </form>
         </div>
     </section>
-        
+
     <section class="pt-16 pb-5 px-4 bg-[#050714]">
         <div class="w-full px-4 mx-auto py-[3vh]">
             <div class="flex flex-wrap -mx-4">
+                @foreach ($events as $event)
+
                 {{-- Aca empezaría el foreach de eventos --}}
                 <div class="relative w-full px-4 basis-2/6 max-w-[33%] mb-12">
                     <x-card>
-                        <h1>Holi</div>
-                    </x-card>
+                        <h1>{{ $event->name }}
                 </div>
-                
+                </x-card>
             </div>
+            @endforeach
+        </div>
         </div>
     </section>
 

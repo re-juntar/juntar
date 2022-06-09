@@ -15,22 +15,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $filter = new Request();
-        $controller = new EventController();
-        $response = $controller->homeRequest($filter);
+        // $filter = new Request();
+        // $controller = new EventController();
+        // $events = $controller->homeRequest($filter);
 
-        $events = $response->paginate(10);
+        // $events = $response->paginate(10);
 
-        return view('home', compact('events'));
+        // return view('home', compact('events'));
     }
 
     public function filteredIndex(Request $filter)
     {
         $controller = new EventController();
-        $response = $controller->homeRequest($filter);
+        $events = $controller->homeRequest($filter);
 
-        $events = $response->paginate(10);
-        return view('home', compact('events'));
+        // $events = $response->paginate(10);
+        return view('pages.home', compact('events'));
     }
 
     /**

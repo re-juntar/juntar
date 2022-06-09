@@ -87,7 +87,7 @@ class EventController extends Controller
     {
         if (isset($filter['search'])) {
             $search = $filter['search'];
-            $response = Event::where('name', 'like', '%' . $search . '%')->orderBy('date', 'desc');
+            $response = Event::where('name', 'like', '%' . $search . '%');
         } else {
             $response = Event::all();
         }
@@ -104,7 +104,7 @@ class EventController extends Controller
                     break;
             }
         } else {
-            $response = $response->orderBy('date', 'desc');
+            $response = $response->sortBy('date');
         }
         return $response;
     }

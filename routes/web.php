@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+// Route::get('/', function () {
+//     return view('pages.home');
+// });
 
-Route::post('/', [HomeController::class, 'filteredIndex'])->name('home.filter');
+Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
 
 /* Route::middleware([
     'auth:sanctum',
@@ -30,6 +31,6 @@ Route::post('/', [HomeController::class, 'filteredIndex'])->name('home.filter');
 }); */
 
 
-Route::get('/home', function () {
-    return view('pages.home');
-})->name('home');
+// Route::get('/home', function () {
+//     return view('pages.home');
+// })->name('home');
