@@ -599,6 +599,44 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.form-input,.form-textarea,.form-select,.form-multiselect {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  border-color: #6b7280;
+  border-width: 1px;
+  border-radius: 0px;
+  padding-top: 0.5rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  --tw-shadow: 0 0 #0000;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus, .form-multiselect:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: #2563eb;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  border-color: #2563eb;
+}
+.form-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-print-color-adjust: exact;
+     color-adjust: exact;
+          print-color-adjust: exact;
+}
 .prose {
   color: var(--tw-prose-body);
   max-width: 65ch;
@@ -1059,6 +1097,12 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
+.mb-px {
+  margin-bottom: 1px;
+}
+.mb-12 {
+  margin-bottom: 3rem;
+}
 .block {
   display: block;
 }
@@ -1182,6 +1226,9 @@ select {
 .max-w-6xl {
   max-width: 72rem;
 }
+.max-w-full {
+  max-width: 100%;
+}
 .max-w-\[40\%\] {
   max-width: 40%;
 }
@@ -1193,9 +1240,6 @@ select {
 }
 .max-w-\[50\%\] {
   max-width: 50%;
-}
-.max-w-full {
-  max-width: 100%;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -1214,6 +1258,9 @@ select {
 }
 .basis-1\/2 {
   flex-basis: 50%;
+}
+.basis-2\/6 {
+  flex-basis: 33.333333%;
 }
 .origin-top-left {
   transform-origin: top left;
@@ -1324,6 +1371,9 @@ select {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.break-words {
+  overflow-wrap: break-word;
 }
 .rounded-md {
   border-radius: 0.375rem;
@@ -1449,6 +1499,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
+.bg-\[\#FE1355\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 19 85 / var(--tw-bg-opacity));
+}
 .bg-\[\#0B0D19\] {
   --tw-bg-opacity: 1;
   background-color: rgb(11 13 25 / var(--tw-bg-opacity));
@@ -1456,10 +1510,6 @@ select {
 .bg-\[\#050714\] {
   --tw-bg-opacity: 1;
   background-color: rgb(5 7 20 / var(--tw-bg-opacity));
-}
-.bg-\[\#FE1355\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 19 85 / var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
@@ -1469,6 +1519,9 @@ select {
 }
 .bg-cover {
   background-size: cover;
+}
+.bg-clip-border {
+  background-clip: border-box;
 }
 .bg-center {
   background-position: center;
@@ -1546,6 +1599,10 @@ select {
   padding-top: 7vh;
   padding-bottom: 7vh;
 }
+.py-\[1vh\] {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
 .py-\[4vh\] {
   padding-top: 4vh;
   padding-bottom: 4vh;
@@ -1587,14 +1644,17 @@ select {
 .pt-8 {
   padding-top: 2rem;
 }
-.pt-16 {
-  padding-top: 4rem;
-}
 .pl-\[10vw\] {
   padding-left: 10vw;
 }
 .pr-\[10vh\] {
   padding-right: 10vh;
+}
+.pt-16 {
+  padding-top: 4rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
 }
 .text-left {
   text-align: left;
@@ -1604,6 +1664,9 @@ select {
 }
 .text-right {
   text-align: right;
+}
+.align-middle {
+  vertical-align: middle;
 }
 .font-sans {
   font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -1940,10 +2003,6 @@ select {
 .hover\:text-gray-200:hover {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
-}
-.hover\:text-\[\#050714\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(5 7 20 / var(--tw-text-opacity));
 }
 .hover\:subpixel-antialiased:hover {
   -webkit-font-smoothing: auto;
