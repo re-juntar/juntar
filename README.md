@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Hot to install
+## How to install
 - `composer install`
 - `npm install`
 - `php artisan key:generate`
