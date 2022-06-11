@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -26,11 +27,23 @@ class HomeController extends Controller
 
     public function filteredIndex(Request $filter)
     {
+        $agent = new Agent();
         $controller = new EventController();
         $events = $controller->homeRequest($filter);
-
+        $arr = collect([]);
+        if($agent->isPhone()){
+            $arr = $events->chunk(5);
+        }elseif($agent->isTablet()){
+            for($i=0; $i<3; $i++){
+                $arr->push($events->nth(5, $i));
+            }
+        }else{
+            for($i=0; $i<5; $i++){
+                $arr->push($events->nth(5, $i));
+            }
+        }
         // $events = $response->paginate(10);
-        return view('pages.home', compact('events'));
+        return view('pages.home', compact('arr'));
     }
 
     /**

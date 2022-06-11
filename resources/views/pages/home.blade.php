@@ -13,21 +13,49 @@
         </div>
     </section>
 
-    <section class="pt-16 pb-5 px-4 bg-[#050714]">
+    {{-- <section class="pt-16 pb-5 px-4 bg-[#050714]">
         <div class="w-full px-4 mx-auto py-[3vh]">
             <div class="flex flex-wrap -mx-4">
-                @foreach ($events as $event)
-
-                {{-- Aca empezaría el foreach de eventos --}}
-                <div class="relative w-full px-4 basis-2/6 max-w-[33%] mb-12">
-                    <x-card>
-                        <h1>{{ $event->name }}
+                <div class="px-20 w-full flex flex-wrap">
+                    @foreach($arr as $sub)
+                    <div id="{{$loop->index}}" class="w-1/5">
+                        @foreach($sub as $event)
+                        <div id="{{$loop->index}}" class="w-full">
+                            <div class="w-full p-2">
+                                <x-card class="w-full h-full">
+                                    <div class="relative">
+                                        <img class="rounded-lg" src="{{asset($event['image_flyer'])}}" alt="">
+                                    </div>
+                                </x-card>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endforeach
                 </div>
-                </x-card>
+            </div>
+        </div>
+        </div>
+    </section> --}}
+
+    <section class="pt-16 pb-5 px-4 bg-[#050714]">
+        <x-grid>
+            @foreach($arr as $sub)
+            <div class="break-inside-avoid mb-2 rounded-lg">
+                @foreach($sub as $event)
+                    <div id="{{$event->id}}" class="w-full">
+                        <div class="w-full p-2">
+                            <x-card class="w-full h-full">
+                                <div class="relative">
+                                    <img class="rounded-lg" src="{{asset($event['image_flyer'])}}" alt="">
+                                </div>
+                            </x-card>
+                        </div>
+                    </div>
+                @endforeach
             </div>
             @endforeach
-        </div>
-        </div>
+        </x-grid>
     </section>
 
 </x-app-layout>
