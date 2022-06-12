@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
+Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
+
 
 /* Route::middleware([
     'auth:sanctum',
@@ -28,9 +27,3 @@ Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 }); */
-
-
-
-Route::get('/home', function () {
-    return view('pages.home');
-})->name('home');
