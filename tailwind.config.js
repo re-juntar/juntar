@@ -19,10 +19,14 @@ module.exports = {
                     dark: "#050714",
                     darkish: "#0b0d19",
                 },
+                white: {
+                    ghost: "#f8f9fa",
+                },
             },
             backgroundImage: {
-                'gradient-radial': 'radial-gradient(ellipse at center, #0B0D19 10%, #FE1355 100%)',
-            }
+                "gradient-radial":
+                    "radial-gradient(ellipse at center, #0B0D19 10%, #FE1355 100%)",
+            },
         },
     },
 
