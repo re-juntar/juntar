@@ -5,12 +5,12 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            {{ __('Antes de continuar, ¿podría verificar su correo electrónico clickeando en el link que le hemos enviado? Si no recivió el correo, le enviaremos otro encantadamente.') }}
         </div>
 
         @if (session('status') == 'verification-link-sent')
             <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided in your profile settings.') }}
+                {{ __('Un nuevo link de verificación ha sido enviado al correo electrónico provisto en su configuración de perfil.') }}
             </div>
         @endif
 
@@ -20,23 +20,20 @@
 
                 <div>
                     <x-jet-button type="submit">
-                        {{ __('Resend Verification Email') }}
+                        {{ __('Re-enviar Correo Electrónico de Verificación') }}
                     </x-jet-button>
                 </div>
             </form>
 
             <div>
-                <a
-                    href="{{ route('profile.show') }}"
-                    class="underline text-sm text-gray-600 hover:text-gray-900"
-                >
-                    {{ __('Edit Profile') }}</a>
+                <a href="{{ route('profile.show') }}" class="underline text-sm text-gray-600 hover:text-gray-900">
+                    {{ __('Editar Perfil') }}</a>
 
                 <form method="POST" action="{{ route('logout') }}" class="inline">
                     @csrf
 
                     <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">
-                        {{ __('Log Out') }}
+                        {{ __('Cerrar Sesión') }}
                     </button>
                 </form>
             </div>

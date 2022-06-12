@@ -13,9 +13,16 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @auth
-
+                    <div class="hidden space-x-7 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                            {{ __('Inicio') }}
+                        </x-jet-nav-link>
+                        <x-jet-nav-link href="">
+                            {{ __('Crear Evento') }}
+                        </x-jet-nav-link>
+                    </div>
                     <!-- Settings Dropdown -->
-                    <div class="ml-3 relative">
+                    <div class="ml-4 relative">
                         <x-jet-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -45,11 +52,12 @@
                             <x-slot name="content">
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Manage Account') }}
+                                    {{ Auth::user()->name }}
+                                    {{-- {{ __('Administrar Cuenta') }} --}}
                                 </div>
 
                                 <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                    {{ __('Profile') }}
+                                    {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
 
                                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -65,7 +73,7 @@
                                     @csrf
 
                                     <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                        {{ __('Log Out') }}
+                                        {{ __('Cerrar Sesión') }}
                                     </x-jet-dropdown-link>
                                 </form>
                             </x-slot>
@@ -108,6 +116,15 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             @auth
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                        {{ __('Inicio') }}
+                    </x-jet-responsive-nav-link>
+                    <x-jet-responsive-nav-link href="">
+                        {{ __('Crear Evento') }}
+                    </x-jet-responsive-nav-link>
+                </div>
+
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="shrink-0 mr-3">
@@ -125,7 +142,7 @@
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
                     <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                        {{ __('Profile') }}
+                        {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -139,7 +156,7 @@
                         @csrf
 
                         <x-jet-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                            {{ __('Log Out') }}
+                            {{ __('Cerrar Sesión') }}
                         </x-jet-responsive-nav-link>
                     </form>
 
