@@ -35,7 +35,7 @@
         <main>
             {{ $slot }}
         </main>
-        <footer class="bg-[#0B0D19] text-[#f8f9fa] pt-16">
+        <footer class="bg-fogra-darkish text-white-ghost pt-16">
             <div class="px-4 mx-auto max-w-6xl">
                 <div class="flex flex-wrap -mx-4"> {{-- row --}}
                     <div class="relative w-100 px-4 py-[4vh] basis-2/5 max-w-[40%]"> {{-- col --}}
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             </div>
-            <div class="text-left text-[#f8f9fa] bg-[#050714] py-4">
+            <div class="text-left text-white-ghost bg-fogra-dark py-4">
                 <p class="px-4 mx-auto max-w-6xl">© Juntar 2022</p>
             </div>
         </footer>
