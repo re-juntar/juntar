@@ -1595,6 +1595,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(254 19 85 / var(--tw-bg-opacity));
 }
+.bg-white-ghost {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 249 250 / var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -2164,6 +2168,10 @@ select {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
+.focus\:border-awesome:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(254 19 85 / var(--tw-border-opacity));
+}
 .focus\:bg-indigo-600:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
@@ -2225,6 +2233,10 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(191 219 254 / var(--tw-ring-opacity));
 }
+.focus\:ring-awesome:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(254 19 85 / var(--tw-ring-opacity));
+}
 .focus\:ring-opacity-50:focus {
   --tw-ring-opacity: 0.5;
 }
@@ -2243,6 +2255,10 @@ select {
 .active\:bg-gray-50:active {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+.active\:bg-awesome:active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 19 85 / var(--tw-bg-opacity));
 }
 .active\:text-gray-700:active {
   --tw-text-opacity: 1;
