@@ -5,12 +5,28 @@
         <x-jet-button class="bg-[#FE1355] uppercase text-lg hover:bg-[#050714]">Empezar</x-jet-button>
     </x-hero>
 
-    <section class="pt-16 pb-5 px-4 bg-[#0B0D19]">
-        <div class="w-full px-1 py-[1vh] mx-auto">
-            <form action="">
+    <section class="bg-[#0B0D19] w-full">
+        @livewire('search-sort-form')
+    </section>
 
-            </form>
-        </div>
+    <section class="pt-16 pb-5 px-4 bg-[#050714]">
+        <x-grid>
+            @foreach($arr as $sub)
+            <div class="break-inside-avoid mb-2 rounded-lg">
+                @foreach($sub as $event)
+                    <div id="{{$event->id}}" class="w-full">
+                        <div class="w-full p-2">
+                            <x-card class="w-full h-full">
+                                <div class="relative">
+                                    <img class="rounded-lg" src="{{asset($event['image_flyer'])}}" alt="">
+                                </div>
+                            </x-card>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            @endforeach
+        </x-grid>
     </section>
 
     {{-- <section class="pt-16 pb-5 px-4 bg-[#050714]">
@@ -37,25 +53,5 @@
         </div>
         </div>
     </section> --}}
-
-    <section class="pt-16 pb-5 px-4 bg-[#050714]">
-        <x-grid>
-            @foreach($arr as $sub)
-            <div class="break-inside-avoid mb-2 rounded-lg">
-                @foreach($sub as $event)
-                    <div id="{{$event->id}}" class="w-full">
-                        <div class="w-full p-2">
-                            <x-card class="w-full h-full">
-                                <div class="relative">
-                                    <img class="rounded-lg" src="{{asset($event['image_flyer'])}}" alt="">
-                                </div>
-                            </x-card>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            @endforeach
-        </x-grid>
-    </section>
-
+    
 </x-app-layout>

@@ -32,14 +32,12 @@ class HomeController extends Controller
         $events = $controller->homeRequest($filter);
         $arr = collect([]);
         if($agent->isPhone()){
-            $arr = $events->chunk(5);
-        }elseif($agent->isTablet()){
-            for($i=0; $i<3; $i++){
-                $arr->push($events->nth(5, $i));
+            for($i=0; $i<2; $i++){
+                $arr->push($events->nth(2, $i));
             }
         }else{
-            for($i=0; $i<5; $i++){
-                $arr->push($events->nth(5, $i));
+            for($i=0; $i<4; $i++){
+                $arr->push($events->nth(4, $i));
             }
         }
         // $events = $response->paginate(10);
