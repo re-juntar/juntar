@@ -8,7 +8,7 @@
         </div>
         <div class="flex items-center px-2 rounded-lg">
             <select id="" class="text-base text-gray-800 outline-none min-w-full border-2 px-4 py-2 rounded-lg">
-                <option value="" selected>Ordenar por...</option>
+                <option value="" disabled selected>Ordenar por...</option>
                 <option value="">Fecha de inicio</option>
                 <option value="">Fecha de creación</option>
             </select>
