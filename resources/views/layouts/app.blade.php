@@ -37,13 +37,13 @@
         </main>
         <footer class="bg-fogra-darkish text-white-ghost pt-16">
             <div class="px-4 mx-auto max-w-6xl">
-                <div class="flex flex-wrap -mx-4"> {{-- row --}}
-                    <div class="relative w-100 px-4 py-[4vh] basis-2/5 max-w-[40%]"> {{-- col --}}
+                <div class="flex flex-wrap -mx-4">
+                    <div class="relative w-100 px-4 py-[4vh] basis-2/5 max-w-[40%]">
                         <img class="m-w-100 h-auto" src="{{ asset('/images/logos/juntar-logo-w.svg') }}" alt="">
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-4"> {{-- row --}}
-                    <div class="relative w-100 px-4 basis-4/6 max-w-[66%]"> {{-- col --}}
+                <div class="flex flex-wrap -mx-4">
+                    <div class="relative w-100 px-4 basis-4/6 max-w-[66%]">
                         <h5 class="text-xl font-medium">Juntar</h5>
                         <p class="text-lg">
                             Somos una plataforma web para gestión de eventos libre y
@@ -54,24 +54,14 @@
                             e incluso la hemos superado gracias a un gran equipo de trabajo. Licencia GNU GPL version 3
                         </p>
                     </div>
-                    <div class="relative w-100 px-4 basis-4/12 max-w-[33%]"> {{-- col --}}
+                    <div class="relative w-100 px-4 basis-4/12 max-w-[33%]">
                         <div class="mt-6">
                             <h5 class="text-lg font-medium underline"><a href="">Contacto</a></h5>
-                            {{-- <ul class="list-disc list-inside">
-                                            <li>
-                                                <a class="text-[#007bff]" href="">Escribinos un mensaje</a>
-                                            </li>
-                                        </ul> --}}
                             <h5 class="text-lg font-medium underline"><a href="">Sobre Nosotros</a></h5>
-                            {{-- <ul class="list-disc list-inside">
-                                            <li>
-                                                <a class="text-[#007bff]" href="">Sobre Nosotros</a>
-                                            </li>
-                                        </ul> --}}
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-4 py-[3vh]"> {{-- row --}}
+                <div class="flex flex-wrap -mx-4 py-[3vh]">
                     <div class="flex justify-center relative basis-1/2 max-w-[50%] py-4">
                         <img class="max-h-48" src="{{ asset('/images/logos/logo-uncoma-w.svg') }}" alt="">
                     </div>
