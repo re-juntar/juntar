@@ -13,6 +13,6 @@ class Hero extends Component
      */
     public function render()
     {
-        return view('components.containers.hero');
+        return view('components.hero');
     }
 }

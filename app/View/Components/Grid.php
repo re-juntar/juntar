@@ -23,6 +23,6 @@ class Grid extends Component
      */
     public function render()
     {
-        return view('components.containers.grid');
+        return view('components.grid');
     }
 }
