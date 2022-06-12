@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
 
+Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
+
 
 /* Route::middleware([
     'auth:sanctum',
