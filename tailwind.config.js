@@ -26,7 +26,25 @@ module.exports = {
             backgroundImage: {
                 "gradient-radial":
                     "radial-gradient(ellipse at center, #0B0D19 10%, #FE1355 100%)",
+                "gradient-cards":
+                    "linear-gradient(270deg, #15c1ca, #f32676);",
             },
+            animation: {
+                "gradient-anima": "super_bg 11s ease infinite"
+            },
+            keyframes: {
+                super_bg: {
+                    '0%': {
+                        backgroundPosition: '0% 50%'
+                    },
+                    '50%': {
+                        backgroundPosition: '100% 50%'
+                    },
+                    '100%': {
+                        backgroundPosition: '0% 50%'
+                    }
+                }
+            }
         },
     },
 
