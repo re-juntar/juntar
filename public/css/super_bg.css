@@ -1,0 +1,43 @@
+.super_bg {
+    background: linear-gradient(270deg, #15c1ca, #f32676);
+    background-size: 600% 600%;
+    -webkit-animation: super_bg 11s ease infinite;
+    -moz-animation: super_bg 11s ease infinite;
+    animation: super_bg 11s ease infinite;
+}
+
+@-webkit-keyframes super_bg {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes super_bg {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes super_bg {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
