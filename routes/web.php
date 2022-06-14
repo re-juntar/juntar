@@ -18,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
 
 Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
+
+Route::view('/about-us', 'pages.about-us')->name('about-us');
