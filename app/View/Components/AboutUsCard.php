@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class AboutUsCard extends Component
 {
+    public $miembro;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($miembro)
     {
-        //
+        $this->miembro = $miembro;
     }
 
     /**
