@@ -10,9 +10,9 @@
     </section>
 
     <section class="pt-16 pb-5 px-4 bg-fogra-dark">
-        <div class="mx-auto" data-masonry='{ "itemSelector": ".grid-item", "horizontalOrder": true, "fitWidth": true}'>
-            @foreach ($events as $event)
-                <x-card id="{{ $event->id }}" class="grid-item w-full mb-4 md:mx-2 md:w-[300px]">
+        <div class="mx-auto infinite-scr">
+            @foreach ($response as $event)
+                <x-card id="{{ $event->id }}" class="grid-item mb-4 md:mx-2 w-[300px]">
                     @php
                         $src = $event['image_flyer'];
                         if($event['image_flyer'] == null){
@@ -24,4 +24,23 @@
             @endforeach
         </div>
     </section>
+
+    <x-slot name="packs">
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+        <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+        <script>
+            var msnry = new Masonry( '.infinite-scr', {
+                itemSelector: ".grid-item",
+                horizontalOrder: true,
+                fitWidth: true
+            });
+            let infScroll = new InfiniteScroll( '.infinite-scr', {
+                path: "http://juntar.test/home?page=@{{#}}",
+                append: '.grid-item',
+                history: false,
+                outlayer: msnry
+            });
+        </script>
+    </x-slot>
+    
 </x-app-layout>

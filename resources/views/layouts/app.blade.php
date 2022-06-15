@@ -26,11 +26,6 @@
     <div>
         @livewire('navigation-menu')
 
-        <!-- Page Heading -->
-        @if (isset($hero))
-            {{ $hero }}
-        @endif
-
         <!-- Page Content -->
         <main>
             {{ $slot }}
@@ -80,6 +75,11 @@
     @stack('modals')
 
     @livewireScripts
+
+    @if (isset($packs))
+        {{ $packs }}
+    @endif
+    
 </body>
 
 </html>
