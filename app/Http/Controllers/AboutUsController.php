@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
-use Jenssegers\Agent\Agent;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class AboutUsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,36 +14,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $filter = new Request();
-        // $controller = new EventController();
-        // $events = $controller->homeRequest($filter);
-
-        // $events = $response->paginate(10);
-
-        // return view('home', compact('events'));
-    }
-
-    public function filteredIndex(Request $filter)
-    {
-        $agent = new Agent();
-        $eventController = new EventController();
-        $events = $eventController->homeRequest($filter);
-        $arr = collect([]);
-        if ($agent->isPhone()) {
-            for ($i = 0; $i < 2; $i++) {
-                $arr->push($events->nth(2, $i));
-            }
-        } else {
-            for ($i = 0; $i < 4; $i++) {
-                $arr->push($events->nth(4, $i));
-            }
-        }
-
         $permissionController = new PermissionController();
         $permission = $permissionController->isAdmin();
-        // $events = $response->paginate(10);
-        
-        return view('pages.home', compact('arr', 'permission'));
+
+        return view('pages.about-us', compact('permission'));
     }
 
     /**
