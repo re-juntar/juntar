@@ -27,9 +27,9 @@
                 </div>
             @endforeach
         </x-grid> --}}
-        <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentPosition": true, "gutter": 10, "horizontalOrder": true, "fitWidth": true}'>
+        <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 80, "percentPosition": true, "gutter": 10, "horizontalOrder": true}'>
             @foreach ($events as $event)
-                <x-card id="{{ $event->id }}" class="grid-item w-full mb-3">
+                <x-card id="{{ $event->id }}" class="grid-item w-1/6 mb-3">
                     <img class="rounded-lg" src="{{ asset($event['image_flyer']) }}" alt="">
                 </x-card>
             @endforeach
