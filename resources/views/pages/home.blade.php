@@ -10,27 +10,16 @@
     </section>
 
     <section class="pt-16 pb-5 px-4 bg-fogra-dark">
-        {{-- <x-grid>
-            @foreach ($arr as $sub)
-                <div class="break-inside-avoid mb-2 rounded-lg">
-                    @foreach ($sub as $event)
-                        <div id="{{ $event->id }}" class="w-full">
-                            <div class="w-full p-2">
-                                <x-card class="w-full h-full">
-                                    <div class="relative">
-                                        <img class="rounded-lg" src="{{ asset($event['image_flyer']) }}" alt="">
-                                    </div>
-                                </x-card>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endforeach
-        </x-grid> --}}
-        <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 80, "percentPosition": true, "gutter": 10, "horizontalOrder": true}'>
+        <div class="mx-auto" data-masonry='{ "itemSelector": ".grid-item", "horizontalOrder": true, "fitWidth": true}'>
             @foreach ($events as $event)
-                <x-card id="{{ $event->id }}" class="grid-item w-1/6 mb-3">
-                    <img class="rounded-lg" src="{{ asset($event['image_flyer']) }}" alt="">
+                <x-card id="{{ $event->id }}" class="grid-item w-full mb-4 md:mx-2 md:w-[300px]">
+                    @php
+                        $src = $event['image_flyer'];
+                        if($event['image_flyer'] == null){
+                            $src = 'images/public/event-card-placeholder.png';
+                        }
+                    @endphp
+                    <img class="rounded-lg" src="{{ asset($src) }}" alt="">
                 </x-card>
             @endforeach
         </div>
