@@ -10,7 +10,7 @@
     </section>
 
     <section class="pt-16 pb-5 px-4 bg-fogra-dark">
-        <x-grid>
+        {{-- <x-grid>
             @foreach ($arr as $sub)
                 <div class="break-inside-avoid mb-2 rounded-lg">
                     @foreach ($sub as $event)
@@ -26,6 +26,13 @@
                     @endforeach
                 </div>
             @endforeach
-        </x-grid>
+        </x-grid> --}}
+        <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentPosition": true, "gutter": 10, "horizontalOrder": true, "fitWidth": true}'>
+            @foreach ($events as $event)
+                <x-card id="{{ $event->id }}" class="grid-item w-full mb-3">
+                    <img class="rounded-lg" src="{{ asset($event['image_flyer']) }}" alt="">
+                </x-card>
+            @endforeach
+        </div>
     </section>
 </x-app-layout>

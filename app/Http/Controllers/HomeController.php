@@ -30,7 +30,7 @@ class HomeController extends Controller
         $agent = new Agent();
         $controller = new EventController();
         $events = $controller->homeRequest($filter);
-        $arr = collect([]);
+        /* $arr = collect([]);
         if($agent->isPhone()){
             for($i=0; $i<2; $i++){
                 $arr->push($events->nth(2, $i));
@@ -39,9 +39,9 @@ class HomeController extends Controller
             for($i=0; $i<4; $i++){
                 $arr->push($events->nth(4, $i));
             }
-        }
+        } */
         // $events = $response->paginate(10);
-        return view('pages.home', compact('arr'));
+        return view('pages.home', compact('events'));
     }
 
     /**
