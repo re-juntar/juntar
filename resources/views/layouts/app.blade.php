@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    
+
     @livewireStyles
 
     <!-- Scripts -->
@@ -28,7 +28,7 @@
 
         <!-- Page Heading -->
         @if (isset($hero))
-            {{ $hero }}
+        {{ $hero }}
         @endif
 
         <!-- Page Content -->
@@ -56,7 +56,7 @@
                     </div>
                     <div class="relative w-100 px-4 basis-4/12 max-w-[33%]">
                         <div class="mt-6">
-                            <h5 class="text-lg font-medium underline"><a href="">Contacto</a></h5>
+                            <h5 class="text-lg font-medium underline"><a href="{{route('contact')}}">Contacto</a></h5>
                             <h5 class="text-lg font-medium underline"><a href="{{route('about-us')}}">Sobre Nosotros</a></h5>
                         </div>
                     </div>
