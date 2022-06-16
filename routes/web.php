@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StoreEventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,7 @@ Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
 Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
 
 Route::view('/about-us', 'pages.about-us')->name('about-us');
+
+Route::view('/create-event', 'pages.create-event')->name('create-event');
+
+Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
