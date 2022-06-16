@@ -76,8 +76,8 @@
 
     @livewireScripts
 
-    @if (isset($packs))
-        {{ $packs }}
+    @if (isset($gridScripts))
+        {{ $gridScripts }}
     @endif
     
 </body>

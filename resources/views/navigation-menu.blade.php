@@ -60,11 +60,11 @@
                                     {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
 
-                                @if ($permission['admin'])
+                                {{-- @if ($permission['admin'])
                                     <x-jet-dropdown-link class="bg-awesome" href="{{ route('gestionar') }}">
                                         {{ __('Gestionar') }}
                                     </x-jet-dropdown-link>
-                                @endif
+                                @endif --}}
 
                                 <div class="border-t border-gray-100"></div>
 
@@ -145,11 +145,11 @@
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
-                    @if ($permission['admin'])
+                    {{-- @if ($permission['admin'])
                         <x-jet-responsive-nav-link href="{{ route('gestionar') }}">
                             {{ __('Gestionar') }}
                         </x-jet-responsive-nav-link>
-                    @endif
+                    @endif --}}
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data>

@@ -25,7 +25,7 @@
         </div>
     </section>
 
-    <x-slot name="packs">
+    <x-slot name="gridScripts">
         <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
         <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
         <script>
