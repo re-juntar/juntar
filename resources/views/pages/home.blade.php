@@ -26,8 +26,8 @@
     </section>
 
     <x-slot name="gridScripts">
-        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-        <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.js"></script>
+        <script src="{{asset('js/masonry.pkgd.js')}}"></script>
+        <script src="{{asset('js/infinite-scroll.pkgd.js')}}"></script>
         <script>
             var msnry = new Masonry( '.infinite-scr', {
                 itemSelector: ".grid-item",
