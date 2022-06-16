@@ -24,7 +24,7 @@
     <x-jet-banner />
 
     <div>
-        @livewire('navigation-menu')
+        @livewire('nav-bar', ['permission' => $permission])
         
         <!-- Page Content -->
         <main>
