@@ -17,7 +17,7 @@
                         <x-jet-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                             {{ __('Inicio') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="">
+                        <x-jet-nav-link href="{{ route('create-event') }}" :active="request()->routeIs('create-event')">
                             {{ __('Crear Evento') }}
                         </x-jet-nav-link>
                     </div>
@@ -120,7 +120,7 @@
                     <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
                         {{ __('Inicio') }}
                     </x-jet-responsive-nav-link>
-                    <x-jet-responsive-nav-link href="">
+                    <x-jet-responsive-nav-link href="{{ route('create-event') }}" :active="request()->routeIs('create-event')">
                         {{ __('Crear Evento') }}
                     </x-jet-responsive-nav-link>
                 </div>
