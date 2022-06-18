@@ -23,6 +23,11 @@
                 </x-card>
             @endforeach
         </div>
+        <div class="text-center">
+            <x-button class="more">
+                {{ __("Cargar más...")}}
+            </x-button>
+        </div>
     </section>
 
     <x-slot name="gridScripts">
@@ -38,6 +43,8 @@
                 path: "http://juntar.test/home?page=@{{#}}",
                 append: '.grid-item',
                 history: false,
+                scrollThreshold: false,
+                button: ".more",
                 outlayer: msnry
             });
         </script>
