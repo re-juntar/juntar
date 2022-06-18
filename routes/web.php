@@ -3,7 +3,11 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
+<<<<<<< HEAD
 use App\Http\Livewire\Events;
+=======
+use App\Http\Controllers\StoreEventController;
+>>>>>>> dev
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +28,13 @@ Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
+<<<<<<< HEAD
 Route::get('/evento/organizar-eventos', [Events::class, 'render']);
+=======
+Route::view('/create-event', 'pages.create-event')->name('create-event');
+
+Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
+>>>>>>> dev
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
