@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Events;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
 Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
+
+Route::get('/evento/organizar-eventos', [Events::class, 'render']);
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
