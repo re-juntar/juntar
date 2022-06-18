@@ -6,11 +6,11 @@
       <div class="create-event-container max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto rounded-[0.25rem] py-[3vh] px-[3vh]">
         <x-pink-header>Cargar Nuevo Evento</x-pink-header>
         <div class="create-event-body bg-[#EFEFEF] p-[1.25rem]">
-          <p class="text-center mb-[1rem]">Complete los siguientes campos</p>
+          <p class="text-center mb-4">Complete los siguientes campos</p>
           <form method="POST" action="{{route('store-event')}}" enctype="multipart/form-data">
             @csrf
             {{-- Nombre --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
                 <x-input id='name' class="w-full" type='text' name='name' placeholder="Ingrese Nombre" value="{{old('name')}}"/>
                 @error('name')
                     <div class="flex items-center">
@@ -19,7 +19,7 @@
                 @enderror
             </div>
             {{-- Nombre Corto --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
                 <x-label for="short-name">Nombre corto del evento *</x-label>
                 <x-input id="short-name" class="w-full" type="text" name="short-name" placeholder='Ingrese nombre corto' value="{{old('short-name')}}"/>
                 @error('short-name')
@@ -27,7 +27,7 @@
                 @enderror
             </div>
             {{-- Descripcion --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label for="description">Descripcion *</x-label>
               <textarea id="description" class="block" name="description" rows="10" cols="80">
                 {{old('description')}}
@@ -39,7 +39,7 @@
               @enderror
             </div>
             {{-- Lugar --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label for="place">Lugar *</x-label>
               <x-input id="place" class="w-full" type="text" name="place" placeholder='Ingrese lugar' value="{{old('place')}}"/>
               @error('place')
@@ -49,7 +49,7 @@
               @enderror
             </div>
             {{-- Categoria --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label for="category">Categoria *</x-label>
               <select id="category"  class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]" name="category">
                 <option disabled selected> Seleccione una categoria </option>
@@ -68,7 +68,7 @@
               @enderror
             </div>
             {{-- Modalidad --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label for="category">Modalidad *</x-label>
               <select id="modality" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]" name="modality">
                 <option disabled selected> Seleccione una modalidad </option>
@@ -84,7 +84,7 @@
               @enderror
             </div>
             {{-- Fecha de Inicio --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label class="block" for="start-date">Fecha Inicio *</x-label>
               <x-input class="block" id="start-date" type="date" name="start-date" value="{{old('start-date')}}"/>
               @error('start-date')
@@ -94,7 +94,7 @@
               @enderror
             </div>
             {{-- Fecha de Fin --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label class="block">Fecha Fin *</x-label>
               <x-input class="block" id="end-date" type="date" name="end-date" value="{{old('end-date')}}"/>
               @error('end-date')
@@ -104,8 +104,8 @@
               @enderror
             </div>
             {{-- Logo --}}
-            <div class="mb-[1rem]">
-              <div class="mb-[1rem]">
+            <div class="mb-4">
+              <div class="mb-4">
                 <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
                 <input id="logo" class="border-none p-0 block" name="logo" type="file" />
                 @error('logo')
@@ -117,8 +117,8 @@
               </div>
             </div>
             {{-- Flyer --}}
-            <div class="mb-[1rem]">
-              <div class="mb-[1rem]">
+            <div class="mb-4">
+              <div class="mb-4">
                 <x-label for="flyer">Ingrese flyer [solo formato png, jpg y jpeg]</x-label>
                 <input id="flyer" class="border-none p-0 block" name="flyer" type="file" />
                 @error('flyer')
@@ -130,7 +130,7 @@
               </div>
             </div>
             {{-- Limite participantes --}}  
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <fieldset>
               <x-label>¿Posee limite de participantes?</x-label>
                 <div>
@@ -149,7 +149,7 @@
               @enderror
             </div>
             {{-- Requiere preinscripcion --}}  
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <fieldset>
                 <x-label>¿Requiere preinscripcion? *</x-label>
                 <div>
@@ -168,7 +168,7 @@
               @enderror
             </div>
             {{-- Codigo Acreditacion --}}
-            <div class="mb-[1rem]">
+            <div class="mb-4">
               <x-label for="acreditation-code">Código Acreditación *</x-label>
               <x-input id="acreditation-code" type="text" name="acreditation-code" placeholder='Ingrese código de acreditación' value="{{old('acreditation-code')}}"/>
               @error('acreditation-code')
