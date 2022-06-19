@@ -18,7 +18,7 @@
                     <img class="rounded-lg border-2 border-black" src="{{ asset($src) }}" alt="">
                 </div>
 
-                <div class="container p-4  bg overscroll-contain overflow-auto max-h-screen">
+                <div class="container p-4 overscroll-contain overflow-auto max-h-screen">
 
                     <div class="flex flex-row">
                         <x-button class="bg-cyan-500 mr-4">Inscribirse</x-button>
