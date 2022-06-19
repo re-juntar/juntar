@@ -11,7 +11,7 @@
 
     <x-jet-dialog-modal wire:model="open" class="bg-gray-50">
         <x-slot name="content">
-            <x-button class="bg-transparent text-black font-extrabold absolute top-4 right-2 hover:text-white-ghost">X</x-button>
+            <x-button class="bg-transparent text-black font-extrabold absolute top-4 right-2 hover:text-white-ghost" wire:click="$set('open', false)">X</x-button>
             <div class="grid grid-cols-2 bg-white-ghost">
 
                 <div class="rounded-lg p-4">

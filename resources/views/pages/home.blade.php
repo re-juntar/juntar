@@ -13,7 +13,7 @@
         <div class="mx-auto infinite-scr">
             @foreach ($response as $event)
                 <x-card id="{{ $event->id }}" class="grid-item mb-4 md:mx-2 w-[300px]">
-                    <button class="bg-fogra-darkish text-white-ghost absolute top-2 right-2 rounded-full p-3 font-black">...</button>
+                    {{-- <button class="bg-fogra-darkish text-white-ghost absolute top-2 right-2 rounded-full p-3 font-black">...</button> --}}
                     @livewire('event-card-desktop', ['event' => $event])
                     <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
                         <img class="w-10 h-10 rounded-full mr-2" src="{{asset('images/logos/logo-uncoma-w.svg')}}">
