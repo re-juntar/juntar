@@ -17,7 +17,7 @@
                     @livewire('event-card-desktop', ['event' => $event])
                     <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
                         <img class="w-10 h-10 rounded-full mr-2" src="{{asset('images/logos/logo-uncoma-w.svg')}}">
-                        <div class="font-bold text-xl uppercase text-white-ghost">
+                        <div class="font-bold text-xl uppercase text-white-ghost py-4">
                             Nombre Apellido
                         </div>
                     </div>
