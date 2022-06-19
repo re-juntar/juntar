@@ -55,21 +55,11 @@
                                             {{ $evento->start_date }}
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <button
-                                                class="bg-transparent hover:bg-blue  font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-                                                Editar </button>
-                                            <button
-                                                class="bg-transparent hover:bg-blue  font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-                                                Borrar </button>
-                                            <button
-                                                class="bg-transparent hover:bg-blue  font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-                                                Publicar </button>
-                                            <button
-                                                class="bg-transparent hover:bg-blue  font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-                                                Finalizar </button>
-                                            <button
-                                                class="bg-transparent hover:bg-blue  font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-                                                Ver </button>
+                                            <x-button class="bg-blue-400">Editar</x-button>
+                                            <x-button>Borrar</x-button>
+                                            <x-button class="bg-green-500">Publicar</x-button>
+                                            <x-button>Finalizar</x-button>
+                                            <x-button>Ver</x-button>
                                         </td>
                                     </tr class="bg-white border-b">
                                 @endforeach
@@ -81,30 +71,9 @@
         </div>
 
         {{-- Table Navigation --}}
+        {{-- edit styles on resources/views/pagination/tailwind.blade.php --}}
         <div class="flex justify-center">
-            <nav aria-label="Page navigation example">
-                <ul class="flex list-style-none bg-white-ghost rounded">
-                    <li class="page-item"><a
-                            class="page-link relative block py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-gray-800 focus:shadow-none"
-                            href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a></li>
-                    <li class="page-item"><a
-                            class="page-link relative block py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-gray-800 focus:shadow-none"
-                            href="#">1</a></li>
-                    <li class="page-item"><a
-                            class="page-link relative block py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-awesome hover:bg-gray-200 focus:shadow-none"
-                            href="#">2</a></li>
-                    <li class="page-item"><a
-                            class="page-link relative block py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-awesome hover:bg-gray-200 focus:shadow-none"
-                            href="#">3</a></li>
-                    <li class="page-item"><a
-                            class="page-link relative block py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-awesome hover:bg-gray-200 focus:shadow-none"
-                            href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a></li>
-                </ul>
-            </nav>
+            {{ $eventos->links() }}
         </div>
     </section>
 

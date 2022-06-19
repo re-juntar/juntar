@@ -3,13 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\Event;
 
 class Events extends Component
 {
-    public $eventos;
+    use WithPagination;
+
     public function render()
     {
-        return view('livewire.events', ['eventos' => Event::all()]);
+        return view('livewire.events', ['eventos' => Event::paginate(5)]);
     }
 }
