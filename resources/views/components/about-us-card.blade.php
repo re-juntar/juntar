@@ -1,11 +1,14 @@
-<div class="card-about-us bg-fogra-darkish text-white-ghost">
-    <div @class(['card-header py-[0.75rem] h-1/4 px-[1.25rem] bg-fogra-dark' => true, 'bg-gradient-cards animate-gradient-anima bg-[length:600%_600%]' => $miembro['isDev']])>
-        {{ $miembro['nombre'] }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="flex flex-col justify-center items-center">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Profile" class="w-8/12 rounded-full">
+    <div>
+        <h2 class="my-3"> {{ $miembro['nombre'] }}</h2>
     </div>
-    <div class="card-body p-[1.25rem] h-3/4 flex flex-col justify-between">
-        <p class="mb-[1rem]"> {{ $miembro['mensajes'][array_rand($miembro['mensajes'])] }} </p> 
-        <div class="flex items-center justify-center">
-            <a href="{{ $miembro['link'] }}" class="text-center py-[0.75rem] px-[1.25rem]">💌</a>
-        </div>
+    <div class="flex items-center justify-between">
+        @foreach ($miembro['redes'] as $red => $redLink)
+            <a href="{{$redLink}}" class="h-6 w-6 mx-1" target="_blank" rel="noreferrer">
+                <i class="fa-brands fa-{{$red}} fa-xl"></i>
+            </a>
+        @endforeach
     </div>
 </div>
