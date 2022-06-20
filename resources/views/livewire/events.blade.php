@@ -12,28 +12,26 @@
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden rounded-lg">
-                        <table class="min-w-full text-center">
-                            <thead class="border-b bg-gray-800">
-                                <tr>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">Nombre</th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">Estado</th>
-                                    <th scope="col" class="hidden sm:flex text-sm font-medium text-white px-6 py-4">
-                                        Fecha de cracion
-                                    </th>
-                                    <th scope="col" class="text-sm font-medium text-white px-6 py-4">Acciones</th>
-                                </tr>
-                            </thead class="border-b">
-                            <tbody class="bg-white-ghost">
-                                @foreach ($events as $event)
-                                    <tr class="bg-white border-b">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <x-table>
+                            <x-slot name="head">
+                                <x-table.heading>Nombre</x-table.heading>
+                                <x-table.heading>Estado</x-table.heading>
+                                <x-table.heading class="hidden sm:flex">Fecha de creaci&oacute;n</x-table.heading>
+                                <x-table.heading>Acciones</x-table.heading>
+                            </x-slot>
+
+                            <x-slot name="body">
+                                @foreach($events as $event))
+                                    <x-table.row>
+                                        <x-table.cell>
                                             @if (strlen($event->name) > 25)
                                                 {{ substr($event->name, 0, 25) . '...' }}
                                             @else
                                                 {{ $event->name }}
                                             @endif
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        </x-table.cell>
+
+                                        <x-table.cell>
                                             @switch($event->event_status_id)
                                                 @case(1)
                                                     Activo
@@ -54,12 +52,13 @@
                                                 @default
                                                     -
                                             @endswitch
-                                        </td>
-                                        <td
-                                            class="hidden sm:table-cell text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap items-center">
+                                        </x-table.cell>
+
+                                        <x-table.cell class="hidden sm:table-cell">
                                             {{ $event->start_date }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                        </x-table.cell>
+
+                                        <x-table.cell>
                                             <div class="justify-center hidden sm:grid sm:gap-2 sm:grid-cols-2 lg:flex">
                                                 <x-button class="bg-blue-400">Editar</x-button>
                                                 <x-button>Borrar</x-button>
@@ -104,11 +103,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                    </tr class="bg-white border-b">
+                                        </x-table.cell>
+                                    </x-table.row>
                                 @endforeach
-                            </tbody>
-                        </table>
+                            </x-slot>
+                        </x-table>
                     </div>
                 </div>
             </div>
