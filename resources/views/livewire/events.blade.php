@@ -21,7 +21,7 @@
                             </x-slot>
 
                             <x-slot name="body">
-                                @foreach($events as $event))
+                                @foreach($events as $event)
                                     <x-table.row>
                                         <x-table.cell>
                                             @if (strlen($event->name) > 25)
