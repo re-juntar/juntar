@@ -29,7 +29,7 @@
             {{-- Descripcion --}}
             <div class="mb-4">
               <x-label for="description">Descripcion *</x-label>
-              <textarea id="description" class="block" name="description" rows="10" cols="80">
+              <textarea id="description" class="block w-full" name="description" rows="10">
                 {{old('description')}}
               </textarea>
               @error('description')
@@ -107,7 +107,7 @@
             <div class="mb-4">
               <div class="mb-4">
                 <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
-                <input id="logo" class="border-none p-0 block" name="logo" type="file" />
+                <input id="logo" class="border-none p-0 block w-full" name="logo" type="file" />
                 @error('logo')
                     <div class="flex items-center">
                         <p class="text-red-600">{{$message}}</p>
@@ -120,7 +120,7 @@
             <div class="mb-4">
               <div class="mb-4">
                 <x-label for="flyer">Ingrese flyer [solo formato png, jpg y jpeg]</x-label>
-                <input id="flyer" class="border-none p-0 block" name="flyer" type="file" />
+                <input id="flyer" class="border-none p-0 block w-full" name="flyer" type="file" />
                 @error('flyer')
                     <div class="flex items-center">
                         <p class="text-red-600">{{$message}}</p>
@@ -177,7 +177,7 @@
                   </div>
               @enderror
             </div>
-            <p class="italic">Los campos marcados con (*) son obligatorios.</p>
+            <p class="italic mb-[1rem]">Los campos marcados con (*) son obligatorios.</p>
             {{-- Cargar --}}
             <x-button class="text-[16px]" type="submit"> Cargar </x-button>
           </form>
