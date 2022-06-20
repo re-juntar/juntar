@@ -39,7 +39,7 @@
                                 </span>
                             @else
                                 <a href="{{ $url }}"
-                                    class="page-link relative block py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-awesome hover:bg-gray-200 focus:shadow-none"
+                                    class="hidden sm:block page-link relative py-3 px-6 border-0 outline-none transition-all duration-300 rounded text-awesome hover:bg-gray-200 focus:shadow-none"
                                     aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
                                     {{ $page }}
                                 </a>

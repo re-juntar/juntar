@@ -12,6 +12,6 @@ class Events extends Component
 
     public function render()
     {
-        return view('livewire.events', ['eventos' => Event::paginate(5)]);
+        return view('livewire.events', ['events' => Event::paginate(5)]);
     }
 }
