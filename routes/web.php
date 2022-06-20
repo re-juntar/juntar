@@ -5,6 +5,8 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Events;
 use App\Http\Controllers\StoreEventController;
+use App\Http\Livewire\InscriptionsController;
+use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +31,10 @@ Route::view('/create-event', 'pages.create-event')->name('create-event');
 
 Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
 
-Route::get('evento/organizar-eventos', [Events::class, 'render']);
+Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'render'])
+    ->name('mis-inscripciones-a-eventos');
+
+Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('organizar-eventos');
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
