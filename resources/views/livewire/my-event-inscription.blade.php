@@ -8,7 +8,7 @@
     <section class="bg-fogra-darkish w-full text-white-ghost pt-16 pb-5 px-4">
         {{-- Table --}}
         <div class="flex flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-center text-white-ghost uppercase mb-2 font-medium leading-6 text-3xl">Mis eventos creados</h2>
+            <h2 class="text-left text-white-ghost uppercase mb-2 font-medium leading-6 text-3xl">Mis inscripciones</h2>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden rounded-lg">
@@ -50,15 +50,11 @@
                                                     -
                                             @endswitch
                                         </td>
+                                       
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            {{ $evento->start_date }}
-                                        </td>
-                                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <x-button>Editar</x-button>
-                                            <x-button>Borrar</x-button>
-                                            <x-button>Publicar</x-buttonclass>
-                                            <x-button>Finalizar</x-button>
-                                            <x-button>Ver</x-button>
+                                            <x-button>Ver evento</x-button>
+                                            <x-button>Certificado</x-button>
+                                            <x-button>Darse de baja</x-buttonclass>
                                         </td>
                                     </tr class="bg-white border-b">
                                 @endforeach
