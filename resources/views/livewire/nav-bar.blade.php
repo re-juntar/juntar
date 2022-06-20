@@ -56,12 +56,14 @@
                                     {{-- {{ __('Administrar Cuenta') }} --}}
                                 </div>
 
-                                <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
+                                    href="{{ route('profile.show') }}">
                                     {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
 
                                 @if ($permission['admin'])
-                                    <x-jet-dropdown-link class="bg-awesome" href="{{ route('gestionar') }}">
+                                    <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
+                                        href="{{ route('gestionar') }}">
                                         {{ __('Gestionar') }}
                                     </x-jet-dropdown-link>
                                 @endif
@@ -72,7 +74,8 @@
                                 <form method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
 
-                                    <x-jet-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                    <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
+                                        href="{{ route('logout') }}" @click.prevent="$root.submit();">
                                         {{ __('Cerrar Sesión') }}
                                     </x-jet-dropdown-link>
                                 </form>
@@ -102,8 +105,8 @@
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
