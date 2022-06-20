@@ -43,7 +43,7 @@ class HomeController extends Controller
             'path' => $request->url(),
             'query' => $request->query(),
         ]);
-        
+
         return view('pages.home', compact('response', 'permission'));
     }
 

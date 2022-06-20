@@ -7,13 +7,12 @@ use Livewire\WithPagination;
 use App\Models\Inscription;
 use App\Models\Event;
 
-class InscriptionsController extends Component
+class MyInscriptions extends Component
 {
     use WithPagination;
 
     public function render()
     {
-        return view('livewire.my-event-inscription',['eventos' => Event::paginate(5)]);
+        return view('livewire.my-inscriptions', ['events' => Event::paginate(5)]);
     }
-    
 }
