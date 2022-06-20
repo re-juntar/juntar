@@ -63,12 +63,17 @@
                     </div>
 
                     <div class="container">
+                        @if($presentationsAndExhibitors)
                         <h2 class="text-2xl font-bold mt-4">Agenda</h2>
+                        @for ($i=0; $i < count($presentationsAndExhibitors); $i++)
+                        @php
+                            $presentation = $presentationsAndExhibitors[$i]['presentation'];
+                        @endphp
                         <table class="min-w-full text-center border mt-2">
                             <thead class="bg-fogra-darkish text-white-ghost">
                                 <tr>
                                     <th scope="col" colspan="2" class="text-xl py-3">
-                                        Título (icono más info)
+                                        {{ $presentationsAndExhibitors[$i]['presentation']->title }}
                                     </th>
                                 </tr>
                             </thead>
@@ -78,7 +83,7 @@
                                         Fecha
                                     </td>
                                     <td>
-                                        dd/mm/aa
+                                        {{ substr($presentation->date, 0, 10) }}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
@@ -86,7 +91,7 @@
                                         Hora
                                     </td>
                                     <td>
-                                        hh:mm
+                                        {{ substr($presentation->start_time, 0, 5) . " - " . substr($presentation->end_time, 0, 5)}}
                                     </td>
                                 </tr>
                                 <tr class="border-b bg-gray-200">
@@ -102,16 +107,17 @@
                                         Expositores
                                     </td>
                                     <td>
-                                        <ul>
-                                            <li>Expositor 1</li>
-                                            <li>Expositor 1</li>
-                                            <li>Expositor 1</li>
-                                            <li>Expositor 1</li>
+                                        <ul class="list-disc">
+                                            @foreach ($presentationsAndExhibitors[$i]['exhibitors'] as $exhibitor)
+                                                <li class="text-left">{{ $exhibitor['0']->name }}</li>
+                                            @endforeach
                                         </ul>
                                     </td>
                                 </tr>
+                                @endfor
                             </tbody>
                         </table>
+                        @endif
                     </div>
                 </div>
             </div>
