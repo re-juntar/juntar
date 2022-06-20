@@ -1,5 +1,4 @@
 <x-app-layout>
-  <script src="../ckeditor/ckeditor.js"></script>
   {{-- Create Event Content --}}
   @auth
     <div class="create-event bg-[#0B0D19]">
@@ -187,5 +186,8 @@
   @else
     <script>window.location = "/login";</script>
   @endauth
-  <script>CKEDITOR.replace( 'description' );</script>
+  <x-slot name="pageScripts">
+    <script src="{{asset('vendor/ckeditor/ckeditor.js')}}"></script>
+    <script>CKEDITOR.replace( 'description' );</script>
+  </x-slot>
 </x-app-layout>
