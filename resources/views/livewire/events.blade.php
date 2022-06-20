@@ -71,7 +71,7 @@
                                             <div id="dropdown-{{ $event->id }}"
                                                 class="inline-block sm:hidden relative text-left dropdown">
                                                 <button
-                                                    class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white shadow-none"
+                                                    class="inline-flex justify-center w-full px-4 py-2 font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white shadow-none"
                                                     type="button" aria-haspopup="true" aria-expanded="true"
                                                     onclick="toggleDropdownMenu('dropdown-menu-{{ $event->id }}', 'dropdown-{{ $event->id }}')"
                                                     aria-controls="headlessui-menu-items-117">
