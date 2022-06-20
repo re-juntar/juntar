@@ -11,33 +11,34 @@
 
     <x-jet-dialog-modal wire:model="open" class="bg-gray-50">
         <x-slot name="content">
-            <x-button class="bg-transparent text-black font-extrabold absolute top-4 right-2 hover:text-white-ghost" wire:click="$set('open', false)">X</x-button>
+            <x-button
+                class="bg-transparent text-black font-extrabold absolute top-4 right-2 hover:overscroll-auto hover:text-white-ghost"
+                wire:click="$set('open', false)">X</x-button>
             <div class="grid grid-cols-2 bg-white-ghost">
 
                 <div class="rounded-lg p-4">
-                    <img class="rounded-lg border-2 border-black" src="{{ asset($src) }}" alt="">
+                    <img class="rounded-lg" src="{{ asset($src) }}" alt="">
                 </div>
 
-                <div class="container p-4 overscroll-contain overflow-auto max-h-screen">
+                <div class="container p-4 overscroll-auto overflow-y-auto max-h-screen">
 
                     <div class="flex flex-row">
                         <x-button class="bg-cyan-500 mr-4">Inscribirse</x-button>
-                        <x-button class="bg-awesome">Flyer </x-button>
+                        <x-button class="bg-awesome">Flyer</x-button>
                     </div>
 
                     <div class="container mt-4">
-
                         <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
 
                         <div class="container mt-2">
 
-                            <h2 class="text-lg font-semibold">Organizador:
+                            <h2 class="text-lg font-semibold">Organiza:
                                 <span class="font-normal">Organizador</span>
                             </h2>
 
                             <div class="flex flex-row mt-1">
-                                <h2 class="text-lg font-semibold">Coorganizadores: </h2>
-                                <ul class="text-lg">
+                                <h2 class="text-lg font-semibold">Co-organiza: </h2>
+                                <ul class="text-lg ml-1">
                                     <li>Coorganizador 1</li>
                                     <li>Coorganizador 2</li>
                                 </ul>
