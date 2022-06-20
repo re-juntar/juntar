@@ -12,11 +12,17 @@ class ContactanosController extends Controller
         return view('mail.index');
     }
 
-    public function store(Request $request)
+    public function store(Request $request)    
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'email:rfc,dns',
+            'asunto' => 'required',
+            'detalle' => 'required'
+        ]);
         $correo = new ContactanosMailable($request->all());
        
-        Mail::to('juntar@uncoma.edu.ar')->send($correo);
+        Mail::to('juntar.test@fi.uncoma.edu.ar')->send($correo);
         
         return redirect()->route('home')->with('info', 'Mensaje enviado correctamente!');
     }
