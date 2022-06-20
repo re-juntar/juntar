@@ -1,6 +1,6 @@
 <form>
     <div class="container flex flex-col sm:flex-row mx-auto p-14 max-w-4xl">
-        <div class="flex flex-row items-center px-2 py-1 justify-between w-full -ml-3 sm:m-0">
+        <div class="flex flex-row items-center px-2 py-1 justify-between w-full sm:m-0">
             <input class="text-base text-gray-400 flex-grow outline-none px-2 rounded-l-lg" type="text"
                 placeholder="Buscar" />
             <button

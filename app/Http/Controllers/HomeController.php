@@ -6,6 +6,7 @@ use App\Models\Event;
 use Jenssegers\Agent\Agent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class HomeController extends Controller
 {
@@ -25,27 +26,25 @@ class HomeController extends Controller
         // return view('home', compact('events'));
     }
 
-    public function filteredIndex(Request $filter)
+    public function filteredIndex(Request $request)
     {
-        $agent = new Agent();
-        $eventController = new EventController();
-        $events = $eventController->homeRequest($filter);
-        $arr = collect([]);
-        if ($agent->isPhone()) {
-            for ($i = 0; $i < 2; $i++) {
-                $arr->push($events->nth(2, $i));
-            }
-        } else {
-            for ($i = 0; $i < 4; $i++) {
-                $arr->push($events->nth(4, $i));
-            }
-        }
-
         $permissionController = new PermissionController();
         $permission = $permissionController->isAdmin();
-        // $events = $response->paginate(10);
-        
-        return view('pages.home', compact('arr', 'permission'));
+        $eventController = new EventController();
+        $events = $eventController->homeRequest($request);
+
+        $total = $events->count();
+        $per_page = 25;
+        $current_page = $request->input("page") ?? 1;
+        $starting_point = ($current_page * $per_page) - $per_page;
+        $response = $events->slice($starting_point, $per_page);
+
+        $response = new Paginator($response, $total, $per_page, $current_page, [
+            'path' => $request->url(),
+            'query' => $request->query(),
+        ]);
+
+        return view('pages.home', compact('response', 'permission'));
     }
 
     /**

@@ -4,6 +4,10 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Livewire\Events;
+use App\Http\Controllers\StoreEventController;
+use App\Http\Livewire\InscriptionsController;
+use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +28,17 @@ Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
+Route::view('/create-event', 'pages.create-event')->name('create-event');
+
+Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
+
+Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'render'])
+    ->name('mis-inscripciones-a-eventos');
+
+Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('organizar-eventos');
+
 /********************* MAILING **************************/
-Route::get('/contactanos', function () {
+Route::get('/contact-us', function () {
     return view('mail.index');
 })->name('contact');
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');

@@ -60,11 +60,11 @@
                                     {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
 
-                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                    <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                        {{ __('API Tokens') }}
+                                {{-- @if ($permission['admin'])
+                                    <x-jet-dropdown-link class="bg-awesome" href="{{ route('gestionar') }}">
+                                        {{ __('Gestionar') }}
                                     </x-jet-dropdown-link>
-                                @endif
+                                @endif --}}
 
                                 <div class="border-t border-gray-100"></div>
 
@@ -145,16 +145,15 @@
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
-                    @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                        <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                            {{ __('API Tokens') }}
+                    {{-- @if ($permission['admin'])
+                        <x-jet-responsive-nav-link href="{{ route('gestionar') }}">
+                            {{ __('Gestionar') }}
                         </x-jet-responsive-nav-link>
-                    @endif
+                    @endif --}}
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
-
                         <x-jet-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                             {{ __('Cerrar Sesión') }}
                         </x-jet-responsive-nav-link>

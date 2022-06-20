@@ -24,13 +24,8 @@
     <x-jet-banner />
 
     <div>
-        @livewire('navigation-menu')
-
-        <!-- Page Heading -->
-        @if (isset($hero))
-        {{ $hero }}
-        @endif
-
+        @livewire('nav-bar', ['permission' => $permission])
+        
         <!-- Page Content -->
         <main>
             {{ $slot }}
@@ -38,11 +33,11 @@
         <footer class="bg-fogra-darkish text-white-ghost pt-16">
             <div class="px-4 mx-auto max-w-6xl">
                 <div class="flex flex-wrap -mx-4">
-                    <div class="relative w-100 px-4 py-[4vh] basis-2/5 max-w-[40%]">
-                        <img class="m-w-100 h-auto" src="{{ asset('/images/logos/juntar-logo-w.svg') }}" alt="">
+                    <div class="relative w-100 px-4 py-[4vh] max-w-xs md:basis-2/5 md:max-w-[40%]">
+                        <img class="h-auto" src="{{ asset('/images/logos/juntar-logo-w.svg') }}" alt="">
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-4">
+                <div class="flex flex-col flex-wrap content-center -mx-4 md:flex-row">
                     <div class="relative w-100 px-4 basis-4/6 max-w-[66%]">
                         <h5 class="text-xl font-medium">Juntar</h5>
                         <p class="text-lg">
@@ -61,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-4 py-[3vh]">
+                <div class="flex flex-col flex-wrap content-center -mx-4 py-[3vh] md:flex-row">
                     <div class="flex justify-center relative basis-1/2 max-w-[50%] py-4">
                         <img class="max-h-48" src="{{ asset('/images/logos/logo-uncoma-w.svg') }}" alt="">
                     </div>
@@ -80,6 +75,11 @@
     @stack('modals')
 
     @livewireScripts
+
+    @if (isset($pageScripts))
+        {{ $pageScripts }}
+    @endif
+    
 </body>
 
 </html>

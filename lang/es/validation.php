@@ -13,7 +13,6 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-
     'accepted'             => 'El campo :attribute debe ser aceptado.',
     'active_url'           => 'El campo :attribute no es una URL válida.',
     'after'                => 'El campo :attribute debe ser una fecha posterior a :date.',
@@ -131,16 +130,31 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
         'name' =>[
             'required'=>'En nombre es obligatorio',
         ],
         'email'=>[
             'required'=>'El email debe ser una cuenta valida',
+        ],
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
+        ],
+        'description' => [
+            'required' => 'La descripcion es obligatoria.',
+        ],
+        'category' => [
+            'required' => 'La categoria es obligatoria.',
+        ],
+        'modality' => [
+            'required' => 'La modalidad es obligatoria.',
+        ],
+        'start-date' => [
+            'required' => 'La fecha de inicio es obligatoria.',
+            'before_or_equal' => 'La fecha de inicio debe ser menor o igual a la fecha de fin'
+        ],
+        'end-date' => [
+            'required' => 'La fecha de fin es obligatoria.',
         ]
-
     ],
 
     /*
@@ -154,6 +168,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'nombre',
+        'short-name' => 'nombre corto',
+        'description' => 'descripcion',
+        'place' => 'lugar',
+        'category' => 'categoria',
+        'modality' => 'modalidad',
+        'start-date' => 'fecha de inicio',
+        'end-date' => 'fecha de fin',
+        'participants-limit' => 'limite de participantes',
+        'preinscription' => 'preinscripcion',
+        'acreditation-code' => 'codigo de acreditacion'
+    ],
 
 ];

@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Http\Controllers\PermissionController;
 
 class AppLayout extends Component
 {
@@ -11,8 +12,11 @@ class AppLayout extends Component
      *
      * @return \Illuminate\View\View
      */
+    public $permission;
     public function render()
     {
+        $permissionController = new PermissionController();
+        $this->permission = $permissionController->isAdmin();
         return view('layouts.app');
     }
 }

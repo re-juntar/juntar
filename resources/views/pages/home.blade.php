@@ -10,22 +10,44 @@
     </section>
 
     <section class="pt-16 pb-5 px-4 bg-fogra-dark">
-        <x-grid>
-            @foreach ($arr as $sub)
-                <div class="break-inside-avoid mb-2 rounded-lg">
-                    @foreach ($sub as $event)
-                        <div id="{{ $event->id }}" class="w-full">
-                            <div class="w-full p-2">
-                                <x-card class="w-full h-full">
-                                    <div class="relative">
-                                        <img class="rounded-lg" src="{{ asset($event['image_flyer']) }}" alt="">
-                                    </div>
-                                </x-card>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+        <div class="mx-auto infinite-scr">
+            @foreach ($response as $event)
+                <x-card id="{{ $event->id }}" class="grid-item mb-4 md:mx-2 w-[300px]">
+                    @php
+                        $src = $event['image_flyer'];
+                        if($event['image_flyer'] == null){
+                            $src = 'images/public/event-card-placeholder.png';
+                        }
+                    @endphp
+                    <img class="rounded-lg" src="{{ asset($src) }}" alt="">
+                </x-card>
             @endforeach
-        </x-grid>
+        </div>
+        <div class="text-center">
+            <x-button class="more">
+                {{ __("Cargar más...")}}
+            </x-button>
+        </div>
     </section>
+
+    <x-slot name="pageScripts">
+        <script src="{{asset('vendor/masonry.pkgd.js')}}"></script>
+        <script src="{{asset('vendor/infinite-scroll.pkgd.js')}}"></script>
+        <script>
+            var msnry = new Masonry( '.infinite-scr', {
+                itemSelector: ".grid-item",
+                horizontalOrder: true,
+                fitWidth: true
+            });
+            let infScroll = new InfiniteScroll( '.infinite-scr', {
+                path: "http://juntar.test/home?page=@{{#}}",
+                append: '.grid-item',
+                history: false,
+                scrollThreshold: false,
+                button: ".more",
+                outlayer: msnry
+            });
+        </script>
+    </x-slot>
+    
 </x-app-layout>
