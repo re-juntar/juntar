@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactanosController;
 use Illuminate\Support\Facades\Route;
 
 /*

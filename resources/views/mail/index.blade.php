@@ -1,27 +1,33 @@
 <x-app-layout>
     {{-- layout contact --}}
 
-    <div class="container max-w-4xl mx-auto border shadow-lg mt-5">
+    <div class="container mx-auto max-w-4xl  border shadow-lg mt-5 ">
         <x-pink-header>
             Contacto
         </x-pink-header>
 
-        <div class="container max-w-4xl mx-auto text-center ">
+        <div class="container max-w-4xl mx-auto text-center  ">
             <x-label class="mt-4 ">
                 Por cualquier consulta, complete el formulario para contactarnos. Muchas Gracias
             </x-label>
         </div>
 
-        <div class="ml-60">
+        <div class="mx-auto max-w-md  ">
             <form action="{{ route('mail.store') }}" method="POST">
+
                 @csrf
                 <div class="mx-3 ">
-                    <x-label class="my-5 ">
+                    <x-label class="my-5">
                         Nombre:
                     </x-label>
                     <br>
-                    <x-input class="w-72" type="text" name='name' value="{{ old('name') }}">
+                    <x-input
+                        class="w-full sm:w-50 transition ease-in-out 50  hover:-translate-y-1 hover:scale-10  duration-300 "
+                        type="text" name='name' value="{{ old('name') }}">
                     </x-input>
+                    @error('name')
+                        <div class="error-message text-red-600">* {{ $message }}</div>
+                    @enderror
                 </div>
                 <br>
                 <div class="mx-3">
@@ -29,28 +35,42 @@
                         Email:
                     </x-label>
                     <br>
-                    <x-input class="w-72" type='email' name='email' value="{{ old('email') }}">
+                    <x-input
+                        class=" w-full transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-10  duration-300"
+                        type='email' name='email' value="{{ old('email') }}">
                     </x-input>
+                    @error('email')
+                        <p class="error-message text-red-600">* {{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mx-3">
                     <x-label class="my-5">
                         Asunto:
                     </x-label>
                     <br>
-                    <x-input class="w-72" type='text' name='asunto' value="{{ old('asunto') }}">
+                    <x-input
+                        class="w-full transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-10  duration-300"
+                        type='text' name='asunto' value="{{ old('asunto') }}">
                     </x-input>
+                    @error('asunto')
+                        <p class="error-message text-red-600">* {{ $message }}</p>
+                    @enderror
                 </div>
                 <br>
-                <div class="mx-3 w-96">
+                <div class="mx-3 ">
 
                     <x-label>
                         Consulta:
                     </x-label>
 
                     <textarea id="message" name="detalle" rows="4"
-                        class=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Escriba su mensaje aqui"></textarea>
-
+                        class=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500   dark:text-black  dark:focus:border-blue-500  transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-10  duration-300"
+                        placeholder="Escriba su mensaje aqui"> {{ old('detalle') }}
+                    </textarea>
+                    @error('detalle')                    
+                        <p class="error-message text-red-500 ">* {{ $message }} </p>
+                        
+                    @enderror
                 </div>
                 <div class="my-5 ml-3">
 
