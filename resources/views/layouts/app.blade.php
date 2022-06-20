@@ -76,8 +76,8 @@
 
     @livewireScripts
 
-    @if (isset($gridScripts))
-        {{ $gridScripts }}
+    @if (isset($pageScripts))
+        {{ $pageScripts }}
     @endif
     
 </body>

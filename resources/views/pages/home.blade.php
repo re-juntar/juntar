@@ -30,9 +30,9 @@
         </div>
     </section>
 
-    <x-slot name="gridScripts">
-        <script src="{{asset('js/masonry.pkgd.js')}}"></script>
-        <script src="{{asset('js/infinite-scroll.pkgd.js')}}"></script>
+    <x-slot name="pageScripts">
+        <script src="{{asset('vendor/masonry.pkgd.js')}}"></script>
+        <script src="{{asset('vendor/infinite-scroll.pkgd.js')}}"></script>
         <script>
             var msnry = new Masonry( '.infinite-scr', {
                 itemSelector: ".grid-item",
