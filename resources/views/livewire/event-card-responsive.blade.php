@@ -1,5 +1,5 @@
 <div>
-    <a href="#modal" wire:click="$set('open', true)">
+    <a href="#{{$event->id}}" wire:click="$set('open', true)">
         @php
             $src = $event['image_flyer'];
             if ($event['image_flyer'] == null) {
@@ -7,6 +7,7 @@
             }
         @endphp
         <img class="rounded-lg" src="{{ asset($src) }}" alt="">
+        <x-verified-badge class="absolute top-4 right-4 z-10" />
     </a>
 
     <x-jet-dialog-modal wire:model="open" class="bg-gray-50">
@@ -19,13 +20,14 @@
             <div class="bg-white-ghost md:min-h-[60vh] md:relative">
 
                 <div class="flex justify-center rounded-lg p-4 h-full md:w-2/4">
-                    <img class="border-2 border-black shadow-lg rounded-lg" src="{{ asset($src) }}" alt="">
+                    <img class="shadow-lg rounded-lg" src="{{ asset($src) }}" alt="">
                 </div>
 
                 <div class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
 
-                        <x-button class="bg-cyan-500 mr-4">Inscribirse</x-button>
-                        <x-button class="bg-awesome">Flyer</x-button>
+                        <x-button class="bg-cyan-500 mr-2">Inscribirse</x-button>
+                        <x-button class="mr-2">Flyer</x-button>
+                        <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
 
                     <div class="container mt-4">
                         <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
@@ -51,6 +53,8 @@
                             <h3 class="font-bold mt-1">Fecha límite de inscripción: </h3>
 
                             <h3 class="font-bold mt-4">Modalidad: </h3>
+
+                            <x-verified-badge class="mt-4" />
 
                             <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
                             <p class="mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
@@ -80,61 +84,76 @@
                     </div>
 
                     <div class="container">
-                        @if($presentationsAndExhibitors)
-                        <h2 class="text-2xl font-bold mt-4">Agenda</h2>
-                        @for ($i=0; $i < count($presentationsAndExhibitors); $i++)
-                        @php
-                            $presentation = $presentationsAndExhibitors[$i]['presentation'];
-                        @endphp
+                        <h2 class="text-2xl font-bold mt-4">Agenda <x-button wire:click="addPresentation">+</x-button></h2>
+                        @foreach($presentations as $presentation)
                         <table class="min-w-full text-center border mt-2">
                             <thead class="bg-fogra-darkish text-white-ghost">
                                 <tr>
                                     <th scope="col" colspan="2" class="text-xl py-3">
-                                        {{ $presentationsAndExhibitors[$i]['presentation']->title }}
+                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'title'" :key="'title'.$presentation->id"/>
+                                        <x-button wire:click="deletePresentation({{$presentation}})">Del</x-button> {{-- ACOMODAR --}}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
+
+                                @if($presentation->date)
                                 <tr class="border-b bg-gray-200">
                                     <td class="text-lg font-medium text-gray-900 px-6 py-2">
                                         Fecha
                                     </td>
                                     <td>
-                                        {{ substr($presentation->date, 0, 10) }}
+                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'date'" :key="'date'.$presentation->id"/>
                                     </td>
                                 </tr>
+                                @endif
+
+                                @if($presentation->start_time)
                                 <tr class="border-b">
                                     <td class="text-lg font-medium text-gray-900 px-6 py-2">
                                         Hora
                                     </td>
                                     <td>
-                                        {{ substr($presentation->start_time, 0, 5) . " - " . substr($presentation->end_time, 0, 5)}}
+                                        {{-- {{ substr($presentation->start_time, 0, 5) . " a " . substr($presentation->end_time, 0, 5)}} --}}
+                                        Desde
+                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'start_time'" :key="'start'.$presentation->id"/>
+                                        @if($presentation->end_time)
+                                        Hasta
+                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'end_time'" :key="'end'.$presentation->id"/>
+                                        @endif
                                     </td>
                                 </tr>
+                                @endif
+
+                                @if($presentation->resources_link)
                                 <tr class="border-b bg-gray-200">
                                     <td class="text-lg font-medium text-gray-900 px-6 py-2">
                                         Recursos
                                     </td>
                                     <td>
-                                        icon
+                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'resources_link'" :key="'resources'.$presentation->id"/>
                                     </td>
                                 </tr>
+                                @endif
+
+                                @if($presentation->exhibitors)
                                 <tr class="border-b">
-                                    <td class="text-lg font-medium text-gray-900 px-6 py-2">
-                                        Expositores
+                                    @php
+                                        $exhibits = explode('-', $presentation->exhibitors);
+                                        $rowspan = count($exhibits)
+                                    @endphp
+                                    <td class="text-lg font-medium text-gray-900 px-6 py-2" rowspan="{{$rowspan/2}}">
+                                        Presentadores
                                     </td>
                                     <td>
-                                        <ul class="list-disc">
-                                            @foreach ($presentationsAndExhibitors[$i]['exhibitors'] as $exhibitor)
-                                                <li class="text-left">{{ $exhibitor['0']->name }}</li>
-                                            @endforeach
-                                        </ul>
+                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'exhibitors'" :key="'exhibitors'.$presentation->id"/>
                                     </td>
                                 </tr>
-                                @endfor
+                                @endif
+
                             </tbody>
                         </table>
-                        @endif
+                        @endforeach
                     </div>
                 </div>
             </div>

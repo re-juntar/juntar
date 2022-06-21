@@ -4,30 +4,34 @@ namespace App\Http\Livewire;
 
 use App\Models\Event;
 use Livewire\Component;
+use App\Models\Presentation;
 
 class EventCardResponsive extends Component
 {
     public $open = false;
     public $event;
+
     public function render()
     {
-        $presentationsAndExhibitors = [];
-        $exhibitors = [];
-        $i = 0;
         $actualEvent = Event::where('id', $this->event->id)->first();
         $presentations = $actualEvent->presentations()->get();
-        foreach ($presentations as $presentation) {
-            $presentationExhibitors = $presentation->exhibitors()->get();
+        return view('livewire.event-card-responsive', compact('presentations'));
+    }
 
-            foreach ($presentationExhibitors as $presentationExhibitor) {
-                $exhibitor = $presentationExhibitor->user()->get();
-                array_push($exhibitors, $exhibitor);
-            }
+    public function deletePresentation(Presentation $presentation){
+        $presentation->delete();
+    }
 
-            $presentationsAndExhibitors[$i]['exhibitors'] = $exhibitors;
-            $presentationsAndExhibitors[$i]['presentation'] = $presentation;
-            $i++;
-        }
-        return view('livewire.event-card-responsive', compact('presentationsAndExhibitors'));
+    public function addPresentation(){
+        $presentation = new Presentation();
+        $presentation->event_id = $this->event->id;
+        $presentation->title = 'Ingrese nombre';
+        $presentation->description = '';
+        $presentation->date = '2022-01-01';
+        $presentation->start_time = '00:00';
+        $presentation->end_time = '00:00';
+        $presentation->exhibitors = 'Ingrese presentadores';
+        $presentation->resources_link = 'Ingrese link';
+        $presentation->save();
     }
 }
