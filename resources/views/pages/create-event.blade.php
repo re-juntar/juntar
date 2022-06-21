@@ -1,6 +1,6 @@
 <x-app-layout>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src={{asset('/js/displayInputs.js/')}}></script>
+
+
   {{-- Create Event Content --}}
   @auth
     <div class="create-event bg-[#0B0D19]">
@@ -10,7 +10,46 @@
           <p class="text-center mb-4">Complete los siguientes campos</p>
           <form method="POST" action="{{route('store-event')}}" enctype="multipart/form-data">
             @csrf
-            {{-- Nombre --}}
+            {{-- Agregar Coorganizador --}}
+            <div class="mb-4">
+              <fieldset id="requires-coorganizer">
+                <x-label>¿Requiere coorganizador? *</x-label>
+                <div>
+                  <input type="radio" id="no-coorganizer" name="requires-coorganizer" value="no-coorganizer" checked {{ old('requires-coorganizer') == "no-coorganizer" ? 'checked' : '' }} />
+                  <x-label class="mb-[0]" for="no-coorganizer">No</x-label>
+                </div>
+                <div>
+                  <input type="radio" id="yes-coorganizer" name="requires-coorganizer" value="yes-coorganizer" {{ old('requires-coorganizer') == "yes-coorganizer" ? 'checked' : '' }}/>
+                  <x-label class="mb-[0]" for="yes-coorganizer">Si</x-label>
+                </div>
+
+              </fieldset>
+            </div>
+            {{-- Ingresar Nombre del Coorganizador --}}
+            <div class="mb-4">
+              <div id='coorganizer-container' class='mt-2'>
+                <x-label for='coorganizer'> Ingrese Nombre del Coorganizador * </x-label> 
+                <x-input id='coorganizer' class='w-full' name='coorganizer' type='text'/>
+              </div>
+              @error('coorganizer')
+                <div class="flex items-center">
+                  <p class="text-red-600">{{$message}}</p>
+                </div>
+              @enderror
+            </div>
+            <div class="mb-4">
+              <select id='showCoorganizers' class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
+              </select>
+            </div>
+
+{{--             <input type="text" list="cars" />
+            <datalist id="cars">
+              <option>Volvo</option>
+              <option>Saab</option>
+              <option>Mercedes</option>
+              <option>Audi</option>
+            </datalist> --}}
+              {{-- Nombre --}}
             <div class="mb-4">
                 <x-label for="name">Nombre del evento *</x-label>
                 <x-input id='name' class="w-full" type='text' name='name' placeholder="Ingrese Nombre" value="{{old('name')}}"/>
