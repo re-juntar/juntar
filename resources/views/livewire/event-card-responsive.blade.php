@@ -11,21 +11,21 @@
 
     <x-jet-dialog-modal wire:model="open" class="bg-gray-50">
         <x-slot name="content">
-            <x-button
-                class="bg-transparent text-black font-extrabold absolute top-4 right-2 hover:overscroll-auto hover:text-white-ghost"
-                wire:click="$set('open', false)">X</x-button>
-            <div class="grid grid-cols-2 bg-white-ghost">
 
-                <div class="rounded-lg p-4">
-                    <img class="rounded-lg" src="{{ asset($src) }}" alt="">
+            <x-button
+                class="bg-transparent text-black font-extrabold absolute top-4 right-4 z-10 hover:overscroll-auto hover:text-white-ghost"
+                wire:click="$set('open', false)">X</x-button>
+
+            <div class="bg-white-ghost md:min-h-[60vh] md:relative">
+
+                <div class="flex justify-center rounded-lg p-4 h-full md:w-2/4">
+                    <img class="border-2 border-black shadow-lg rounded-lg" src="{{ asset($src) }}" alt="">
                 </div>
 
-                <div class="container p-4 overscroll-auto overflow-y-auto max-h-screen">
+                <div class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
 
-                    <div class="flex flex-row">
                         <x-button class="bg-cyan-500 mr-4">Inscribirse</x-button>
                         <x-button class="bg-awesome">Flyer</x-button>
-                    </div>
 
                     <div class="container mt-4">
                         <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
@@ -54,6 +54,22 @@
 
                             <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
                             <p class="mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
+                                ipsa aut, dolorem cupiditate,
+                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
+                                exercitationem dolor hic fugit animi!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
+                                ipsa aut, dolorem cupiditate,
+                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
+                                exercitationem dolor hic fugit animi!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
+                                ipsa aut, dolorem cupiditate,
+                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
+                                exercitationem dolor hic fugit animi!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
+                                ipsa aut, dolorem cupiditate,
+                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
+                                exercitationem dolor hic fugit animi!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
                                 ipsa aut, dolorem cupiditate,
                                 ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
                                 exercitationem dolor hic fugit animi!

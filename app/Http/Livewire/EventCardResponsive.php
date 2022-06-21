@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Event;
 use Livewire\Component;
 
-class EventCardDesktop extends Component
+class EventCardResponsive extends Component
 {
     public $open = false;
     public $event;
@@ -28,6 +28,6 @@ class EventCardDesktop extends Component
             $presentationsAndExhibitors[$i]['presentation'] = $presentation;
             $i++;
         }
-        return view('livewire.event-card-desktop', compact('presentationsAndExhibitors'));
+        return view('livewire.event-card-responsive', compact('presentationsAndExhibitors'));
     }
 }
