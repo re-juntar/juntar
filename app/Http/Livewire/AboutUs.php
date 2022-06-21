@@ -8,47 +8,95 @@ class AboutUs extends Component
 {
 
     public $miembrosv2 = [
-        'FDA' => [
-            'nombre' => 'Federico Díaz Aimar',
-            'redes' => [
+        [
+            'name' => 'Federico Díaz Aimar',
+            'socials' => [
                 'github' => 'https://github.com/diazAimar',
                 'linkedin' => 'https://www.linkedin.com/in/diazaimar/',
-                'instagram' => 'https://www.instagram.com/'
+                'envelope' => 'fede2804@hotmail.com'
             ],
-            'imagen' => '',
+            'image' => 'FDA',
         ],
-        'a' => [
-            'nombre' => 'a',
-            'redes' => [
-                'github' => 'https://github.com/diazAimar',
-                'youtube' => 'https://www.youtube.com/'
+        [
+            'name' => 'Juan Marcos Gonzalez',
+            'socials' => [
+                'github' => 'https://github.com/jmarcosg',
+                'linkedin' => 'https://www.linkedin.com/in/jmarcosg/',
+                'envelope' => 'jmarcos.gonzalez94@gmail.com'
             ],
-            'imagen' => '',
+            'image' => 'JMG',
         ],
-        'b' => [
-            'nombre' => 'b',
-            'redes' => [
-                'github' => 'https://github.com/diazAimar',
-                'facebook' => 'https://www.facebook.com/'
+        [
+            'name' => 'Santiago Scantamburlo',
+            'socials' => [
+                'linkedin' => 'https://www.linkedin.com/in/santiago-scantamburlo/',
+                'github' => 'https://github.com/santiagoScantamburlo',
+                'envelope' => 'santiagosca@outlook.com'
             ],
-            'imagen' => '',
+            'image' => 'SS',
         ],
-        'c' => [
-            'nombre' => 'c',
-            'redes' => [
-                'facebook' => 'https://www.facebook.com/',
-                'twitter' => 'https://www.twitter.com/'
+        [
+            'name' => 'Ramiro Cardozo',
+            'socials' => [
+                'github' => 'https://github.com/Raam4',
+                'linkedin' => 'https://www.linkedin.com/in/ramiro-cardozo-1504/',
+                'envelope' => 'ramiro_cardozo22@hotmail.com',
+                'user' => 'Ramiro Cardozo - Portfolio'
             ],
-            'imagen' => '',
+            'image' => 'RC',
         ],
-        'd' => [
-            'nombre' => 'd',
-            'redes' => [
-                'github' => 'https://github.com/diazAimar',
-                'linkedin' => 'https://www.linkedin.com/in/diazaimar/'
+        [
+            'name' => 'Francisco Rubilar',
+            'socials' => [
+                'github' => 'frubilar1986',
+                'envelope' => 'francisco.rubilar@est.fi.uncoma.edu.ar',
             ],
-            'imagen' => '',
+            'image' => 'FR',
         ],
+        [
+            'name' => 'Santi Lubary',
+            'socials' => [
+                'github' => 'https://github.com/SaniLubary',
+                'linkedin' => 'https://www.linkedin.com/in/santi-lubary/',
+                'envelope' => 'santiago.lp.cop@gmail.com'
+            ],
+        ],
+        [
+            'name' => 'Cristian Garrado',
+            'socials' => [
+                'github' => 'cristian96-https://github.com/code',
+                'linkedin' => 'https://www.linkedin.com/in/cristian-garrado-517a23209/',
+                'envelope' => 'cristiangarrado45@gmail.com',
+            ],
+            'image' => 'CG',
+        ],
+        [
+            'name' => 'Juan Julian Mora',
+            'socials' => [
+                'github' => 'https://github.com/jotanqn',
+                'linkedin' => 'https://www.linkedin.com/in/juan-julian-mora-marcos/',
+                'instagram' => 'https://www.instagram.com/jotaweb/',
+                'envelope' => 'juan@moramarcos.com.ar',
+                'user' => 'jotaweb.com.ar'
+            ],
+            'image' => 'JJM',
+        ],
+        [
+            'name' => 'Santiago Avilez',
+            'socials' => [
+                'github' => 'https://github.com/santiagoavilez',
+                'linkedin' => 'https://www.linkedin.com/in/santiago-avilez-ariza-431b5a203/',
+                'envelope' => 'santiago.avilez@est.fi.uncoma.edu.ar',
+            ],
+            'image' => 'SA',
+        ],
+        [
+            'name' => 'Juan Elias Henriquez',
+            'socials' => [
+                'github' => 'https://github.com/jehenriquez',
+                'envelope' => 'juan.henriquez@est.fi.uncoma.edu.ar'
+            ]
+        ]
     ];
 
     public function render()
