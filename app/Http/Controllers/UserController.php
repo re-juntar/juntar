@@ -12,9 +12,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) {
-        if($request->id) {
-            $response = User::all('name', 'email');
+    public function index(Request $request)
+    {
+        if ($request->id) {
+            $response = User::select('name', 'email')->where('id', '<>', $request->id)->get();
         } else {
             $response = null;
         }

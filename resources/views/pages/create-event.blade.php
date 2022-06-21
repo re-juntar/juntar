@@ -1,4 +1,6 @@
 <x-app-layout>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src={{asset('/js/displayInputs.js/')}}></script>
   {{-- Create Event Content --}}
   @auth
     <div class="create-event bg-[#0B0D19]">
@@ -10,6 +12,7 @@
             @csrf
             {{-- Nombre --}}
             <div class="mb-4">
+                <x-label for="name">Nombre del evento *</x-label>
                 <x-input id='name' class="w-full" type='text' name='name' placeholder="Ingrese Nombre" value="{{old('name')}}"/>
                 @error('name')
                     <div class="flex items-center">
@@ -130,8 +133,8 @@
             </div>
             {{-- Limite participantes --}}  
             <div class="mb-4">
-              <fieldset>
-              <x-label>¿Posee limite de participantes?</x-label>
+              <fieldset id="participant-limit">
+                <x-label>¿Posee limite de participantes?</x-label>
                 <div>
                   <input type="radio" id="no-limite-participantes" name="participants-limit" value="no-limite-participantes" checked {{ old('participants-limit') == "no-limite-participantes" ? 'checked' : '' }}>
                   <x-label class="mb-[0]" for="no-limite-participantes">No</x-label>
@@ -147,23 +150,38 @@
                   </div>
               @enderror
             </div>
+            {{-- Ingresar Numero de Participantes --}}
+            <div id='amount-of-participants-container' class='mt-2'>
+
+            </div>
+            @error('participants-limit')
+                <div class="flex items-center">
+                    <p class="text-red-600">{{$message}}</p>
+                </div>
+            @enderror
             {{-- Requiere preinscripcion --}}  
             <div class="mb-4">
-              <fieldset>
+              <fieldset id="requires-preinscription">
                 <x-label>¿Requiere preinscripcion? *</x-label>
                 <div>
-                  <input type="radio" id="no-preinscripcion" name="preinscription" value="0" checked {{ old('preinscription') == "no-preinscripcion" ? 'checked' : '' }}/>
-                  <x-label class="mb-[0]" for="no-preinscripcion">No</x-label>
+                  <input type="radio" id="no-preinscription" name="preinscription" value="no-preinscription" checked {{ old('preinscription') == "no-preinscription" ? 'checked' : '' }} />
+                  <x-label class="mb-[0]" for="no-preinscription">No</x-label>
                 </div>
                 <div>
-                  <input type="radio" id="si-preinscripcion" name="preinscription" value="1" {{ old('preinscription') == "si-preinscripcion" ? 'checked' : '' }}/>
-                  <x-label class="mb-[0]" for="si-preinscripcion">Si</x-label>
+                  <input type="radio" id="yes-preinscription" name="preinscription" value="yes-preinscription" {{ old('preinscription') == "yes-preinscription" ? 'checked' : '' }}/>
+                  <x-label class="mb-[0]" for="yes-preinscription">Si</x-label>
                 </div>
               </fieldset>
-              @error('participants-limit')
-                  <div class="flex items-center">
-                      <p class="text-red-600">{{$message}}</p>
-                  </div>
+            </div>
+            {{-- Ingresar Numero de Participantes --}}
+            <div class="mb-4">
+              <div id='preinscription-date-container' class='mt-2'>
+                
+              </div>
+              @error('preinscription-date')
+                <div class="flex items-center">
+                  <p class="text-red-600">{{$message}}</p>
+                </div>
               @enderror
             </div>
             {{-- Codigo Acreditacion --}}

@@ -145,10 +145,15 @@ return [
         ],
         'start-date' => [
             'required' => 'La fecha de inicio es obligatoria.',
-            'before_or_equal' => 'La fecha de inicio debe ser menor o igual a la fecha de fin'
+            'before_or_equal' => 'La fecha de inicio debe ser menor o igual a la fecha de fin.'
         ],
         'end-date' => [
             'required' => 'La fecha de fin es obligatoria.',
+            'after_or_equal' => 'La fecha de fin debe ser igual o mayor a la fecha de inicio.'
+        ],
+        'preinscription-date' => [
+            'required' => 'La fecha de preinscripcion es obligatoria.',
+            'before_or_equal' => 'La fecha de preinscripcion debe ser una fecha anterior o igual a fecha de inicio.'
         ]
     ],
 
@@ -174,6 +179,7 @@ return [
         'end-date' => 'fecha de fin',
         'participants-limit' => 'limite de participantes',
         'preinscription' => 'preinscripcion',
+        'preinscription-date' => 'fecha de preinscripcion',
         'acreditation-code' => 'codigo de acreditacion'
     ],
 
