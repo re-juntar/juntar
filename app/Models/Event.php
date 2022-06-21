@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helper\Imageable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
 {
@@ -47,6 +48,7 @@ class Event extends Model
 
     public function storeEvent($request)
     {
+        $this->user_id = Auth::user()->id;
         $this->name = $request->name;
         $this->short_name = $request['short-name'];
         $this->description = $request->description;
@@ -59,8 +61,8 @@ class Event extends Model
         $this->endorsed = 0;
         // $this->capacity = $request['participants-limit'];
         $this->capacity = 1;
-        // $this->pre_registration = $request->preinscription;
-        $this->pre_registration = 0;
+        $this->pre_registration = $request->preinscription;
+        // $this->pre_registration = 0;
         // $this->accreditation_token = $request['accreditation-code'];
         $this->accreditation_token = 1;
         // $this->image_flyer = $paths['flyer'];

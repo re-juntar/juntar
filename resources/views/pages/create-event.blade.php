@@ -152,11 +152,11 @@
               <fieldset>
                 <x-label>¿Requiere preinscripcion? *</x-label>
                 <div>
-                  <input type="radio" id="no-preinscripcion" name="preinscription" value="no-preinscripcion" checked {{ old('preinscription') == "no-preinscripcion" ? 'checked' : '' }}/>
+                  <input type="radio" id="no-preinscripcion" name="preinscription" value="0" checked {{ old('preinscription') == "no-preinscripcion" ? 'checked' : '' }}/>
                   <x-label class="mb-[0]" for="no-preinscripcion">No</x-label>
                 </div>
                 <div>
-                  <input type="radio" id="si-preinscripcion" name="preinscription" value="si-preinscripcion" {{ old('preinscription') == "si-preinscripcion" ? 'checked' : '' }}/>
+                  <input type="radio" id="si-preinscripcion" name="preinscription" value="1" {{ old('preinscription') == "si-preinscripcion" ? 'checked' : '' }}/>
                   <x-label class="mb-[0]" for="si-preinscripcion">Si</x-label>
                 </div>
               </fieldset>

@@ -18,10 +18,10 @@ trait Imageable
         $fileName1 = uniqid() . '_' . trim($file1->getClientOriginalName());
         $fileName2 = uniqid() . '_' . trim($file2->getClientOriginalName());
 
-        $this->image_logo = $fileName1;
+        $this->image_logo = "tmp/uploads/" . $fileName1;
         $this->save();
 
-        $this->image_flyer = $fileName2;
+        $this->image_flyer = "tmp/uploads/" . $fileName2;
         $this->save();
 
         $file1->move($path, $fileName1);
