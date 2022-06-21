@@ -46,6 +46,11 @@ class Event extends Model
         return $this->hasMany('App\Models\Question');
     }
 
+    public function organizers()
+    {
+        return $this->hasMany('App\Models\Organizer');
+    }
+
     public function storeEvent($request)
     {
         $this->user_id = Auth::user()->id;
@@ -59,8 +64,11 @@ class Event extends Model
         $this->start_date = $request['start-date'];
         $this->end_date = $request['end-date'];
         $this->endorsed = 0;
-        // $this->capacity = $request['participants-limit'];
-        $this->capacity = 1;
+        if (isset($request['amount-of-participants'])) {
+            $this->capacity = $request['amount-of-participants'];
+        } else {
+            $this->capacity = -1;
+        }
         $this->pre_registration = $request->preinscription;
         // $this->pre_registration = 0;
         // $this->accreditation_token = $request['accreditation-code'];
