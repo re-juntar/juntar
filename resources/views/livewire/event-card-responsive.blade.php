@@ -90,8 +90,14 @@
                             <thead class="bg-fogra-darkish text-white-ghost">
                                 <tr>
                                     <th scope="col" colspan="2" class="text-xl py-3">
-                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'title'" :key="'title'.$presentation->id"/>
-                                        <x-button wire:click="deletePresentation({{$presentation}})">Del</x-button> {{-- ACOMODAR --}}
+                                        <div class="grid grid-flow-row grid-cols-4 grid-rows-1">
+                                            <div class="col-span-3">
+                                                <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'title'" :key="'title'.$presentation->id"/>
+                                            </div>
+                                            <div class="col-span-1">
+                                                <x-button wire:click="deletePresentation({{$presentation}})" class="">Del</x-button>
+                                            </div>
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
