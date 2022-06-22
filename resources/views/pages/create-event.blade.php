@@ -77,15 +77,7 @@
               @enderror
             </div>
             {{-- Lugar --}}
-            <div class="mb-4">
-              <x-label for="place">Lugar *</x-label>
-              <x-input id="place" class="w-full" type="text" name="place" placeholder='Ingrese lugar' value="{{old('place')}}"/>
-              @error('place')
-                  <div class="flex items-center">
-                      <p class="text-red-600">{{$message}}</p>
-                  </div>
-              @enderror
-            </div>
+            
             {{-- Categoria --}}
             <div class="mb-4">
               <x-label for="category">Categoria *</x-label>
@@ -121,6 +113,11 @@
                   </div>
               @enderror
             </div>
+                        {{-- lugares y meet --}}
+                       <div id='places-container' class='mt-2'>
+
+                        </div>           
+                                 
             {{-- Fecha de Inicio --}}
             <div class="mb-4">
               <x-label class="block" for="start-date">Fecha Inicio *</x-label>
