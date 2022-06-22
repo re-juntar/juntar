@@ -1,4 +1,4 @@
-$(document).ready(function() {
+jQuery(function () {
     createParticipantLimitDiv();
     createPreinscriptionDiv();
     // $(".showCoorganizers").select2({
@@ -25,22 +25,22 @@ $(document).ready(function() {
     }
 
 
-    $("#participant-limit").on("change", function() {
+    $("#participant-limit").on("change", function () {
         createParticipantLimitDiv();
     });
 
-    $("#requires-preinscription").on("change", function() {
+    $("#requires-preinscription").on("change", function () {
         createPreinscriptionDiv();
     });
 
-    $("#requires-coorganizer").on("change", function() {
+    $("#requires-coorganizer").on("change", function () {
         createCoorganizerDiv();
-        $("#coorganizer").on('keyup', function() {
+        $("#coorganizer").on('keyup', function () {
             $('#coorganizersList').html("<option disabled selected>Seleccione</option>");
             if (this.value.length >= 3) {
                 let organizers;
                 let inputOrganizer = this.value;
-                $.each(usuarios, function(i, item) {
+                $.each(usuarios, function (i, item) {
                     let longitudInput = inputOrganizer.length;
                     let subStringOrganizer = item.name.substring(0, longitudInput);
                     if (subStringOrganizer.toLowerCase() == inputOrganizer) {
@@ -51,7 +51,7 @@ $(document).ready(function() {
             }
         });
 
-        $("#coorganizersList").on("change", function() {
+        $("#coorganizersList").on("change", function () {
             let i = 0;
             let encontrado = false;
             let nombre = "";
@@ -84,43 +84,9 @@ $(document).ready(function() {
 
 
 
-    $("#modality").on("change", function(e) {
+    $("#modality").on("change", function (e) {
         createLugarDiv();
     });
-
-    // $("#coorganizer").on('keyup', function() {
-    //     // console.log(usuarios)
-    //     $('#coorganizersList').html("<option disabled>Seleccione</option>");
-    //     if (this.value.length >= 3) {
-    //         let organizers;
-    //         let inputOrganizer = this.value;
-    //         $.each(usuarios, function(i, item) {
-    //             // console.log(organizers);
-    //             let longitudInput = inputOrganizer.length;
-    //             let subStringOrganizer = item.name.substring(0, longitudInput);
-    //             // item.descripcion.toLowerCase().includes(inputPais);
-    //             if (subStringOrganizer.toLowerCase() == inputOrganizer) {
-    //                 organizers += `<option value="${item.id}">${item.name}</option>`;
-    //             }
-    //         });
-    //         // console.log(paises);
-    //         $("#coorganizersList").append(organizers);
-    //     }
-    // });
-
-    // $(function() {
-    //     // console.log(usuarios);
-    //     // console.log(usuarios.attr());
-    //     let amountSelected = 0;
-    //     while (amountSelected <= 3) {
-    //         $.each(usuarios, function(i, item) {
-    //             $("#showCoorganizers").append(`<option value='${item.id}'>${item.name}</option>`);
-    //             if ($("#showCoorganizer option[value='" + item.id + "']").prop("selected", true)) {
-    //                 ++amountSelected;
-    //             }
-    //         });
-    //     }
-    // });
 
     function createParticipantLimitDiv() {
         let div =
@@ -172,3 +138,48 @@ $(document).ready(function() {
 
     }
 });
+
+// called by create-event to multiselect coorganizersList
+function dropdown() {
+    return {
+        options: [],
+        selected: [],
+        show: false,
+        open() { this.show = true },
+        close() { this.show = false },
+        isOpen() { return this.show === true },
+        select(index, event) {
+            if (!this.options[index].selected) {
+
+                this.options[index].selected = true;
+                this.options[index].element = event.target;
+                this.selected.push(index);
+
+            } else {
+                this.selected.splice(this.selected.lastIndexOf(index), 1);
+                this.options[index].selected = false
+            }
+        },
+        remove(index, option) {
+            this.options[option].selected = false;
+            this.selected.splice(index, 1);
+
+
+        },
+        loadOptions() {
+            const options = document.getElementById('select').options;
+            for (let i = 0; i < options.length; i++) {
+                this.options.push({
+                    value: options[i].value,
+                    text: options[i].innerText,
+                    selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
+                });
+            }
+        },
+        selectedValues() {
+            return this.selected.map((option) => {
+                return this.options[option].value;
+            })
+        }
+    }
+}
