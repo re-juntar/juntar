@@ -36,6 +36,9 @@
                 x-on:click="isEditing = false"
             ><i class="fas fa-check"></i></button>
         </form>
+        @error('newName')
+        <small class="text-xs text-red-600">El campo no puede estar vacío</small>
+        @enderror
         <small class="text-xs">Enter para guardar, Esc para cancelar</small>
     </div>
 </div>

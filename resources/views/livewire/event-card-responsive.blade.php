@@ -84,20 +84,18 @@
                     </div>
 
                     <div class="container">
-                        <h2 class="text-2xl font-bold mt-4">Agenda <x-button wire:click="addPresentation">+</x-button></h2>
+                        <h2 class="text-2xl font-bold mt-4">Agenda {{-- <x-button wire:click="addPresentation">+</x-button> --}}</h2>
                         @foreach($presentations as $presentation)
                         <table class="min-w-full text-center border mt-2">
                             <thead class="bg-fogra-darkish text-white-ghost">
                                 <tr>
                                     <th scope="col" colspan="2" class="text-xl py-3">
-                                        <div class="grid grid-flow-row grid-cols-4 grid-rows-1">
-                                            <div class="col-span-3">
-                                                <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'title'" :key="'title'.$presentation->id"/>
-                                            </div>
+                                            {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'title'" :key="'title'.$presentation->id"/> --}}
+                                                {{$presentation->title}}
+                                            {{-- 
                                             <div class="col-span-1">
                                                 <x-button wire:click="deletePresentation({{$presentation}})" class="">Del</x-button>
-                                            </div>
-                                        </div>
+                                            </div> --}}
                                     </th>
                                 </tr>
                             </thead>
@@ -109,7 +107,8 @@
                                         Fecha
                                     </td>
                                     <td>
-                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'date'" :key="'date'.$presentation->id"/>
+                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'date'" :key="'date'.$presentation->id"/> --}}
+                                        {{$presentation->date}}
                                     </td>
                                 </tr>
                                 @endif
@@ -121,11 +120,11 @@
                                     </td>
                                     <td>
                                         {{-- {{ substr($presentation->start_time, 0, 5) . " a " . substr($presentation->end_time, 0, 5)}} --}}
-                                        Desde
-                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'start_time'" :key="'start'.$presentation->id"/>
+                                        Desde {{$presentation->start_time}}
+                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'start_time'" :key="'start'.$presentation->id"/> --}}
                                         @if($presentation->end_time)
-                                        Hasta
-                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'end_time'" :key="'end'.$presentation->id"/>
+                                        Hasta {{$presentation->end_time}}
+                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'end_time'" :key="'end'.$presentation->id"/> --}}
                                         @endif
                                     </td>
                                 </tr>
@@ -137,7 +136,8 @@
                                         Recursos
                                     </td>
                                     <td>
-                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'resources_link'" :key="'resources'.$presentation->id"/>
+                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'resources_link'" :key="'resources'.$presentation->id"/> --}}
+                                        <a href="{{$presentation->resources_link}}">Link (icon)</a>
                                     </td>
                                 </tr>
                                 @endif
@@ -145,14 +145,19 @@
                                 @if($presentation->exhibitors)
                                 <tr class="border-b">
                                     @php
-                                        $exhibits = explode('-', $presentation->exhibitors);
-                                        $rowspan = count($exhibits)
+                                        $exhibitors = explode('-', $presentation->exhibitors);
+                                        $rowspan = count($exhibitors)
                                     @endphp
                                     <td class="text-lg font-medium text-gray-900 px-6 py-2" rowspan="{{$rowspan/2}}">
                                         Presentadores
                                     </td>
                                     <td>
-                                        <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'exhibitors'" :key="'exhibitors'.$presentation->id"/>
+                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'exhibitors'" :key="'exhibitors'.$presentation->id"/> --}}
+                                        <ul>
+                                            @foreach($exhibitors as $exh)
+                                            <li>{{$exh}}</li>
+                                            @endforeach
+                                        </ul>
                                     </td>
                                 </tr>
                                 @endif
