@@ -30,6 +30,8 @@ Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::view('/create-event', 'pages.create-event')->name('create-event');
 
+Route::view('/edit-event', 'pages.edit-event')->name('edit-event');
+
 Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
 
 Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'render'])
