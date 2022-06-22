@@ -1,5 +1,5 @@
 <div>
-    <a href="#{{$event->id}}" wire:click="$set('open', true)">
+    <a href="#modal" wire:click="$set('open', true)">
         @php
             $src = $event['image_flyer'];
             if ($event['image_flyer'] == null) {
@@ -57,45 +57,19 @@
                             <x-verified-badge class="mt-4" />
 
                             <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
-                            <p class="mt-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
-                                ipsa aut, dolorem cupiditate,
-                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
-                                exercitationem dolor hic fugit animi!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
-                                ipsa aut, dolorem cupiditate,
-                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
-                                exercitationem dolor hic fugit animi!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
-                                ipsa aut, dolorem cupiditate,
-                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
-                                exercitationem dolor hic fugit animi!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
-                                ipsa aut, dolorem cupiditate,
-                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
-                                exercitationem dolor hic fugit animi!
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque doloribus,
-                                ipsa aut, dolorem cupiditate,
-                                ipsum vero est corporis laboriosam odio amet repellendus praesentium illum optio
-                                exercitationem dolor hic fugit animi!
-                            </p>
-
+                            {!! $event->description !!}
                         </div>
 
                     </div>
 
                     <div class="container">
-                        <h2 class="text-2xl font-bold mt-4">Agenda {{-- <x-button wire:click="addPresentation">+</x-button> --}}</h2>
+                        <h2 class="text-2xl font-bold mt-4">Agenda</h2>
                         @foreach($presentations as $presentation)
                         <table class="min-w-full text-center border mt-2">
                             <thead class="bg-fogra-darkish text-white-ghost">
                                 <tr>
                                     <th scope="col" colspan="2" class="text-xl py-3">
-                                            {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'title'" :key="'title'.$presentation->id"/> --}}
-                                                {{$presentation->title}}
-                                            {{-- 
-                                            <div class="col-span-1">
-                                                <x-button wire:click="deletePresentation({{$presentation}})" class="">Del</x-button>
-                                            </div> --}}
+                                            {{$presentation->title}}
                                     </th>
                                 </tr>
                             </thead>
@@ -107,7 +81,6 @@
                                         Fecha
                                     </td>
                                     <td>
-                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'date'" :key="'date'.$presentation->id"/> --}}
                                         {{$presentation->date}}
                                     </td>
                                 </tr>
@@ -119,12 +92,9 @@
                                         Hora
                                     </td>
                                     <td>
-                                        {{-- {{ substr($presentation->start_time, 0, 5) . " a " . substr($presentation->end_time, 0, 5)}} --}}
                                         Desde {{$presentation->start_time}}
-                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'start_time'" :key="'start'.$presentation->id"/> --}}
                                         @if($presentation->end_time)
                                         Hasta {{$presentation->end_time}}
-                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'end_time'" :key="'end'.$presentation->id"/> --}}
                                         @endif
                                     </td>
                                 </tr>
@@ -136,8 +106,7 @@
                                         Recursos
                                     </td>
                                     <td>
-                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'resources_link'" :key="'resources'.$presentation->id"/> --}}
-                                        <a href="{{$presentation->resources_link}}">Link (icon)</a>
+                                        <a href="{{$presentation->resources_link}}"><i class="fa-solid fa-paperclip text-awesome"></i></a>
                                     </td>
                                 </tr>
                                 @endif
@@ -152,7 +121,6 @@
                                         Presentadores
                                     </td>
                                     <td>
-                                        {{-- <livewire:edit-field :model="'\App\Models\Presentation'" :entity="$presentation" :field="'exhibitors'" :key="'exhibitors'.$presentation->id"/> --}}
                                         <ul>
                                             @foreach($exhibitors as $exh)
                                             <li>{{$exh}}</li>
