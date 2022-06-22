@@ -29,8 +29,8 @@ class AboutUs extends Component
         [
             'name' => 'Santiago Scantamburlo',
             'socials' => [
-                'linkedin' => 'https://www.linkedin.com/in/santiago-scantamburlo/',
                 'github' => 'https://github.com/santiagoScantamburlo',
+                'linkedin' => 'https://www.linkedin.com/in/santiago-scantamburlo/',
                 'envelope' => 'santiagosca@outlook.com'
             ],
             'image' => 'SS',
@@ -41,14 +41,14 @@ class AboutUs extends Component
                 'github' => 'https://github.com/Raam4',
                 'linkedin' => 'https://www.linkedin.com/in/ramiro-cardozo-1504/',
                 'envelope' => 'ramiro_cardozo22@hotmail.com',
-                'user' => 'Ramiro Cardozo - Portfolio'
+                'user' => 'https://portfolio-rcardozo.web.app/home'
             ],
             'image' => 'RC',
         ],
         [
             'name' => 'Francisco Rubilar',
             'socials' => [
-                'github' => 'frubilar1986',
+                'github' => 'https://github.com/frubilar1986',
                 'envelope' => 'francisco.rubilar@est.fi.uncoma.edu.ar',
             ],
             'image' => 'FR',
@@ -60,11 +60,12 @@ class AboutUs extends Component
                 'linkedin' => 'https://www.linkedin.com/in/santi-lubary/',
                 'envelope' => 'santiago.lp.cop@gmail.com'
             ],
+            'image' => 'SL',
         ],
         [
             'name' => 'Cristian Garrado',
             'socials' => [
-                'github' => 'cristian96-https://github.com/code',
+                'github' => 'https://github.com/cristian96-code',
                 'linkedin' => 'https://www.linkedin.com/in/cristian-garrado-517a23209/',
                 'envelope' => 'cristiangarrado45@gmail.com',
             ],
@@ -75,9 +76,9 @@ class AboutUs extends Component
             'socials' => [
                 'github' => 'https://github.com/jotanqn',
                 'linkedin' => 'https://www.linkedin.com/in/juan-julian-mora-marcos/',
-                'instagram' => 'https://www.instagram.com/jotaweb/',
                 'envelope' => 'juan@moramarcos.com.ar',
-                'user' => 'jotaweb.com.ar'
+                'instagram' => 'https://www.instagram.com/jotaweb/',
+                'user' => 'https://jotaweb.com.ar/'
             ],
             'image' => 'JJM',
         ],
@@ -95,7 +96,17 @@ class AboutUs extends Component
             'socials' => [
                 'github' => 'https://github.com/jehenriquez',
                 'envelope' => 'juan.henriquez@est.fi.uncoma.edu.ar'
-            ]
+            ],
+            'image' => 'JEH',
+        ],
+        [
+            'name' => 'Adriana Fabiola Leiva',
+            'socials' => [
+                'github' => 'https://github.com/adri-leiva',
+                'linkedin' => 'https://www.linkedin.com/in/adriana-leiva/',
+                'envelope' => 'adriana.leiva@est.fi.uncoma.edu.ar',
+            ],
+            'image' => 'AFL',
         ]
     ];
 
