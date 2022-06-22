@@ -1,11 +1,11 @@
 $(document).ready(function() {
     createParticipantLimitDiv();
     createPreinscriptionDiv();
-    $(".showCoorganizers").select2({
-        placeholder: "Seleccione un Coorganizador",
-    });
+    // $(".showCoorganizers").select2({
+    //     placeholder: "Seleccione un Coorganizador",
+    // });
     let datos = {
-        id: 10,
+        id: $("#id").val(),
     };
 
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
     $("#requires-coorganizer").on("change", function() {
         createCoorganizerDiv();
         $("#coorganizer").on('keyup', function() {
-            $('#coorganizersList').html("<option disabled>Seleccione</option>");
+            $('#coorganizersList').html("<option disabled selected>Seleccione</option>");
             if (this.value.length >= 3) {
                 let organizers;
                 let inputOrganizer = this.value;
@@ -50,9 +50,41 @@ $(document).ready(function() {
                 $("#coorganizersList").append(organizers);
             }
         });
+
+        $("#coorganizersList").on("change", function() {
+            let i = 0;
+            let encontrado = false;
+            let nombre = "";
+            while (i < usuarios.length && !encontrado) {
+                if (usuarios[i]['id'] == this.value) {
+                    encontrado = true;
+                    nombre = usuarios[i]['name'];
+                }
+                ++i;
+            }
+            let coorganizersSelected = $(".selected-coorganizers").length;
+            console.log(coorganizersSelected);
+            if (coorganizersSelected < 3) {
+                if (coorganizersSelected == 0) {
+                    let div = `<div id="actual-coorganizers">\n<input hidden name="coorganizer1" value="${this.value}"></input>\n<input disabled class="selected-coorganizers" name="coorganizer1-name">${nombre}</input>\n</div>`;
+                    console.log(div);
+                    $("#coorganizer-container").append(div);
+                } else {
+                    let input = `<input hidden name="coorganizer${coorganizersSelected + 1}" value="${this.value}"></input>\n<input disabled class="selected-coorganizers" name="coorganizer1-name">${nombre}</input>`;
+                    console.log(input);
+                    $("#actual-coorganizers").append(input);
+                }
+            }
+        });
     });
 
-    $("#modality").on("change", function (e) {
+    // let coorganizersList = document.getElementById('coorganizersList');
+    // console.log(coorganizersList);
+    // coorganizersList.addEventListener('change', function() {});
+
+
+
+    $("#modality").on("change", function(e) {
         createLugarDiv();
     });
 
@@ -134,8 +166,7 @@ $(document).ready(function() {
             $("#places-container").html("");
             $("#places-container").append(meet);
             $("#places-container").append(lugar);
-        }
-        else {
+        } else {
             $("#places-container").html("");
         }
 

@@ -10,6 +10,7 @@
           <p class="text-center mb-4">Complete los siguientes campos</p>
           <form method="POST" action="{{route('store-event')}}" enctype="multipart/form-data">
             @csrf
+            <input hidden value="{{Auth::user()->id}}" id="id">
             {{-- Agregar Coorganizador --}}
             <div class="mb-4">
               <fieldset id="requires-coorganizer">
@@ -26,13 +27,8 @@
               </fieldset>
             </div>
             {{-- Ingresar Nombre del Coorganizador --}}
-            <div class="mb-4">
+            <div id="" class="mb-4">
               <div id='coorganizer-container' class='mt-2'>
-                {{-- <x-label for='coorganizer'> Ingrese Nombre del Coorganizador * </x-label> 
-                <x-input id='coorganizer' class='w-full' name='coorganizer' type='text'/>
-                <select class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem]' placeholder="Seleccione" name="coorganizersList" id="coorganizersList">
-                  <option disabled selected>Seleccione</option>
-                </select> --}}
               </div>
               @error('coorganizer')
                 <div class="flex items-center">
@@ -197,11 +193,11 @@
               <fieldset id="requires-preinscription">
                 <x-label>¿Requiere preinscripcion? *</x-label>
                 <div>
-                  <input type="radio" id="no-preinscription" name="preinscription" value="no-preinscription" checked {{ old('preinscription') == "no-preinscription" ? 'checked' : '' }} />
+                  <input type="radio" id="no-preinscription" name="preinscription" value="0" checked {{ old('preinscription') == "no-preinscription" ? 'checked' : '' }} />
                   <x-label class="mb-[0]" for="no-preinscription">No</x-label>
                 </div>
                 <div>
-                  <input type="radio" id="yes-preinscription" name="preinscription" value="yes-preinscription" {{ old('preinscription') == "yes-preinscription" ? 'checked' : '' }}/>
+                  <input type="radio" id="yes-preinscription" name="preinscription" value="1" {{ old('preinscription') == "yes-preinscription" ? 'checked' : '' }}/>
                   <x-label class="mb-[0]" for="yes-preinscription">Si</x-label>
                 </div>
               </fieldset>
