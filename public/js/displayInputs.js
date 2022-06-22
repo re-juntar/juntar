@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     createParticipantLimitDiv();
     createPreinscriptionDiv();
     $(".showCoorganizers").select2({
@@ -8,25 +8,81 @@ $(document).ready(function () {
         id: 10,
     };
 
-    let usuarios = $.post("http://juntar.test/api/users", datos);
+
+    let usuarios = getJsonInfo("http://juntar.test/api/users", datos);
     // console.log(usuarios);
 
-    $("#participant-limit").on("change", function () {
+    function getJsonInfo(url, datos) {
+        var jsonData = $.ajax({
+            url: url,
+            method: "POST",
+            dataType: 'json',
+            async: false,
+            data: datos
+        });
+        return jsonData.responseJSON;
+    }
+
+    $("#participant-limit").on("change", function() {
         createParticipantLimitDiv();
     });
 
-    $("#requires-preinscription").on("change", function () {
+    $("#requires-preinscription").on("change", function() {
         createPreinscriptionDiv();
     });
 
-    $(function () {
-        console.log(usuarios);
-        console.log(usuarios.attr());
-        $.each(usuarios.responseJSON, function (i, item) {
-            console.log(item.name);
-            $("#showCoorganizers").append(`hola`);
+    $("#requires-coorganizer").on("change", function() {
+        createCoorganizerDiv();
+        $("#coorganizer").on('keyup', function() {
+            $('#coorganizersList').html("<option disabled>Seleccione</option>");
+            if (this.value.length >= 3) {
+                let organizers;
+                let inputOrganizer = this.value;
+                $.each(usuarios, function(i, item) {
+                    let longitudInput = inputOrganizer.length;
+                    let subStringOrganizer = item.name.substring(0, longitudInput);
+                    if (subStringOrganizer.toLowerCase() == inputOrganizer) {
+                        organizers += `<option value="${item.id}">${item.name}</option>`;
+                    }
+                });
+                $("#coorganizersList").append(organizers);
+            }
         });
     });
+
+    // $("#coorganizer").on('keyup', function() {
+    //     // console.log(usuarios)
+    //     $('#coorganizersList').html("<option disabled>Seleccione</option>");
+    //     if (this.value.length >= 3) {
+    //         let organizers;
+    //         let inputOrganizer = this.value;
+    //         $.each(usuarios, function(i, item) {
+    //             // console.log(organizers);
+    //             let longitudInput = inputOrganizer.length;
+    //             let subStringOrganizer = item.name.substring(0, longitudInput);
+    //             // item.descripcion.toLowerCase().includes(inputPais);
+    //             if (subStringOrganizer.toLowerCase() == inputOrganizer) {
+    //                 organizers += `<option value="${item.id}">${item.name}</option>`;
+    //             }
+    //         });
+    //         // console.log(paises);
+    //         $("#coorganizersList").append(organizers);
+    //     }
+    // });
+
+    // $(function() {
+    //     // console.log(usuarios);
+    //     // console.log(usuarios.attr());
+    //     let amountSelected = 0;
+    //     while (amountSelected <= 3) {
+    //         $.each(usuarios, function(i, item) {
+    //             $("#showCoorganizers").append(`<option value='${item.id}'>${item.name}</option>`);
+    //             if ($("#showCoorganizer option[value='" + item.id + "']").prop("selected", true)) {
+    //                 ++amountSelected;
+    //             }
+    //         });
+    //     }
+    // });
 
     function createParticipantLimitDiv() {
         let div =
@@ -45,6 +101,16 @@ $(document).ready(function () {
             $("#preinscription-date-container").append(div);
         } else if ($("#no-preinscription").is(":checked")) {
             $("#preinscription-date-container").html("");
+        }
+    }
+
+    function createCoorganizerDiv() {
+        let div =
+            "<x-label for='coorganizer'> Ingrese Nombre del Coorganizador * </x-label> <input id='coorganizer' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem] w-full' name='coorganizer' type='text'/><select class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem]' placeholder='Seleccione' name='coorganizersList' id='coorganizersList'><option disabled selected>Seleccione</option></select>";
+        if ($("#yes-coorganizer").is(":checked")) {
+            $("#coorganizer-container").append(div);
+        } else if ($("#no-coorganizer").is(":checked")) {
+            $("#coorganizer-container").html("");
         }
     }
 });

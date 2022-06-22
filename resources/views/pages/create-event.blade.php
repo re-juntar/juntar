@@ -28,8 +28,11 @@
             {{-- Ingresar Nombre del Coorganizador --}}
             <div class="mb-4">
               <div id='coorganizer-container' class='mt-2'>
-                <x-label for='coorganizer'> Ingrese Nombre del Coorganizador * </x-label> 
+                {{-- <x-label for='coorganizer'> Ingrese Nombre del Coorganizador * </x-label> 
                 <x-input id='coorganizer' class='w-full' name='coorganizer' type='text'/>
+                <select class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem]' placeholder="Seleccione" name="coorganizersList" id="coorganizersList">
+                  <option disabled selected>Seleccione</option>
+                </select> --}}
               </div>
               @error('coorganizer')
                 <div class="flex items-center">
@@ -37,18 +40,12 @@
                 </div>
               @enderror
             </div>
-            <div class="mb-4">
-              <select id='showCoorganizers' class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
+            <!-- <div class="mb-4">
+              <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
               </select>
-            </div>
+            </div> -->
 
-{{--             <input type="text" list="cars" />
-            <datalist id="cars">
-              <option>Volvo</option>
-              <option>Saab</option>
-              <option>Mercedes</option>
-              <option>Audi</option>
-            </datalist> --}}
+             <!-- <input type="text" list="cars" class="w-full" id="organizers"/> -->
               {{-- Nombre --}}
             <div class="mb-4">
                 <x-label for="name">Nombre del evento *</x-label>
