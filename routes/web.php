@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\EventController;
 use App\Http\Livewire\Events;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Livewire\InscriptionsController;
@@ -29,6 +30,9 @@ Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::view('/create-event', 'pages.create-event')->name('create-event');
+
+Route::get('/eventos/evento/{eventoId}', [EventController::class, 'show'])->name('evento');
+
 
 Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
 

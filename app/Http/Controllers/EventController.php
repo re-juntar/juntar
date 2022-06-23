@@ -44,9 +44,10 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($eventoId)
     {
-        //
+        $event = Event::find($eventoId);
+        return view('pages.events.evento', compact('eventoId', 'event'));
     }
 
     /**
@@ -81,6 +82,10 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function specificRequest(Request $id)
+    {
     }
 
     public function homeRequest(Request $filter)
