@@ -14,7 +14,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $event = Event::findOrFail(1);
+        return view('pages.edit-event',['event'=>$event]);
     }
 
     /**
@@ -57,7 +58,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = event::findOrfail($id);
+        return view('page.edit-event',['event'=>$event]);
     }
 
     /**
