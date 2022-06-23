@@ -31,7 +31,7 @@ Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::view('/create-event', 'pages.create-event')->name('create-event');
 
-Route::get('/edit-event', [EventController::class,'index'])->name('edit-event');
+Route::get('/edit-event/{eventid}', [EventController::class,'edit'])->name('edit-event');
 
 //Route::view('/update-event', 'pages.update-event')->name('update-event');
 

@@ -1,4 +1,3 @@
-alert('jsss');
 $(document).ready(function() {
     createParticipantLimitDiv();
     createPreinscriptionDiv();

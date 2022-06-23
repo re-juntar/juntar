@@ -175,7 +175,7 @@
                                 <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
                                 <input id="logo" class="border-none p-0 block w-full" name="logo" type="file" 
                                     value= {{ asset($event->image_logo) }} />
-                                <img src={{ $event->image_logo ? asset( $event->image_logo) : '' }}
+                                <img class="h-60" src={{ $event->image_logo ? asset( $event->image_logo) : '' }}
                                     alt="">
                                 @error('logo')
                                     <div class="flex items-center">
@@ -189,16 +189,17 @@
                         <div class="mb-4">
                             <div class="mb-4">
                                 <x-label for="flyer">Ingrese flyer [solo formato png, jpg y jpeg]</x-label>
-                                <input id="flyer" class="border-none p-0 block w-full" name="flyer" type="file"
-                                    value="{{ $event->image_flyer }}" />
-                                <img src={{ $event->image_flyer ? asset( $event->image_flyer) : '' }}
-                                    alt="">
+                                
+                                {{-- <input id="flyer" class="border-none p-0 block w-full" name="flyer" type="file"
+                                    value="{{ $event->image_flyer }}" /> --}}
+                                    @livewire('limpiar-input', ['event' => $event])
+
                                 @error('flyer')
                                     <div class="flex items-center">
                                         <p class="text-red-600">{{ $message }}</p>
                                     </div>
                                 @enderror
-                                <x-button id="remove-flyer" class="text-[14px] mt-3" type="button">Quitar</x-button>
+
                             </div>
                         </div>
                         {{-- Limite participantes --}}
@@ -254,7 +255,7 @@
                                 </div>
                             @enderror
                         </div>
-                        {{-- Ingresar Numero de Participantes --}}
+                        {{-- Ingresar preisnscripcion --}}
                         <div class="mb-4">
                             <div id='preinscription-date-container' class='mt-2'>
 
@@ -268,7 +269,7 @@
                         {{-- Codigo Acreditacion --}}
                         <div class="mb-4">
                             <x-label for="acreditation-code">Código Acreditación *</x-label>
-                            <x-input id="acreditation-code" type="text" name="acreditation-code" placeholder='Ingrese código de acreditación' value="{{old('acreditation-code'), $event->accreditation_token}}"/>
+                            <x-input id="acreditation-code" type="text" name="acreditation-code" placeholder='Ingrese código de acreditación' value="{{old('acreditation-code', $event->accreditation_token)}}"/>
                             @error('acreditation-code')
                                 <div class="flex items-center">
                                     <p class="text-red-600">{{ $message }}</p>
@@ -293,5 +294,7 @@
         <script>
             CKEDITOR.replace('description');
         </script>
+
+            {{-- SElect2 --}}
     </x-slot>
 </x-app-layout>
