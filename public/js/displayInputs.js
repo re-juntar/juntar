@@ -9,7 +9,7 @@ jQuery(function () {
     createParticipantLimitDiv();
 
     function getJsonInfo(url, hiddenUserId) {
-        var jsonData = $.ajax({
+        let jsonData = $.ajax({
             url: url,
             method: "POST",
             dataType: 'json',
@@ -132,17 +132,32 @@ function dropdown() {
         options: [],
         selected: [],
         show: false,
-        users: [],
-        selectElement: document.getElementById('select'),
         setValueDefault() { this.value = null },
         getValue() { return this.value },
         setValue(val) { this.value = val },
         open() { this.show = true },
         close() { this.show = false },
         isOpen() { return this.show === true },
-        loadUsers() {
-            // get users
-            var usersResponse = $.ajax({
+        select(id, event) {
+            if (!this.options[id].selected) {
+                if (this.selectedValues().length >= 3) return
+
+                this.options[id].selected = true;
+                this.options[id].element = event.target;
+                this.selected.push(id);
+                this.setValueDefault()
+
+            } else {
+                this.selected.splice(this.selected.lastIndexOf(optionValue), 1);
+                this.options[optionValue].selected = false
+            }
+        },
+        remove(index, option) {
+            this.options[option].selected = false;
+            this.selected.splice(index, 1);
+        },
+        loadOptions() {
+            const usersResponse = $.ajax({
                 url: 'http://juntar.test/api/users',
                 method: "POST",
                 dataType: 'json',
@@ -152,47 +167,17 @@ function dropdown() {
                 }
             });
 
-            this.users = usersResponse.responseJSON;
-        },
-        select(index, event) {
-            if (!this.options[index].selected) {
-                if (this.selectedValues().length >= 3) return
+            const users = usersResponse.responseJSON;
 
-                this.options[index].selected = true;
-                this.options[index].element = event.target;
-                this.selected.push(index);
-                this.setValueDefault()
-
-            } else {
-                this.selected.splice(this.selected.lastIndexOf(index), 1);
-                this.options[index].selected = false
-            }
-        },
-        remove(index, option) {
-            this.options[option].selected = false;
-            this.selected.splice(index, 1);
-        },
-        init() {
-            this.loadUsers()
-            this.appendOptions()
-            this.loadOptions()
-        },
-        loadOptions() {
             // loads options to feed the dropdown
-            const options = this.selectElement.options;
-            for (let i = 0; i < options.length; i++) {
+            for (let i = 0; i < users.length; i++) {
                 this.options.push({
-                    value: options[i].value,
-                    text: options[i].innerText,
-                    selected: options[i].getAttribute('selected') != null ? options[i].getAttribute('selected') : false
+                    id: i,
+                    value: i + users[i].name,
+                    text: users[i].name,
+                    selected: false,
+                    show: false
                 });
-            }
-        },
-        appendOptions() {
-            // load only 5 users max
-            for (let i = 0; i < 5; i++) {
-                const user = this.users[i];
-                $("#select").append(`<option value="${user.id}">${user.name}</option>`);
             }
         },
         selectedValues() {
@@ -201,19 +186,20 @@ function dropdown() {
             })
         },
         updateUsersList(event) {
+            if (event.target.value.length < 3) return
+
             this.setValue(event.target.value)
-            // if (event.target.value.length >= 3) {
-            //     let organizers;
-            //     let inputOrganizer = event.target.value;
-            //     $.each(usuarios, function (i, item) {
-            //         let longitudInput = inputOrganizer.length;
-            //         let subStringOrganizer = item.name.substring(0, longitudInput);
-            //         if (subStringOrganizer.toLowerCase() == inputOrganizer) {
-            //             organizers += `<option value="${item.id}">${item.name}</option>`;
-            //         }
-            //     });
-            //     console.log(organizers);
-            // }
+            for (let index = 0; index < this.options.length; index++) {
+                let inputOrganizer = event.target.value.toLowerCase();
+                let inputLength = inputOrganizer.length;
+
+                let subStringOrganizer = this.options[index].text.substring(0, inputLength);
+                if (subStringOrganizer.toLowerCase() == inputOrganizer.toLowerCase()) {
+                    this.options[index].show = true
+                } else {
+                    this.options[index].show = false
+                }
+            }
         }
     }
 }

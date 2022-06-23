@@ -1,13 +1,6 @@
-{{-- Setear un Id al componente para evitar errores al integrar mas de un multiselect en el formularios --}}
-
-<div>
-    <select x-cloak id="select">
-        {{-- <template x-for="(user,i) in users" :key="i">
-            <option :value="user.i" x-text="user.name"></option>
-        </template> --}}
-    </select>
-
-    <div x-data="dropdown()" x-init="init()" class="flex">
+<div {{ $attributes->merge(['id' => 'multiselectInput']) }}>
+    {{-- Functionality used here lives in the dropdown() function on displayInputs.js --}}
+    <div x-data="dropdown()" x-init="loadOptions()" class="flex">
         <input name="values" type="hidden" x-bind:value="selectedValues()">
         <div class="flex relative w-64">
             <div class="flex flex-col items-center relative">
@@ -17,7 +10,6 @@
                         <div class="flex flex-auto flex-wrap">
                             <div x-show="selected.length <= 3" class="flex-1">
                                 <input placeholder="Select an option"
-                                    {{ $attributes->merge(['id' => 'multiselectInput']) }}
                                     class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"
                                     x-bind:value="getValue()"
                                     @input.debounce="updateUsersList($event)"
@@ -53,10 +45,12 @@
                         class="absolute shadow top-100 bg-white-ghost z-40 w-full left-0 rounded max-h-select overflow-y-auto svelte-5uyqqj"
                         x-on:click.away="close">
                         <div class="flex flex-col w-full">
-                            <template x-for="(option,index) in options" :key="'option'+index">
-                                <div>
+                            {{-- Options arr is filitered by 'show' property and is shown only 5 results max --}}
+                            <template x-for="(option,index) in options.filter(option => option.show == true)" :key="'option'+index">
+                                {{-- Selecting an input calls select(), which adds the option to selected array --}}
+                                <template x-if="index <= 4">
                                     <div class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-slate-200"
-                                        @click="select(index,$event)">
+                                        @click="select(option.id, $event)">
                                         <div x-bind:class="option.selected ? 'border-awesome' : ''"
                                             class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative">
                                             <div class="w-full items-center flex">
@@ -64,7 +58,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </template>
                             </template>
                         </div>
                     </div>
