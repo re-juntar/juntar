@@ -6,13 +6,46 @@
 
         <x-jet-validation-errors class="mb-4" />
 
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
+            <div class="mt-4">
                 <x-jet-label for="name" value="{{ __('Nombre') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                     autofocus autocomplete="name" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="surname" value="{{ __('Apellido') }}" />
+                <x-jet-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required
+                    autofocus autocomplete="surname" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="dni" value="{{ __('DNI') }}" />
+                <x-jet-input id="dni" class="block mt-1 w-full" type="text" name="dni" :value="old('dni')" required
+                    autofocus autocomplete="dni" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="country" value="{{ __('Country') }}" />
+                <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')" required
+                    autofocus autocomplete="country" />
+            </div>
+
+            
+
+            <div class="mt-4">
+                <x-jet-label for="province" value="{{ __('Provincia') }}" />
+                <x-jet-input id="province" class="block mt-1 w-full" type="text" name="province" :value="old('province')" required
+                    autofocus autocomplete="province" />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="city" value="{{ __('Ciudad') }}" />
+                <x-jet-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required
+                    autofocus autocomplete="city" />
             </div>
 
             <div class="mt-4">
