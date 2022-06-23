@@ -1,6 +1,7 @@
 $(document).ready(function() {
     createParticipantLimitDiv();
     createPreinscriptionDiv();
+    createLugarDiv();
     // $(".showCoorganizers").select2({
     //     placeholder: "Seleccione un Coorganizador",
     // });
@@ -171,4 +172,30 @@ $(document).ready(function() {
         }
 
     }
+
+    // $("#removelogo").on("click", function () {
+
+    //     $("#newphotologo").css('display','none');
+    //     $("#oldphotologo").css('display','block');
+        
+    // });
+
+    // $("input[name='archivoslogo']").on("change", function () {        
+    //     $("#newphotologo").css('display','block');
+    //     $("#oldphotologo").hide();
+    // });
+
+
+    // $("#removeflyer").on("click", function () {
+    //     console.log("borro flyer");
+    //     $("#newphotoflyer").css('display','none');
+    //     $("#oldphotoflyer").css('display','block');
+
+    // });
+    // $("input[name='archivosflyer']").on("change", function () {
+    //     console.log("cambio flyer");
+    //     $("#newphotoflyer").css('display','block');
+    //     $("#oldphotoflyer").hide();
+    // });
+    
 });

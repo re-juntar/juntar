@@ -8,9 +8,10 @@ use Livewire\WithFileUploads;
 class LimpiarInput extends Component
 {
     public $photo;
-    public $event;
     public $iteration;
     public $predeterminada;
+    public $img;
+    public $tipo;
     use WithFileUploads;
 
     public function limpiar()

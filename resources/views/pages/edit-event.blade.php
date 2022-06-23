@@ -9,8 +9,7 @@
                     <p class="text-center mb-4">Cambie la informacion que desee y luego aplique los cambios con el boton de
                         "Guardar Cambios" que se encuentra al final del formulario.</p>
                     <form method="POST" action="" enctype="multipart/form-data">
-                        @csrf
-                        {{$event->image_logo}}
+                        @csrf                        
                         {{ method_field('put') }}
                         <input hidden value="{{ Auth::user()->id }}" id="id">
                         {{-- Agregar Coorganizador --}}
@@ -122,10 +121,10 @@
                             <select id="modality" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="modality">
                                 {{-- <option disabled selected> Seleccione una modalidad </option> --}}
-                                <option value='presencial' @if ($modality == 1) selected @endif>Presencial</option>
-                                <option value='online' @if ($modality == 2) selected @endif>Online
+                                <option value='1' @if ($modality == 1) selected @endif>Presencial</option>
+                                <option value='2' @if ($modality == 2) selected @endif>Online
                                 </option>
-                                <option value='presensial y online' @if ($modality == 3) selected @endif>Presencial y Online</option>
+                                <option value='3' @if ($modality == 3) selected @endif>Presencial y Online</option>
                                 <option value='otra' @if ($modality == 4) selected @endif>
                                     otra</option>
                                 {{-- <option value="otra" {{ old('modality') == 'otra' ? 'selected' : '' }}> Otra </option>
@@ -140,13 +139,10 @@
                             @enderror
 
                         </div>
-
                         {{-- lugares y meet --}}
                         <div id='places-container' class='mt-2'>
 
                         </div>
-
-                        <div id=""></div>
                         {{-- Fecha de Inicio --}}
                         <div class="mb-4">
                             <x-label class="block" for="start-date">Fecha Inicio *</x-label>
@@ -173,16 +169,12 @@
                         <div class="mb-4">
                             <div class="mb-4">
                                 <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
-                                <input id="logo" class="border-none p-0 block w-full" name="logo" type="file" 
-                                    value= {{ asset($event->image_logo) }} />
-                                <img class="h-60" src={{ $event->image_logo ? asset( $event->image_logo) : '' }}
-                                    alt="">
+                                @livewire('limpiar-input', ['img' => $event->image_logo, 'tipo' => "logo"] )                                
                                 @error('logo')
                                     <div class="flex items-center">
                                         <p class="text-red-600">{{ $message }}</p>
                                     </div>
                                 @enderror
-                                <x-button id="remove-logo" class="text-[14px] mt-3" type="button">Quitar</x-button>
                             </div>
                         </div>
                         {{-- Flyer --}}
@@ -192,8 +184,7 @@
                                 
                                 {{-- <input id="flyer" class="border-none p-0 block w-full" name="flyer" type="file"
                                     value="{{ $event->image_flyer }}" /> --}}
-                                    @livewire('limpiar-input', ['event' => $event])
-
+                                    @livewire('limpiar-input', ['img' => $event->image_flyer , 'tipo' => "flyer" ])
                                 @error('flyer')
                                     <div class="flex items-center">
                                         <p class="text-red-600">{{ $message }}</p>
@@ -204,7 +195,7 @@
                         </div>
                         {{-- Limite participantes --}}
                         <div class="mb-4">
-                            <fieldset>
+                            <fieldset  id="participant-limit">
                                 <x-label>¿Posee limite de participantes?</x-label>
                                 <div>
                                     <input type="radio" id="no-limite-participantes" name="participants-limit"
@@ -235,15 +226,15 @@
                         @enderror
                         {{-- Requiere preinscripcion --}}
                         <div class="mb-4">
-                            <fieldset>
+                            <fieldset id="requires-preinscription">
                                 <x-label>¿Requiere preinscripcion? *</x-label>
                                 <div>
-                                    <input type="radio" id="no-preinscripcion" name="preinscription"
+                                    <input type="radio" id="no-preinscription" name="preinscription"
                                         value="no-preinscripcion" {{ !$event->pre_registration ? 'checked' : '' }} />
                                     <x-label class="mb-[0]" for="no-preinscripcion">No</x-label>
                                 </div>
                                 <div>
-                                    <input type="radio" id="si-preinscripcion" name="preinscription"
+                                    <input type="radio" id="yes-preinscription" name="preinscription"
                                         value="si-preinscripcion " {{ $event->pre_registration ? 'checked' : '' }} />
 
                                     <x-label class="mb-[0]" for="si-preinscripcion">Si</x-label>
