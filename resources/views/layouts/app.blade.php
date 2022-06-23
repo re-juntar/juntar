@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="text-left text-white-ghost bg-fogra-dark py-4">
-                <p class="px-4 mx-auto max-w-6xl">© Juntar 2022 <i class="fa fa-times"></i></p>
+                <p class="px-4 mx-auto max-w-6xl"><i class="fa fa-copyright"></i> Juntar 2022</p>
             </div>
         </footer>
     </div>
