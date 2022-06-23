@@ -14,7 +14,12 @@ class StoreEventController extends Controller
 
   public function index()
   {
-    return view('pages.create-event');
+    $permisssionController = new PermissionController();
+    if ($permisssionController->isLogged()) {
+      return view('pages.create-event');
+    } else {
+      return view('login');
+    }
   }
 
   public function store(ImageUploadRequest $request, Event $event)
@@ -55,7 +60,7 @@ class StoreEventController extends Controller
     // echo $paths;
     // $event->storeEvent($request, $paths);
 
-    $response = Event::all()->where('event_status_id', 1);
+    // $response = Event::all()->where('event_status_id', 1);
     return redirect()->action([HomeController::class, 'filteredIndex']);
   }
 }
