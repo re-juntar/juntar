@@ -69,10 +69,31 @@
                         {{ __('Link ') }}
                     </x-backend.side-nav-link>
                 </li>
+
             </ul>
-            <div class="text-white-ghost bg-fogra-dark text-center bottom-0 absolute w-full">
+            <div class="bg-fogra-dark text-center bottom-0 absolute w-full">
                 <hr class="border-awesome m-0">
-                <p class="py-2 text-md">© Juntar 2022</p>
+                <x-backend.dropdown :active="request()->routeIs('gestionar')">
+                    <x-slot name="profile">
+                        <img class="h-8 w-8 rounded-full object-cover mr-2" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        <div class="font-bold text-xs uppercase text-white-ghost">
+                            {{ Auth::user()->name }}
+                        </div>
+                    </x-slot>
+                    <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}" {{-- :active="request()->routeIs('')" --}}>
+                        {{ __('Perfil') }}
+                    </x-backend.side-nav-link>
+                    <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">
+                        {{ __('Juntar') }}
+                    </x-backend.side-nav-link>
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-backend.side-nav-link class="text-md" href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                            {{ __('Cerrar Sesión') }}
+                        </x-backend.side-nav-link>
+                    </form>
+                </x-backend.dropdown>
+                <p class="py-2 text-md text-white-ghost ">© Juntar 2022</p>
             </div>
         </nav>
     </div>
@@ -80,31 +101,11 @@
         function sidebar() {
             return {
                 sidebarOpen: true,
-                sidebarMenuOpen: false,
                 openSidebar() {
                     this.sidebarOpen = true
                 },
                 closeSidebar() {
                     this.sidebarOpen = false
-                },
-                sidebarProductMenu() {
-                    if (this.sidebarMenuOpen === true) {
-                        this.sidebarMenuOpen = false
-                        window.localStorage.setItem('sidebarMenuOpen', 'close');
-                    } else {
-                        this.sidebarMenuOpen = true
-                        window.localStorage.setItem('sidebarMenuOpen', 'open');
-                    }
-                },
-                checkSidebarProductMenu() {
-                    if (window.localStorage.getItem('sidebarMenuOpen')) {
-                        if (window.localStorage.getItem('sidebarMenuOpen') === 'open') {
-                            this.sidebarMenuOpen = true
-                        } else {
-                            this.sidebarMenuOpen = false
-                            window.localStorage.setItem('sidebarMenuOpen', 'close');
-                        }
-                    }
                 },
             }
         }
