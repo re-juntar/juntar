@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->id) {
+            $response = User::select('name', 'id')->where('id', '<>', $request->id)->get();
+        } else {
+            $response = null;
+        }
+        return $response;
     }
 
     /**
@@ -57,8 +62,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $event = Event::findOrfail($id);
-        return view('pages.edit-event', ['event' => $event, 'eventId' => $id]);
+        //
     }
 
     /**
@@ -70,10 +74,9 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        // return back()->with('message', 'Lisiting update successfully!');
-
+        //
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -83,32 +86,5 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function homeRequest(Request $filter)
-    {
-        if (isset($filter['search'])) {
-            $search = $filter['search'];
-            $response = Event::where('name', 'like', '%' . $search . '%')->where('event_status_id', '=', 1);
-        } else {
-            $response = Event::where('event_status_id', 1)->orderBy('start_date', 'asc')->get();
-        }
-
-        if (isset($filter['order'])) {
-            $order = $filter['order'];
-
-            switch ($order) {
-                case 'asc':
-                    $response = $response->orderBy('start_date', 'asc')->get();
-                    break;
-                case 'desc':
-                    $response = $response->orderBy('start_date', 'desc')->get();
-                    break;
-            }
-        }
-        // } else {
-        //     $response = $response->orderBy('start_date', 'asc');
-        // }
-        return $response;
     }
 }

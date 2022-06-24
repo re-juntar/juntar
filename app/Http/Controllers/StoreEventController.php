@@ -24,8 +24,8 @@ class StoreEventController extends Controller
 
   public function store(ImageUploadRequest $request, Event $event)
   {
-    $request->validate([
-      // 'name' => 'required|max:200|string',
+    // $request->validate([
+    //   'name' => 'required|max:200|string',
     //   'short-name' => 'required|max:100|string',
     //   'description' => 'required',
     //   'place' => 'required|max:200|string',
@@ -38,7 +38,8 @@ class StoreEventController extends Controller
     //   'participants-limit' => 'required',
     //   'preinscription' => 'required',
     //   'acreditation-code' => 'required|string'
-    ]);
+    // ]);
+
 
     if ($event->storeEvent($request)->storeMedia($request)) {
       $eventId = Event::max('id');
@@ -57,12 +58,6 @@ class StoreEventController extends Controller
         $orgController3->store($request->coorganizer3, $eventId);
       }
     }
-
-    
-    // echo $paths;
-    // $event->storeEvent($request, $paths);
-
-    // $response = Event::all()->where('event_status_id', 1);
     return redirect()->action([HomeController::class, 'filteredIndex']);
   }
 

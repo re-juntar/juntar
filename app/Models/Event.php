@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Helper\Imageable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Event extends Model
 {
@@ -45,6 +45,12 @@ class Event extends Model
     {
         return $this->hasMany('App\Models\Question');
     }
+
+    public function organizers()
+    {
+        return $this->hasMany('App\Models\Organizer');
+    }
+
     public function storeEvent($request)
     {
         $this->user_id = Auth::user()->id;
@@ -113,6 +119,7 @@ class Event extends Model
         if($request->preinscription) {
             $this->inscription_end_date = $request['preinscription-date'];
         }
+
 
         $this->save();
 

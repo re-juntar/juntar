@@ -2,7 +2,6 @@
 
 namespace App\Helper;
 
-
 trait Imageable
 {
     public function storeMedia($request)
@@ -26,11 +25,5 @@ trait Imageable
 
         $file1->move($path, $fileName1);
         $file2->move($path, $fileName2);
-
-        // $paths = [
-        //     'logo' => $path . "/" . $fileName1,
-        //     'flyer' => $path . "/" . $fileName2
-        // ];
-        // return $paths;
     }
 }

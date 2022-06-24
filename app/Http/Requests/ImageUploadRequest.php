@@ -21,7 +21,6 @@ class ImageUploadRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-
     public function rules()
     {
         return [
@@ -40,5 +39,4 @@ class ImageUploadRequest extends FormRequest
             'acreditation-code' => 'required|string'
         ];
     }
-    
 }
