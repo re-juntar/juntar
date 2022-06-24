@@ -12,41 +12,7 @@
                         @csrf                        
                         {{ method_field('put') }}
                         <input hidden value="{{ Auth::user()->id }}" id="id">
-                        {{-- Agregar Coorganizador --}}
-                        <div class="mb-4">
-                            <fieldset id="requires-coorganizer">
-                                <x-label>¿Requiere coorganizador? *</x-label>
-                                <div>
-                                    <input type="radio" id="no-coorganizer" name="requires-coorganizer"
-                                        value="no-coorganizer" checked
-                                        {{ old('requires-coorganizer') == 'no-coorganizer' ? 'checked' : '' }} />
-                                    <x-label class="mb-[0]" for="no-coorganizer">No</x-label>
-                                </div>
-                                <div>
-                                    <input type="radio" id="yes-coorganizer" name="requires-coorganizer"
-                                        value="yes-coorganizer"
-                                        {{ old('requires-coorganizer') == 'yes-coorganizer' ? 'checked' : '' }} />
-                                    <x-label class="mb-[0]" for="yes-coorganizer">Si</x-label>
-                                </div>
 
-                            </fieldset>
-                        </div>
-                        {{-- Ingresar Nombre del Coorganizador --}}
-                        <div id="" class="mb-4">
-                            <div id='coorganizer-container' class='mt-2'>
-                            </div>
-                            @error('coorganizer')
-                                <div class="flex items-center">
-                                    <p class="text-red-600">{{ $message }}</p>
-                                </div>
-                            @enderror
-                        </div>
-                        <!-- <div class="mb-4">
-                      <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
-                      </select>
-                    </div> -->
-
-                        <!-- <input type="text" list="cars" class="w-full" id="organizers"/> -->
 
                         {{-- Nombre --}}
                         <p class="text-3xl text-red-600">Falta el event-store para tener la accion de crear evento y
