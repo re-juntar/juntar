@@ -33,8 +33,12 @@
 
             {{-- Ingresar Nombre del Coorganizador --}}
             <div id="" class="mb-4">
-              <div id='coorganizer-container' class='mt-2 hidden'>
-                <x-dropdown-multiselect id="coorganizer-dropdown" />
+              <div id='coorganizer-container' class='mt-2 {{ old('requires-coorganizer') != "yes-coorganizer" ? 'hidden' : '' }}'>
+                <x-dropdown-multiselect id="coorganizer-dropdown">
+                    <input id="coorganizer1" name="coorganizer1" class="coorganizer hidden" type="text" value="{{old('coorganizer1')}}">
+                    <input id="coorganizer2" name="coorganizer2" class="coorganizer hidden" type="text" value="{{old('coorganizer2')}}">
+                    <input id="coorganizer3" name="coorganizer3" class="coorganizer hidden" type="text" value="{{old('coorganizer3')}}">
+                </x-dropdown-multiselect>
               </div>
               @error('coorganizer')
                 <div class="flex items-center">

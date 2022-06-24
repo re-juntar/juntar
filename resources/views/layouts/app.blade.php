@@ -32,7 +32,7 @@
 
     <div>
         @livewire('nav-bar', ['permission' => $permission])
-        
+
         <!-- Page Content -->
         <main>
             {{ $slot }}
@@ -86,7 +86,7 @@
     @if (isset($pageScripts))
         {{ $pageScripts }}
     @endif
-    
+
 </body>
 
 </html>
