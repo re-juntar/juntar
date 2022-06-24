@@ -13,7 +13,7 @@
     <div x-cloak wire:ignore :class="{ 'w-60': ham, 'w-0': !ham }"
         class="fixed top-0 bottom-0 left-0 z-30 block w-60 h-full min-h-screen overflow-y-auto transition-all duration-300 ease-in-out bg-fogra-dark shadow-lg overflow-x-hidden">
         <div class="mr-8 pt-4 pb-2 px-6">
-            <a href="#">
+            <a href="{{ route('management')}}">
                 <div class="flex items-center">
                     <img src="{{ asset('images/logos/juntar-logo-w.svg') }}" alt="">
                 </div>
@@ -35,7 +35,7 @@
                     </form>
                 </li>
                 <li class="relative">
-                    <x-backend.side-nav-link href="{{ route('gestionar') }}" :active="request()->routeIs('gestionar')">
+                    <x-backend.side-nav-link href="{{ route('management') }}" :active="request()->routeIs('management')">
                         {{ __('Inicio') }}
                     </x-backend.side-nav-link>
                 </li>
