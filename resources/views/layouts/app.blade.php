@@ -15,34 +15,42 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
     {{-- jQuery --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{-- autocomplete --}}
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer></script>
 
     <!-- FontAwesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
-    @if(Route::currentRouteName() == 'create-event')
-    <script src={{asset('/js/displayInput.js/')}}></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (Route::currentRouteName() == 'create-event')
+        <script src={{ asset('/js/displayInputs.js/') }}></script>
     @endif
 
-    @if(Route::currentRouteName() == 'edit-event')
-    <script src={{asset('/js/displayInputsEdit.js/')}}></script>
+    @if (Route::currentRouteName() == 'edit-event')
+        <script src={{ asset('/js/displayInputsEdit.js/') }}></script>
     @endif
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @livewireStyles
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src={{asset('/js/displayInputs.js/')}}></script>
+    <script src={{ asset('/js/register.js') }} defer></script>
 </head>
 
 <body class="font-sans antialiased min-h-screen">
     <x-jet-banner />
 
     @livewire('nav-bar', ['permission' => $permission])
-    
+
     <!-- Page Content -->
     <main>
         {{ $slot }}
@@ -68,8 +76,9 @@
                 </div>
                 <div class="relative w-100 px-4 basis-4/12 max-w-[33%]">
                     <div class="mt-6">
-                        <h5 class="text-lg font-medium underline"><a href="{{route('contact')}}">Contacto</a></h5>
-                        <h5 class="text-lg font-medium underline"><a href="{{route('about-us')}}">Sobre Nosotros</a></h5>
+                        <h5 class="text-lg font-medium underline"><a href="{{ route('contact') }}">Contacto</a></h5>
+                        <h5 class="text-lg font-medium underline"><a href="{{ route('about-us') }}">Sobre Nosotros</a>
+                        </h5>
                     </div>
                 </div>
             </div>

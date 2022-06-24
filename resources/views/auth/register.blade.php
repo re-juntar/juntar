@@ -36,15 +36,14 @@
             <div class="mt-4">
                 <x-jet-label for="country" value="{{ __('País (*)') }}" />
                 <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')"
-                    required autofocus autocomplete="country" />
+                    required />
             </div>
-
-
+            <input id="pais" hidden value="">
 
             <div class="mt-4">
                 <x-jet-label for="province" value="{{ __('Provincia (*)') }}" />
                 <x-jet-input id="province" class="block mt-1 w-full" type="text" name="province" :value="old('province')"
-                    required autofocus autocomplete="province" />
+                    required autofocus />
             </div>
 
             <div class="mt-4">
