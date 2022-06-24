@@ -33,9 +33,9 @@ Route::view('/create-event', 'pages.create-event')->name('create-event');
 Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
 
 Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'render'])
-    ->name('mis-inscripciones-a-eventos');
+    ->name('my-inscriptions');
 
-Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('organizar-eventos');
+Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('my-events');
 
 /********************* MAILING **************************/
 Route::get('/contact-us', function () {
@@ -44,4 +44,4 @@ Route::get('/contact-us', function () {
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
 
 /********************** BACKEND *************************/
-Route::get('/gestionar', [BackendController::class, 'index'])->name('gestionar');
+Route::get('/gestionar', [BackendController::class, 'index'])->name('management');
