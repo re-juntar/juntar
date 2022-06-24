@@ -8,6 +8,7 @@
                 <div class="create-event-body bg-[#EFEFEF] p-[1.25rem]">
                     <p class="text-center mb-4">Cambie la informacion que desee y luego aplique los cambios con el boton de
                         "Guardar Cambios" que se encuentra al final del formulario.</p>
+
                     <form method="POST" action="{{ route('update-event') }}" enctype="multipart/form-data">
                         @csrf
                         
@@ -20,7 +21,7 @@
                                       </select>
                                     </div> -->
 
-                        <!-- <input type="text" list="cars" class="w-full" id="organizers"/> -->
+                    
 
                         {{-- Nombre --}}
                         <p class="text-3xl text-red-600">Falta el event-store para tener la accion de crear evento y
