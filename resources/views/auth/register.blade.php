@@ -28,27 +28,6 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="country" value="{{ __('Pais') }}" />
-                <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')" required
-                    autofocus autocomplete="country" />
-                    @php
-                     $path = (base_path().'\resources\json\countries.json');
-                     $countries = json_decode(file_get_contents($path),true);
-                     //print_r ( $countries);
-                
-                   @endphp
-
-                   <select>
-
-                   @foreach($countries['countries'] as $country)
-                   <option>{{$country['name']}}</option>
-                   @endforeach
-                   </select>
-                   
-                   
-                <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"> </script>
-                <!-- <script type="text/javascript" src="..\..\json\countries.json"> </script> -->
-
                 <x-jet-label for="dni" value="{{ __('DNI (*)') }}" />
                 <x-jet-input id="dni" class="block mt-1 w-full" type="text" name="dni" :value="old('dni')"
                     required autofocus autocomplete="dni" />
@@ -56,16 +35,17 @@
 
             <div class="mt-4">
                 <x-jet-label for="country" value="{{ __('País (*)') }}" />
-                <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')"
-                    required autofocus autocomplete="country" />
+                <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')" required  />
             </div>
+            <input id="pais" hidden value="">
+
 
 
 
             <div class="mt-4">
                 <x-jet-label for="province" value="{{ __('Provincia (*)') }}" />
                 <x-jet-input id="province" class="block mt-1 w-full" type="text" name="province" :value="old('province')"
-                    required autofocus autocomplete="province" />
+                    required autofocus />
             </div>
 
             <div class="mt-4">
