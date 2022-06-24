@@ -57,7 +57,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::findOrfail($id);
+        return view('pages.edit-event', ['event' => $event, 'eventId' => $id]);
     }
 
     /**
@@ -69,9 +70,10 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+        // return back()->with('message', 'Lisiting update successfully!');
+
+    }
     /**
      * Remove the specified resource from storage.
      *

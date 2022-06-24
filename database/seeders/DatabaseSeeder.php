@@ -36,9 +36,14 @@ class DatabaseSeeder extends Seeder
         $role2->save();
 
         $role3 = new Role();
-        $role3->name = 'common_user';
-        $role3->description = 'Has access only to frontend application';
+        $role3->name = 'validator';
+        $role3->description = 'Has access only to event endorsement requests';
         $role3->save();
+
+        $role4 = new Role();
+        $role4->name = 'common_user';
+        $role4->description = 'Has access only to frontend application';
+        $role4->save();
         /*******************************STATUS******************************************/
         $status1 = new EventStatus();
         $status1->description = 'Active';
@@ -89,7 +94,11 @@ class DatabaseSeeder extends Seeder
         $category4->save();
 
         $category5 = new EventCategory();
-        $category5->description = 'Otra';
+        $category5->description = 'Curso';
         $category5->save();
+
+        $category6 = new EventCategory();
+        $category6->description = 'Otra';
+        $category6->save();
     }
 }
