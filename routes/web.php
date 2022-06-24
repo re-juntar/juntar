@@ -4,6 +4,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\EventController;
 use App\Http\Livewire\Events;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Livewire\InscriptionsController;
@@ -30,12 +31,16 @@ Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::view('/create-event', 'pages.create-event')->name('create-event');
 
+Route::get('/edit-event/{eventid}', [EventController::class,'edit'])->name('edit-event');
+
+Route::post('/update-event', [StoreEventController::class, 'update'])->name('update-event');
+
 Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
 
 Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'render'])
-    ->name('mis-inscripciones-a-eventos');
+    ->name('my-inscriptions');
 
-Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('organizar-eventos');
+Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('my-events');
 
 /********************* MAILING **************************/
 Route::get('/contact-us', function () {
@@ -44,4 +49,4 @@ Route::get('/contact-us', function () {
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
 
 /********************** BACKEND *************************/
-Route::get('/gestionar', [BackendController::class, 'index'])->name('gestionar');
+Route::get('/gestionar', [BackendController::class, 'index'])->name('management');
