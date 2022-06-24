@@ -95,7 +95,7 @@
     @if (isset($pageScripts))
         {{ $pageScripts }}
     @endif
-    
+
 </body>
 
 </html>
