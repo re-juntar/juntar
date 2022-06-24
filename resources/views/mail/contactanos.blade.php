@@ -12,8 +12,11 @@
 
         <h1>Nombre del remitente: {{$contacto['name']}} </h1>
         <h2>Asunto del mensaje: {{$contacto['asunto']}} </h2>
+        <h2>Email del remitente: {{$contacto['email']}} </h2>
         <h2>Mensaje:</h2>
-        <p>{{$contacto['detalle']}}</p>
+        <h3>{{$contacto['detalle']}}</h3>
+
+        
            
         
         

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactanosController;
 use App\Http\Livewire\Events;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Livewire\InscriptionsController;
@@ -37,7 +38,7 @@ Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'rende
 Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('my-events');
 
 /********************* MAILING **************************/
-Route::get('/contactanos', function () {
+Route::get('/contact-us', function () {
     return view('mail.index');
 })->name('contact');
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');

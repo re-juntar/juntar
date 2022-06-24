@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('date');
             $table->time('start_time', 4);
             $table->time('end_time', 4);
+            $table->longText('exhibitors')->nullable();
             $table->string('resources_link')->nullable();
             $table->timestamps();
         });

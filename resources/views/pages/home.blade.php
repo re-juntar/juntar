@@ -20,6 +20,14 @@
                     }
                     @endphp --}}
                     <img class="rounded-lg" src="{{ asset($event->image_flyer) }}" alt="">
+                    {{-- <button class="bg-fogra-darkish text-white-ghost absolute top-2 right-2 rounded-full p-3 font-black">...</button> --}}
+                    @livewire('event-card-responsive', ['event' => $event])
+                    <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
+                        <img class="w-10 h-10 rounded-full mr-2" src="{{asset('images/logos/logo-uncoma-w.svg')}}">
+                        <div class="font-bold text-xl uppercase text-white-ghost py-4">
+                            Nombre Apellido
+                        </div>
+                    </div>
                 </x-card>
             @endforeach
         </div>

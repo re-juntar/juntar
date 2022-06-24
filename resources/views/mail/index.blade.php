@@ -10,8 +10,8 @@
         </x-label>
         <div class="px-[4vh]">
             <form action="{{ route('mail.store') }}" method="POST">
-                @csrf
 
+                @csrf
                 <div>
                     <x-label for="name">Nombre</x-label>
                     <x-input id="name" class="w-full" type="text" name="name" :value="old('name')"/>
@@ -19,7 +19,6 @@
                         <p class="text-red-600">{{$message}}</p>
                     @enderror
                 </div>
-
                 <div class="mb-4">
                     <x-label for="email">Email</x-label>
                     <x-input id="email" class="w-full" type="text" name="email" value="{{old('email')}}"/>
@@ -55,5 +54,4 @@
             </form>
         </div>
     </div>
-
 </x-app-layout>
