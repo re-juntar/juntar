@@ -52,4 +52,4 @@ Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store')
 /********************** BACKEND *************************/
 Route::get('/gestionar', [BackendController::class, 'index'])->name('management');
 
-Route::get('/users', UsersCrud::class);
+Route::get('/gestionar/users', UsersCrud::class);

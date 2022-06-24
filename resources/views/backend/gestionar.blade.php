@@ -1,1 +1,3 @@
-<x-back-layout></x-back-layout>
+<div>
+    Hello World!
+</div>
