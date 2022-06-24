@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,5 +22,18 @@ class PermissionController extends Controller
         }
 
         return ['admin' => $admin];
+    }
+
+    function isLogged() {
+        $logged = false;
+        $userId = Auth::user()->id;
+
+        $user = User::findOrFail($userId);
+
+        if($user->id) {
+            $logged = true;
+        }
+
+        return $logged;
     }
 }

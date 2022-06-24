@@ -74,7 +74,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::findOrfail($id);
+        return view('pages.edit-event', ['event' => $event, 'eventId' => $id]);
     }
 
     /**
@@ -86,9 +87,10 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
 
+        // return back()->with('message', 'Lisiting update successfully!');
+
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -108,9 +110,9 @@ class EventController extends Controller
     {
         if (isset($filter['search'])) {
             $search = $filter['search'];
-            $response = Event::where('name', 'like', '%' . $search . '%');
+            $response = Event::where('name', 'like', '%' . $search . '%')->where('event_status_id', '=', 1);
         } else {
-            $response = Event::all();
+            $response = Event::where('event_status_id', 1)->orderBy('start_date', 'asc')->get();
         }
 
         if (isset($filter['order'])) {
@@ -118,15 +120,16 @@ class EventController extends Controller
 
             switch ($order) {
                 case 'asc':
-                    $response = $response->orderBy('date', 'asc');
+                    $response = $response->orderBy('start_date', 'asc')->get();
                     break;
                 case 'desc':
-                    $response = $response->orderBy('date', 'desc');
+                    $response = $response->orderBy('start_date', 'desc')->get();
                     break;
             }
-        } else {
-            $response = $response->sortBy('date');
         }
+        // } else {
+        //     $response = $response->orderBy('start_date', 'asc');
+        // }
         return $response;
     }
 }
