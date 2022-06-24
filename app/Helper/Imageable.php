@@ -19,18 +19,11 @@ trait Imageable
         $fileName2 = uniqid() . '_' . trim($file2->getClientOriginalName());
 
         $this->image_logo = "tmp/uploads/" . $fileName1;
-        $this->save();
-
         $this->image_flyer = "tmp/uploads/" . $fileName2;
+
         $this->save();
 
         $file1->move($path, $fileName1);
         $file2->move($path, $fileName2);
-
-        $paths = [
-            'logo' => $path . "/" . $fileName1,
-            'flyer' => $path . "/" . $fileName2
-        ];
-        return $paths;
     }
 }

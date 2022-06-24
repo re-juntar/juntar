@@ -40,6 +40,7 @@ class StoreEventController extends Controller
     //   'acreditation-code' => 'required|string'
     // ]);
 
+
     if ($event->storeEvent($request)->storeMedia($request)) {
       $eventId = Event::max('id');
       if (isset($request->coorganizer1)) {
@@ -57,10 +58,13 @@ class StoreEventController extends Controller
         $orgController3->store($request->coorganizer3, $eventId);
       }
     }
-    // echo $paths;
-    // $event->storeEvent($request, $paths);
-
-    // $response = Event::all()->where('event_status_id', 1);
     return redirect()->action([HomeController::class, 'filteredIndex']);
   }
+
+  public function update(ImageUploadRequest $request, Event $event){
+    $event = Event::find($request->eventId);
+    $event->updateEvent($request)->storeMedia($request);
+    return redirect()->action([HomeController::class, 'filteredIndex']);
+  }
+
 }
