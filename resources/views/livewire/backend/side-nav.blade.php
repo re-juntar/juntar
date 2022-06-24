@@ -4,7 +4,8 @@
         <div class="flex justify-end">
             <button @click="ham = !ham"
                 :class="{ 'hover:bg-awesome': !ham, 'hover:bg-awesome': ham }"
-                class="transition-all duration-300 w-8 p-1 mx-3 my-2 rounded-full focus:outline-none">
+                class="transition-all duration-300 w-8 p-1 mx-3 my-2 rounded-full focus:outline-none"
+                wire:click="$emitUp('toggleBar')">
                 <i class="fa fa-bars text-awesome text-xl"
                     :class="{ 'text-gray-600': !ham, 'text-gray-300': ham }"></i>
             </button>

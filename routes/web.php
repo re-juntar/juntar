@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\BackendController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ContactanosController;
-use App\Http\Controllers\EventController;
 use App\Http\Livewire\Events;
-use App\Http\Controllers\StoreEventController;
-use App\Http\Livewire\InscriptionsController;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Backend\UsersCrud;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\BackendController;
+use App\Http\Livewire\InscriptionsController;
+use App\Http\Controllers\StoreEventController;
+use App\Http\Controllers\ContactanosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,5 @@ Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store')
 
 /********************** BACKEND *************************/
 Route::get('/gestionar', [BackendController::class, 'index'])->name('management');
+
+Route::get('/users', UsersCrud::class);
