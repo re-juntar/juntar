@@ -1,16 +1,16 @@
-<div x-cloak x-data="sidebar()" class="relative flex">
+<div x-cloak x-data="{ ham: true }" class="relative flex">
     <div class="fixed top-4 left-48 z-40 transition-all duration-300"
-        :class="{ 'left-48': sidebarOpen, 'left-0': !sidebarOpen }">
+        :class="{ 'left-48': ham, 'left-0': !ham }">
         <div class="flex justify-end">
-            <button @click="sidebarOpen = !sidebarOpen"
-                :class="{ 'hover:bg-awesome': !sidebarOpen, 'hover:bg-awesome': sidebarOpen }"
+            <button @click="ham = !ham"
+                :class="{ 'hover:bg-awesome': !ham, 'hover:bg-awesome': ham }"
                 class="transition-all duration-300 w-8 p-1 mx-3 my-2 rounded-full focus:outline-none">
                 <i class="fa fa-bars text-awesome text-xl"
-                    :class="{ 'text-gray-600': !sidebarOpen, 'text-gray-300': sidebarOpen }"></i>
+                    :class="{ 'text-gray-600': !ham, 'text-gray-300': ham }"></i>
             </button>
         </div>
     </div>
-    <div x-cloak wire:ignore :class="{ 'w-60': sidebarOpen, 'w-0': !sidebarOpen }"
+    <div x-cloak wire:ignore :class="{ 'w-60': ham, 'w-0': !ham }"
         class="fixed top-0 bottom-0 left-0 z-30 block w-60 h-full min-h-screen overflow-y-auto transition-all duration-300 ease-in-out bg-fogra-dark shadow-lg overflow-x-hidden">
         <div class="mr-8 pt-4 pb-2 px-6">
             <a href="#">
@@ -20,7 +20,7 @@
             </a>
         </div>
         <nav>
-            <ul class="relative px-1 mt-2" :class="{ 'opacity-1': sidebarOpen, 'opacity-0': !sidebarOpen }">
+            <ul class="relative px-1 mt-2" :class="{ 'opacity-1': ham, 'opacity-0': !ham }">
                 <li class="relative">
                     <form>
                         <div class="flex items-center justify-center py-4 h-12">
@@ -45,9 +45,22 @@
                     </x-backend.side-nav-link>
                 </li>
                 <li class="relative">
-                    <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
-                        {{ __('Link ') }}
-                    </x-backend.side-nav-link>
+                    <x-backend.dropdown>
+                        <x-slot name="dropName">
+                            {{ __('Dropdown') }}
+                        </x-slot>
+                        <x-slot name="links">
+                            <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
+                                {{ __('Link ') }}
+                            </x-backend.side-nav-link>
+                            <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
+                                {{ __('Link ') }}
+                            </x-backend.side-nav-link>
+                            <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
+                                {{ __('Link ') }}
+                            </x-backend.side-nav-link>
+                        </x-slot>
+                    </x-backend.dropdown>
                 </li>
                 <li class="relative">
                     <x-backend.side-nav-link href="" {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
@@ -65,7 +78,7 @@
                     </x-backend.side-nav-link>
                 </li>
                 <li class="relative">
-                    <x-backend.dropdown class="w-full">
+                    <x-backend.dropdown>
                         <x-slot name="dropName">
                             {{ __('Dropdown') }}
                         </x-slot>
@@ -102,21 +115,9 @@
                         </form>
                     </x-slot>
                 </x-backend.dropdown>
+                <hr class="border-awesome m-0">
                 <p class="py-2 text-md text-white-ghost ">© Juntar 2022</p>
             </div>
         </nav>
     </div>
-    <script>
-        function sidebar() {
-            return {
-                sidebarOpen: true,
-                openSidebar() {
-                    this.sidebarOpen = true
-                },
-                closeSidebar() {
-                    this.sidebarOpen = false
-                },
-            }
-        }
-    </script>
 </div>
