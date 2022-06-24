@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Presentation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -52,18 +54,37 @@ class EventController extends Controller
             ->join('event_categories', 'event_categories.id', '=', 'events.event_category_id')
             ->join('event_statuses', 'event_statuses.id', '=', 'events.event_status_id')
             ->where('events.id', $eventoId)
-            ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description']);
-        // $presentations = Presentation::where('event_id', $eventoId)->get();
+            ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description'])[0];
 
-        /*         $organizer = Event::join('users', 'users.id', '=', 'events.user_id')
+        $presentations = Presentation::where('event_id', $eventoId)->get();
+
+        $organizer = Event::join('users', 'users.id', '=', 'events.user_id')
             ->where('events.id', $eventoId)
-            ->get(['users.name as user_name']); */
+            ->get(['users.name as user_name', 'users.surname as user_surname', 'users.email as user_email'])[0];
 
         $coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
             ->where('events.id', $eventoId)
             ->get('users.*');
-        return view('pages.events.evento', ['eventoId' => $eventoId, 'event' => $event, 'coorganizers' => $coorganizers]);
+
+        $hasPermission = false;
+        if (!is_null(Auth::user())) {
+            $userId = Auth::user()->id;
+            if ($userId == $event->user_id) {
+                $hasPermission = true;
+            }
+
+            if (!$hasPermission && count($coorganizers) > 0) {
+                $i = 0;
+                foreach ($coorganizers as $coorganizer) {
+                    if ($coorganizer->id == $userId) {
+                        $hasPermission = true;
+                    }
+                }
+            }
+        }
+
+        return view('pages.events.evento', ['eventoId' => $eventoId, 'event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'presentations' => $presentations, 'hasPermission' => $hasPermission]);
     }
 
     /**
