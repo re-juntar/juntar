@@ -125,7 +125,7 @@ $(document).ready(function() {
 
     function createParticipantLimitDiv() {
         let div =
-            "<x-label for='amount-of-participants'> Ingrese número de participantes * </x-label> <input id='amount-of-participants' class='" + stlyes + "' name='amount-of-participants' type='number' min='1'/>";
+            "<x-label for='amount-of-participants'> Ingrese número de participantes * </x-label> <input id='amount-of-participants' class='" + stlyes + "' name='capacity' type='number' min='1'/>";
         if ($("#si-limite-participantes").is(":checked")) {
             $("#amount-of-participants-container").append(div);
         } else if ($("#no-limite-participantes").is(":checked")) {
@@ -135,7 +135,7 @@ $(document).ready(function() {
 
     function createPreinscriptionDiv() {
         let div =
-            "<x-label for='preinscription-date'> Fecha límite de preinscripción * </x-label> <input id='preinscription-date' class='" + stlyes + "' name='preinscription-date' type='date'/>";
+            "<x-label for='preinscription-date'> Fecha límite de preinscripción * </x-label> <input id='preinscription-date' class='" + stlyes + "' name='preinscription_date' type='date'/>";
         if ($("#yes-preinscription").is(":checked")) {
             $("#preinscription-date-container").append(div);
         } else if ($("#no-preinscription").is(":checked")) {
@@ -172,30 +172,4 @@ $(document).ready(function() {
         }
 
     }
-
-    // $("#removelogo").on("click", function () {
-
-    //     $("#newphotologo").css('display','none');
-    //     $("#oldphotologo").css('display','block');
-        
-    // });
-
-    // $("input[name='archivoslogo']").on("change", function () {        
-    //     $("#newphotologo").css('display','block');
-    //     $("#oldphotologo").hide();
-    // });
-
-
-    // $("#removeflyer").on("click", function () {
-    //     console.log("borro flyer");
-    //     $("#newphotoflyer").css('display','none');
-    //     $("#oldphotoflyer").css('display','block');
-
-    // });
-    // $("input[name='archivosflyer']").on("change", function () {
-    //     console.log("cambio flyer");
-    //     $("#newphotoflyer").css('display','block');
-    //     $("#oldphotoflyer").hide();
-    // });
-    
 });

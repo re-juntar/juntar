@@ -33,8 +33,7 @@ Route::view('/create-event', 'pages.create-event')->name('create-event');
 
 Route::get('/edit-event/{eventid}', [EventController::class,'edit'])->name('edit-event');
 
-//Route::view('/update-event', 'pages.update-event')->name('update-event');
-
+Route::post('/update-event', [StoreEventController::class, 'update'])->name('update-event');
 
 Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
 

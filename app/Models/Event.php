@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helper\Imageable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, Imageable;
 
     public function category()
     {
@@ -42,5 +44,78 @@ class Event extends Model
     public function questions()
     {
         return $this->hasMany('App\Models\Question');
+    }
+    public function storeEvent($request)
+    {
+        $this->user_id = Auth::user()->id;
+        $this->name = $request->name;
+        $this->short_name = $request['short-name'];
+        $this->description = $request->description;
+        $this->venue = $request->place;
+        $this->event_category_id = $request->category;
+        $this->event_modality_id = $request->modality;
+        $this->event_status_id = 4;
+        $this->start_date = $request['start-date'];
+        $this->end_date = $request['end-date'];
+        $this->endorsed = 0;
+
+        if (isset($request['amount-of-participants'])) {
+            $this->capacity = $request['amount-of-participants'];
+        } else {
+            $this->capacity = -1;
+        }
+
+        if(isset($request->meet)) {
+            $this->meeting_link = $request->meet;
+        }
+
+        if(isset($request->place)) {
+            $this->venue = $request->place;
+        }
+
+        $this->pre_registration = $request->preinscription;
+        if($request->preinscription) {
+            $this->inscription_end_date = $request['preinscription-date'];
+        }
+
+        $this->save();
+
+        return $this;
+    }
+
+    public function updateEvent($request) {
+        $this->name = $request->name;
+        $this->short_name = $request['short-name'];
+        $this->description = $request->description;
+        $this->venue = $request->place;
+        $this->event_category_id = $request->category;
+        $this->event_modality_id = $request->modality;
+        $this->event_status_id = 1;
+        $this->start_date = $request['start-date'];
+        $this->end_date = $request['end-date'];
+        $this->endorsed = 0;
+
+        if (isset($request['participants-limit'])) {
+            $this->capacity = $request['participants-limit'];
+        } else {
+            $this->capacity = -1;
+        }
+
+        if(isset($request->meet)) {
+            $this->meeting_link = $request->meet;
+        }
+
+        if(isset($request->place)) {
+            $this->venue = $request->place;
+        }
+
+        $this->pre_registration = $request->preinscription;
+        if($request->preinscription) {
+            $this->inscription_end_date = $request['preinscription-date'];
+        }
+
+        $this->save();
+
+        return $this;
     }
 }
