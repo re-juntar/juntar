@@ -9,7 +9,7 @@
                     <div class=" p-1 flex border border-gray-200 bg-white-ghost rounded">
                         <div class="flex flex-auto flex-wrap">
                             <div x-show="selected.length <= 3" class="flex-1">
-                                <input placeholder="Select an option"
+                                <input placeholder="Seleccione una opci&oacute;n"
                                     class="bg-transparent p-1 px-2 appearance-none outline-none h-full w-full text-gray-800"
                                     x-bind:value="getValue()"
                                     @input.debounce="updateUsersList($event)"

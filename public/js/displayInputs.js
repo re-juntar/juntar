@@ -1,23 +1,8 @@
 jQuery(function () {
     let styles = "block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] w-full mb-[1rem]";
-    let hiddenUserId = {
-        id: $("#hiddenUserId").val(),
-    };
-    let usuarios = getJsonInfo("http://juntar.test/api/users", hiddenUserId);
 
     createPreinscriptionDiv();
     createParticipantLimitDiv();
-
-    function getJsonInfo(url, hiddenUserId) {
-        let jsonData = $.ajax({
-            url: url,
-            method: "POST",
-            dataType: 'json',
-            async: false,
-            data: hiddenUserId
-        });
-        return jsonData.responseJSON;
-    }
 
     $("#participant-limit").on("change", function () {
         createParticipantLimitDiv();
@@ -28,46 +13,7 @@ jQuery(function () {
     });
 
     $("#requires-coorganizer").on("change", function () {
-        createCoorganizerDiv();
-        $("#coorganizer").on('keyup', function () {
-            $('#coorganizersList').html("<option disabled selected>Seleccione</option>");
-            if (this.value.length >= 3) {
-                let organizers;
-                let inputOrganizer = this.value;
-                $.each(usuarios, function (i, item) {
-                    let longitudInput = inputOrganizer.length;
-                    let subStringOrganizer = item.name.substring(0, longitudInput);
-                    if (subStringOrganizer.toLowerCase() == inputOrganizer) {
-                        organizers += `<option value="${item.id + item.name}">${item.name}</option>`;
-                    }
-                });
-                $("#coorganizersList").append(organizers);
-            }
-        });
-
-        $("#coorganizersList").on("change", function () {
-            let i = 0;
-            let encontrado = false;
-            let nombre = "";
-            while (i < usuarios.length && !encontrado) {
-                if (usuarios[i]['id'] == this.value) {
-                    encontrado = true;
-                    nombre = usuarios[i]['name'];
-                }
-                ++i;
-            }
-            let coorganizersSelected = $(".selected-coorganizers").length;
-
-            if (coorganizersSelected < 3) {
-                if (coorganizersSelected == 0) {
-                    let div = `<div id="actual-coorganizers">\n<input hidden name="coorganizer1" value="${this.value}"></input>\n<input disabled class="selected-coorganizers" name="coorganizer1-name">${nombre}</input>\n</div>`;
-                    $("#coorganizer-container").append(div);
-                } else {
-                    let input = `<input hidden name="coorganizer${coorganizersSelected + 1}" value="${this.value}"></input>\n<input disabled class="selected-coorganizers" name="coorganizer1-name">${nombre}</input>`;
-                    $("#actual-coorganizers").append(input);
-                }
-            }
-        });
+        $("#coorganizer-container").toggleClass('hidden');
     });
 
     $("#modality").on("change", function (e) {
@@ -94,14 +40,6 @@ jQuery(function () {
         }
     }
 
-    function createCoorganizerDiv() {
-        let div = "<x-label for='coorganizer'> Ingrese Nombre del Coorganizador * </x-label> <input id='coorganizer' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem] w-full' name='coorganizer' type='text'/><select class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem]' placeholder='Seleccione' name='coorganizersList' id='coorganizersList'><option disabled selected>Seleccione</option></select>";
-        if ($("#yes-coorganizer").is(":checked")) {
-            $("#coorganizer-container").append(div);
-        } else if ($("#no-coorganizer").is(":checked")) {
-            $("#coorganizer-container").html("");
-        }
-    }
 
     function createLugarDiv() {
         let lugar = "<x-label for='place'> Lugar * </x-label> <input id='place' class='" + styles + "' name='place' type='text'/>";

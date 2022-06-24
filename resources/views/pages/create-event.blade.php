@@ -33,8 +33,8 @@
 
             {{-- Ingresar Nombre del Coorganizador --}}
             <div id="" class="mb-4">
-              <x-dropdown-multiselect />
-              <div id='coorganizer-container' class='mt-2'>
+              <div id='coorganizer-container' class='mt-2 hidden'>
+                <x-dropdown-multiselect id="coorganizer-dropdown" />
               </div>
               @error('coorganizer')
                 <div class="flex items-center">
