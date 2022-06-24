@@ -65,33 +65,42 @@
                     </x-backend.side-nav-link>
                 </li>
                 <li class="relative">
-                    <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
-                        {{ __('Link ') }}
-                    </x-backend.side-nav-link>
+                    <x-backend.dropdown class="w-full">
+                        <x-slot name="dropName">
+                            {{ __('Dropdown') }}
+                        </x-slot>
+                        <x-slot name="links">
+                            <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
+                                {{ __('Link ') }}
+                            </x-backend.side-nav-link>
+                        </x-slot>
+                    </x-backend.dropdown>
                 </li>
 
             </ul>
             <div class="bg-fogra-dark text-center bottom-0 absolute w-full">
                 <hr class="border-awesome m-0">
-                <x-backend.dropdown :active="request()->routeIs('gestionar')">
+                <x-backend.dropdown>
                     <x-slot name="profile">
                         <img class="h-8 w-8 rounded-full object-cover mr-2" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                        <div class="font-bold text-xs uppercase text-white-ghost">
+                        <div class="font-bold text-xs uppercase text-white-ghost mr-1">
                             {{ Auth::user()->name }}
                         </div>
                     </x-slot>
-                    <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}" {{-- :active="request()->routeIs('')" --}}>
-                        {{ __('Perfil') }}
-                    </x-backend.side-nav-link>
-                    <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">
-                        {{ __('Juntar') }}
-                    </x-backend.side-nav-link>
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <x-backend.side-nav-link class="text-md" href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                            {{ __('Cerrar Sesión') }}
+                    <x-slot name="links">
+                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}" {{-- :active="request()->routeIs('')" --}}>
+                            {{ __('Perfil') }}
                         </x-backend.side-nav-link>
-                    </form>
+                        <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">
+                            {{ __('Juntar') }}
+                        </x-backend.side-nav-link>
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+                            <x-backend.side-nav-link class="text-md" href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                {{ __('Cerrar Sesión') }}
+                            </x-backend.side-nav-link>
+                        </form>
+                    </x-slot>
                 </x-backend.dropdown>
                 <p class="py-2 text-md text-white-ghost ">© Juntar 2022</p>
             </div>
