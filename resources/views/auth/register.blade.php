@@ -29,9 +29,27 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="country" value="{{ __('Country') }}" />
+                <x-jet-label for="country" value="{{ __('Pais') }}" />
                 <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')" required
                     autofocus autocomplete="country" />
+                    @php
+                     $path = (base_path().'\resources\json\countries.json');
+                     $countries = json_decode(file_get_contents($path),true);
+                     //print_r ( $countries);
+                
+                   @endphp
+
+                   <select>
+
+                   @foreach($countries['countries'] as $country)
+                   <option>{{$country['name']}}</option>
+                   @endforeach
+                   </select>
+                   
+                   
+                <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"> </script>
+                <!-- <script type="text/javascript" src="..\..\json\countries.json"> </script> -->
+
             </div>
 
             
