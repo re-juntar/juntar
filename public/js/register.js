@@ -12,8 +12,8 @@ $(function () {
                 availableTags.push(countries.name);
             });
 
-            console.log(availableTags);
-
+            //console.log(availableTags);
+            // cuando se presional a tercera tecla busca los paises que coincidan
             $("#country").autocomplete({
                 minLength: 3,
                 source: availableTags,
@@ -21,9 +21,9 @@ $(function () {
                     "ui-autocomplete":
                         "bg-fogra-dark text-white-ghost w-20 p-4 rounded",
                 },
+                // una vez seleccionado el pais busco las provincias
                 select: function (event, ui) {
                     pais = ui.item.label;
-                    $("#pais").val(ui.item.label).trigger("change");
 
                     $.ajax({
                         type: "GET",
@@ -32,7 +32,7 @@ $(function () {
                         dataType: "json",
                         success: function (data) {
                             let availableTags = new Array();
-
+                            // recorro el arreglo de paises y luego en cada provincia recorro para anexar los nombres de la provincia
                             data.forEach((country) => {
                                 if (country.name == pais) {
                                     country.provincias.forEach((estado) => {
@@ -42,13 +42,14 @@ $(function () {
                             });
 
                             $("#province").autocomplete({
-                                minLength: 3,
+                                minLength: 2,
                                 source: availableTags,
                                 max: 10,
                                 classes: {
                                     "ui-autocomplete":
                                         "bg-fogra-dark text-white-ghost w-20 p-4 rounded",
                                 },
+                                // una vez seleccionado la provincia busco las ciudades                                
                                 select: function (eve, estado) {
                                     varprovince = estado.item.label;
                                     $.ajax({
@@ -59,7 +60,7 @@ $(function () {
                                         dataType: "json",
                                         success: function (data) {
                                             let availableTags = new Array();
-
+                                            // recorro el arreglo de provincias y luego en cada provincia recorro para anexar los nombres de las ciudades
                                             data.forEach((province) => {
                                                 if (
                                                     province.nombre ==
@@ -75,7 +76,7 @@ $(function () {
                                                 }
                                             });
                                             $("#city").autocomplete({
-                                                minLength: 3,
+                                                minLength: 2,
                                                 source: availableTags,
                                                 max: 10,
                                                 classes: {
