@@ -71,25 +71,28 @@ class Event extends Model
             $this->capacity = -1;
         }
 
-        if(isset($request->meet)) {
+        if (isset($request->meet)) {
             $this->meeting_link = $request->meet;
         }
 
-        if(isset($request->place)) {
+        if (isset($request->place)) {
             $this->venue = $request->place;
         }
 
         $this->pre_registration = $request->preinscription;
-        if($request->preinscription) {
+        if ($request->preinscription) {
             $this->inscription_end_date = $request['preinscription-date'];
         }
+
+        $this->accreditation_token = 1;
 
         $this->save();
 
         return $this;
     }
 
-    public function updateEvent($request) {
+    public function updateEvent($request)
+    {
         $this->name = $request->name;
         $this->short_name = $request['short-name'];
         $this->description = $request->description;
@@ -107,16 +110,16 @@ class Event extends Model
             $this->capacity = -1;
         }
 
-        if(isset($request->meet)) {
+        if (isset($request->meet)) {
             $this->meeting_link = $request->meet;
         }
 
-        if(isset($request->place)) {
+        if (isset($request->place)) {
             $this->venue = $request->place;
         }
 
         $this->pre_registration = $request->preinscription;
-        if($request->preinscription) {
+        if ($request->preinscription) {
             $this->inscription_end_date = $request['preinscription-date'];
         }
 
