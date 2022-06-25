@@ -16,7 +16,7 @@ class PermissionController extends Controller
             $userId = Auth::user()->id;
 
             $role = UserRole::where('user_id', '=', $userId)->first();
-            if ($role->role_id < 3) {
+            if ($role->role_id <= 3) {
                 $admin = true;
             }
         }
@@ -24,13 +24,14 @@ class PermissionController extends Controller
         return ['admin' => $admin];
     }
 
-    function isLogged() {
+    function isLogged()
+    {
         $logged = false;
         $userId = Auth::user()->id;
 
         $user = User::findOrFail($userId);
 
-        if($user->id) {
+        if ($user->id) {
             $logged = true;
         }
 
