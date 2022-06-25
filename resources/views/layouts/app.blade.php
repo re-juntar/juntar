@@ -13,7 +13,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
 
     {{-- jQuery --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -29,10 +28,12 @@
 
     @if (Route::currentRouteName() == 'create-event')
         <script src={{ asset('/js/displayInputs.js/') }}></script>
+        <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
     @endif
 
     @if (Route::currentRouteName() == 'edit-event')
         <script src={{ asset('/js/displayInputsEdit.js/') }}></script>
+        <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
     @endif
 
 
