@@ -51,27 +51,22 @@
                     </x-backend.side-nav-link>
                 </li>
                 <li class="relative">
-                    <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
-                        {{ __('Link ') }}
+                    <x-backend.side-nav-link href="{{ route('endorsements') }}" :active="request()->routeIs('endorsements')">
+                        {{ __('Avales ') }}
                     </x-backend.side-nav-link>
                 </li>
-                <li class="relative">
-                    <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
-                        {{ __('Link ') }}
-                    </x-backend.side-nav-link>
-                </li>
-                <li class="relative">
+                {{-- <li class="relative">
                     <x-backend.dropdown>
                         <x-slot name="dropName">
                             {{ __('Dropdown') }}
                         </x-slot>
                         <x-slot name="links">
-                            <x-backend.side-nav-link {{-- href="{{ route('') }}" :active="request()->routeIs('')" --}}>
+                            <x-backend.side-nav-link>
                                 {{ __('Link ') }}
                             </x-backend.side-nav-link>
                         </x-slot>
                     </x-backend.dropdown>
-                </li>
+                </li> --}}
 
             </ul>
             <div class="bg-fogra-dark text-center bottom-0 absolute w-full">
