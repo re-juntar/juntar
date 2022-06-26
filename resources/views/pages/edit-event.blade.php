@@ -11,17 +11,17 @@
 
                     <form method="POST" action="{{ route('update-event') }}" enctype="multipart/form-data">
                         @csrf
-                        
-                        <input hidden name="eventId" id="eventId" value="{{ $eventId }}">
-                        <input hidden id="hiddenDate" value="{{ $event->inscription_end_date}}">
-                        <input id="hiddenVenue" hidden value="{{$event->venue}}">
-                        <input id="hiddenmeeting" hidden value="{{$event->meeting_link}}">
-                        <!-- <div class="mb-4">
-                                      <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
-                                      </select>
-                                    </div> -->
 
-                    
+                        <input hidden name="eventId" id="eventId" value="{{ $eventId }}">
+                        <input hidden id="hiddenDate" value="{{ $event->inscription_end_date }}">
+                        <input id="hiddenVenue" hidden value="{{ $event->venue }}">
+                        <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
+                        <!-- <div class="mb-4">
+                                          <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
+                                          </select>
+                                        </div> -->
+
+
 
                         {{-- Nombre --}}
                         <p class="text-3xl text-red-600">Falta el event-store para tener la accion de crear evento y
@@ -106,7 +106,7 @@
 
                         </div>
                         {{-- lugares y meet --}}
-                        
+
                         <div id='places-container' class='mt-2'>
 
                         </div>
@@ -134,33 +134,34 @@
                         </div>
                         {{-- Logo --}}
                         <div class="mb-4">
-                        <div class="mb-4">
-                            <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
-                            <input id="logo" class="border-none p-0 block w-full" name="logo" type="file" />
-                            @error('logo')
-                                <div class="flex items-center">
-                                    <p class="text-red-600">* {{$message}}</p>
-                                </div>
-                            @enderror
-                            <x-button id="remove-logo" class="text-[14px] mt-3" type="button">Quitar</x-button>
-                        </div>
+                            <div class="mb-4">
+                                <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
+                                <input id="logo" class="border-none p-0 block w-full" name="logo" type="file" />
+                                @error('logo')
+                                    <div class="flex items-center">
+                                        <p class="text-red-600">* {{ $message }}</p>
+                                    </div>
+                                @enderror
+                                <x-button id="remove-logo" class="text-[14px] mt-3" type="button">Quitar</x-button>
+                            </div>
                         </div>
 
                         {{-- Flyer --}}
                         <div class="mb-4">
-                        <div class="mb-4">
-                            <x-label for="flyer">Ingrese flyer [solo formato png, jpg y jpeg]</x-label>
-                            <input id="flyer" class="border-none p-0 block w-full" name="flyer" type="file" />
-                            @error('flyer')
-                                <div class="flex items-center">
-                                    <p class="text-red-600">* {{$message}}</p>
-                                </div>
-                            @enderror
-                            <x-button id="remove-flyer" class="text-[14px] mt-3" type="button">Quitar</x-button>
-                        </div>
+                            <div class="mb-4">
+                                <x-label for="flyer">Ingrese flyer [solo formato png, jpg y jpeg]</x-label>
+                                <input id="flyer" class="border-none p-0 block w-full" name="flyer"
+                                    type="file" />
+                                @error('flyer')
+                                    <div class="flex items-center">
+                                        <p class="text-red-600">* {{ $message }}</p>
+                                    </div>
+                                @enderror
+                                <x-button id="remove-flyer" class="text-[14px] mt-3" type="button">Quitar</x-button>
+                            </div>
                         </div>
                         {{-- Limite participantes --}}
-                        <input id="hiddenCapacity" hidden value="{{$event->capacity}}">
+                        <input id="hiddenCapacity" hidden value="{{ $event->capacity }}">
                         <div class="mb-4">
                             <fieldset id="participant-limit">
                                 <x-label>¿Posee limite de participantes?</x-label>
@@ -172,7 +173,7 @@
                                 <div>
                                     <input type="radio" id="si-limite-participantes" name="participants-limit"
                                         value="1" {{ $event->capacity != -1 ? 'checked "' : '' }}>
-                                    
+
                                     <x-label class="mb-[0]" for="si-limite-participantes">Si</x-label>
 
 
@@ -187,7 +188,7 @@
                         {{-- </div> --}}
                         {{-- Ingresar Numero de Participantes --}}
                         <div id='amount-of-participants-container' class='mt-2'>
-                        {{-- @if($event->capacity != -1)
+                            {{-- @if ($event->capacity != -1)
                             <input id='amount-of-participants' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] w-full mb-[1rem]' name='capacity' value="{{$event->capacity}}" type='number' min='1'/>
                         @endif --}}
                         </div>
@@ -220,9 +221,10 @@
                         </div>
                         {{-- Ingresar preisnscripcion --}}
                         <div class="mb-4">
-                            <input id='hiddenDate' hidden name='preinscription_date' type='date' value="{{ old('preinscription-date', $event->inscription_end_date) }}" />
-                            <div id='preinscription-date-container' class='mt-2'>                                   
-                                    
+                            <input id='hiddenDate' hidden name='preinscription_date' type='date'
+                                value="{{ old('preinscription-date', $event->inscription_end_date) }}" />
+                            <div id='preinscription-date-container' class='mt-2'>
+
                             </div>
                             @error('preinscription-date')
                                 <div class="flex items-center">

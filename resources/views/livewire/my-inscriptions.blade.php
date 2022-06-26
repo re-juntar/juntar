@@ -19,10 +19,10 @@
                             </x-slot>
 
                             <x-slot name="body">
-                                @for($i = 0; $i < count($events); $i++)
-                                @php
-                                $event = $events[$i];
-                                @endphp
+                                @for ($i = 0; $i < count($events); $i++)
+                                    @php
+                                        $event = $events[$i];
+                                    @endphp
                                     <x-table.row>
                                         <x-table.cell>
                                             @if (strlen($event->name) > 25)

@@ -23,14 +23,16 @@
                     <img class="shadow-lg rounded-lg" src="{{ asset($src) }}" alt="">
                 </div>
 
-                <div class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
+                <div
+                    class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
                     <x-button class="bg-cyan-500 mr-2">Inscribirse</x-button>
                     <x-button class="mr-2">Flyer</x-button>
                     <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
-                    
+
                     <div class="container mt-4">
                         <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
-                        <a class="text-2xl text-red-600" href={{ route('evento', $event->id) }} id={{$event->id}}>Ver mas</a>
+                        <a class="text-2xl text-red-600" href={{ route('evento', $event->id) }}
+                            id={{ $event->id }}>Ver mas</a>
 
                         <div class="container mt-2">
 
@@ -64,74 +66,76 @@
 
                     <div class="container">
                         <h2 class="text-2xl font-bold mt-4">Agenda</h2>
-                        @foreach($presentations as $presentation)
-                        <table class="min-w-full text-center border mt-2">
-                            <thead class="bg-fogra-darkish text-white-ghost">
-                                <tr>
-                                    <th scope="col" colspan="2" class="text-xl py-3">
-                                            {{$presentation->title}}
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        @foreach ($presentations as $presentation)
+                            <table class="min-w-full text-center border mt-2">
+                                <thead class="bg-fogra-darkish text-white-ghost">
+                                    <tr>
+                                        <th scope="col" colspan="2" class="text-xl py-3">
+                                            {{ $presentation->title }}
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                @if($presentation->date)
-                                <tr class="border-b bg-gray-200">
-                                    <td class="text-lg font-medium text-gray-900 px-6 py-2">
-                                        Fecha
-                                    </td>
-                                    <td>
-                                        {{$presentation->date}}
-                                    </td>
-                                </tr>
-                                @endif
+                                    @if ($presentation->date)
+                                        <tr class="border-b bg-gray-200">
+                                            <td class="text-lg font-medium text-gray-900 px-6 py-2">
+                                                Fecha
+                                            </td>
+                                            <td>
+                                                {{ $presentation->date }}
+                                            </td>
+                                        </tr>
+                                    @endif
 
-                                @if($presentation->start_time)
-                                <tr class="border-b">
-                                    <td class="text-lg font-medium text-gray-900 px-6 py-2">
-                                        Hora
-                                    </td>
-                                    <td>
-                                        Desde {{$presentation->start_time}}
-                                        @if($presentation->end_time)
-                                        Hasta {{$presentation->end_time}}
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endif
+                                    @if ($presentation->start_time)
+                                        <tr class="border-b">
+                                            <td class="text-lg font-medium text-gray-900 px-6 py-2">
+                                                Hora
+                                            </td>
+                                            <td>
+                                                Desde {{ $presentation->start_time }}
+                                                @if ($presentation->end_time)
+                                                    Hasta {{ $presentation->end_time }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
 
-                                @if($presentation->resources_link)
-                                <tr class="border-b bg-gray-200">
-                                    <td class="text-lg font-medium text-gray-900 px-6 py-2">
-                                        Recursos
-                                    </td>
-                                    <td>
-                                        <a href="{{$presentation->resources_link}}"><i class="fa-solid fa-paperclip text-awesome"></i></a>
-                                    </td>
-                                </tr>
-                                @endif
+                                    @if ($presentation->resources_link)
+                                        <tr class="border-b bg-gray-200">
+                                            <td class="text-lg font-medium text-gray-900 px-6 py-2">
+                                                Recursos
+                                            </td>
+                                            <td>
+                                                <a href="{{ $presentation->resources_link }}"><i
+                                                        class="fa-solid fa-paperclip text-awesome"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endif
 
-                                @if($presentation->exhibitors)
-                                <tr class="border-b">
-                                    @php
-                                        $exhibitors = explode('-', $presentation->exhibitors);
-                                        $rowspan = count($exhibitors)
-                                    @endphp
-                                    <td class="text-lg font-medium text-gray-900 px-6 py-2" rowspan="{{$rowspan/2}}">
-                                        Presentadores
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            @foreach($exhibitors as $exh)
-                                            <li>{{$exh}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
-                                </tr>
-                                @endif
+                                    @if ($presentation->exhibitors)
+                                        <tr class="border-b">
+                                            @php
+                                                $exhibitors = explode('-', $presentation->exhibitors);
+                                                $rowspan = count($exhibitors);
+                                            @endphp
+                                            <td class="text-lg font-medium text-gray-900 px-6 py-2"
+                                                rowspan="{{ $rowspan / 2 }}">
+                                                Presentadores
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    @foreach ($exhibitors as $exh)
+                                                        <li>{{ $exh }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endif
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
                         @endforeach
                     </div>
                 </div>
