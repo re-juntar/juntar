@@ -19,7 +19,7 @@
                         $src = 'images/public/event-card-placeholder.png';
                     }
                     @endphp --}}
-                    <img class="rounded-lg" src="{{ asset($event->image_flyer) }}" alt="">
+                    {{--<img class="rounded-lg" src="{{ asset($event->image_flyer) }}" alt="">--}}
                     {{-- <button class="bg-fogra-darkish text-white-ghost absolute top-2 right-2 rounded-full p-3 font-black">...</button> --}}
                     @livewire('event-card-responsive', ['event' => $event])
                     <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">

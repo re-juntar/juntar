@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class BackLayout extends Component
+class InputSearch extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class BackLayout extends Component
      */
     public function render()
     {
-        return view('layouts.back');
+        return view('components.input-search');
     }
 }

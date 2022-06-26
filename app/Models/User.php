@@ -65,11 +65,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function organizers()
-    {
-        return $this->hasMany('App\Models\Organizer');
-    }
 
+    public function organizers() {
+        return $this->hasOne('App\Models\Organizer');
+    }
+  
     public function events()
     {
         return $this->hasMany('App\Models\Event');
@@ -78,5 +78,9 @@ class User extends Authenticatable
     public function inscriptions()
     {
         return $this->hasMany('App\Models\Inscription');
+    }
+
+    public function userRole() {
+        return $this->hasOne('App\Models\UserRole');
     }
 }
