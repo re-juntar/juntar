@@ -77,6 +77,10 @@ function dropdown() {
         close() { this.show = false },
         isOpen() { return this.show === true },
         select(id, event) {
+            let coorganizers = document.getElementsByClassName('coorganizer')
+
+            // When option from dropdown is selected, save selection on this.selected array
+            //  If the options was already selected, unselect it and delete from this.selected array
             if (!this.options[id].selected) {
                 if (this.selectedValues().length >= 3) return
 
@@ -85,9 +89,21 @@ function dropdown() {
                 this.selected.push(id);
                 this.setValueDefault()
 
+                // Add selected value to corresponding hidden inputs coorganizer 1/2/3
+                this.updateHiddenInputsValue(this.options[id].text)
             } else {
-                this.selected.splice(this.selected.lastIndexOf(optionValue), 1);
-                this.options[optionValue].selected = false
+                this.selected.splice(this.selected.lastIndexOf(id), 1);
+                this.options[id].selected = false
+
+                // Set selected value to null on corresponding hidden inputs coorganizer 1/2/3
+                this.updateHiddenInputsValue()
+            }
+        },
+        updateHiddenInputsValue(value = null) {
+            let coorganizersId = `coorganizer${value === null ? this.selectedValues().length + 1 : this.selectedValues().length}`
+
+            if (document.getElementById(coorganizersId)) {
+                document.getElementById(coorganizersId).value = value
             }
         },
         remove(index, option) {
@@ -95,6 +111,7 @@ function dropdown() {
             this.selected.splice(index, 1);
         },
         loadOptions() {
+            // Gets users
             const usersResponse = $.ajax({
                 url: 'http://juntar.test/api/users',
                 method: "POST",
@@ -107,7 +124,7 @@ function dropdown() {
 
             const users = usersResponse.responseJSON;
 
-            // loads options to feed the dropdown
+            // Loads options array with users info to feed the dropdown divs
             for (let i = 0; i < users.length; i++) {
                 this.options.push({
                     id: i,
@@ -117,6 +134,8 @@ function dropdown() {
                     show: false
                 });
             }
+
+            // If theres {{old('oldCoorganizer1/2/3')}} inputs selected, add them to this.selected array
         },
         selectedValues() {
             return this.selected.map((option) => {
@@ -124,8 +143,13 @@ function dropdown() {
             })
         },
         updateUsersList(event) {
+            // Only search when a minimum of 3 letters are typed
             if (event.target.value.length < 3) return
 
+            // On keyup open dropdown in case it closed
+            //  set the current value to what was typed
+            //  search for results coinciding with that was typed
+            this.open()
             this.setValue(event.target.value)
             for (let index = 0; index < this.options.length; index++) {
                 let inputOrganizer = event.target.value.toLowerCase();

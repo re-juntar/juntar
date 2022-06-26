@@ -11,7 +11,9 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+                'hind-madurai': 'Hind Madurai, sans-serif',
+                'mada': 'Mada, sans-serif',
+                'montserrat': 'Montserrat, sans-serif'
             },
             colors: {
                 awesome: "#fe1355",

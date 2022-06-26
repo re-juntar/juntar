@@ -37,7 +37,7 @@ class UserRoleController extends Controller
     {
         $userRole = new UserRole();
         $userRole->user_id = $id;
-        $userRole->role_id = 3;
+        $userRole->role_id = 4;
 
         $userRole->save();
     }
