@@ -89,9 +89,9 @@ class EventController extends Controller
     {
         if (isset($filter['search'])) {
             $search = $filter['search'];
-            $response = Event::where('name', 'like', '%' . $search . '%')->where('event_status_id', '=', 1);
+            $response = Event::where('name', 'like', '%' . $search . '%')->where('event_status_id', '=', 1)->orWhere('event_status_id', '=', 3);
         } else {
-            $response = Event::where('event_status_id', 1)->orderBy('start_date', 'asc')->get();
+            $response = Event::where('event_status_id', 1)->orWhere('event_status_id', '=', 3)->orderBy('start_date', 'asc')->get();
         }
 
         if (isset($filter['order'])) {

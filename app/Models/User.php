@@ -60,7 +60,7 @@ class User extends Authenticatable
     ];
 
     public function organizers() {
-        return $this->hasMany('App\Models\Organizer');
+        return $this->hasOne('App\Models\Organizer');
     }
 
     public function events() {
@@ -69,5 +69,9 @@ class User extends Authenticatable
 
     public function inscriptions() {
         return $this->hasMany('App\Models\Inscription');
+    }
+
+    public function userRole() {
+        return $this->hasOne('App\Models\UserRole');
     }
 }

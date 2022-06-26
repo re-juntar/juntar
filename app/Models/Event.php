@@ -11,17 +11,17 @@ class Event extends Model
 {
     use HasFactory, Imageable;
 
-    public function category()
+    public function eventCategory()
     {
         return $this->belongsTo('App\Models\EventCategory');
     }
 
-    public function status()
+    public function eventStatus()
     {
         return $this->belongsTo('App\Models\EventStatus');
     }
 
-    public function modality()
+    public function eventModality()
     {
         return $this->belongsTo('App\Models\EventModality');
     }
@@ -48,7 +48,11 @@ class Event extends Model
 
     public function organizers()
     {
-        return $this->hasMany('App\Models\Organizer');
+        return $this->hasOne('App\Models\Organizer');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
 
     public function storeEvent($request)
