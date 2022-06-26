@@ -24,13 +24,13 @@
                 </div>
 
                 <div class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
-
-                        <x-button class="bg-cyan-500 mr-2">Inscribirse</x-button>
-                        <x-button class="mr-2">Flyer</x-button>
-                        <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
-
+                    <x-button class="bg-cyan-500 mr-2">Inscribirse</x-button>
+                    <x-button class="mr-2">Flyer</x-button>
+                    <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
+                    
                     <div class="container mt-4">
                         <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
+                        <a class="text-2xl text-red-600" href={{ route('evento', $event->id) }} id={{$event->id}}>Ver mas</a>
 
                         <div class="container mt-2">
 

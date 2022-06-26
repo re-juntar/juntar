@@ -25,6 +25,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'dni',
+        'country',
+        'province',
+        'city',
+        'ua',
         'email',
         'password',
     ];
@@ -58,4 +64,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function organizers()
+    {
+        return $this->hasMany('App\Models\Organizer');
+    }
+
+    public function events()
+    {
+        return $this->hasMany('App\Models\Event');
+    }
+
+    public function inscriptions()
+    {
+        return $this->hasMany('App\Models\Inscription');
+    }
 }

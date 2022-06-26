@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('name', 200);
             $table->string('short_name', 100);
             $table->longText('description');
-            $table->string('venue', 200);
+            $table->string('venue', 200)->nullable();
             $table->date('start_date');
             $table->date('end_date');
             $table->tinyInteger('endorsed')->default('0');
@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('image_logo', 200)->nullable();
             $table->integer('capacity')->nullable();
             $table->tinyInteger('pre_registration');
+            $table->string('meeting_link')->nullable();
             $table->date('inscription_end_date')->nullable();
             $table->string('accreditation_token', 100);
             $table->timestamps();

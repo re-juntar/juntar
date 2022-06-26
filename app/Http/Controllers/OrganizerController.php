@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserRole;
+use App\Models\Organizer;
 use Illuminate\Http\Request;
 
-class UserRoleController extends Controller
+class OrganizerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,13 +33,13 @@ class UserRoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store($userId, $eventId)
     {
-        $userRole = new UserRole();
-        $userRole->user_id = $id;
-        $userRole->role_id = 4;
+        $organizer = new Organizer();
+        $organizer->user_id = $userId;
+        $organizer->event_id = $eventId;
 
-        $userRole->save();
+        $organizer->save();
     }
 
     /**

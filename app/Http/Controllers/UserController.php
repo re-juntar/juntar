@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserRole;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserRoleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->id) {
+            $response = User::select('name', 'id')->where('id', '<>', $request->id)->get();
+        } else {
+            $response = null;
+        }
+        return $response;
     }
 
     /**
@@ -33,13 +38,9 @@ class UserRoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
-        $userRole = new UserRole();
-        $userRole->user_id = $id;
-        $userRole->role_id = 4;
-
-        $userRole->save();
+        //
     }
 
     /**
