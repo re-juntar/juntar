@@ -64,7 +64,7 @@ class Event extends Model
         $this->start_date = $request['start-date'];
         $this->end_date = $request['end-date'];
         $this->endorsed = 0;
-
+        $this->accreditation_token = 0;
         if (isset($request['amount-of-participants'])) {
             $this->capacity = $request['amount-of-participants'];
         } else {
