@@ -63,7 +63,7 @@
 
                                 @if ($permission['admin'])
                                     <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
-                                        href="{{ route('management') }}">
+                                        href="{{ route('back-home') }}">
                                         {{ __('Administración') }}
                                     </x-jet-dropdown-link>
                                 @endif
@@ -159,7 +159,7 @@
                     </x-jet-responsive-nav-link>
 
                     @if ($permission['admin'])
-                        <x-jet-responsive-nav-link href="{{ route('management') }}">
+                        <x-jet-responsive-nav-link href="{{ route('back-home') }}">
                             {{ __('Administración') }}
                         </x-jet-responsive-nav-link>
                     @endif

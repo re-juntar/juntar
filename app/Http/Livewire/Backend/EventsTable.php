@@ -4,10 +4,10 @@ namespace App\Http\Livewire\Backend;
 
 use Livewire\Component;
 
-class UsersCrud extends Component
+class EventsTable extends Component
 {
     public function render()
     {
-        return view('pages.backend.users-crud')->layout('layouts.back');
+        return view('backend.events-table')->layout('layouts.back');
     }
 }

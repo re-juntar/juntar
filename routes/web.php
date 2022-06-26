@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Livewire\Events;
+use App\Http\Livewire\BackHome;
+use App\Http\Livewire\Backend\EventsTable;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Livewire\Backend\UsersCrud;
 use App\Http\Controllers\EventController;
+use App\Http\Livewire\Backend\UsersTable;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Livewire\InscriptionsController;
@@ -50,6 +52,10 @@ Route::get('/contact-us', function () {
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
 
 /********************** BACKEND *************************/
-Route::get('/gestionar', [BackendController::class, 'index'])->name('management');
+/* Route::get('/gestionar', [BackendController::class, 'index'])->name('management'); */
 
-Route::get('/gestionar/users', UsersCrud::class);
+Route::get('gestionar', BackHome::class)->name('back-home');
+
+Route::get('/gestionar/usuarios', UsersTable::class)->name('users');
+
+Route::get('/gestionar/eventos', EventsTable::class)->name('events');

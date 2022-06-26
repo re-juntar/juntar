@@ -34,9 +34,8 @@
 
     <!-- Page Content -->
     <main class="mt-3">
-        <div class="">
+        {{-- <div class="">
             <x-card class="text-white-ghost max-w-7xl mx-auto">
-                {{--<x-input-search></x-input-search>--}}
                 <h1 class="text-xl text-black">USUARIOS</h1>
                 <livewire:user-table />
             </x-card>
@@ -58,7 +57,8 @@
             <h1 class="text-xl text-black">EVENTOS PROPIOS</h1>
                 <livewire:user-events-table />
             </x-card>
-        </div>
+        </div> --}}
+        {{$slot}}
     </main>
 
     @stack('modals')
