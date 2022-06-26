@@ -2,7 +2,6 @@
     <x-hero>
         <img class="max-w-full h-auto mb-4" src="{{ asset('images/logos/juntar-logo-w.svg') }}" alt="" />
         <h5 class="text-white-ghost uppercase font-medium text-xl mb-4">Sistema de gestión de eventos</h5>
-        <x-jet-button class="bg-awesome uppercase text-lg text-white-ghost hover:bg-fogra-dark">Empezar</x-jet-button>
     </x-hero>
 
     <section class="bg-fogra-darkish w-full text-white-ghost pt-16 pb-5 px-4">
@@ -21,7 +20,7 @@
                             </x-slot>
 
                             <x-slot name="body">
-                                @foreach($events as $event)
+                                @foreach ($events as $event)
                                     <x-table.row>
                                         <x-table.cell>
                                             @if (strlen($event->name) > 25)
@@ -106,11 +105,11 @@
                                         </x-table.cell>
                                     </x-table.row>
                                 @endforeach
-                                @for ($i= 0; $i < count($organizers); $i++)
-                                @php
-                                $event = $organizers[$i][0];
-                                @endphp
-                                <x-table.row>
+                                @for ($i = 0; $i < count($organizers); $i++)
+                                    @php
+                                        $event = $organizers[$i][0];
+                                    @endphp
+                                    <x-table.row>
                                         <x-table.cell>
                                             @if (strlen($event->name) > 25)
                                                 {{ substr($event->name, 0, 25) . '...' }}
@@ -180,7 +179,7 @@
                                             </div>
                                         </x-table.cell>
                                     </x-table.row>
-                                    @endfor
+                                @endfor
                             </x-slot>
                         </x-table>
                     </div>
