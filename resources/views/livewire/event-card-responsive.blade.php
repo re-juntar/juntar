@@ -59,7 +59,9 @@
                             <x-verified-badge class="mt-4" />
 
                             <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
-                            {!! $event->description !!}
+                            <div id='cssCkeditor'>
+                                {!! $event->description !!}
+                            </div>
                         </div>
 
                     </div>
