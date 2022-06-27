@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Backend;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class BackHome extends Component
 {
     public function render()
     {
-        return view('livewire.back-home')->layout('layouts.back');
+        return view('pages.backend.back-home')->layout('layouts.back');
     }
 }

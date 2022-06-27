@@ -6,24 +6,29 @@ trait Imageable
 {
     public function storeMedia($request)
     {
-        $path = public_path('tmp/uploads');
+        $logosPath = public_path('images/eventLogos');
+        $flyersPath = public_path('images/eventFlyers');
 
-        if (!file_exists($path)) {
-            mkdir($path, 0777, true);
+        if (!file_exists($logosPath)) {
+            mkdir($logosPath, 0777, true);
         }
 
-        $file1 = $request->file('logo');
-        $file2 = $request->file('flyer');
+        if (!file_exists($flyersPath)) {
+            mkdir($flyersPath, 0777, true);
+        }
 
-        $fileName1 = uniqid() . '_' . trim($file1->getClientOriginalName());
-        $fileName2 = uniqid() . '_' . trim($file2->getClientOriginalName());
+        $logo = $request->file('logo');
+        $flyer = $request->file('flyer');
 
-        $this->image_logo = "tmp/uploads/" . $fileName1;
-        $this->image_flyer = "tmp/uploads/" . $fileName2;
+        $logoName = uniqid() . '_' . trim($logo->getClientOriginalName());
+        $flyerName = uniqid() . '_' . trim($flyer->getClientOriginalName());
+
+        $this->image_logo = "tmp/uploads/" . $logoName;
+        $this->image_flyer = "tmp/uploads/" . $flyerName;
 
         $this->save();
 
-        $file1->move($path, $fileName1);
-        $file2->move($path, $fileName2);
+        $logo->move($logosPath, $logoName);
+        $flyer->move($flyersPath, $flyerName);
     }
 }
