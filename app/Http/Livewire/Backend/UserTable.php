@@ -23,8 +23,6 @@ class UserTable extends DataTableComponent
         $this->setEmptyMessage('No se encontraron usuarios');
 
         $this->setQueryStringDisabled();
-        
-        $this->setTableAttributes(['class' => "text-white-ghost"]);
 
         // $this->setSecondaryHeaderTrAttributes(function ($rows) {
         //     return ['class' => 'text-white-ghost'];

@@ -25,8 +25,6 @@ class EventTable extends DataTableComponent
         $this->setEmptyMessage('No se encontraron eventos');
 
         $this->setQueryStringDisabled();
-
-        $this->setTableAttributes(['class' => "text-white-ghost"]);
     }
 
     public function columns(): array
