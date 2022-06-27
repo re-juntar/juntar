@@ -85,10 +85,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-left text-white-ghost bg-fogra-dark py-4">
-                <p class="px-4 mx-auto max-w-6xl"><i class="fa fa-copyright"></i> Juntar 2022</p>
-            </div>
             <div class="flex flex-col flex-wrap content-center -mx-4 py-[3vh] md:flex-row">
                 <div class="flex justify-center relative basis-1/2 max-w-[50%] py-4">
                     <img class="max-h-48" src="{{ asset('/images/logos/logo-uncoma-w.svg') }}" alt="">
