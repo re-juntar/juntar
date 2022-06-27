@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
 use App\Models\Presentation;
 use Illuminate\Http\Request;
@@ -26,7 +27,12 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        $permisssionController = new PermissionController();
+        if ($permisssionController->isLogged()) {
+            return view('pages.create-event');
+        } else {
+            return view('login');
+        }
     }
 
     /**
@@ -35,9 +41,26 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageUploadRequest $request, Event $event)
     {
-        //
+        if ($event->storeEvent($request)->storeMedia($request)) {
+            $eventId = Event::max('id');
+            if (isset($request->coorganizer1)) {
+                $orgController1 = new OrganizerController();
+                $orgController1->store($request->coorganizer1, $eventId);
+            }
+
+            if (isset($request->coorganizer2)) {
+                $orgController2 = new OrganizerController();
+                $orgController2->store($request->coorganizer2, $eventId);
+            }
+
+            if (isset($request->coorganizer3)) {
+                $orgController3 = new OrganizerController();
+                $orgController3->store($request->coorganizer3, $eventId);
+            }
+        }
+        return redirect()->action([HomeController::class, 'filteredIndex']);
     }
 
     /**
@@ -56,16 +79,17 @@ class EventController extends Controller
             ->where('events.id', $eventoId)
             ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description'])[0];
 
-        $presentations = Presentation::where('event_id', $eventoId)->get();
-
-        $organizer = Event::join('users', 'users.id', '=', 'events.user_id')
-            ->where('events.id', $eventoId)
-            ->get(['users.name as user_name', 'users.surname as user_surname', 'users.email as user_email'])[0];
+        $presentations = $event->presentations;
+        // $presentations = Presentation::where('event_id', $eventoId)->get();
+        $organizer = $event->user;
+        // $organizer = Event::join('users', 'users.id', '=', 'events.user_id')
+        //     ->where('events.id', $eventoId)
+        //     ->get(['users.name as user_name', 'users.surname as user_surname', 'users.email as user_email'])[0];
 
         $coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
             ->where('events.id', $eventoId)
-            ->get('users.*');
+            ->get('users.name', 'users.surname');
 
         $hasPermission = false;
         if (!is_null(Auth::user())) {
@@ -96,7 +120,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrfail($id);
-        return view('pages.edit-event', ['event' => $event, 'eventId' => $id]);
+        return view('pages.edit-event', ['event' => $event]);
     }
 
     /**
@@ -108,9 +132,9 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        // return back()->with('message', 'Lisiting update successfully!');
-
+        $event = Event::find($request->eventId);
+        $event->updateEvent($request);
+        return redirect()->action([HomeController::class, 'filteredIndex']);
     }
     /**
      * Remove the specified resource from storage.
@@ -121,10 +145,6 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function specificRequest(Request $id)
-    {
     }
 
     public function homeRequest(Request $filter)
@@ -152,5 +172,15 @@ class EventController extends Controller
         //     $response = $response->orderBy('start_date', 'asc');
         // }
         return $response;
+    }
+
+    public function myEvents()
+    {
+        $permisssionController = new PermissionController();
+        if ($permisssionController->isLogged()) {
+            return view('pages.events');
+        } else {
+            return view('login');
+        }
     }
 }

@@ -2,9 +2,9 @@
 
 use App\Http\Livewire\Events;
 use App\Http\Livewire\Backend\BackHome;
-use App\Http\Livewire\FrontHome;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Controllers\EventController;
 use App\Http\Livewire\Backend\EventsPage;
@@ -14,6 +14,7 @@ use App\Http\Livewire\InscriptionsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
 use App\Http\Livewire\Backend\EndorsementsPage;
+use App\Http\Livewire\FrontHome;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,27 +30,27 @@ use App\Http\Livewire\Backend\EndorsementsPage;
 
 Route::get('/', FrontHome::class)->name('home');
 
-Route::get('/home', FrontHome::class)->name('home');
+Route::get('/inicio', FrontHome::class)->name('home');
 
-Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
+Route::get('/sobre-nosotros', [AboutUsController::class, 'index'])->name('about-us');
 
-Route::view('/create-event', 'pages.create-event')->name('create-event');
+Route::get('/crear-evento', [EventController::class, 'create'])->name('create-event');
 
-Route::get('/eventos/evento/{eventoId}', [EventController::class, 'show'])->name('evento');
+Route::get('/evento/{eventoId}', [EventController::class, 'show'])->name('evento');
 
-Route::get('/edit-event/{eventid}', [EventController::class,'edit'])->name('edit-event');
+Route::get('/editar-evento/{eventId}', [EventController::class, 'edit'])->name('edit-event');
 
-Route::post('/update-event', [StoreEventController::class, 'update'])->name('update-event');
+Route::post('/update-event', [EventController::class, 'update'])->name('update-event');
 
-Route::post('/store-event', [StoreEventController::class, 'store'])->name('store-event');
+Route::post('/store-event', [EventController::class, 'store'])->name('store-event');
 
-Route::get('/cuenta/mis-inscripciones-a-eventos', [MyInscriptions::class, 'render'])
+Route::get('/mis-inscripciones', [MyInscriptions::class, 'render'])
     ->name('my-inscriptions');
 
-Route::get('/evento/organizar-eventos', [Events::class, 'render'])->name('my-events');
+Route::get('/mis-eventos', [Events::class, 'render'])->name('my-events');
 
 /********************* MAILING **************************/
-Route::get('/contact-us', function () {
+Route::get('/contactanos', function () {
     return view('mail.index');
 })->name('contact');
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');

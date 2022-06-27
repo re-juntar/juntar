@@ -46,6 +46,10 @@ class Event extends Model
         return $this->hasMany('App\Models\Question');
     }
 
+    public function coorganizers() {
+        return $this->hasMany('App\Models\Organizer');
+    }
+
     public function organizers()
     {
         return $this->hasOne('App\Models\Organizer');
