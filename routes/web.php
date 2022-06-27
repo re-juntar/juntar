@@ -2,9 +2,9 @@
 
 use App\Http\Livewire\Events;
 use App\Http\Livewire\BackHome;
+use App\Http\Livewire\FrontHome;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Controllers\EventController;
 use App\Http\Livewire\Backend\EventsPage;
@@ -27,9 +27,9 @@ use App\Http\Livewire\Backend\EndorsementsPage;
 */
 
 
-Route::get('/', [HomeController::class, 'filteredIndex'])->name('home');
+Route::get('/', FrontHome::class)->name('home');
 
-Route::get('/home', [HomeController::class, 'filteredIndex'])->name('home');
+Route::get('/home', FrontHome::class)->name('home');
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
 
