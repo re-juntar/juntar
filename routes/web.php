@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Livewire\Events;
-use App\Http\Livewire\BackHome;
+use App\Http\Livewire\Backend\BackHome;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
