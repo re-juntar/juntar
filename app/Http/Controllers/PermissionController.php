@@ -27,13 +27,8 @@ class PermissionController extends Controller
     function isLogged()
     {
         $logged = false;
-        $userId = Auth::user()->id;
 
-        $user = User::findOrFail($userId);
-
-        if ($user->id) {
-            $logged = true;
-        }
+        (!is_null(Auth::user())) ? $logged = true : '';
 
         return $logged;
     }

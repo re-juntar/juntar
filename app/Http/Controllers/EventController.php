@@ -31,7 +31,7 @@ class EventController extends Controller
         if ($permisssionController->isLogged()) {
             return view('pages.create-event');
         } else {
-            return view('login');
+            return redirect('login');
         }
     }
 
@@ -178,9 +178,19 @@ class EventController extends Controller
     {
         $permisssionController = new PermissionController();
         if ($permisssionController->isLogged()) {
-            return view('pages.events');
+            return view('livewire.events');
         } else {
-            return view('login');
+            return redirect('login');
+        }
+    }
+
+    public function myInscriptions()
+    {
+        $permisssionController = new PermissionController();
+        if ($permisssionController->isLogged()) {
+            return view('livewire.my-inscriptions');
+        } else {
+            return redirect('login');
         }
     }
 }

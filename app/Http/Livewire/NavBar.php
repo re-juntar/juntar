@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class NavBar extends Component
 {
-    public $permission;
+    private $permission;
     public function render()
     {
         return view('livewire.nav-bar');

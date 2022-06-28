@@ -19,13 +19,5 @@
                 </div>
             </div>
         </div>
-
-        {{-- Table Navigation --}}
-        {{-- edit styles on resources/views/pagination/tailwind.blade.php --}}
-        <div class="flex justify-center">
-            {{ $events->links() }}
-        </div>
     </section>
-
-    {{-- Actions table funcionality --}}
 </x-app-layout>

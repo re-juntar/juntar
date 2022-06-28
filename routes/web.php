@@ -30,7 +30,7 @@ use App\Http\Livewire\FrontHome;
 
 Route::get('/', FrontHome::class)->name('home');
 
-Route::get('/inicio', FrontHome::class)->name('home');
+Route::get('/home', FrontHome::class)->name('home');
 
 Route::get('/sobre-nosotros', [AboutUsController::class, 'index'])->name('about-us');
 
@@ -44,10 +44,9 @@ Route::post('/update-event', [EventController::class, 'update'])->name('update-e
 
 Route::post('/store-event', [EventController::class, 'store'])->name('store-event');
 
-Route::get('/mis-inscripciones', [MyInscriptions::class, 'render'])
-    ->name('my-inscriptions');
+Route::get('/mis-inscripciones', [EventController::class, 'myInscriptions'])->name('my-inscriptions');
 
-Route::get('/mis-eventos', [Events::class, 'render'])->name('my-events');
+Route::get('/mis-eventos', [EventController::class, 'myEvents'])->name('my-events');
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
@@ -56,8 +55,6 @@ Route::get('/contactanos', function () {
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
 
 /********************** BACKEND *************************/
-/* Route::get('/gestionar', [BackendController::class, 'index'])->name('management'); */
-
 Route::get('gestionar', BackHome::class)->name('back-home');
 
 Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
