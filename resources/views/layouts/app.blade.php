@@ -51,7 +51,9 @@
 <body class="font-sans antialiased min-h-screen">
     <x-jet-banner />
 
-    @livewire('nav-bar', ['permission' => $permission])
+    @if (isset($permission))
+        @livewire('nav-bar', ['permission' => $permission])
+    @endif
 
     <!-- Page Content -->
     <main>

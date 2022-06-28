@@ -20,7 +20,7 @@ class BackHome extends Component
                 return view('home.front-home')->layout('layouts.app');
             }
         } else {
-            return view('auth.login');
+            return view('livewire.backend.login-back');
         }
     }
 
