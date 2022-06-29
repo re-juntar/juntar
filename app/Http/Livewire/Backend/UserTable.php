@@ -18,7 +18,7 @@ class UserTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
 
-        $this->setHideBulkActionsWhenEmptyEnabled();
+        ;$this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setEmptyMessage('No se encontraron usuarios');
 

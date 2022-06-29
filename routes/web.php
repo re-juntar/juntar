@@ -13,7 +13,14 @@ use App\Http\Controllers\BackendController;
 use App\Http\Livewire\InscriptionsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\EventModalityController;
+use App\Http\Livewire\Backend\CreateEventModality;
+use App\Http\Livewire\Backend\CreateModality;
+use App\Http\Livewire\Backend\EditModality;
 use App\Http\Livewire\Backend\EndorsementsPage;
+use App\Http\Livewire\Backend\EventModalities;
+use App\Http\Livewire\EventModalitiesPage;
+use App\Models\EventModality;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +71,9 @@ Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
 Route::get('/gestionar/eventos', EventsPage::class)->name('events');
 
 Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
+
+Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventModalities');
+
+Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
+
+Route::get('/gestionar/modalidades/editar', EditModality::class)->name('editModality');

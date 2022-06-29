@@ -55,6 +55,11 @@
                         {{ __('Avales ') }}
                     </x-backend.side-nav-link>
                 </li>
+                <li class="relative">
+                    <x-backend.side-nav-link href="{{ route('eventModalities') }}" :active="request()->routeIs('eventModalities')">
+                        {{ __('Modalidades') }}
+                    </x-backend.side-nav-link>
+                </li>
                 {{-- <li class="relative">
                     <x-backend.dropdown>
                         <x-slot name="dropName">

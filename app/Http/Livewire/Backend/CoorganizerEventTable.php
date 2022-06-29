@@ -17,6 +17,8 @@ class CoorganizerEventTable extends DataTableComponent
 
     public array $organizerEvents = [];
 
+    
+
     public function configure(): void
     {
         $this->setPrimaryKey('events.id');
