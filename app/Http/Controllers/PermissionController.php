@@ -17,7 +17,7 @@ class PermissionController extends Controller
 
             $role = UserRole::where('user_id', '=', $userId)->first();
             if ($role->role_id <= 3) {
-                $admin = true;
+                $admin = $role->role_id;
             }
         }
 

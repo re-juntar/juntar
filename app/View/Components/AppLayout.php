@@ -12,11 +12,16 @@ class AppLayout extends Component
      *
      * @return \Illuminate\View\View
      */
+
     public $permission;
-    public function render()
-    {
+
+    public function __construct(){
         $permissionController = new PermissionController();
         $this->permission = $permissionController->isAdmin();
+    }
+
+    public function render()
+    {
         return view('layouts.app');
     }
 }
