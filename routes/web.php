@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Livewire\Events;
-use App\Http\Livewire\Backend\BackHome;
+use App\Http\Livewire\FrontHome;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Backend\BackHome;
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Controllers\EventController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\RedirectionController;
 use App\Http\Livewire\Backend\EndorsementsPage;
-use App\Http\Livewire\FrontHome;
+use App\Http\Livewire\PreinscriptionFormBuilder;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,3 +67,5 @@ Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
 
 /************************ HELPER **************************/
 Route::get('/redirection/{url}', 'App\Http\Controllers\RedirectionController@externalUrl')->name('redirection');
+
+Route::get('/formbuilder', PreinscriptionFormBuilder::class)->name('formbuilder');

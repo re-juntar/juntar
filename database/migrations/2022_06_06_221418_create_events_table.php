@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('image_flyer', 200)->nullable(); //OBS: ver como es la carga de las imagenes y como funcionan flyer y logo
             $table->string('image_logo', 200)->nullable();
             $table->integer('capacity')->nullable();
-            $table->tinyInteger('pre_registration');
+            $table->tinyInteger('pre_registration')->nullable();
             $table->string('meeting_link')->nullable();
             $table->date('inscription_end_date')->nullable();
             $table->string('accreditation_token', 100);
