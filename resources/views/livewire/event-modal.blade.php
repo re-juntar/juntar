@@ -63,7 +63,7 @@
 
                 </div>
 
-                <div class="container">
+                {{-- <div class="container">
                     @if(count($presentations) != 0)
                     <h2 class="text-2xl font-bold mt-4">Agenda</h2>
                     @endif
@@ -138,7 +138,7 @@
                             </tbody>
                         </table>
                     @endforeach
-                </div>
+                </div> --}}
             </div>
         </div>
     </x-slot>

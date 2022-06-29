@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
 use App\Models\Presentation;
@@ -60,7 +61,7 @@ class EventController extends Controller
                 $orgController3->store($request->coorganizer3, $eventId);
             }
         }
-        return redirect()->action([HomeController::class, 'filteredIndex']);
+        return redirect()->action(FrontHome::class);
     }
 
     /**
@@ -69,17 +70,16 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($eventoId)
+    public function show($eventId)
     {
 
         // $event = Event::find($eventoId);
         $event = Event::join('event_modalities', 'event_modalities.id', '=', 'events.event_modality_id')
             ->join('event_categories', 'event_categories.id', '=', 'events.event_category_id')
             ->join('event_statuses', 'event_statuses.id', '=', 'events.event_status_id')
-            ->where('events.id', $eventoId)
+            ->where('events.id', $eventId)
             ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description'])[0];
 
-        $presentations = $event->presentations;
         // $presentations = Presentation::where('event_id', $eventoId)->get();
         $organizer = $event->user;
         // $organizer = Event::join('users', 'users.id', '=', 'events.user_id')
@@ -88,8 +88,8 @@ class EventController extends Controller
 
         $coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
-            ->where('events.id', $eventoId)
-            ->get('users.name', 'users.surname');
+            ->where('events.id', $eventId)
+            ->get(['users.name', 'users.surname']);
 
         $hasPermission = false;
         if (!is_null(Auth::user())) {
@@ -99,7 +99,6 @@ class EventController extends Controller
             }
 
             if (!$hasPermission && count($coorganizers) > 0) {
-                $i = 0;
                 foreach ($coorganizers as $coorganizer) {
                     if ($coorganizer->id == $userId) {
                         $hasPermission = true;
@@ -108,7 +107,7 @@ class EventController extends Controller
             }
         }
 
-        return view('pages.events.evento', ['eventoId' => $eventoId, 'event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'presentations' => $presentations, 'hasPermission' => $hasPermission]);
+        return view('pages.events.evento', ['event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'hasPermission' => $hasPermission]);
     }
 
     /**
@@ -117,9 +116,9 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($eventId)
     {
-        $event = Event::findOrfail($id);
+        $event = Event::findOrfail($eventId);
         return view('pages.edit-event', ['event' => $event]);
     }
 
@@ -130,11 +129,11 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $event = Event::find($request->eventId);
         $event->updateEvent($request);
-        return redirect()->action([HomeController::class, 'filteredIndex']);
+        return redirect()->action(FrontHome::class);
     }
     /**
      * Remove the specified resource from storage.

@@ -129,7 +129,7 @@ function dropdown() {
                 this.options.push({
                     id: i,
                     value: i + users[i].name,
-                    text: users[i].name,
+                    text: users[i].email,
                     selected: false,
                     show: false
                 });

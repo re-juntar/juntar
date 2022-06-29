@@ -23,8 +23,8 @@ trait Imageable
         $logoName = uniqid() . '_' . trim($logo->getClientOriginalName());
         $flyerName = uniqid() . '_' . trim($flyer->getClientOriginalName());
 
-        $this->image_logo = "tmp/uploads/" . $logoName;
-        $this->image_flyer = "tmp/uploads/" . $flyerName;
+        $this->image_logo = "images/eventLogos/" . $logoName;
+        $this->image_flyer = "images/eventFlyers/" . $flyerName;
 
         $this->save();
 

@@ -7,6 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class UserEventsTable extends DataTableComponent
 {
@@ -35,6 +36,9 @@ class UserEventsTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            LinkColumn::make('')
+                ->title(fn ($row) => 'VER EVENTO')
+                ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Nombre", "name"),

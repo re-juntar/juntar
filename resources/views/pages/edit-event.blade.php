@@ -12,7 +12,7 @@
                     <form method="POST" action="{{ route('update-event') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <input hidden name="eventId" id="eventId" value="{{ $eventId }}">
+                        <input hidden name="eventId" id="eventId" value="{{ $event->id }}">
                         <input hidden id="hiddenDate" value="{{ $event->inscription_end_date }}">
                         <input id="hiddenVenue" hidden value="{{ $event->venue }}">
                         <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
@@ -131,34 +131,6 @@
                                     <p class="text-red-600">* {{ $message }}</p>
                                 </div>
                             @enderror
-                        </div>
-                        {{-- Logo --}}
-                        <div class="mb-4">
-                            <div class="mb-4">
-                                <x-label for="logo">Ingrese logo [solo formato png, jpg y jpeg]</x-label>
-                                <input id="logo" class="border-none p-0 block w-full" name="logo" type="file" />
-                                @error('logo')
-                                    <div class="flex items-center">
-                                        <p class="text-red-600">* {{ $message }}</p>
-                                    </div>
-                                @enderror
-                                <x-button id="remove-logo" class="text-[14px] mt-3" type="button">Quitar</x-button>
-                            </div>
-                        </div>
-
-                        {{-- Flyer --}}
-                        <div class="mb-4">
-                            <div class="mb-4">
-                                <x-label for="flyer">Ingrese flyer [solo formato png, jpg y jpeg]</x-label>
-                                <input id="flyer" class="border-none p-0 block w-full" name="flyer"
-                                    type="file" />
-                                @error('flyer')
-                                    <div class="flex items-center">
-                                        <p class="text-red-600">* {{ $message }}</p>
-                                    </div>
-                                @enderror
-                                <x-button id="remove-flyer" class="text-[14px] mt-3" type="button">Quitar</x-button>
-                            </div>
                         </div>
                         {{-- Limite participantes --}}
                         <input id="hiddenCapacity" hidden value="{{ $event->capacity }}">
