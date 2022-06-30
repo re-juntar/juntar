@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Event;
 use App\Http\Livewire\Events;
-use App\Http\Livewire\Backend\BackHome;
 use App\Http\Livewire\FrontHome;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Backend\BackHome;
 use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Controllers\EventController;
 use App\Http\Livewire\Backend\EventsPage;
@@ -14,6 +15,7 @@ use App\Http\Livewire\InscriptionsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
 use App\Http\Livewire\Backend\EndorsementsPage;
+use App\Http\Livewire\Backend\EventCategoriesPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +39,7 @@ Route::view('/create-event', 'pages.create-event')->name('create-event');
 
 Route::get('/eventos/evento/{eventoId}', [EventController::class, 'show'])->name('evento');
 
-Route::get('/edit-event/{eventid}', [EventController::class,'edit'])->name('edit-event');
+Route::get('/edit-event/{eventid}', [EventController::class, 'edit'])->name('edit-event');
 
 Route::post('/update-event', [StoreEventController::class, 'update'])->name('update-event');
 
@@ -64,3 +66,5 @@ Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
 Route::get('/gestionar/eventos', EventsPage::class)->name('events');
 
 Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
+
+Route::get('/gestionar/event-category', EventCategoriesPage::class)->name('event-category');
