@@ -13,7 +13,7 @@ class BackendController extends Controller
 
 
         if ($permission['admin']) {
-            return view('backend.gestionar', compact('permission'));
+            return view('layouts.back', compact('permission'));
         } else {
             // return redirect()->action([HomeController::class, 'filteredIndex']);
             abort(404);

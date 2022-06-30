@@ -19,7 +19,10 @@
                             </x-slot>
 
                             <x-slot name="body">
-                                @foreach($events as $event)
+                                @for ($i = 0; $i < count($events); $i++)
+                                    @php
+                                        $event = $events[$i];
+                                    @endphp
                                     <x-table.row>
                                         <x-table.cell>
                                             @if (strlen($event->name) > 25)
@@ -39,11 +42,11 @@
                                                     Inhabilitado
                                                 @break
 
-                                                @case(1)
+                                                @case(3)
                                                     Finalizado
                                                 @break
 
-                                                @case(1)
+                                                @case(4)
                                                     Borrador
                                                 @break
 
@@ -97,7 +100,7 @@
                                             </div>
                                         </x-table.cell>
                                     </x-table.row>
-                                @endforeach
+                                @endfor
                             </x-slot>
                         </x-table>
                     </div>
@@ -108,7 +111,7 @@
         {{-- Table Navigation --}}
         {{-- edit styles on resources/views/pagination/tailwind.blade.php --}}
         <div class="flex justify-center">
-            {{ $events->links() }}
+            {{-- $events->links() --}}
         </div>
     </section>
 

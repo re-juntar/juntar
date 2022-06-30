@@ -54,7 +54,7 @@ class AboutUs extends Component
             'image' => 'FR',
         ],
         [
-            'name' => 'Santi Lubary',
+            'name' => 'Santiago Lubary',
             'socials' => [
                 'github' => 'https://github.com/SaniLubary',
                 'linkedin' => 'https://www.linkedin.com/in/santi-lubary/',
@@ -83,7 +83,7 @@ class AboutUs extends Component
             'image' => 'JJM',
         ],
         [
-            'name' => 'Santiago Avilez',
+            'name' => 'Santiago Avilez Ariza',
             'socials' => [
                 'github' => 'https://github.com/santiagoavilez',
                 'linkedin' => 'https://www.linkedin.com/in/santiago-avilez-ariza-431b5a203/',

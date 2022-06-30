@@ -63,10 +63,20 @@
 
                                 @if ($permission['admin'])
                                     <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
-                                        href="{{ route('gestionar') }}">
-                                        {{ __('Gestionar') }}
+                                        href="{{ route('back-home') }}">
+                                        {{ __('Administración') }}
                                     </x-jet-dropdown-link>
                                 @endif
+
+                                <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
+                                    href="{{ route('my-events') }}">
+                                    {{ __('Mis Eventos') }}
+                                </x-jet-dropdown-link>
+
+                                <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
+                                    href="{{ route('my-inscriptions') }}">
+                                    {{ __('Mis Inscripciones') }}
+                                </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-100"></div>
 
@@ -149,8 +159,8 @@
                     </x-jet-responsive-nav-link>
 
                     @if ($permission['admin'])
-                        <x-jet-responsive-nav-link href="{{ route('gestionar') }}">
-                            {{ __('Gestionar') }}
+                        <x-jet-responsive-nav-link href="{{ route('back-home') }}">
+                            {{ __('Administración') }}
                         </x-jet-responsive-nav-link>
                     @endif
 

@@ -23,22 +23,30 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'int', 'min:1000000', 'max:99999999'],
+            'country' => ['required', 'string', 'max:255'],
+            'province' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
-
-        $userId = User::max('id');
         $userRoleController = new UserRoleController();
 
-        
-        
+
+
         $user = User::create([
             'name' => $input['name'],
+            'surname' => $input['surname'],
+            'dni' => $input['dni'],
+            'country' => $input['country'],
+            'province' => $input['province'],
+            'city' => $input['city'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
-        
+
         $userRoleController->store(User::max('id'));
 
         return $user;

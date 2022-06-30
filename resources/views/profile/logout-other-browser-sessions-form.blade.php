@@ -30,7 +30,8 @@
                                     stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                     class="w-8 h-8 text-gray-500">
                                     <path d="M0 0h24v24H0z" stroke="none"></path>
-                                    <rect x="7" y="4" width="10" height="16" rx="1"></rect>
+                                    <rect x="7" y="4" width="10" height="16" rx="1">
+                                    </rect>
                                     <path d="M11 5h2M12 17v.01"></path>
                                 </svg>
                             @endif
@@ -92,8 +93,7 @@
                     {{ __('Cancelar') }}
                 </x-jet-secondary-button>
 
-                <x-jet-button class="ml-3" wire:click="logoutOtherBrowserSessions"
-                    wire:loading.attr="disabled">
+                <x-jet-button class="ml-3" wire:click="logoutOtherBrowserSessions" wire:loading.attr="disabled">
                     {{ __('Cierre Sesión en Otros Navegadores') }}
                 </x-jet-button>
             </x-slot>

@@ -1,57 +1,85 @@
 <x-app-layout>
+
     {{-- layout contact --}}
-    <div class="max-w-lg mx-auto bg-white-ghost border shadow-lg rounded-[0.25rem] py-[3vh] mb-4">
-        <x-pink-header class="w-full">
+    <div class="container mx-auto max-w-4xl  border shadow-lg mt-5 ">
+        <x-pink-header>
             Contacto
         </x-pink-header>
 
-        <x-label class="mt-4 text-center">
-            Por cualquier consulta, complete el formulario para contactarnos. Muchas Gracias
-        </x-label>
-        <div class="px-[4vh]">
+        <div class="container max-w-4xl mx-auto text-center  ">
+            <x-label class="mt-4 ">
+                Por cualquier consulta, complete el formulario para contactarnos. Muchas Gracias
+            </x-label>
+        </div>
+
+        <div class="mx-auto max-w-md  ">
             <form action="{{ route('mail.store') }}" method="POST">
 
                 @csrf
-                <div>
-                    <x-label for="name">Nombre</x-label>
-                    <x-input id="name" class="w-full" type="text" name="name" :value="old('name')"/>
+                <div class="mx-3 ">
+                    <x-label class="my-5">
+                        Nombre:
+                    </x-label>
+                    <br>
+                    <x-input
+                        class="w-full sm:w-50 transition ease-in-out 50  hover:-translate-y-1 hover:scale-10  duration-300 "
+                        type="text" id="name" name='name' value="{{ old('name') }}">
+                    </x-input>
                     @error('name')
-                        <p class="text-red-600">{{$message}}</p>
+                        <div class="error-message text-red-600">* {{ $message }}</div>
                     @enderror
                 </div>
-                <div class="mb-4">
-                    <x-label for="email">Email</x-label>
-                    <x-input id="email" class="w-full" type="text" name="email" value="{{old('email')}}"/>
+                <br>
+                <div class="mx-3">
+                    <x-label class="my-5">
+                        Email:
+                    </x-label>
+                    <br>
+                    <x-input
+                        class=" w-full transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-10  duration-300"
+                        type='email' id="email" name='email' value="{{ old('email') }}">
+                    </x-input>
                     @error('email')
-                        <p class="text-red-600">{{$message}}</p>
+                        <p class="error-message text-red-600">* {{ $message }}</p>
                     @enderror
                 </div>
-
-                <div class="mb-4">
-                    <x-label for="subject">Asunto</x-label>
-                    <x-input id="subject" class="w-full" type="text" name="subject" value="{{old('subject')}}"/>
+                <div class="mx-3">
+                    <x-label class="my-5">
+                        Asunto:
+                    </x-label>
+                    <br>
+                    <x-input
+                        class="w-full transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-10  duration-300"
+                        type='text' id="subject" name='subject' value="{{ old('subject') }}">
+                    </x-input>
                     @error('subject')
-                        <p class="text-red-600">{{$message}}</p>
+                        <p class="error-message text-red-600">* {{ $message }}</p>
                     @enderror
                 </div>
+                <br>
+                <div class="mx-3 ">
 
-                <div class="mb-4">
-                    <x-label for="query">Consulta</x-label>
-                    <textarea id="query" class="block" name="query" rows="5" cols="30">
-                    {{old('query')}}
+                    <x-label>
+                        Consulta:
+                    </x-label>
+
+                    <textarea id="query" name="query" rows="4"
+                        class=" block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border  focus:ring-blue-500 focus:border-blue-500   dark:text-black  dark:focus:border-blue-500  transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-10  duration-300"
+                        placeholder="Escriba su mensaje aqui"> {{ old('detalle') }}
                     </textarea>
                     @error('query')
-                        <div class="flex items-center">
-                            <p class="text-red-600">{{$message}}</p>
-                        </div>
+                        <p class="error-message text-red-500 ">* {{ $message }} </p>
                     @enderror
                 </div>
+                <div class="my-5 ml-3">
 
-                <x-button type='submit'>
-                    Enviar
-                </x-button>
-
+                    <x-button type='submit'>
+                        Enviar
+                    </x-button>
+                </div>
             </form>
         </div>
     </div>
+
+    <x-jet-section-border />
 </x-app-layout>

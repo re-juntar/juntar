@@ -2,7 +2,6 @@
     <x-hero>
         <img class="max-w-full h-auto mb-4" src="{{ asset('images/logos/juntar-logo-w.svg') }}" alt="" />
         <h5 class="text-white-ghost uppercase font-medium text-xl mb-4">Sistema de gestión de eventos</h5>
-        <x-jet-button class="bg-awesome uppercase text-lg text-white-ghost hover:bg-fogra-dark">Empezar</x-jet-button>
     </x-hero>
 
     <section class="bg-fogra-darkish w-full text-white-ghost pt-16 pb-5 px-4">
@@ -21,7 +20,7 @@
                             </x-slot>
 
                             <x-slot name="body">
-                                @foreach($events as $event)
+                                @foreach ($events as $event)
                                     <x-table.row>
                                         <x-table.cell>
                                             @if (strlen($event->name) > 25)
@@ -41,11 +40,11 @@
                                                     Inhabilitado
                                                 @break
 
-                                                @case(1)
+                                                @case(3)
                                                     Finalizado
                                                 @break
 
-                                                @case(1)
+                                                @case(4)
                                                     Borrador
                                                 @break
 
@@ -106,6 +105,81 @@
                                         </x-table.cell>
                                     </x-table.row>
                                 @endforeach
+                                @for ($i = 0; $i < count($organizers); $i++)
+                                    @php
+                                        $event = $organizers[$i][0];
+                                    @endphp
+                                    <x-table.row>
+                                        <x-table.cell>
+                                            @if (strlen($event->name) > 25)
+                                                {{ substr($event->name, 0, 25) . '...' }}
+                                            @else
+                                                {{ $event->name }}
+                                            @endif
+                                        </x-table.cell>
+
+                                        <x-table.cell>
+                                            @switch($event->event_status_id)
+                                                @case(1)
+                                                    Activo
+                                                @break
+
+                                                @case(2)
+                                                    Inhabilitado
+                                                @break
+
+                                                @case(3)
+                                                    Finalizado
+                                                @break
+
+                                                @case(4)
+                                                    Borrador
+                                                @break
+
+                                                @default
+                                                    -
+                                            @endswitch
+                                        </x-table.cell>
+
+                                        <x-table.cell class="hidden sm:table-cell">
+                                            {{ $event->start_date }}
+                                        </x-table.cell>
+
+                                        <x-table.cell>
+                                            <div class="justify-center hidden sm:grid sm:gap-2 sm:grid-cols-2 lg:flex">
+                                                <x-button class="bg-blue-400">Editar</x-button>
+                                                {{-- <x-button>Ver</x-button> --}}
+                                            </div>
+
+                                            {{-- More Actions dots button that shows on phones --}}
+                                            <div id="dropdown-{{ $event->id }}"
+                                                class="inline-block sm:hidden relative text-left dropdown">
+                                                <button
+                                                    class="inline-flex justify-center w-full px-4 py-2 font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white shadow-none"
+                                                    type="button" aria-haspopup="true" aria-expanded="true"
+                                                    onclick="toggleDropdownMenu('dropdown-menu-{{ $event->id }}', 'dropdown-{{ $event->id }}')"
+                                                    aria-controls="headlessui-menu-items-117">
+                                                    <img src="{{ url('/images/icons/dots-vertical.svg') }}"
+                                                        alt="more options icon">
+                                                </button>
+                                                <div id="dropdown-menu-{{ $event->id }}"
+                                                    class="opacity-0
+                                                    invisible transition-all duration-300 transform
+                                                    origin-top-right -translate-y-2 scale-95">
+                                                    <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white-ghost border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                                        aria-labelledby="headlessui-menu-button-1"
+                                                        id="headlessui-menu-items-117" role="menu">
+                                                        <ul class="list-none bg-white-ghost">
+                                                            <li>
+                                                                <x-button class="w-full bg-blue-400">Editar</x-button>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </x-table.cell>
+                                    </x-table.row>
+                                @endfor
                             </x-slot>
                         </x-table>
                     </div>
