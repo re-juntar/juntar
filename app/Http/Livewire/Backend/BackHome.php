@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Backend;
 
 use App\Http\Controllers\PermissionController;
+use App\Models\Event;
 use Livewire\Component;
 
 class BackHome extends Component
@@ -17,7 +18,8 @@ class BackHome extends Component
                 return view('pages.backend.back-home')->layout('layouts.back');
                 // return $this->render();
             } else {
-                return view('home.front-home')->layout('layouts.app');
+                $events = Event::paginate(25);
+                return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
             }
         } else {
             return view('livewire.backend.login-back');

@@ -6,6 +6,7 @@ use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
 use App\Models\Presentation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,24 +45,26 @@ class EventController extends Controller
      */
     public function store(ImageUploadRequest $request, Event $event)
     {
-        if ($event->storeEvent($request)->storeMedia($request)) {
+        $event->storeEvent($request)->storeMedia($request);
             $eventId = Event::max('id');
             if (isset($request->coorganizer1)) {
                 $orgController1 = new OrganizerController();
-                $orgController1->store($request->coorganizer1, $eventId);
+                $user = User::where('email', '=', $request->coorganizer1)->first();
+                $orgController1->store($user->id, $eventId);
             }
 
             if (isset($request->coorganizer2)) {
                 $orgController2 = new OrganizerController();
-                $orgController2->store($request->coorganizer2, $eventId);
+                $user = User::where('email', '=', $request->coorganizer2)->first();
+                $orgController2->store($user->id, $eventId);
             }
 
             if (isset($request->coorganizer3)) {
                 $orgController3 = new OrganizerController();
-                $orgController3->store($request->coorganizer3, $eventId);
+                $user = User::where('email', '=', $request->coorganizer3)->first();
+                $orgController3->store($user->id, $eventId);
             }
-        }
-        return redirect()->action(FrontHome::class);
+            return redirect('evento/' . $eventId);
     }
 
     /**
@@ -107,6 +110,10 @@ class EventController extends Controller
             }
         }
 
+        if (($event->status_description == "Draft" || $event->status_description == "Disabled") && !$hasPermission) {
+            return redirect()->action(FrontHome::class);
+        }
+
         return view('pages.events.evento', ['event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'hasPermission' => $hasPermission]);
     }
 
@@ -146,29 +153,30 @@ class EventController extends Controller
         //
     }
 
-    public function homeRequest(Request $filter)
+    public function homeRequest($filter)
     {
         if (isset($filter['search'])) {
             $search = $filter['search'];
-            $response = Event::where('name', 'like', '%' . $search . '%')->where('event_status_id', '=', 1)->orWhere('event_status_id', '=', 3);
+            $response = Event::where('name', 'like', '%' . $search . '%')
+                ->where('event_status_id', '<>', 4)
+                ->where('event_status_id', '<>', 2)
+                ->orderBy('start_date', 'asc')
+                ->paginate(25);
         } else {
-            $response = Event::where('event_status_id', 1)->orWhere('event_status_id', '=', 3)->orderBy('start_date', 'asc')->get();
+            $response = Event::where('event_status_id', '<>', 4)->where('event_status_id', '<>', 2)->orderBy('start_date', 'asc')->paginate(25);
         }
 
-        if (isset($filter['order'])) {
-            $order = $filter['order'];
+        // if (isset($filter['order'])) {
+        //     $order = $filter['order'];
 
-            switch ($order) {
-                case 'asc':
-                    $response = $response->orderBy('start_date', 'asc')->get();
-                    break;
-                case 'desc':
-                    $response = $response->orderBy('start_date', 'desc')->get();
-                    break;
-            }
-        }
-        // } else {
-        //     $response = $response->orderBy('start_date', 'asc');
+        //     switch ($order) {
+        //         case 'asc':
+        //             $response = $response->orderBy('start_date', 'asc')->get();
+        //             break;
+        //         case 'desc':
+        //             $response = $response->orderBy('start_date', 'desc')->get();
+        //             break;
+        //     }
         // }
         return $response;
     }

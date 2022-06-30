@@ -28,6 +28,7 @@ use App\Http\Livewire\FrontHome;
 |
 */
 
+Route::post('/home', FrontHome::class)->name('home');
 
 Route::get('/', FrontHome::class)->name('home');
 
@@ -63,6 +64,3 @@ Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
 Route::get('/gestionar/eventos', EventsPage::class)->name('events');
 
 Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
-
-/************************ HELPER **************************/
-Route::get('/redirection/{url}', 'App\Http\Controllers\RedirectionController@externalUrl')->name('redirection');

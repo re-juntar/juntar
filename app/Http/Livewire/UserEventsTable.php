@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\EventController;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Event;
@@ -19,7 +20,7 @@ class UserEventsTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Event::where('user_id', Auth::user()->id);
+        return Event::where('user_id', Auth::user()->id)->where('event_status_id', '<>', 2);
     }
 
     public function configure(): void
@@ -31,6 +32,8 @@ class UserEventsTable extends DataTableComponent
         $this->setEmptyMessage('Aún no ha organizado ningún evento');
 
         $this->setQueryStringDisabled();
+
+        $this->setColumnSelectDisabled();
     }
 
     public function columns(): array
@@ -39,16 +42,56 @@ class UserEventsTable extends DataTableComponent
             LinkColumn::make('')
                 ->title(fn ($row) => 'VER EVENTO')
                 ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
+                LinkColumn::make('')
+                ->title(fn ($row) => 'EDITAR EVENTO')
+                ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']])),
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Nombre", "name"),
             Column::make("Nombre Corto", "short_name"),
-            Column::make("Nombre Organizador", "user.name"),
-            Column::make("Apellido Organizador", 'user.surname')
+            Column::make("Estado", 'eventStatus.description')
+            // Column::make("Nombre Organizador", "user.name"),
+            // Column::make("Apellido Organizador", 'user.surname')
             // Column::make("Created at", "created_at")
             //     ->sortable(),
             // Column::make("Updated at", "updated_at")
             //     ->sortable(),
         ];
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            'publish' => 'Publicar',
+            'disable' => 'Deshabilitar',
+            'end' => 'Finalizar',
+            'makeDraft' => 'Hacer Borrador',
+            'edit' => 'Editar'
+        ];
+    }
+
+    public function publish()
+    {
+        Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 1]);
+
+        $this->clearSelected();
+    }
+    public function disable()
+    {
+        Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 2]);
+
+        $this->clearSelected();
+    }
+    public function end()
+    {
+        Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 3]);
+
+        $this->clearSelected();
+    }
+    public function makeDraft()
+    {
+        Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 4]);
+
+        $this->clearSelected();
     }
 }

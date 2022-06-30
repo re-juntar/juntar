@@ -17,6 +17,6 @@ class FrontHome extends Component
     {
         $eventController = new EventController();
         $events = $eventController->homeRequest($request);
-        return view('pages.front-home', ['events' => Event::paginate(25)])->layout(\App\View\Components\AppLayout::class);
+        return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
     }
 }
