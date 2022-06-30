@@ -1,33 +1,33 @@
 @switch($input['type'])
-    @case(1)
+    @case('Texto')
         {{ Aire::input()->label($input['label']) }}
         @break
  
-    @case(2)
+    @case('Checkbox')
         {{ Aire::checkboxGroup($input['options'], 'radio', $input['label']) }}
         @break
  
-    @case(3)
+    @case('Dropdown')
         {{ Aire::select($input['options'], 'select', $input['label']) }}
         @break
 
-    @case(4)
+    @case('Fecha')
         {{ Aire::date('date_input', $input['label']) }}
         @break
 
-    @case(5)
+    @case('Correo')
         {{ Aire::email('email', $input['label']) }}
         @break
 
-    @case(6)
+    @case('Numero')
         {{ Aire::number('number', $input['label']) }}
         @break
 
-    @case(7)
+    @case('Radio')
         {{ Aire::radioGroup($input['options'], 'radio', $input['label']) }}
         @break
 
-    @case(8)
+    @case('Textarea')
         {{ Aire::textArea('textArea', $input['label']) }}
         @break
 @endswitch

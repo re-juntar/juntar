@@ -33,15 +33,16 @@
                             </td>
 
                             <td class="text-lg font-medium text-gray-900 px-6 py-2">
-                                @if(count($input['options'])) {{-- FIX --}}
+                                @php
+                                    $optionsArray = explode("/", $input['options']);
+                                @endphp
                                 <ul class="list-disc">
-                                    @foreach($input['options'] as $option)
+
+                                    @foreach($optionsArray as $option)
                                     <li class="text-left"> {{ $option }} </li>
                                     @endforeach
+
                                 </ul>
-                                @else
-                                <hr class="border-2 border-black">
-                                @endif
                             </td>
 
                             <td class="text-lg font-medium px-6 py-2">
@@ -51,6 +52,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <x-button class="text-center" wire:click="saveForm">Guardar</x-button>
             </div>
         </div>
     </div>

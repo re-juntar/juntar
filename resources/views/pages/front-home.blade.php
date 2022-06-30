@@ -25,12 +25,12 @@
 
                     @livewire('event-card-responsive', ['event' => $event])
 
-                    <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
+                    {{-- <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
                         <img class="w-10 h-10 rounded-full mr-2" src="{{ $event->user->profile_photo_url }}">
                         <div class="font-bold text-xl uppercase text-white-ghost py-4">
                             {{$event->user->name}} {{$event->user->surname}}
                         </div>
-                    </div>
+                    </div> --}}
                 </x-card>
             @endforeach
         </div>

@@ -26,8 +26,7 @@ class FormBuilderModal extends Component
     }
 
     public function submit(){
-        $optionsArray = explode("/", $this->options);
-        $inputs = ['type' => $this->type, 'label' => $this->label, 'options' => $optionsArray];
+        $inputs = ['type' => $this->type, 'label' => $this->label, 'options' => $this->options];
         $this->emitUp('sendQuestion', $inputs);
         $this->reset();
     }

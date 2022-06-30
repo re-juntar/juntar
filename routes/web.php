@@ -69,5 +69,5 @@ Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
 /************************ HELPER **************************/
 Route::get('/redirection/{url}', 'App\Http\Controllers\RedirectionController@externalUrl')->name('redirection');
 
-Route::get('/formbuilder', PreinscriptionFormBuilder::class)->name('formbuilder');
+Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuilder::class)->name('formbuilder');
 

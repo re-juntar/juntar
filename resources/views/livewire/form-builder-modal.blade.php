@@ -4,7 +4,7 @@
 
             {{ Aire::open()->id('addQForm') }}
 
-            {{ Aire::select(['' => 'Seleccione una opción', 'Texto' => 'Texto', 'Checkbox' => 'Checkbox', 'Dropdown' => 'Dropdown', 'Fecha' => 'Fecha', 'Correo' => 'Correo', 'Número' => 'Número', 'Radio' => 'Radio', 'Area de Texto' => 'Area de Texto'], 'type', 'Seleccionar tipo de campo')->id('type')}}
+            {{ Aire::select(['' => 'Seleccione una opción', 'Texto' => 'Texto', 'Checkbox' => 'Checkbox', 'Dropdown' => 'Dropdown', 'Fecha' => 'Fecha', 'Correo' => 'Correo', 'Numero' => 'Numero', 'Radio' => 'Radio', 'Textarea' => 'Area de Texto'], 'type', 'Seleccionar tipo de campo')->id('type')}}
             @error('type')
                 <span class="error">{{ $message }}</span>
             @enderror
