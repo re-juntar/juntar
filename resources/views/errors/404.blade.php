@@ -6,8 +6,11 @@
         </div>
         <div class="container mx-auto px-6 md:px-12 relative z-10 flex items-center py-32 xl:py-40">
             <div class="w-full font-mono flex flex-col items-center relative z-10">
-                <p class="font-extrabold text-8xl my-36 text-white-ghost animate-bounce">
-                    404
+                <h1 class="font-extrabold text-5xl text-center text-white-ghost leading-tight mt-4">
+                    Página no encontrada
+                </h1>
+                <p class="font-extrabold text-8xl my-16 text-white-ghost animate-bounce">
+                    Error 404
                 </p>
             </div>
         </div>
