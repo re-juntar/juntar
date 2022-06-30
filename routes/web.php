@@ -17,6 +17,7 @@ use App\Http\Controllers\EventModalityController;
 use App\Http\Livewire\Backend\CreateEventModality;
 use App\Http\Livewire\Backend\CreateModality;
 use App\Http\Livewire\Backend\EditModality;
+use App\Http\Livewire\Backend\EditModalityt;
 use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\EventModalities;
 use App\Http\Livewire\EventModalitiesPage;
@@ -76,4 +77,5 @@ Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventMo
 
 Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
 
-Route::get('/gestionar/modalidades/editar', EditModality::class)->name('editModality');
+// Route::get('/gestionar/modalidades/editar/{id}', EditModalityt::class,'edit')->name('editModality');
+ Route::get('/gestionar/modalidades/editar/{id}', EditModality::class,'render')->name('editModality');

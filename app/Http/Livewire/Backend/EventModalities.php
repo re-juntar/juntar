@@ -96,11 +96,11 @@ class EventModalities extends DataTableComponent
         //  return return redirect()->action('${App\Http\Controllers\HomeController@index}', ['parameterKey' => 'value']);
     }
 
-    // public function editModality(){
-    //     // $this->setPrimaryKey('id')
-    //     // ->setTableRowUrl(function($row) {
-    //              $var = EventModality::where('id', $this->getSelected());
-    //         return route('/gestionar/modalidades/editar' );
-    // }
+    public function editModality(){
+       $id = $this->getSelected()[0];
+        // $modality = $evntModality::find($id);
+             return redirect()->to('/gestionar/modalidades/editar/'.$id);
+            
+    }
 }
 
