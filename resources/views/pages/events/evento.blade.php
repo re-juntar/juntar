@@ -45,9 +45,14 @@ $logoSrcNull = 'Logo en construcción';
                     </a>
                     <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-eye"></i> Ver Inscriptos
                     </x-button>
-                    @if($event->pre_registration && count($event->questions) == 0)
+                    @if($event->pre_registration)
                     <a href="{{ route('formbuilder', $event->id) }}">
-                        <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-clipboard"></i> Crear formulario de preinscipción
+                        <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-clipboard"></i>
+                            @if(count($event->questions) == 0)
+                            Crear formulario de preinscipción
+                            @else
+                            Editar formulario de preinscripción
+                            @endif
                         </x-button>
                     </a>
                     @endif

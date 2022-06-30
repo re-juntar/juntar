@@ -22,6 +22,12 @@ class PreinscriptionFormBuilder extends Component
 
     public function mount($eventId){
         $this->eventId = $eventId;
+        foreach (Question::where('event_id', $eventId)->cursor() as $question) {
+            $inputs['type'] = $question->type;
+            $inputs['label'] = $question->label;
+            $inputs['options'] = $question->options;
+            array_push($this->inputs, $inputs);
+        }
     }
 
     public function showModal(){
@@ -39,6 +45,7 @@ class PreinscriptionFormBuilder extends Component
     }
 
     public function saveForm(){
+        Question::where('event_id', $this->eventId)->delete();
         foreach($this->inputs as $input){
             $question = new Question();
             $question->event_id = $this->eventId;
