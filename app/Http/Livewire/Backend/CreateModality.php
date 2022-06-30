@@ -10,7 +10,7 @@ class CreateModality extends Component
     public EventModality $eventModality;
 
     protected $rules = [
-         'eventModality.description' => 'required|string|min:6',
+        'eventModality.description' => 'required|string|min:4',
     ];
 
     public function mount()
@@ -18,12 +18,17 @@ class CreateModality extends Component
         $this->eventModality = new EventModality();
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName, ['eventModality.description' => 'required|string|min:4']);
+    }
+
     public function save()
     {
+        $this->validate();
         $this->eventModality->save();
         return redirect()->to('/gestionar/modalidades');
-    } 
-   
+    }
 
     public function render()
     {

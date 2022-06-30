@@ -11,29 +11,27 @@ class EditModality extends Component
     public EventModality $eventModality;
 
     protected $rules = [
-        'eventModality.description' => 'required|string|min:6',
+        'eventModality.description' => 'required|string|min:4',
     ];
-
-    // ventModality::where('id', $this->getSelected())->update(['description' => $this->getSelected()[0]])
-   
 
     public function mount($id)
     {
-        // $this->eventModality = new EventModality();
         $this->eventModality = EventModality::find($id);
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName, ['eventModality.description' => 'required|string|min:4']);
+    }
+
+
     public function save()
     {
-        // $this->validate();
-
-        // $this->users->password = time();
-
+        $this->validate();
         $this->eventModality->save();
-
         return redirect()->to('/gestionar/modalidades');
     }
-   
+
     public function render()
     {
         return view('livewire.backend.edit-modality')->layout('layouts.back');

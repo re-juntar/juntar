@@ -6,9 +6,6 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\EventModality;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
-use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class EventModalities extends DataTableComponent
 {
@@ -30,51 +27,18 @@ class EventModalities extends DataTableComponent
         $this->setQueryStringDisabled();
 
         $this->setTableAttributes(['class' => "text-white-ghost"]);
-
-        // $this->setPrimaryKey('id')
-        // ->setTableRowUrl(function($row) {
-        //     return route('addModality', $row);
-        // });
-        // ->setTableRowUrlTarget(function($row) {
-        //     if ($row->isExternal()) {
-        //         return '_blank';
-        //     }
-
-        //     return '_self';
-        // });
-    
     }
-
-    // public function builder(): Builder 
-    // {
-    //      return EventModality::where('id', Auth::user()->id);
-
-    // }
 
     public function columns(): array
     {
         return [
-            Column::make("IdEvento", "id")
-                ->sortable(),
-
+            Column::make("IdModalidad", "id")
+                ->sortable()
+                ->hideIf(true),
             Column::make("Descripcion", "description")
-                ->sortable(),
-            // LinkColumn::make('Action')
-            //     ->title(fn ($row) => 'Editar')
-            //     ->location(fn ($row) => route('admin.users.edit', $row)),
-            // LinkColumn::make('Action')
-            //     ->title(fn ($row) => 'Borrar')
-            //     ->location(fn ($row) => route('admin.users.edit', $row)),
-            /*             Column::make('Editar')
-            ->format(function($value) {
-                return '<strong>Hola</strong>';
-            }) */
-            // ->asHtml(),
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
-            
+                ->sortable()
+                ->searchable(),
+            Column::make("Editar")->label(fn ($row, Column $column) => '<a class="text-awesome" href="' . route('editModality', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i></a>')->html(),
         ];
     }
 
@@ -82,25 +46,14 @@ class EventModalities extends DataTableComponent
     {
         return [
             'deleteModality' => 'Borrar',
-            'editModality' => 'Editar Modalidad',
         ];
     }
     public function deleteModality()
     {
-        EventModality::where('id', $this->getSelected())->delete();
-        // $this->getSelected();
-
+        foreach ($this->getSelected() as $selectedItem) {
+            EventModality::where('id', $selectedItem)->delete();
+        }
+        session()->flash('message', 'Product Deleted Successfully.');
         $this->clearSelected();
-        //return redirect()->to('/gestionar/avales', ['item' => $item] );
-        // return redirect('/contact-us')->with('error', "mensaje");
-        //  return return redirect()->action('${App\Http\Controllers\HomeController@index}', ['parameterKey' => 'value']);
-    }
-
-    public function editModality(){
-       $id = $this->getSelected()[0];
-        // $modality = $evntModality::find($id);
-             return redirect()->to('/gestionar/modalidades/editar/'.$id);
-            
     }
 }
-
