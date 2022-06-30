@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Controllers\EventController;
 use App\Http\Livewire\Backend\EventsPage;
+use App\Http\Livewire\PreinscriptionForm;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BackendController;
 use App\Http\Livewire\InscriptionsController;
@@ -71,3 +72,4 @@ Route::get('/redirection/{url}', 'App\Http\Controllers\RedirectionController@ext
 
 Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuilder::class)->name('formbuilder');
 
+Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');

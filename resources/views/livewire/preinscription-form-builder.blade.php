@@ -1,7 +1,7 @@
-<div class="create-event bg-[#0B0D19]">
-    <div class="create-event-container max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto rounded-[0.25rem] py-[3vh] px-[3vh]">
+<div class="bg-[#0B0D19]">
+    <div class="max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto rounded-lg py-[3vh] px-[3vh]">
         <x-pink-header>Crear formulario de preinscripción</x-pink-header>
-        <div class="bg-[#EFEFEF] p-[1.25rem]">
+        <div class="bg-white-ghost p-5">
             <x-button class="text-center" wire:click="showModal">Añadir pregunta</x-button>
             <div class="container">
                 <table class="min-w-full text-center border mt-2">
@@ -52,7 +52,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <x-button class="text-center" wire:click="saveForm">Guardar</x-button>
+                <x-button class="text-center mt-4" wire:click="saveForm">Guardar</x-button>
             </div>
         </div>
     </div>
