@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Event;
 use App\Http\Livewire\Events;
 use App\Http\Livewire\FrontHome;
 use App\Http\Livewire\MyInscriptions;
@@ -10,10 +9,9 @@ use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Controllers\EventController;
 use App\Http\Livewire\Backend\EventsPage;
 use App\Http\Controllers\AboutUsController;
-use App\Http\Controllers\BackendController;
-use App\Http\Livewire\InscriptionsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\EventCategoryController;
 use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\EventCategoriesPage;
 
@@ -57,14 +55,15 @@ Route::get('/contact-us', function () {
 Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
 
 /********************** BACKEND *************************/
-/* Route::get('/gestionar', [BackendController::class, 'index'])->name('management'); */
+Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
+    Route::get('/', BackHome::class)->name('back-home');
 
-Route::get('gestionar', BackHome::class)->name('back-home');
+    Route::get('/usuarios', UsersPage::class)->name('users');
 
-Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
+    Route::get('/eventos', EventsPage::class)->name('events');
 
-Route::get('/gestionar/eventos', EventsPage::class)->name('events');
+    Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
-Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
-
-Route::get('/gestionar/event-category', EventCategoriesPage::class)->name('event-category');
+    Route::get('/event-category', EventCategoriesPage::class)->name('event-category');
+    Route::post('/event-category', [EventCategoryController::class, 'update'])->name('event-category');
+});
