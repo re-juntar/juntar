@@ -29,6 +29,7 @@ use App\Http\Livewire\PreinscriptionFormBuilder;
 |
 */
 
+Route::post('/home', FrontHome::class)->name('home');
 
 Route::get('/', FrontHome::class)->name('home');
 
@@ -69,3 +70,4 @@ Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
 Route::get('/redirection/{url}', 'App\Http\Controllers\RedirectionController@externalUrl')->name('redirection');
 
 Route::get('/formbuilder', PreinscriptionFormBuilder::class)->name('formbuilder');
+

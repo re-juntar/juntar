@@ -29,11 +29,13 @@ $logoSrcNull = 'Logo en construcción';
             <div class="event-body bg-[#fff]">
 
                 <x-pink-header class="text-[#856404]  bg-[#fff3cd] uppercase h-auto">
-                    @if ($event->end_date <= date('Y-m-d')) El evento se encuentra finalizado @elseif($event->start_date <= date('Y-m-d') && $event->end_date >= date('Y-m-d'))
-                            El evento ya ha iniciado
-                            @else
-                            El evento aun no ha comenzado
-                            @endif
+                    @if($event->start_date < date('Y-m-d'))
+                        EL EVENTO NO HA COMENZADO
+                    @elseif($event->start_date >= date('Y-m-d') && $event->end_date <= date('Y-m-d'))
+                        EL EVENTO YA HA COMENZADO
+                    @else
+                        EL EVENTO YA HA TERMINADO
+                    @endif
                 </x-pink-header>
                 @if ($hasPermission)
                 <x-pink-header class="h-[50px]" style="justify-content: start">
@@ -99,15 +101,26 @@ $logoSrcNull = 'Logo en construcción';
                         @endif
                     </div>
                     <div class="status w-full md:w-4/12 px-[15px]">
-                        @if ($event->pre_registration && $event->inscription_end_date >= date('Y-m-d'))
-                        <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
+
+
+                    @if($event->start_date < date('Y-m-d'))
+                        @if($event->pre_registration && $event->inscription_end_date < date('d/m/Y'))
+                            {{--<a href="{{route('formulario-preinscripcion')}}">--}}<x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button>{{--</a>--}}
+                            <p>Fecha limite: {{ $event->inscription_end_date }}</p>
+                    @else
+                            {{--<a href="{{route('inscribir')}}">--}}<x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>{{--</a>--}}
+                        @endif
+                    @endif
+            
+                        {{--@if($event->pre_registration && $event->inscription_end_date >= date('Y-m-d'))
+                        <x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button>
                         <p>Fecha limite: {{ $event->inscription_end_date }}</p>
                         @elseif($event->start_date >= date('Y-m-d'))
                         <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
                         @elseif($event->start_date <= date('Y-m-d') && $event->end_date > date('Y-m-d'))
                             <p>El evento ya ha iniciado</p>
-                            @elseif($event->end_date <= date('Y-m-d')) <p>El evento se encuentra finalizado</p>
-                                @endif
+                            @elseif($event->end_date < date('Y-m-d')) <p>El evento se encuentra finalizado</p>
+                                @endif--}}
                     </div>
                 </div>
                 <div class="event-body-main flex-col flex-wrap md:flex md:flex-row pb-[3rem] p-[15px]">
@@ -142,18 +155,28 @@ $logoSrcNull = 'Logo en construcción';
                                 <span>{{ $event->inscription_end_date }}</span>
                             </li>
                             @endif
+                            @if($event->venue)
                             <li class="py-[0.75rem] ">
                                 <p class="mb-[1rem] font-bold">Lugar:</p>
                                 <span>{{ $event->venue }}</span>
                             </li>
+                            @endif
+                            @if($event->meeting_link)
+                            <li class="py-[0.75rem] ">
+                                <p class="mb-[1rem] font-bold">Enlace:</p>
+                                <span>{{ $event->meeting_link }}</span>
+                            </li>
+                            @endif
                             <li class="py-[0.75rem] ">
                                 <p class="mb-[1rem] font-bold">Modalidad: </p>
                                 <span>{{ $event->modality_description }}</span>
                             </li>
+                            @if($event->capacity != -1)
                             <li class="py-[0.75rem] ">
                                 <p class="mb-[1rem] font-bold">Capacidad: </p>
                                 <span>{{ $event->capacity }}</span>
                             </li>
+                            @endif
                             <li class="py-[0.75rem] ">
                                 <p class="mb-[1rem] font-bold">Fecha Publicación: </p>
                                 <span>{{ $event->updated_at }}</span>
@@ -161,7 +184,7 @@ $logoSrcNull = 'Logo en construcción';
                         </ul>
                     </div>
                 </div>
-                <livewire:presentation-table event="{{$event->id}}">
+                    <livewire:presentation-table event="{{$event->id}}">
             </div>
         </div>
     </div>

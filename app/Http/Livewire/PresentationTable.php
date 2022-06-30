@@ -16,7 +16,7 @@ class PresentationTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Presentation::where('event_id', $this->event)->orderBy('start_time');
+        return Presentation::where('event_id', $this->event)->orderBy('date')->orderBy('start_time')->orderBy('end_time');
     }
 
     public function configure(): void
@@ -24,6 +24,12 @@ class PresentationTable extends DataTableComponent
         $this->setPrimaryKey('id');
 
         $this->setTableAttributes(['class' => 'text-white-ghost']);
+
+        $this->setSearchDisabled();
+
+        $this->setPaginationDisabled();
+
+        $this->setColumnSelectDisabled();
     }
 
     public function columns(): array
@@ -36,10 +42,11 @@ class PresentationTable extends DataTableComponent
             Column::make("Hora Inicio", "start_time"),
             Column::make("Hora Fin", "end_time"),
             Column::make("Presentadores", "exhibitors"),
-            Column::make("Recursos", 'resources_link')->hideIf(true),
-            LinkColumn::make('Recursos')
-                ->title(fn ($row) => 'Recursos')
-                ->location(fn ($row) => route('redirection', ['url' => $row['resources_link']])),
+            Column::make("Resources", 'resources_link')->hideIf(true),
+            Column::make("Recursos")->label(fn ($row, Column $column) => '<a target="_blank" href="' . $row->resources_link . '"><i class="fa fa-paperclip text-awesome"></i></a>')->html(),
+            // LinkColumn::make('Recursos')
+            //     ->title(fn ($row) => 'Recursos')
+            //     ->location(fn ($row) => route('redirection', ['url' => $row['resources_link']])),
             // Column::make("Created at", "created_at")
             //     ->sortable(),
             // Column::make("Updated at", "updated_at")

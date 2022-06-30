@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\FrontHome;
 use Illuminate\Http\Request;
 
 class BackendController extends Controller
@@ -15,7 +16,7 @@ class BackendController extends Controller
         if ($permission['admin']) {
             return view('layouts.back', compact('permission'));
         } else {
-            return redirect()->action([HomeController::class, 'filteredIndex']);
+            return redirect('home');
         }
     }
 }

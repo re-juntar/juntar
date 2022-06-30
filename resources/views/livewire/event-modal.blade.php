@@ -36,26 +36,37 @@
                     <div class="container mt-2">
 
                         <h2 class="text-lg font-semibold">Organiza:
-                            <span class="font-normal">Organizador</span>
+                            <span class="font-normal">{{$event->user->name}} {{$event->user->surname}}</span>
                         </h2>
 
+                        @if(count($event->coorganizers) > 0)
                         <div class="flex flex-row mt-1">
                             <h2 class="text-lg font-semibold">Co-organiza: </h2>
                             <ul class="text-lg ml-1">
-                                <li>Coorganizador 1</li>
-                                <li>Coorganizador 2</li>
+                                @foreach($event->coorganizers as $coorganizer)
+                                    <li>{{$coorganizer->user->name}} {{$coorganizer->user->surname}}</li>
+                                @endforeach
                             </ul>
                         </div>
+                        @endif
 
-                        <h3 class="font-bold mt-2">Fecha de inicio: </h3>
+                        <h3 class="font-bold mt-2">Fecha de inicio: {{$event->start_date}}</h3>
 
-                        <h3 class="font-bold mt-1">Fecha de finalización: </h3>
+                        <h3 class="font-bold mt-1">Fecha de finalización: {{$event->start_date}}</h3>
 
-                        <h3 class="font-bold mt-1">Fecha límite de inscripción: </h3>
+                        @if(!is_null($event->pre_registration))
+                            @if($event->pre_registration)
+                                <h3 class="font-bold mt-1">Fecha límite de inscripción: {{$event->inscription_end_date}}</h3>
+                            @endif
+                        @endif
 
-                        <h3 class="font-bold mt-4">Modalidad: </h3>
+                        <h3 class="font-bold mt-4">Modalidad: {{$event->eventModality->description}}</h3>
 
-                        <x-verified-badge class="mt-4" />
+                        @if(!is_null($event->endorsementRequest))
+                            @if($event->endorsementRequest->endorsed)
+                                <x-verified-badge class="mt-4" />
+                            @endif
+                        @endif
 
                         <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
                         {!! $event->description !!}

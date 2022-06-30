@@ -6,5 +6,9 @@
         }
     @endphp
     <img class="rounded-lg" src="{{ asset($src) }}" alt="">
-    <x-verified-badge class="absolute top-4 right-4 z-10" />
+    @if(!is_null($event->endorsementRequest))
+        @if($event->endorsementRequest->endorsed)
+            <x-verified-badge class="absolute top-4 right-4 z-10"/>
+        @endif
+    @endif
 </button>

@@ -38,9 +38,9 @@ class Event extends Model
         return $this->hasMany('App\Models\Presentation');
     }
 
-    public function endorsements()
+    public function endorsementRequest()
     {
-        return $this->hasMany('App\Models\EndorsementRequest');
+        return $this->hasOne('App\Models\EndorsementRequest');
     }
 
     public function questions()
