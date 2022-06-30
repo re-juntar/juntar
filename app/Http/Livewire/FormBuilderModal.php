@@ -14,12 +14,7 @@ class FormBuilderModal extends Component
 
     public $label;
 
-    public $options = null;
-
-    protected $rules = [
-        'type' => 'required',
-        'label' => 'required'
-    ];
+    public $options;
 
     public function render()
     {
@@ -31,11 +26,10 @@ class FormBuilderModal extends Component
     }
 
     public function submit(){
-        $this->validate();
-        $this->open = false;
-        // ENVIAR OPTIONS YA FORMATEADO 'VALOR' => 'VALOR'
-        $inputs = [$this->type, $this->label, $this->options];
+        $optionsArray = explode("/", $this->options);
+        $inputs = ['type' => $this->type, 'label' => $this->label, 'options' => $optionsArray];
         $this->emitUp('sendQuestion', $inputs);
+        $this->reset();
     }
 
 }

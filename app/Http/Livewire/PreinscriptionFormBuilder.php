@@ -9,24 +9,14 @@ use Illuminate\Http\Request;
 class PreinscriptionFormBuilder extends Component
 {
 
-    public $counter = 0;
 
     public $inputs = [];
 
-    protected $listeners = ['sendQuestion' => 'addQuestion'];
+    protected $listeners = ['sendQuestion' => 'addQuestion', 'refreshComponent' => '$refresh'];
 
     public function render()
     {
         return view('livewire.preinscription-form-builder')->layout(\App\View\Components\AppLayout::class);
-    }
-
-    public function newInput(){
-        if($this->counter == 0){
-            array_push($this->inputs, "123");
-        }else{
-            array_push($this->inputs, "456");
-        }
-        $this->counter++;
     }
 
     public function showModal(){
@@ -35,5 +25,11 @@ class PreinscriptionFormBuilder extends Component
 
     public function addQuestion($inputs){
         array_push($this->inputs, $inputs);
+    }
+
+    public function removeQuestion($key){
+        unset($this->inputs[$key]);
+        $this->inputs = array_values($this->inputs);
+        $this->emit('refreshComponent');
     }
 }
