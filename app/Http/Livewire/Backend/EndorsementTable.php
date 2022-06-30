@@ -28,7 +28,6 @@ class EndorsementTable extends DataTableComponent
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setQueryStringDisabled();
-
     }
 
     public function filters(): array
@@ -56,17 +55,17 @@ class EndorsementTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("ID Avales", "id"),
+            Column::make("#", "id"),
             Column::make("Nombre Evento", 'event.name')->searchable(),
             Column::make("Solicitante", "user.name")->searchable(),
             Column::make("Token", 'request_token'),
             Column::make("Fecha de revision", "revision_date"),
             Column::make('Estado', 'endorsed')
-            ->format(function ($value, $row, Column $column) {
-                if ($row->endorsed === null) return 'Pendiente';
+                ->format(function ($value, $row, Column $column) {
+                    if ($row->endorsed === null) return 'Pendiente';
 
-                return $row->endorsed == 1 ? 'Avalado' : 'Denegado';
-            })->sortable(),
+                    return $row->endorsed == 1 ? 'Avalado' : 'Denegado';
+                })->sortable(),
         ];
     }
 
