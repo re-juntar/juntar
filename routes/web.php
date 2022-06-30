@@ -14,6 +14,7 @@ use App\Http\Livewire\InscriptionsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
 use App\Http\Livewire\Backend\EndorsementsPage;
+use App\Http\Livewire\Backend\RolesPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +63,7 @@ Route::get('gestionar', BackHome::class)->name('back-home');
 Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
 
 Route::get('/gestionar/eventos', EventsPage::class)->name('events');
+
+Route::get('/gestionar/roles', RolesPage::class)->name('roles');
 
 Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
