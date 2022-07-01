@@ -14,6 +14,12 @@ class PreinscriptionTable extends DataTableComponent
 
     public string $event;
 
+    public string $tableName = "events";
+
+    public array $events = [];
+
+    protected $listeners = ['refreshComponent' => '$refresh'];
+
     public function builder(): Builder
     {
         return Inscription::where('event_id', $this->event)->where('pre_inscription_date', '<>', 'null');
@@ -22,11 +28,13 @@ class PreinscriptionTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setQueryStringDisabled();
     }
 
     public function columns(): array
     {
         return [
+            Column::make("ID", "id")->hideIf(true),
             Column::make("Nombre", 'user.name'),
             Column::make("Apellido", "user.surname"),
             Column::make("DNI", "user.dni"),
@@ -49,8 +57,10 @@ class PreinscriptionTable extends DataTableComponent
 
     public function enroll()
     {
-        Inscription::whereIn('id', $this->getSelected())->update(["pre_inscription_date" => null, "inscription_date" => date('Y-m-d')]);
+        Inscription::whereIn('id', $this->getSelected())->update(['pre_inscription_date' => null]);
+        Inscription::whereIn('id', $this->getSelected())->update(['inscription_date' => date('Y-m-d')]);
 
         $this->clearSelected();
+        $this->emit('refreshComponent');
     }
 }
