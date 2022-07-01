@@ -148,7 +148,7 @@ class Event extends Model
         return new Attribute(
             get: function ($value) {
                 $return = explode("-", $value);
-                return substr($return[2], 0, 2) . "/" . $return[1] . "/" . $return[0];
+                return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
             }
         );
     }
@@ -158,7 +158,7 @@ class Event extends Model
         return new Attribute(
             get: function ($value) {
                 $return = explode("-", $value);
-                return substr($return[2], 0, 2) . "/" . $return[1] . "/" . $return[0];
+                return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
             }
         );
     }
@@ -169,7 +169,7 @@ class Event extends Model
             get: function ($value) {
                 if (!is_null($value)) {
                     $return = explode("-", $value);
-                    return substr($return[2], 0, 2) . "/" . $return[1] . "/" . $return[0];
+                    return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
                 } else {
                     return;
                 }
@@ -183,7 +183,7 @@ class Event extends Model
             get: function ($value) {
                 if (!is_null($value)) {
                     $return = explode("-", $value);
-                    return substr($return[2], 0, 2) . "/" . $return[1] . "/" . $return[0];
+                    return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
                 } else {
                     return;
                 }

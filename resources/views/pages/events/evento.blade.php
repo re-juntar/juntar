@@ -9,6 +9,16 @@ $logoSrc = $event->image_logo;
 if ($event->image_logo == null) {
 $logoSrcNull = 'Logo en construcción';
 }
+$today = strtotime(date('d-m-Y'));
+
+$start_date = new DateTime($event->start_date);
+$start_date = strtotime($start_date->format('d-m-Y'));
+
+$end_date = new DateTime($event->end_date);
+$end_date = strtotime($end_date->format('d-m-Y'));
+
+$inscription_end_date = new DateTime($event->inscription_end_date);
+$inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
 @endphp
 
 <x-app-layout>
@@ -29,13 +39,17 @@ $logoSrcNull = 'Logo en construcción';
             <div class="event-body bg-[#fff]">
 
                 <x-pink-header class="text-[#856404]  bg-[#fff3cd] uppercase h-auto">
-                    @if($event->start_date < date('Y-m-d'))
+
+                    @if($start_date > $today)
                         EL EVENTO NO HA COMENZADO
-                    @elseif($event->start_date >= date('Y-m-d') && $event->end_date <= date('Y-m-d'))
+
+                    @elseif($start_date <= $today && $today <= $end_date)
                         EL EVENTO YA HA COMENZADO
+
                     @else
                         EL EVENTO YA HA TERMINADO
                     @endif
+
                 </x-pink-header>
                 @if ($hasPermission)
                 <x-pink-header class="h-[50px]" style="justify-content: start">
@@ -108,30 +122,29 @@ $logoSrcNull = 'Logo en construcción';
                         <p class="text-[1rem]">CUPOS ILIMITADOS</p>
                         @endif
                         @if ($event->pre_registration)
-                        <span class="text-[#ff0000] font-bold"> *Requiere preinscipción* </span></p>
+                        <span class="text-[#ff0000] font-bold"> *Requiere pre-inscripción* </span></p>
                         @endif
                     </div>
                     <div class="status w-full md:w-4/12 px-[15px]">
 
 
-                    @if($event->start_date < date('Y-m-d'))
-                        @if($event->pre_registration && $event->inscription_end_date < date('d/m/Y'))
-                            {{--<a href="{{route('formulario-preinscripcion')}}">--}}<x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button>{{--</a>--}}
+                    
+                        
+                        @if($event->pre_registration)
+
+                            @if($today < $inscription_end_date)
+                            <a href="{{route('preinscripcionform', $event->id)}}"><x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button></a>
                             <p>Fecha limite: {{ $event->inscription_end_date }}</p>
-                    @else
+                            @endif
+
+                        @else
+                        
+                            @if($today < $end_date)
                             {{--<a href="{{route('inscribir')}}">--}}<x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>{{--</a>--}}
+                            @endif
+
                         @endif
-                    @endif
-            
-                        {{--@if($event->pre_registration && $event->inscription_end_date >= date('Y-m-d'))
-                        <x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button>
-                        <p>Fecha limite: {{ $event->inscription_end_date }}</p>
-                        @elseif($event->start_date >= date('Y-m-d'))
-                        <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
-                        @elseif($event->start_date <= date('Y-m-d') && $event->end_date > date('Y-m-d'))
-                            <p>El evento ya ha iniciado</p>
-                            @elseif($event->end_date < date('Y-m-d')) <p>El evento se encuentra finalizado</p>
-                                @endif--}}
+
                     </div>
                 </div>
                 <div class="event-body-main flex-col flex-wrap md:flex md:flex-row pb-[3rem] p-[15px]">
