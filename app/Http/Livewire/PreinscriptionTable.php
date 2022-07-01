@@ -43,7 +43,7 @@ class PreinscriptionTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
-            "Inscribir" => "enroll"
+            "enroll" => "Inscribir"
         ];
     }
 

@@ -57,8 +57,12 @@ $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
                         <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-pen"></i> Editar
                         </x-button>
                     </a>
-                    <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-eye"></i> Ver Inscriptos
-                    </x-button>
+
+                    <a href="{{route('inscriptions', $event->id)}}">
+                        <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-eye"></i> Ver Inscriptos
+                        </x-button>
+                    </a>
+
                     @if($event->pre_registration)
                     <a href="{{ route('formbuilder', $event->id) }}">
                         <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-clipboard"></i>

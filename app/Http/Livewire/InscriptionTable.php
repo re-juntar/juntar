@@ -11,6 +11,8 @@ class InscriptionTable extends DataTableComponent
 {
     protected $model = Inscription::class;
 
+    public string $event;
+
     public function builder(): Builder
     {
         return Inscription::where('event_id', $this->event)->where('inscription_date', '<>', 'null');

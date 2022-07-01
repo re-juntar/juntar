@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Events;
 use App\Http\Livewire\FrontHome;
+use App\Http\Livewire\Inscriptions;
 use App\Http\Livewire\MyInscriptions;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Backend\BackHome;
@@ -73,3 +74,5 @@ Route::get('/redirection/{url}', 'App\Http\Controllers\RedirectionController@ext
 Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuilder::class)->name('formbuilder');
 
 Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
+
+Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
