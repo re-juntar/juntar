@@ -21,6 +21,12 @@ class EventCategoryTable extends DataTableComponent
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setSearchStatus(false);
+
+        $this->setConfigurableAreas([
+            'toolbar-left-start' => [
+                'livewire.backend.add-event-category',
+            ],
+        ]);
     }
 
     public function columns(): array

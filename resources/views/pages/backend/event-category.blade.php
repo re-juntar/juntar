@@ -4,6 +4,7 @@
             Categorias
         </section>
         @livewire('backend.event-category-modal')
+        @livewire('backend.new-event-category-modal')
         <livewire:backend.event-category-table />
     </x-card>
 </div>

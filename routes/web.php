@@ -65,5 +65,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
     Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
     Route::get('/event-category', EventCategoriesPage::class)->name('event-category');
-    Route::post('/event-category', [EventCategoryController::class, 'update'])->name('event-category');
+    Route::put('/event-category', [EventCategoryController::class, 'update'])->name('event-category');
+    Route::post('/event-category', [EventCategoryController::class, 'create'])->name('event-category');
 });
