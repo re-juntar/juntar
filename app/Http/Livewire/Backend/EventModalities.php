@@ -26,7 +26,7 @@ class EventModalities extends DataTableComponent
 
         $this->setQueryStringDisabled();
 
-        $this->setTableAttributes(['class' => "text-white-ghost"]);
+        $this->setTableAttributes(['class' => ""]);
     }
 
     public function columns(): array

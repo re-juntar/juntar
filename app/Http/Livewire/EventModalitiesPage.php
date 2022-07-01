@@ -9,12 +9,12 @@ use Livewire\Component;
 class EventModalitiesPage extends Component
 {
     public $open = false;
-    
     public $description;
+
     // public $listener = ['render' => 'render'];
 
     protected $rules = [
-        'description' => 'required',
+        'description' => 'required|string|min:4',
     ];
 
     // public function mount()
@@ -29,15 +29,12 @@ class EventModalitiesPage extends Component
 
     public function save()
     {
-         $this->validate();
-        // $this->eventModality->save();
+        $this->validate();
         EventModality::create([
             'description' => $this->description
-
         ]);
-        $this->reset('open','description');
-        // $this->emit('render');
-         return redirect()->to('/gestionar/modalidades');
+        $this->reset('open', 'description');
+        return redirect()->to('/gestionar/modalidades');
     }
 
     public function render()
