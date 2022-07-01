@@ -13,4 +13,12 @@ class EventCategory extends Model
     {
         return $this->hasMany('App\Models\Event');
     }
+
+    public function updateEventCategory($request)
+    {
+        $this->description = $request->description;
+        $this->save();
+
+        return $this;
+    }
 }

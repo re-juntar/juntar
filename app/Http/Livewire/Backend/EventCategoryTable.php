@@ -4,10 +4,7 @@ namespace App\Http\Livewire\Backend;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Event;
 use App\Models\EventCategory;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 
 class EventCategoryTable extends DataTableComponent
 {
@@ -22,6 +19,8 @@ class EventCategoryTable extends DataTableComponent
         $this->setPrimaryKey('id');
 
         $this->setHideBulkActionsWhenEmptyEnabled();
+
+        $this->setSearchStatus(false);
     }
 
     public function columns(): array
@@ -30,5 +29,26 @@ class EventCategoryTable extends DataTableComponent
             Column::make("#", "id"),
             Column::make("Categoria", "description"),
         ];
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            'delete' => 'Eliminar',
+            'update' => 'Modificar',
+        ];
+    }
+
+    public function delete()
+    {
+        EventCategory::whereIn('id', $this->getSelected())->delete();
+
+        $this->clearSelected();
+    }
+
+    public function update()
+    {
+        $this->emit('showCategoryModal', $this->getSelected()[0]);
+        $this->clearSelected();
     }
 }
