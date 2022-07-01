@@ -43,5 +43,4 @@
 
         </div>
     </x-slot>
-    @endif
 </x-jet-dialog-modal>

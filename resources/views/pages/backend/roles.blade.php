@@ -4,6 +4,7 @@
             Roles
         </section>
         @livewire('backend.role-modal') 
+        @livewire('backend.role-modal-create') 
          <livewire:backend.role-table /> 
     </x-card>
 </div>

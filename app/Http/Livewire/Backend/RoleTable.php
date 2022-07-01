@@ -56,7 +56,7 @@ class RoleTable extends DataTableComponent
 
     public function create()
     {   
-        $this->emitTo('RoleModalCreate','showRoleModalcreate');
+        $this->emit('showRoleModalcreate');
         $this->clearSelected();    
     }
 
