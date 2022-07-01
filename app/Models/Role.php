@@ -12,4 +12,12 @@ class Role extends Model
     public function userRole() {
         return $this->hasOne('App\Models\UserRole');
     }
+
+    public function updateRole($request)
+    {
+        $this->description = $request->description;
+        $this->name = $request->name;
+        $this->save();
+        return $this;
+    }
 }

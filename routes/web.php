@@ -13,6 +13,7 @@ use App\Http\Controllers\BackendController;
 use App\Http\Livewire\InscriptionsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\RolesPage;
 
@@ -58,12 +59,16 @@ Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store')
 /********************** BACKEND *************************/
 /* Route::get('/gestionar', [BackendController::class, 'index'])->name('management'); */
 
-Route::get('gestionar', BackHome::class)->name('back-home');
+Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
+    Route::get('/', BackHome::class)->name('back-home');
 
-Route::get('/gestionar/usuarios', UsersPage::class)->name('users');
+    Route::get('/usuarios', UsersPage::class)->name('users');
 
-Route::get('/gestionar/eventos', EventsPage::class)->name('events');
+    Route::get('/eventos', EventsPage::class)->name('events');
 
-Route::get('/gestionar/roles', RolesPage::class)->name('roles');
+    Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
-Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
+    Route::get('/roles', RolesPage::class)->name('roles');
+    Route::put('/roles', [RoleController::class, 'update'])->name('roles');
+    Route::post('/roles', [RoleController::class, 'create'])->name('roles');
+});

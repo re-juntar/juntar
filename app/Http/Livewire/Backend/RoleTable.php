@@ -11,12 +11,15 @@ class RoleTable extends DataTableComponent
     protected $model = Role::class;
 
     public string $tableName = "roles";
+    
 
     public array $roles = [];
 
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setHideBulkActionsWhenEmptyEnabled();
+        
 
         $this->setTableAttributes(['class' => "text-white-ghost"]);
     }
@@ -25,7 +28,8 @@ class RoleTable extends DataTableComponent
     {
         return [
             Column::make("ID", 'id'),
-            Column::make("Descripcion", 'description'),             
+            Column::make("Nombre", 'name')->searchable(),  
+            Column::make("Descripcion", 'description')->searchable(),             
 
             // Column::make("Created at", "created_at")
             //     ->sortable(),
@@ -34,6 +38,29 @@ class RoleTable extends DataTableComponent
         ];
     }
 
+    public function bulkActions(): array
+    {
+        return [            
+            'update' => 'Modificar',
+            'create' => 'Crear',
+        ];
+    }
+
+    public function update()
+    {
+        if(isset($this->getSelected()[0])){
+            $this->emit('showRoleModalEdit', $this->getSelected()[0]);
+            $this->clearSelected();
+        }        
+    }
+
+    public function create()
+    {   
+        $this->emitTo('RoleModalCreate','showRoleModalcreate');
+        $this->clearSelected();    
+    }
+
+    
     // public function bulkActions(): array
     // {
     //     return [
