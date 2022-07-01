@@ -10,6 +10,8 @@ class NewEventCategoryModal extends Component
 
     protected $listeners = ['showNewCategoryModal'];
 
+    public $message;
+
     public function render()
     {
         return view('livewire.backend.modal-new-category');

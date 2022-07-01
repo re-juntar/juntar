@@ -33,7 +33,7 @@ class EndorsementTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            SelectFilter::make('endorsed')
+            SelectFilter::make('Filtro')
                 ->options([
                     '' => 'Elegir una opcion',
                     'pendiente' => 'Pendientes',
@@ -50,6 +50,7 @@ class EndorsementTable extends DataTableComponent
                     }
                 }),
         ];
+        
     }
 
     public function columns(): array

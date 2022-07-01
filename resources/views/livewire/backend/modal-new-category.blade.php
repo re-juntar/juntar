@@ -1,3 +1,5 @@
+@aware(['component'])
+
 <x-jet-dialog-modal wire:model="open">
     <x-slot name="content">
 
@@ -16,12 +18,14 @@
                 <div class="mb-4">
                     <x-label for="description">Descripcion *</x-label>
                     <x-input id='description' class="w-full" type='text' name='description'
-                        placeholder="Descripcion" value="{{ old('description') }}" />
-                    @error('description')
+                        placeholder="Descripcion" value="{{ old('description') }}"  />
+
+                    @if($message)
+                    
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
                         </div>
-                    @enderror
+                    @endif
                 </div>
 
                 {{-- Cargar --}}

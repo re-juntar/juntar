@@ -21,6 +21,10 @@ class EventCategoryController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'description' => 'required|max:100|string',
+        ]);
+
         $eventCategory = EventCategory::find($request->id);
         if ($eventCategory) {
             $eventCategory->updateEventCategory($request);
