@@ -5,18 +5,15 @@ namespace App\Http\Livewire;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Inscription;
-use App\Models\Presentation;
 use Illuminate\Database\Eloquent\Builder;
 
-class PreinscriptionTable extends DataTableComponent
+class InscriptionTable extends DataTableComponent
 {
     protected $model = Inscription::class;
 
-    public string $event;
-
     public function builder(): Builder
     {
-        return Inscription::where('event_id', $this->event)->where('pre_inscription_date', '<>', 'null');
+        return Inscription::where('event_id', $this->event)->where('inscription_date', '<>', 'null');
     }
 
     public function configure(): void
@@ -27,10 +24,10 @@ class PreinscriptionTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Nombre", 'user.name'),
+            Column::make("Nombre", "user.name"),
             Column::make("Apellido", "user.surname"),
             Column::make("DNI", "user.dni"),
-            Column::make("Fecha", "pre_inscription_date")
+            Column::make("Fecha", "inscription_date")
             // Column::make("Id", "id")
             //     ->sortable(),
             // Column::make("Created at", "created_at")
@@ -43,13 +40,19 @@ class PreinscriptionTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
-            "Inscribir" => "enroll"
+            "Inscribir" => "unsubscribe"
         ];
     }
 
-    public function enroll()
+    public function unsubscribe()
     {
-        Inscription::whereIn('id', $this->getSelected())->update(["pre_inscription_date" => null, "inscription_date" => date('Y-m-d')]);
+        $inscription = Inscription::find($this->getSelected());
+
+        if ($inscription->event->pre_registration) {
+            $inscription->update(["pre_inscription_date" => date('Y-m-d'), "inscription_date" => null]);
+        } else {
+            $inscription->delete();
+        }
 
         $this->clearSelected();
     }
