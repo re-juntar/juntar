@@ -41,8 +41,7 @@ class RoleTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [            
-            'update' => 'Modificar',
-            'create' => 'Crear',
+            'update' => 'Modificar'
         ];
     }
 
@@ -54,45 +53,4 @@ class RoleTable extends DataTableComponent
         }        
     }
 
-    public function create()
-    {   
-        $this->emit('showRoleModalcreate');
-        $this->clearSelected();    
-    }
-
-    
-    // public function bulkActions(): array
-    // {
-    //     return [
-    //         'publish' => 'Publicar',
-    //         'disable' => 'Deshabilitar',
-    //         'end' => 'Finalizar',
-    //         'makeDraft' => 'Hacer Borrador'
-    //     ];
-    // }
-
-    // public function publish()
-    // {
-    //     Role::whereIn('id', $this->getSelected())->update(['event_status_id' => 1]);
-
-    //     $this->clearSelected();
-    // }
-    // public function disable()
-    // {
-    //     Role::whereIn('id', $this->getSelected())->update(['event_status_id' => 2]);
-
-    //     $this->clearSelected();
-    // }
-    // public function end()
-    // {
-    //     Role::whereIn('id', $this->getSelected())->update(['event_status_id' => 3]);
-
-    //     $this->clearSelected();
-    // }
-    // public function makeDraft()
-    // {
-    //     Role::whereIn('id', $this->getSelected())->update(['event_status_id' => 4]);
-
-    //     $this->clearSelected();
-    // }
 }
