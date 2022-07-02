@@ -12,20 +12,20 @@
                 Nueva Categoria
             </section>
 
-            <form method="POST" action="event-category" enctype="multipart/form-data" >
+            <form method="POST" action="event-category" >
                 @csrf
                 {{-- Descripcion categoria --}}
-                <div class="mb-4">
+                
+                <div class="mb-4 form-group">
                     <x-label for="description">Descripcion *</x-label>
-                    <x-input id='description' class="w-full" type='text' name='description'
-                        placeholder="Descripcion" value="{{ old('description') }}"  />
-
-                    @if($message)
-                    
+                    <x-input class="w-full form-control" type='text' name='description'
+                        placeholder="Descripcion" value="{{ old('description') }}" {{-- wire:model="description" --}}/>
+                    <x-jet-input-error for='description' class="text-[1rem]"/>      
+                    {{-- @error('description')
                         <div class="flex items-center">
-                            <p class="text-red-600">{{ $message }}</p>
+                            <p class="error">{{ $message }}</p>
                         </div>
-                    @endif
+                    @enderror --}}
                 </div>
 
                 {{-- Cargar --}}

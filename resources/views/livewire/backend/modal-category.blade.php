@@ -25,7 +25,7 @@
                 <div class="mb-4">
                     <x-label for="description">Descripcion *</x-label>
                     <x-input id='description' class="w-full" type='text' name='description'
-                        placeholder="Descripcion" value="{{ old('description') ? old('description') : $eventCategory->description }}" />
+                        placeholder="Descripcion" value="{{ old('description') ? old('description') : $eventCategory->description }}" required/>
                     @error('description')
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
