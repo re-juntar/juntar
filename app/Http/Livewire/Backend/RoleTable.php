@@ -19,7 +19,7 @@ class RoleTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setHideBulkActionsWhenEmptyEnabled();
-        
+        $this->setSearchDisabled();
 
         $this->setTableAttributes(['class' => "text-white-ghost"]);
     }

@@ -11,9 +11,19 @@ class RoleModalCreate extends Component
 
   protected $listeners = ['showRoleModalcreate' => 'openModalCreate' ];
 
-  public $rolecreate;
+  
+  public $name;
+  public $description; 
 
-  public $messagecreate = 'mensaje error asfja';
+  protected $rules = [
+    'name' => 'required',
+    'description' => 'required',
+  ];
+
+  // protected $messages = [
+  //   'name.required' => 'Ingrese una nombre.',
+  //   'description.required' => 'Ingrese una descripcion.',
+  // ];
 
   public function render()
   {           
@@ -23,5 +33,19 @@ class RoleModalCreate extends Component
   public function openModalCreate()  {
       
       $this->opencreate = true;
+  }
+
+  public function updated($propertyName)
+  {
+      $this->validateOnly($propertyName);
+  }
+
+  public function submit()
+  {
+      $validateData = $this->validate();
+      $rolecreate= new Role();
+      $rolecreate->createRole($validateData);
+      $this->reset('opencreate', 'description','name');
+      return redirect()->to('/gestionar/roles');
   }
 }

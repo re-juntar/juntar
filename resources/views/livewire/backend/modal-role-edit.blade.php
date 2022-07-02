@@ -15,15 +15,14 @@
                 Editar
             </section>
 
-            <form method= "POST" action="roles" enctype="multipart/form-data" >
+            {{-- <form wire:submit.prevent="submit" >
                 @csrf
-                @method('PUT')
-                {{-- Nombre role --}}
-                <input hidden name="id" id="id" value="{{ $role->id }}">
+                @method('PUT')  --}}
+                {{-- Nombre role --}}                
                 <div class="mb-4">
                     <x-label for="name">Nombre * </x-label>
-                    <x-input id='name' class="w-full" type='text' name='name'
-                        placeholder="Name" value="{{ old('name') ? old('name') : $role->name }}" />
+                    <x-input wire:model='name'  id="name" class="w-full" type='text' name='name'
+                    placeholder="nombre"  value="{{ old('name') ? old('name') :$role->name}}" required/>
                     @error('name')
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
@@ -33,9 +32,9 @@
                 {{-- Nombre role --}}
                 <div class="mb-4">
                     <x-label for="description">Descripcion *</x-label>
-                    <x-input id='description' class="w-full" type='text' name='description'
-                        placeholder="Descripcion" value="{{ old('description') ? old('description') : $role->description }}" />
-                    @error('Descripcion')
+                    <x-input wire:model='description' id='description' class="w-full" type='text' name='description'
+                        placeholder="Descripcion" value="{{ old('description') ? old('description') : $role->description }}" required/>
+                    @error('descripcion')
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
                         </div>
@@ -44,8 +43,8 @@
 
 
                 {{-- Cargar --}}
-                <x-button class="text-[16px]" type="submit"> Modificar </x-button>
-            </form>
+                <x-button class="text-[16px]" wire:click='submit'> Modificar </x-button>
+             {{-- </form> --}}
 
 
         </div>
