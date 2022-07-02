@@ -18,7 +18,7 @@ class RoleModal extends Component
 
   protected $rules = [
     'name' => 'required|string|min:2',
-    'description' => 'required|string|min:2',,
+    'description' => 'required|string|min:2',
   ];
 
   // protected $messages = [
@@ -35,7 +35,7 @@ class RoleModal extends Component
   public function updated($fields){
         $this->validateOnly($fields, [
           'name' => 'required|string|min:2',
-          'description' => 'required|string|min:2',,
+          'description' => 'required|string|min:2',
         ]);
   }
 
