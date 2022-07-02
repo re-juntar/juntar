@@ -16,7 +16,7 @@ class EventCategory extends Model
 
     public function store($request)
     {
-        $this->description = $request->description;
+        $this->description = $request['description'];
         $this->save();
 
         return $this;
