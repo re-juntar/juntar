@@ -15,9 +15,7 @@
                 Editar
             </section>
 
-            {{-- <form wire:submit.prevent="submit" >
-                @csrf
-                @method('PUT')  --}}
+            <form wire:submit.prevent="submit" >
                 {{-- Nombre role --}}                
                 <div class="mb-4">
                     <x-label for="name">Nombre * </x-label>
@@ -44,7 +42,7 @@
 
                 {{-- Cargar --}}
                 <x-button class="text-[16px]" wire:click='submit'> Modificar </x-button>
-             {{-- </form> --}}
+              </form> 
 
 
         </div>

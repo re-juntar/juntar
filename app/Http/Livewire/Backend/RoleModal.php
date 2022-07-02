@@ -46,7 +46,7 @@ class RoleModal extends Component
 
     // Execution doesn't reach here if validation fails.
     
-      $this->role->updateRole($validatedData);
+      $this->role->update($validatedData);
       return redirect()->to('/gestionar/roles');
     
   }

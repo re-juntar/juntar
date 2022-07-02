@@ -8,20 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['name','description'];
 
 
     public function userRole() {
         return $this->hasOne('App\Models\UserRole');
     }
 
-    public function updateRole($request)
-    {
-        $this->description = $request["description"];
-        $this->name = $request["name"];
-        $this->save();
-        return $this;
-    }
+    // public function updateRole($request)
+    // {
+    //     $this->description = $request["description"];
+    //     $this->name = $request["name"];
+    //     $this->save();
+    //     return $this;
+    // }
 
     public function createRole($request)
     {

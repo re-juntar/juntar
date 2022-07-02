@@ -69,6 +69,4 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
     Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
     Route::get('/roles', RolesPage::class)->name('roles');
-    Route::put('/roles', [RoleController::class, 'update'])->name('roles');
-    Route::post('/roles', [RoleController::class, 'create'])->name('roles');
 });
