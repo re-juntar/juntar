@@ -35,12 +35,12 @@ class EditModality extends Component
             'description' => $this->description
         ]);
         $this->reset('open', 'description');
-        return redirect()->to('/gestionar/modalidades');
-    
+        // return redirect()->to('/gestionar/modalidades');
+
         // $this->validate();
         // $this->evnetModality->description = $this->description;
         // $this->eventModality->save();
-        // return redirect()->to('/gestionar/modalidades');
+        return redirect()->to('/gestionar/modalidades');
     }
 
     public function render()

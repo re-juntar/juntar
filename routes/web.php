@@ -45,7 +45,7 @@ Route::view('/create-event', 'pages.create-event')->name('create-event');
 
 Route::get('/eventos/evento/{eventoId}', [EventController::class, 'show'])->name('evento');
 
-Route::get('/edit-event/{eventid}', [EventController::class,'edit'])->name('edit-event');
+Route::get('/edit-event/{eventid}', [EventController::class, 'edit'])->name('edit-event');
 
 Route::post('/update-event', [StoreEventController::class, 'update'])->name('update-event');
 
@@ -78,4 +78,4 @@ Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventMo
 Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
 
 // Route::get('/gestionar/modalidades/editar/{id}', EditModalityt::class,'edit')->name('editModality');
- Route::get('/gestionar/modalidades/editar/{id}', EditModality::class,'render')->name('editModality');
+Route::get('/gestionar/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');

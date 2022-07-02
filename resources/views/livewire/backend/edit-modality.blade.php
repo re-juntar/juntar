@@ -35,7 +35,6 @@
             <x-slot name='content'>
                 <div class="bg-white-ghost p-5">
                     <p>Nombre/Descripcion:</p>
-                    {{$eventModality}}
                     <div>
                         <x-jet-input type='text' class="w-full" wire:model="description" value='{{$description}}' />
                         <x-jet-input-error for='description' class="text-[1rem]"/>                    
