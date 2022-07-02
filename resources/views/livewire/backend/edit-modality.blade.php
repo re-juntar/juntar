@@ -1,18 +1,49 @@
-<div class="max-w-4xl mx-auto mt-5">
-    <div class="max-w-4xl mx-auto mt-5">
-        <div class="px-4 sm:px-6 lg:px-8">
-            <form wire:submit.prevent="save">
-                <div class="mb-6">
-                    <x-label for="description">Descripcion/Nombre</x-label>
-                    <x-input id="description" class="w-full" wire:model="eventModality.description" name="description" />
-                    @error('eventModality.description')
-                        <span class="text-red-500">{{$message}}</span>
-                    @enderror
+{{-- <div>
+    <livewire:backend.event-modalities />
+
+    <x-jet-dialog-modal wire:model='open'>
+        <x-slot name='content'>
+            <div class="bg-white-ghost p-5">
+                <p>Nombre/Descripcion:</p>
+                <div>
+                    <x-jet-input type='text' class="w-full" wire:model="description" />
+                    <x-jet-input-error for='description' class="text-[1rem]"/>                    
                 </div>
-                <div class="flex items-center justify-start space-x-4">
-                    <x-button class="text-[0.8rem]" type="submit">Guardar Cambios</x-button>
-                </div>
-            </form>
+                <x-button class="mt-4" wire:click='save'>Guardar</x-button>
+                <x-jet-secondary-button class="mt-4" wire:click="$set('open',false)">Cerrar</x-button>
+            </div>
+        </x-slot>
+    </x-jet-dialog-modal>
+</div> --}}
+<div>
+    <x-card class="max-w-4xl mx-auto">
+        <livewire:backend.event-modalities />
+        <div class="sm:flex sm:items-center">
+            <div class="mt-4 ">
+                {{-- <a href="{{ route('addModality') }}"> --}}
+                <x-button wire:click="$set('open',true)">Agregar Modalidad</x-button>
+                {{-- </a> --}}
+
+            </div>
+
         </div>
+    </x-card>
+
+    <div>
+
+        <x-jet-dialog-modal wire:model='open'>
+            <x-slot name='content'>
+                <div class="bg-white-ghost p-5">
+                    <p>Nombre/Descripcion:</p>
+                    {{$eventModality}}
+                    <div>
+                        <x-jet-input type='text' class="w-full" wire:model="description" value='{{$description}}' />
+                        <x-jet-input-error for='description' class="text-[1rem]"/>                    
+                    </div>
+                    <x-button class="mt-4" wire:click='save'>Guardar</x-button>
+                    {{-- <x-jet-secondary-button class="mt-4" wire:click="$set('open',false)">Cerrar</x-button> --}}
+                </div>
+            </x-slot>
+        </x-jet-dialog-modal>
     </div>
 </div>
