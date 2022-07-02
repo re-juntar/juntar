@@ -15,7 +15,7 @@ class NewEventCategoryModal extends Component
     public $description;
 
     protected $rules = [
-        'description' => 'required|string|min:4'];
+        'description' => 'required'];
 
     
     public function render()
@@ -29,7 +29,7 @@ class NewEventCategoryModal extends Component
     }
 
     public function updated($propertyName){
-        $this->validateOnly($propertyName,['description' => 'required|string|min:4']);
+        $this->validateOnly($propertyName,['description' => 'required']);
     }
      
     public function submit(){        

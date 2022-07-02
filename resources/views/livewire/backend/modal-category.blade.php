@@ -15,17 +15,15 @@
                 {{ $eventCategory->description }}
             </section>
 
-            <form method="POST" action="event-category" enctype="multipart/form-data" >
-                @csrf
-                @method('put')
+            <form  wire:submit.prevent="submit" >
 
                 <input hidden name="id" id="id" value="{{ $eventCategory->id }}">
 
                 {{-- Descripcion categoria --}}
                 <div class="mb-4">
                     <x-label for="description">Descripcion *</x-label>
-                    <x-input id='description' class="w-full" type='text' name='description'
-                        placeholder="Descripcion" value="{{ old('description') ? old('description') : $eventCategory->description }}" required/>
+                    <x-input wire:model="description" id='description' class="w-full" type='text' name='description'
+                        placeholder="Descripcion" value="{{ old('description') ? old('description') : $eventCategory->description }}" />                        
                     @error('description')
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
