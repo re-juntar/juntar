@@ -28,7 +28,7 @@
                     <x-label for="description">Descripcion *</x-label>
                     <x-input wire:model="description" id='description' class="w-full" type='text' name='description'
                         placeholder="Descripcion" value="{{ old('description') }}" />
-                    @error('Descripcion')
+                    @error('description')
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
                         </div>

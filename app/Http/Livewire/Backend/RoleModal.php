@@ -17,14 +17,14 @@ class RoleModal extends Component
   public $role;
 
   protected $rules = [
-    'name' => 'required',
-    'description' => 'required',
+    'name' => 'required|string|min:2',
+    'description' => 'required|string|min:2',,
   ];
 
-  protected $messages = [
-    'name.required' => 'Ingrese una nombre.',
-    'description.required' => 'Ingrese una descripcion.',
-  ];
+  // protected $messages = [
+  //   'name.required' => 'Ingrese una nombre.',
+  //   'description.required' => 'Ingrese una descripcion.',
+  // ];
 
 
   public function render()
@@ -33,7 +33,10 @@ class RoleModal extends Component
   }
 
   public function updated($fields){
-        $this->validateOnly($fields);
+        $this->validateOnly($fields, [
+          'name' => 'required|string|min:2',
+          'description' => 'required|string|min:2',,
+        ]);
   }
 
   public function submit()

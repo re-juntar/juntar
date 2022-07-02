@@ -16,8 +16,8 @@ class RoleModalCreate extends Component
   public $description; 
 
   protected $rules = [
-    'name' => 'required',
-    'description' => 'required',
+    'name' => 'required|string|min:2',
+    'description' => 'required|string|min:2',,
   ];
 
   // protected $messages = [
@@ -37,7 +37,10 @@ class RoleModalCreate extends Component
 
   public function updated($propertyName)
   {
-      $this->validateOnly($propertyName);
+      $this->validateOnly($propertyName,[
+        'name' => 'required|string|min:2',
+        'description' => 'required|string|min:2',,
+      ] );
   }
 
   public function submit()
