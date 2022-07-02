@@ -2,7 +2,7 @@
     <div class="max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto rounded-lg py-[3vh] px-[3vh]">
         <x-pink-header>Formulario de preinscripción</x-pink-header>
         <div class="bg-white-ghost p-5">
-            <div class="mx-auto w-3/6">
+            <div class="mx-auto w-4/5 sm:w-3/6">
             <x-aire::form wire:submit.prevent='store'>
 
                 @foreach($fields as $field)

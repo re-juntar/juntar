@@ -9,13 +9,13 @@
                 <span class="error">{{ $message }}</span>
             @enderror
 
-            {{ Aire::input($name = 'label', $label = 'Ingrese la pregunta')->id('label')->setAttribute('wire:model', 'label') }}
+            {{ Aire::input($name = 'label', $label = 'Ingrese la descripción')->id('label')->setAttribute('wire:model', 'label') }}
             @error('label')
                 <span class="error">{{ $message }}</span>
             @enderror
 
             <div x-show="type == 'Checkbox' || type == 'Dropdown' || type == 'Radio'">
-                {{ Aire::input($name = 'options', $label = 'Ingrese las opciones')->id('options')->setAttribute('wire:model', 'options') }}
+                {{ Aire::input($name = 'options', $label = 'Ingrese las opciones')->id('options')->setAttribute('wire:model', 'options')->placeholder('uno/dos/tres/cuatro') }}
             </div>
 
             {{ Aire::submit('Guardar')->addClass('bg-awesome text-white-ghost') }}

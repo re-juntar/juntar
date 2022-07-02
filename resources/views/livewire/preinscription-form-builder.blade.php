@@ -3,7 +3,7 @@
         <x-pink-header>Crear formulario de preinscripción</x-pink-header>
         <div class="bg-white-ghost p-5">
             <x-button class="text-center" wire:click="showModal">Añadir pregunta</x-button>
-            <div class="container">
+            <div class="container overflow-x-scroll lg:overflow-hidden">
                 <table class="min-w-full text-center border mt-2">
                     <thead class="bg-fogra-darkish text-white-ghost">
                         <tr>
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         @foreach ($inputs as $input)
-                        <tr class="border-b bg-gray-200">
+                        <tr @class(['border-b', 'bg-gray-300' => !$loop->even])>
                             <td class="text-lg font-medium text-gray-900 px-6 py-2">
                                 {{ $input['label'] }}
                             </td>
@@ -32,10 +32,11 @@
                                 {{ $input['type'] }}
                             </td>
 
-                            <td class="text-lg font-medium text-gray-900 px-6 py-2">
+                            <td class="flex justify-center text-lg font-medium text-gray-900 px-6 py-2">
                                 @php
                                     $optionsArray = explode("/", $input['options']);
                                 @endphp
+                                @if(1 < count($optionsArray))
                                 <ul class="list-disc">
 
                                     @foreach($optionsArray as $option)
@@ -43,6 +44,9 @@
                                     @endforeach
 
                                 </ul>
+                                @else
+                                <p class="text-sm">No posee</p>
+                                @endif
                             </td>
 
                             <td class="text-lg font-medium px-6 py-2">
