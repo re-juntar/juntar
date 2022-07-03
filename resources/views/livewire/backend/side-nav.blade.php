@@ -58,6 +58,10 @@
                 <li class="relative">
                     <x-backend.side-nav-link href="{{ route('eventModalities') }}" :active="request()->routeIs('eventModalities')">
                         {{ __('Modalidades') }}
+                </li>
+                <li class="relative">
+                    <x-backend.side-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
+                        {{ __('Roles') }}
                     </x-backend.side-nav-link>
                 </li>
                 {{-- <li class="relative">

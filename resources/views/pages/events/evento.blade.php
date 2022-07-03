@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
-
 @php
 $flyerSrc = $event->image_flyer;
 if ($event->image_flyer == null) {
@@ -105,7 +103,7 @@ if ($event->image_logo == null) {
                             <span class="text-[#ff0000] font-bold"> *Requiere preinscipción* </span></p>
                         @endif
                     </div>
-                    <div class="status w-full md:w-4/12 px-[15px]">
+                    <div class="status w-full md:w-4/12 text-[15px]">
                         @if ($event->pre_registration && $event->inscription_end_date >= date('Y-m-d'))
                             <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
                             <p>Fecha limite: {{ $event->inscription_end_date }}</p>
@@ -123,7 +121,7 @@ if ($event->image_logo == null) {
                         class="event-info flex flex-col justify-between items-start w-full md:w-8/12 xl:w-9/12 pr-3 pb-3">
                         <h2 class="text-[1.4rem] font-bold mb-[0.5rem]">Sobre este evento</h2>
                         @if ($event->description)
-                            <div class="w-full text-[1rem]">
+                            <div class="w-full text-[1rem]" id='cssCkeditor'>
                                 {!! $event->description !!}
                             </div>
                             <br>

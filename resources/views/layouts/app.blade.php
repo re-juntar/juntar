@@ -24,7 +24,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     @if (Route::currentRouteName() == 'create-event')
         <script src={{ asset('/js/displayInputs.js/') }}></script>
         <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
@@ -35,6 +34,7 @@
         <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
     @endif
 
+    <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -84,10 +84,6 @@
                         </h5>
                     </div>
                 </div>
-            </div>
-
-            <div class="text-left text-white-ghost bg-fogra-dark py-4">
-                <p class="px-4 mx-auto max-w-6xl"><i class="fa fa-copyright"></i> Juntar 2022</p>
             </div>
             <div class="flex flex-col flex-wrap content-center -mx-4 py-[3vh] md:flex-row">
                 <div class="flex justify-center relative basis-1/2 max-w-[50%] py-4">
