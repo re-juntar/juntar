@@ -20,16 +20,21 @@ class RoleTable extends DataTableComponent
         $this->setPrimaryKey('id');
         $this->setHideBulkActionsWhenEmptyEnabled();
         $this->setSearchDisabled();
-
+        $this->setCollapsingColumnsEnabled();
         $this->setTableAttributes(['class' => "text-white-ghost"]);
+        $this->setConfigurableAreas([
+            'toolbar-left-start' => [
+                'livewire.backend.add-role'
+            ],
+        ]);
     }
 
     public function columns(): array
     {
         return [
-            Column::make("ID", 'id'),
-            Column::make("Nombre", 'name')->searchable(),  
-            Column::make("Descripcion", 'description')->searchable(),             
+            Column::make("ID", 'id')->collapseOnMobile(),
+            Column::make("Nombre", 'name')->searchable(),
+            Column::make("Descripcion", 'description')->searchable()->collapseOnMobile(),             
 
             // Column::make("Created at", "created_at")
             //     ->sortable(),
