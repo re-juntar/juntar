@@ -11,11 +11,12 @@ class BackendController extends Controller
         $permissionController = new PermissionController();
         $permission = $permissionController->isAdmin();
 
-        
+
         if ($permission['admin']) {
             return view('layouts.back', compact('permission'));
         } else {
-            return redirect()->action([HomeController::class, 'filteredIndex']);
+            // return redirect()->action([HomeController::class, 'filteredIndex']);
+            abort(404);
         }
     }
 }
