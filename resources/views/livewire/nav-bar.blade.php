@@ -61,7 +61,7 @@
                                     {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
 
-                                @if ($permission['admin'])
+                                @if($permission['admin'])
                                     <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
                                         href="{{ route('back-home') }}">
                                         {{ __('Administración') }}
@@ -158,7 +158,7 @@
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
-                    @if ($permission['admin'])
+                    @if($permission['admin'])
                         <x-jet-responsive-nav-link href="{{ route('back-home') }}">
                             {{ __('Administración') }}
                         </x-jet-responsive-nav-link>

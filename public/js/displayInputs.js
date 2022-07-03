@@ -103,7 +103,8 @@ function dropdown() {
             let coorganizersId = `coorganizer${value === null ? this.selectedValues().length + 1 : this.selectedValues().length}`
 
             if (document.getElementById(coorganizersId)) {
-                document.getElementById(coorganizersId).value = value
+                document.getElementById(coorganizersId).value = value;
+                console.log(document.getElementById(coorganizersId).value);
             }
         },
         remove(index, option) {
@@ -128,8 +129,8 @@ function dropdown() {
             for (let i = 0; i < users.length; i++) {
                 this.options.push({
                     id: i,
-                    value: i + users[i].name,
-                    text: users[i].name,
+                    value: i + users[i].id,
+                    text: users[i].email,
                     selected: false,
                     show: false
                 });

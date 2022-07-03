@@ -23,4 +23,9 @@ class Inscription extends Model
     {
         return $this->hasMany('App\Models\Answer');
     }
+
+    public function answer()
+    {
+        return $this->hasOne('App\Models\Answer');
+    }
 }

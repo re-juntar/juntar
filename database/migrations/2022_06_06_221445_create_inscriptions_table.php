@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('event_id')->nullable()->constrained()->onDelete('set null');
             $table->tinyInteger('status');
-            $table->date('pre_inscription_date');
+            $table->date('pre_inscription_date')->nullable();
             $table->date('inscription_date')->nullable();
             $table->tinyInteger('accreditation');
             $table->string('certification', 200)->nullable();

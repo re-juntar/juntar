@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id')->nullable()->constrained()->onDelete('set null');
-            $table->enum('type', ['1', '2', '3']);
-            $table->longText('description');
+            $table->string('type');
+            $table->longText('label');
+            $table->longText('options')->nullable();
             $table->timestamps();
 
             // $table->foreign('events_id')->references('id')->on('events')->onDelete('set null');

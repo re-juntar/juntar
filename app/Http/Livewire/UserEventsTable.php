@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Backend;
+namespace App\Http\Livewire;
 
+use App\Http\Controllers\EventController;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Event;
@@ -9,13 +10,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
-class EventTable extends DataTableComponent
+class UserEventsTable extends DataTableComponent
 {
     protected $model = Event::class;
 
-    public string $tableName = "events";
+    public string $tableName = "userEventsTable";
 
-    public array $events = [];
+    public array $userEventsTable = [];
+
+    public function builder(): Builder
+    {
+        return Event::where('user_id', Auth::user()->id)->where('event_status_id', '<>', 2);
+    }
 
     public function configure(): void
     {
@@ -23,26 +29,29 @@ class EventTable extends DataTableComponent
 
         $this->setHideBulkActionsWhenEmptyEnabled();
 
-        $this->setEmptyMessage('No se encontraron eventos');
+        $this->setEmptyMessage('Aún no ha organizado ningún evento');
 
         $this->setQueryStringDisabled();
 
-        $this->setTableAttributes(['class' => "text-white-ghost"]);
+        $this->setColumnSelectDisabled();
     }
 
     public function columns(): array
     {
         return [
-            LinkColumn::make('Evento')
-            ->title(fn ($row) => 'Ver')
-            ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
-            Column::make("ID Usuario", "user.id"),
-            Column::make("Nombre Usuario", "user.name"),
-            Column::make("ID Evento", 'id'),
-            Column::make("Nombre", 'name'),
-            Column::make("Estado", "eventStatus.description")->searchable(),
-            Column::make("Modalidad", "eventModality.description"),
-            Column::make("Cateogoria", "eventCategory.description")
+            LinkColumn::make('')
+                ->title(fn ($row) => 'VER EVENTO')
+                ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
+                LinkColumn::make('')
+                ->title(fn ($row) => 'EDITAR EVENTO')
+                ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']])),
+            Column::make("Id", "id")
+                ->sortable(),
+            Column::make("Nombre", "name"),
+            Column::make("Nombre Corto", "short_name"),
+            Column::make("Estado", 'eventStatus.description')
+            // Column::make("Nombre Organizador", "user.name"),
+            // Column::make("Apellido Organizador", 'user.surname')
             // Column::make("Created at", "created_at")
             //     ->sortable(),
             // Column::make("Updated at", "updated_at")
@@ -56,7 +65,8 @@ class EventTable extends DataTableComponent
             'publish' => 'Publicar',
             'disable' => 'Deshabilitar',
             'end' => 'Finalizar',
-            'makeDraft' => 'Hacer Borrador'
+            'makeDraft' => 'Hacer Borrador',
+            'edit' => 'Editar'
         ];
     }
 

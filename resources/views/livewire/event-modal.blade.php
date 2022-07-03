@@ -35,45 +35,68 @@
 
                         <div class="container mt-2">
 
-                            <h2 class="text-lg font-semibold">Organiza:
-                                <span class="font-normal">Organizador</span>
-                            </h2>
+                        <h2 class="text-lg font-semibold">Organiza:
+                            <span class="font-normal">{{$event->user->name}} {{$event->user->surname}}</span>
+                        </h2>
 
-                            <div class="flex flex-row mt-1">
-                                <h2 class="text-lg font-semibold">Co-organiza: </h2>
-                                <ul class="text-lg ml-1">
-                                    <li>Coorganizador 1</li>
-                                    <li>Coorganizador 2</li>
-                                </ul>
-                            </div>
-
-                            <h3 class="font-bold mt-2">Fecha de inicio: </h3>
-
-                            <h3 class="font-bold mt-1">Fecha de finalización: </h3>
-
-                            <h3 class="font-bold mt-1">Fecha límite de inscripción: </h3>
-
-                            <h3 class="font-bold mt-4">Modalidad: </h3>
-
-                            <x-verified-badge class="mt-4" />
-
-                            <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
-                            {!! $event->description !!}
+                        @if(count($event->coorganizers) > 0)
+                        <div class="flex flex-row mt-1">
+                            <h2 class="text-lg font-semibold">Co-organiza: </h2>
+                            <ul class="text-lg ml-1">
+                                @foreach($event->coorganizers as $coorganizer)
+                                    <li>{{$coorganizer->user->name}} {{$coorganizer->user->surname}}</li>
+                                @endforeach
+                            </ul>
                         </div>
+                        @endif
 
+                        <h3 class="font-bold mt-2">Fecha de inicio: {{$event->start_date}}</h3>
+
+                        <h3 class="font-bold mt-1">Fecha de finalización: {{$event->start_date}}</h3>
+
+                        @if(!is_null($event->pre_registration))
+                            @if($event->pre_registration)
+                                <h3 class="font-bold mt-1">Fecha límite de inscripción: {{$event->inscription_end_date}}</h3>
+                            @endif
+                        @endif
+
+                        <h3 class="font-bold mt-4">Modalidad: {{$event->eventModality->description}}</h3>
+
+                        @if(!is_null($event->endorsementRequest))
+                            @if($event->endorsementRequest->endorsed)
+                                <x-verified-badge class="mt-4" />
+                            @endif
+                        @endif
+
+                        <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
+                        {!! $event->description !!}
                     </div>
 
-                    <div class="container">
-                        @if (count($presentations) != 0)
-                            <h2 class="text-2xl font-bold mt-4">Agenda</h2>
-                        @endif
-                        @foreach ($presentations as $presentation)
-                            <table class="min-w-full text-center border mt-2">
-                                <thead class="bg-fogra-darkish text-white-ghost">
-                                    <tr>
-                                        <th scope="col" colspan="2" class="text-xl py-3">
-                                            {{ $presentation->title }}
-                                        </th>
+                </div>
+
+                {{-- <div class="container">
+                    @if(count($presentations) != 0)
+                    <h2 class="text-2xl font-bold mt-4">Agenda</h2>
+                    @endif
+                    @foreach ($presentations as $presentation)
+                        <table class="min-w-full text-center border mt-2">
+                            <thead class="bg-fogra-darkish text-white-ghost">
+                                <tr>
+                                    <th scope="col" colspan="2" class="text-xl py-3">
+                                        {{ $presentation->title }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if ($presentation->date)
+                                    <tr class="border-b bg-gray-200">
+                                        <td class="text-lg font-medium text-gray-900 px-6 py-2">
+                                            Fecha
+                                        </td>
+                                        <td>
+                                            {{ $presentation->date }}
+                                        </td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,31 +138,10 @@
                                         </tr>
                                     @endif
 
-                                    @if ($presentation->exhibitors)
-                                        <tr class="border-b">
-                                            @php
-                                                $exhibitors = explode('-', $presentation->exhibitors);
-                                                $rowspan = count($exhibitors);
-                                            @endphp
-                                            <td class="text-lg font-medium text-gray-900 px-6 py-2"
-                                                rowspan="{{ $rowspan / 2 }}">
-                                                Presentadores
-                                            </td>
-                                            <td>
-                                                <ul>
-                                                    @foreach ($exhibitors as $exh)
-                                                        <li>{{ $exh }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    @endif
-
-                                </tbody>
-                            </table>
-                        @endforeach
-                    </div>
-                </div>
+                            </tbody>
+                        </table>
+                    @endforeach
+                </div> --}}
             </div>
         </x-slot>
     @endif

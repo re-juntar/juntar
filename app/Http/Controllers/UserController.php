@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->id) {
-            $response = User::select('name', 'id')->where('id', '<>', $request->id)->get();
+            $response = User::select('name', 'id', 'surname', 'email')->where('id', '<>', $request->id)->get();
         } else {
             $response = null;
         }

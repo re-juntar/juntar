@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
 use App\Models\Organizer;
@@ -58,7 +59,7 @@ class StoreEventController extends Controller
         $orgController3->store($request->coorganizer3, $eventId);
       }
     }
-    return redirect()->action([HomeController::class, 'filteredIndex']);
+    return redirect()->action([FrontHome::class, 'filteredIndex']);
   }
 
   public function update(ImageUploadRequest $request, Event $event){

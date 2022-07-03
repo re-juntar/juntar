@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helper\Imageable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,7 @@ class Event extends Model
 {
     use HasFactory, Imageable;
 
+    //RELATIONSHIPS
     public function eventCategory()
     {
         return $this->belongsTo('App\Models\EventCategory');
@@ -36,9 +38,9 @@ class Event extends Model
         return $this->hasMany('App\Models\Presentation');
     }
 
-    public function endorsements()
+    public function endorsementRequest()
     {
-        return $this->hasMany('App\Models\EndorsementRequest');
+        return $this->hasOne('App\Models\EndorsementRequest');
     }
 
     public function questions()
@@ -46,15 +48,22 @@ class Event extends Model
         return $this->hasMany('App\Models\Question');
     }
 
+    public function coorganizers()
+    {
+        return $this->hasMany('App\Models\Organizer');
+    }
+
     public function organizers()
     {
         return $this->hasOne('App\Models\Organizer');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
     }
 
+    //INSERT INTO DATABASE
     public function storeEvent($request)
     {
         $this->user_id = Auth::user()->id;
@@ -131,5 +140,54 @@ class Event extends Model
         $this->save();
 
         return $this;
+    }
+
+    //ACCESORES
+    protected function startDate(): Attribute
+    {
+        return new Attribute(
+            get: function ($value) {
+                $return = explode("-", $value);
+                return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
+            }
+        );
+    }
+
+    protected function endDate(): Attribute
+    {
+        return new Attribute(
+            get: function ($value) {
+                $return = explode("-", $value);
+                return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
+            }
+        );
+    }
+
+    protected function updatedAt(): Attribute
+    {
+        return new Attribute(
+            get: function ($value) {
+                if (!is_null($value)) {
+                    $return = explode("-", $value);
+                    return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
+                } else {
+                    return;
+                }
+            }
+        );
+    }
+
+    protected function inscriptionEndDate(): Attribute
+    {
+        return new Attribute(
+            get: function ($value) {
+                if (!is_null($value)) {
+                    $return = explode("-", $value);
+                    return substr($return[2], 0, 2) . "-" . $return[1] . "-" . $return[0];
+                } else {
+                    return;
+                }
+            }
+        );
     }
 }
