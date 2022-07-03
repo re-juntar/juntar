@@ -12,8 +12,17 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\StoreEventController;
 use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\EventCategoryController;
-use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\EventCategoriesPage;
+use App\Http\Controllers\EventModalityController;
+use App\Http\Livewire\Backend\CreateEventModality;
+use App\Http\Livewire\Backend\CreateModality;
+use App\Http\Livewire\Backend\EditModality;
+use App\Http\Livewire\Backend\EndorsementsPage;
+use App\Http\Livewire\Backend\EventModalities;
+use App\Http\Livewire\EventModalitiesPage;
+use App\Models\EventModality;
+use App\Http\Controllers\RoleController;
+use App\Http\Livewire\Backend\RolesPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,11 +67,23 @@ Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store')
 Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
     Route::get('/', BackHome::class)->name('back-home');
 
+    Route::get('/event-category', EventCategoriesPage::class)->name('event-category');
+    
+    Route::get('/', BackHome::class)->name('back-home');
+
     Route::get('/usuarios', UsersPage::class)->name('users');
 
     Route::get('/eventos', EventsPage::class)->name('events');
 
+    Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
+
+    Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventModalities');
+
+    Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
+
+    Route::get('/gestionar/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
+
     Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
-    Route::get('/event-category', EventCategoriesPage::class)->name('event-category');
+    Route::get('/roles', RolesPage::class)->name('roles');
 });

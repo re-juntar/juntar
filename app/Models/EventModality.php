@@ -9,8 +9,10 @@ class EventModality extends Model
 {
     use HasFactory;
 
+    public $fillable = ['description'];
+
     public function events()
     {
-        return $this->hasMany('App\Models\Event');
+        return $this->hasOne('App\Models\Event');
     }
 }
