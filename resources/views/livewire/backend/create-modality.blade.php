@@ -4,9 +4,9 @@
             <form wire:submit.prevent="save">
                 <div class="mb-6">
                     <x-label for="description">Descripcion/Nombre</x-label>
-                    <x-input id="description" class="w-full" wire:model="eventModality.description" name="description"/>
+                    <x-input id="description" class="w-full" wire:model="eventModality.description" name="description" />
                     @error('eventModality.description')
-                        <span class="text-red-500">{{$message}}</span>
+                        <span class="text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="flex items-center justify-start space-x-4">

@@ -7,7 +7,7 @@
                 <p>Nombre/Descripcion:</p>
                 <div>
                     <x-jet-input type='text' class="w-full" wire:model="description" />
-                    <x-jet-input-error for='description' class="text-[1rem]"/>                    
+                    <x-jet-input-error for='description' class="text-[1rem]"/>
                 </div>
                 <x-button class="mt-4" wire:click='save'>Guardar</x-button>
                 <x-jet-secondary-button class="mt-4" wire:click="$set('open',false)">Cerrar</x-button>
@@ -36,8 +36,8 @@
                 <div class="bg-white-ghost p-5">
                     <p>Nombre/Descripcion:</p>
                     <div>
-                        <x-jet-input type='text' class="w-full" wire:model="description" value='{{$description}}' />
-                        <x-jet-input-error for='description' class="text-[1rem]"/>                    
+                        <x-jet-input type='text' class="w-full" wire:model="description" value='{{ $description }}' />
+                        <x-jet-input-error for='description' class="text-[1rem]" />
                     </div>
                     <x-button class="mt-4" wire:click='save'>Guardar</x-button>
                     {{-- <x-jet-secondary-button class="mt-4" wire:click="$set('open',false)">Cerrar</x-button> --}}

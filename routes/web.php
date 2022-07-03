@@ -22,7 +22,6 @@ use App\Http\Livewire\Backend\EventModalities;
 use App\Http\Livewire\EventModalitiesPage;
 use App\Models\EventModality;
 use App\Http\Controllers\RoleController;
-use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\RolesPage;
 
 /*
@@ -74,16 +73,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
 
     Route::get('/eventos', EventsPage::class)->name('events');
 
-Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
+    Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
 
-Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventModalities');
+    Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventModalities');
 
-Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
+    Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
 
-Route::get('/gestionar/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
+    Route::get('/gestionar/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
 
-Route::get('/avales', EndorsementsPage::class)->name('endorsements');
+    Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
-Route::get('/roles', RolesPage::class)->name('roles');
+    Route::get('/roles', RolesPage::class)->name('roles');
 });
-

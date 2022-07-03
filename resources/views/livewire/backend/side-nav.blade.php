@@ -1,20 +1,17 @@
 <div x-cloak x-data="{ ham: true }" class="relative flex">
-    <div class="fixed top-4 left-48 z-40 transition-all duration-300"
-        :class="{ 'left-48': ham, 'left-0': !ham }">
+    <div class="fixed top-4 left-48 z-40 transition-all duration-300" :class="{ 'left-48': ham, 'left-0': !ham }">
         <div class="flex justify-end">
-            <button @click="ham = !ham"
-                :class="{ 'hover:bg-awesome': !ham, 'hover:bg-awesome': ham }"
+            <button @click="ham = !ham" :class="{ 'hover:bg-awesome': !ham, 'hover:bg-awesome': ham }"
                 class="transition-all duration-300 w-8 p-1 mx-3 my-2 rounded-full focus:outline-none"
                 wire:click="$emitUp('toggleBar')">
-                <i class="fa fa-bars text-awesome text-xl"
-                    :class="{ 'text-gray-600': !ham, 'text-gray-300': ham }"></i>
+                <i class="fa fa-bars text-awesome text-xl" :class="{ 'text-gray-600': !ham, 'text-gray-300': ham }"></i>
             </button>
         </div>
     </div>
     <div x-cloak wire:ignore :class="{ 'w-60': ham, 'w-0': !ham }"
         class="fixed top-0 bottom-0 left-0 z-30 block w-60 h-full min-h-screen overflow-y-auto transition-all duration-300 ease-in-out bg-fogra-dark shadow-lg overflow-x-hidden">
         <div class="mr-8 pt-4 pb-2 px-6">
-            <a href="{{ route('back-home')}}">
+            <a href="{{ route('back-home') }}">
                 <div class="flex items-center">
                     <img src="{{ asset('images/logos/juntar-logo-w.svg') }}" alt="">
                 </div>
@@ -58,6 +55,7 @@
                 <li class="relative">
                     <x-backend.side-nav-link href="{{ route('eventModalities') }}" :active="request()->routeIs('eventModalities')">
                         {{ __('Modalidades') }}
+                    </x-backend.side-nav-link>
                 </li>
                 <li class="relative">
                     <x-backend.side-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
@@ -82,13 +80,15 @@
                 <hr class="border-awesome m-0">
                 <x-backend.dropdown>
                     <x-slot name="profile">
-                        <img class="h-8 w-8 rounded-full object-cover mr-2" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        <img class="h-8 w-8 rounded-full object-cover mr-2"
+                            src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                         <div class="font-bold text-xs uppercase text-white-ghost mr-1">
                             {{ Auth::user()->name }}
                         </div>
                     </x-slot>
                     <x-slot name="links">
-                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}" {{-- :active="request()->routeIs('')" --}}>
+                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}"
+                            {{-- :active="request()->routeIs('')" --}}>
                             {{ __('Perfil') }}
                         </x-backend.side-nav-link>
                         <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">
@@ -96,7 +96,8 @@
                         </x-backend.side-nav-link>
                         <form method="POST" action="{{ route('logout') }}" x-data>
                             @csrf
-                            <x-backend.side-nav-link class="text-md" href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                            <x-backend.side-nav-link class="text-md" href="{{ route('logout') }}"
+                                @click.prevent="$root.submit();">
                                 {{ __('Cerrar Sesión') }}
                             </x-backend.side-nav-link>
                         </form>

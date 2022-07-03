@@ -10,13 +10,13 @@
                 Crear Rol
             </section>
 
-             <form  wire:submit.prevent='submit'  enctype="multipart/form-data" > 
-                 @csrf 
+            <form wire:submit.prevent='submit' enctype="multipart/form-data">
+                @csrf
                 {{-- Nombre rolecreate --}}
                 <div class="mb-4">
                     <x-label for="name">Nombre * </x-label>
                     <x-input wire:model="name" id='name' class="w-full" type='text' name='name'
-                        placeholder="Name" value="{{ old('name')}}" />
+                        placeholder="Name" value="{{ old('name') }}" />
                     @error('name')
                         <div class="flex items-center">
                             <p class="text-red-600">{{ $message }}</p>
@@ -38,7 +38,7 @@
 
                 {{-- Cargar --}}
                 <x-button class="text-[16px]" type="submit"> Crear </x-button>
-             </form> 
+            </form>
 
 
         </div>

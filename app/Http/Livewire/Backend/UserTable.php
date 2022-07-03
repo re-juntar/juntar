@@ -16,15 +16,14 @@ class UserTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
-
-        ;$this->setHideBulkActionsWhenEmptyEnabled();
+        $this->setPrimaryKey('id');;
+        $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setEmptyMessage('No se encontraron usuarios');
 
         $this->setQueryStringDisabled();
-        
-        $this->setTableAttributes(['class' => "text-white-ghost"]);
+
+        // $this->setTableAttributes(['class' => "text-white-ghost"]);
 
         // $this->setSecondaryHeaderTrAttributes(function ($rows) {
         //     return ['class' => 'text-white-ghost'];
