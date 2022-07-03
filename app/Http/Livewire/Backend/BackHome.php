@@ -19,7 +19,8 @@ class BackHome extends Component
                 // return $this->render();
             } else {
                 $events = Event::paginate(25);
-                return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
+                // return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
+                abort(403);
             }
         } else {
             return view('livewire.backend.login-back');
