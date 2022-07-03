@@ -9,8 +9,26 @@ class EventCategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['description'];
+
     public function events()
     {
         return $this->hasMany('App\Models\Event');
+    }
+
+    public function store($request)
+    {
+        $this->description = $request['description'];
+        $this->save();
+
+        return $this;
+    }
+
+    public function updateEventCategory($request)
+    {
+        $this->description = $request['description'];
+        $this->save();
+
+        return $this;
     }
 }

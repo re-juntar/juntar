@@ -48,6 +48,11 @@
                     </x-backend.side-nav-link>
                 </li>
                 <li class="relative">
+                    <x-backend.side-nav-link href="{{ route('event-category') }}" :active="request()->routeIs('event-category')">
+                        {{ __('Categorias') }}
+                    </x-backend.side-nav-link>
+                </li>
+                <li class="relative">
                     <x-backend.side-nav-link href="{{ route('endorsements') }}" :active="request()->routeIs('endorsements')">
                         {{ __('Avales ') }}
                     </x-backend.side-nav-link>
@@ -74,7 +79,6 @@
                         </x-slot>
                     </x-backend.dropdown>
                 </li> --}}
-
             </ul>
             <div class="bg-fogra-dark text-center bottom-0 absolute w-full">
                 <hr class="border-awesome m-0">
