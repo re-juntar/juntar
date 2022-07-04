@@ -61,6 +61,11 @@ Route::get('/mis-inscripciones', [EventController::class, 'myInscriptions'])->na
 
 Route::get('/mis-eventos', [EventController::class, 'myEvents'])->name('my-events');
 
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+->group(function(){ 
+        Route::get('/home', FrontHome::class)->name('home');
+});
+
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
     return view('mail.index');
