@@ -27,7 +27,7 @@ $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
         <h5 class="text-white-ghost uppercase font-medium text-[16px] md:text-[24px] mb-[0.5rem]"><i class="fa-regular fa-calendar mr-3"></i>{{ $event->start_date }}</h5>
         <h5 class="text-white-ghost uppercase font-medium text-[16px] md:text-[24px] mb-[0.5rem]"><i class="fa-solid fa-location-dot mr-3"></i>{{ $event->modality_description }}</h5>
         <h5 class="text-white-ghost uppercase font-medium text-[20px] mb-[0.5rem]">
-            @if ($event->endorsed)
+            @if ($endorsementRequest && $endorsementRequest->endorsed)
             <x-verified-badge></x-verified-badge>
             @endif
 
@@ -72,6 +72,22 @@ $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
                         </x-button>
                     </a>
                     @endif
+                    
+                    @if (!$endorsementRequest)
+                        <form method="POST" action="{{route('avales')}}" class="inline-block" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" for="eventId" name="eventId" id="eventId" value="{{$event->id}}">
+                            <x-button class="h-full hover:bg-fogra-darkish" type=submit> Solicitar aval
+                            </x-button>
+                        </form>
+                    @elseif ($endorsementRequest->endorsed == 1)
+
+                    @elseif ($endorsementRequest->endorsed === 0)
+                    <h2 class="">La solicitud de aval fue rechazada</h2>
+                    @elseif ($endorsementRequest->endorsed === null)
+                        <h2 class="">La solicitud de aval ya fue enviada</h2>
+                    @endif
+                    
                 </x-pink-header>
                 @endif
                 <div class="event-body-hero flex flex-col md:flex md:flex-row p-[15px] ">

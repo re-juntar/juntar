@@ -2,12 +2,18 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Http\Controllers\PermissionController;
 use App\Models\Event;
 use Livewire\Component;
+use Illuminate\Http\Request;
+use App\Models\EndorsementRequest;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PermissionController;
 
 class EndorsementsPage extends Component
 {
+
+    public $aval; 
+    
     public function render()
     {
         $permission = [];
@@ -16,7 +22,6 @@ class EndorsementsPage extends Component
             $permission = $permissionController->isAdmin();
             if ($permission['admin']) {
                 return view('pages.backend.endorsements')->layout('layouts.back');
-                // return $this->render();
             } else {
                 $events = Event::paginate(25);
                 return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
@@ -25,4 +30,13 @@ class EndorsementsPage extends Component
             return view('livewire.backend.login-back');
         }
     }
+
+    public function store(Request $request){
+        $id = Auth::user()->id;
+        $aval = new EndorsementRequest();
+        $solcAval = ['event_id'=>$request->eventId, 'user_id' => $id];
+        $aval->create($solcAval);
+
+        return redirect()->to('/evento/'.$request->eventId);
+    } 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\EndorsementRequest;
 use App\Models\Event;
 use App\Models\EventModality;
 use App\Models\Presentation;
@@ -114,8 +115,13 @@ class EventController extends Controller
         if (($event->status_description == "Draft" || $event->status_description == "Disabled") && !$hasPermission) {
             return redirect()->action(FrontHome::class);
         }
-
-        return view('pages.events.evento', ['event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'hasPermission' => $hasPermission]);
+        $endorsementRequest = EndorsementRequest::where('event_id', $eventId)->get('endorsement_requests.*');
+        if(count($endorsementRequest) == 0){
+            $endorsementRequest = null;
+        }else{
+            $endorsementRequest = $endorsementRequest[0];
+        }
+        return view('pages.events.evento', ['event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'hasPermission' => $hasPermission, 'endorsementRequest' => $endorsementRequest]);
     }
 
     /**

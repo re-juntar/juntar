@@ -87,7 +87,7 @@ class EndorsementTable extends DataTableComponent
     }
     public function denyEndorsement()
     {
-        EndorsementRequest::whereIn('id', $this->getSelected())->update(['endorsed' => 0]);
+        EndorsementRequest::whereIn('id', $this->getSelected())->update(['endorsed' => 0, 'revision_date' => Carbon::now()]);
 
         $this->clearSelected();
     }

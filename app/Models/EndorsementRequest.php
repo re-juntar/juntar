@@ -9,6 +9,16 @@ class EndorsementRequest extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'event_id',
+        'user_id',
+    ];
+
     public function event()
     {
         return $this->belongsTo('App\Models\Event');

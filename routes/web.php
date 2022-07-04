@@ -61,6 +61,8 @@ Route::get('/mis-inscripciones', [EventController::class, 'myInscriptions'])->na
 
 Route::get('/mis-eventos', [EventController::class, 'myEvents'])->name('my-events');
 
+Route::post('/avales', [EndorsementsPage::class, 'store'])->name('avales');
+
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
     return view('mail.index');
@@ -79,13 +81,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
 
     Route::get('/eventos', EventsPage::class)->name('events');
 
-    Route::get('/gestionar/avales', EndorsementsPage::class)->name('endorsements');
+    Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
-    Route::get('/gestionar/modalidades', EventModalitiesPage::class,)->name('eventModalities');
+    Route::get('/modalidades', EventModalitiesPage::class,)->name('eventModalities');
 
-    Route::get('/gestionar/modalidades/agregar', CreateModality::class)->name('addModality');
+    Route::get('/modalidades/agregar', CreateModality::class)->name('addModality');
 
-    Route::get('/gestionar/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
+    Route::get('/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
 
     Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
