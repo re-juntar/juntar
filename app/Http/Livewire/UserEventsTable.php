@@ -42,7 +42,7 @@ class UserEventsTable extends DataTableComponent
             LinkColumn::make('')
                 ->title(fn ($row) => 'VER EVENTO')
                 ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
-                LinkColumn::make('')
+            LinkColumn::make('')
                 ->title(fn ($row) => 'EDITAR EVENTO')
                 ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']])),
             Column::make("Id", "id")
@@ -66,7 +66,6 @@ class UserEventsTable extends DataTableComponent
             'disable' => 'Deshabilitar',
             'end' => 'Finalizar',
             'makeDraft' => 'Hacer Borrador',
-            'edit' => 'Editar'
         ];
     }
 

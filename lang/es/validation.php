@@ -130,11 +130,11 @@ return [
     */
 
     'custom' => [
-        'name' =>[
-            'required'=>'En nombre es obligatorio',
+        'name' => [
+            'required' => 'En nombre es obligatorio',
         ],
-        'email'=>[
-            'required'=>'El email debe ser una cuenta valida',
+        'email' => [
+            'required' => 'El email debe ser una cuenta valida',
         ],
         'attribute-name' => [
             'rule-name' => 'custom-message',
@@ -159,7 +159,22 @@ return [
         'preinscription-date' => [
             'required' => 'La fecha de preinscripcion es obligatoria.',
             'before_or_equal' => 'La fecha de preinscripcion debe ser una fecha anterior o igual a fecha de inicio.'
-        ]
+        ],
+        'date' => [
+            'required' => 'La fecha es obligatoria',
+        ],
+        'start_time' => [
+            'required' => 'La hora de inicio es obligatoria',
+        ],
+        'end_time' => [
+            'required' => 'La hora de fin es obligatoria',
+        ],
+        'exhibitors' => [
+            'required' => 'Los presentadores son obligatorios',
+        ],
+        'resources_link' => [
+            'required' => 'El recurso es obligatorio',
+        ],
     ],
 
     /*
@@ -185,7 +200,8 @@ return [
         'participants-limit' => 'limite de participantes',
         'preinscription' => 'preinscripcion',
         'preinscription-date' => 'fecha de preinscripcion',
-        'acreditation-code' => 'codigo de acreditacion'
+        'acreditation-code' => 'codigo de acreditacion',
+        'title' => 'titulo'
     ],
 
 ];

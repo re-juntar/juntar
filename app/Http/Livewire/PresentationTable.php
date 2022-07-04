@@ -23,8 +23,6 @@ class PresentationTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
 
-        $this->setTableAttributes(['class' => 'text-white-ghost']);
-
         $this->setSearchDisabled();
 
         $this->setPaginationDisabled();
