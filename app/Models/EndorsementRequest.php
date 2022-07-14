@@ -16,6 +16,7 @@ class EndorsementRequest extends Model
      */
     protected $fillable = [
         'event_id',
+        'academic_unit',
         'user_id',
     ];
 
