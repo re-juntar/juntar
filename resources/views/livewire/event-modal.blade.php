@@ -24,7 +24,12 @@
 
                 <div
                     class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
-                    <x-button class="bg-cyan-500 mr-2">Inscribirse</x-button>
+                    @if($event->pre_registration)
+                    <a  href="{{route('preinscripcionform', $event->id)}}"> <x-button class="bg-cyan-500 mr-2">Pre Inscribirse</x-button></a>
+                    @else
+                    <a href="{{route('inscribir', $event->id )}}"><x-button class="bg-cyan-500 mr-2">Inscribirse</x-button></a>
+                    @endif
+                    
                     <x-button class="mr-2">Flyer</x-button>
                     <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
 
