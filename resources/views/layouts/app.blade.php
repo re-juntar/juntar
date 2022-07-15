@@ -29,8 +29,6 @@
         <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
     @endif
 
-    <script src={{ asset('/js/styleFixes.js/') }}></script>
-
     @if (Route::currentRouteName() == 'edit-event')
         <script src={{ asset('/js/displayInputsEdit.js/') }}></script>
         <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
