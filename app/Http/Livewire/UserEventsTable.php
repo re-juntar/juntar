@@ -34,6 +34,57 @@ class UserEventsTable extends DataTableComponent
         $this->setQueryStringDisabled();
 
         $this->setColumnSelectDisabled();
+
+        // $this->setTableAttributes([
+        //     'id' => 'eventos',
+        //     'class' => 'bg-gray-400',
+        //   ]);
+
+
+
+        //   $this->setTbodyAttributes([
+        //     'id' => 'eventosbody',
+        //     'class' => 'bg-gray-500 dark:bg-gray-500',
+        //   ]);
+
+
+        //   $this->setTrAttributes(function($row, $index) {
+        //     if ($index % 2 > 0) {
+        //       return [
+        //         'class' => 'bg-gray-500',
+        //         'id' => 'eventosbody',
+        //       ];
+        //     }
+      
+        //     return [];
+        // });
+
+        // $this->setTableAttributes([
+        //     'default' => false,
+        //     'id' => 'my-id',
+        //     'class' => 'bg-gray-500',
+        //   ]);
+
+
+
+
+         $this->setTrAttributes(function($row, $index) {
+             if ($index % 2 === 0) {
+               return [
+                 'default' => false,
+                 'class' => 'bg-gray-300 text-black',
+               ];
+             }
+             else{
+                return [
+                  'default' => false,
+                  'class' => 'bg-white-ghost text-black',
+                ];
+              }
+      
+             return ['default' => false];
+         });
+        
     }
 
     public function columns(): array
@@ -42,7 +93,7 @@ class UserEventsTable extends DataTableComponent
             LinkColumn::make('')
                 ->title(fn ($row) => 'VER EVENTO')
                 ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
-                LinkColumn::make('')
+        LinkColumn::make('')
                 ->title(fn ($row) => 'EDITAR EVENTO')
                 ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']])),
             Column::make("Id", "id")
@@ -66,7 +117,6 @@ class UserEventsTable extends DataTableComponent
             'disable' => 'Deshabilitar',
             'end' => 'Finalizar',
             'makeDraft' => 'Hacer Borrador',
-            'edit' => 'Editar'
         ];
     }
 
