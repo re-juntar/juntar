@@ -122,8 +122,8 @@
                                 @else
                             <p class="text-[1rem]">CUPOS ILIMITADOS</p>
                         @endif
-                        @if ($event->pre_registration)
-                            <span class="text-[#ff0000] font-bold"> *Requiere pre-inscripción* </span></p>
+                        @if ($event->pre_registration && $event->inscription_end_date)
+                            <span class="text-[#ff0000] font-bold">&nbsp;*Requiere pre-inscripción* </span></p>
                         @endif
                     </div>
                     <div class="status w-full md:w-4/12 px-[15px]">
@@ -171,9 +171,9 @@
                                 <span>{{ $event->end_date }}</span>
                             </li>
 
-                            @if ($event->pre_registration)
+                            @if ($event->pre_registration && $event->inscription_end_date)
                                 <li class="py-[0.75rem]">
-                                    <p class="mb-[1rem] font-bold">Fecha Límite de Inscripción:</p>
+                                    <p class="mb-[1rem] font-bold">Fecha Límite de Preinscripción:</p>
                                     <span>{{ $event->inscription_end_date }}</span>
                                 </li>
                             @endif

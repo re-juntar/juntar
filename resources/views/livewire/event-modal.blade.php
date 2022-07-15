@@ -56,7 +56,7 @@
 
                         @if(!is_null($event->pre_registration))
                             @if($event->pre_registration)
-                                <h3 class="font-bold mt-1">Fecha límite de inscripción: {{$event->inscription_end_date}}</h3>
+                                <h3 class="font-bold mt-1">Fecha límite de preinscripción: {{$event->inscription_end_date}}</h3>
                             @endif
                         @endif
 
