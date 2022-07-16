@@ -35,36 +35,10 @@ class UserEventsTable extends DataTableComponent
 
         $this->setColumnSelectDisabled();
 
-        // $this->setTableAttributes([
-        //     'id' => 'eventos',
-        //     'class' => 'bg-gray-400',
-        //   ]);
-
-
-
-        //   $this->setTbodyAttributes([
-        //     'id' => 'eventosbody',
-        //     'class' => 'bg-gray-500 dark:bg-gray-500',
-        //   ]);
-
-
-        //   $this->setTrAttributes(function($row, $index) {
-        //     if ($index % 2 > 0) {
-        //       return [
-        //         'class' => 'bg-gray-500',
-        //         'id' => 'eventosbody',
-        //       ];
-        //     }
-      
-        //     return [];
-        // });
-
-        // $this->setTableAttributes([
-        //     'default' => false,
-        //     'id' => 'my-id',
-        //     'class' => 'bg-gray-500',
-        //   ]);
-
+         $this->setComponentWrapperAttributes([
+             'id' => 'eventos',
+             'class' => ' text-black bg-gray-200 p-3',
+           ]);
 
 
 
@@ -99,7 +73,7 @@ class UserEventsTable extends DataTableComponent
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Nombre", "name"),
-            Column::make("Nombre Corto", "short_name"),
+            // Column::make("Nombre Corto", "short_name"),
             Column::make("Estado", 'eventStatus.description')
             // Column::make("Nombre Organizador", "user.name"),
             // Column::make("Apellido Organizador", 'user.surname')

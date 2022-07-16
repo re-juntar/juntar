@@ -24,12 +24,17 @@ class CoorganizerEventTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('events.id');
-
+        $this->setColumnSelectDisabled();
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setEmptyMessage('No es coorganizador de ningún evento');
 
         $this->setQueryStringDisabled();
+
+        $this->setComponentWrapperAttributes([
+            'id' => 'eventos',
+            'class' => ' text-black',
+          ]);
 
         $this->setTrAttributes(function($row, $index) {
             if ($index % 2 === 0) {
@@ -48,6 +53,8 @@ class CoorganizerEventTable extends DataTableComponent
             return ['default' => false];
         });
 
+        
+
     }
 
     public function builder(): Builder
@@ -65,51 +72,15 @@ class CoorganizerEventTable extends DataTableComponent
             LinkColumn::make('')
                  ->title(fn ($row) => 'EDITAR EVENTO')
                  ->location(fn ($row) => route('edit-event', ['eventId' => $row['organizers.event.id']])),
-             Column::make("ID Evento", 'organizers.event.id'),
+             Column::make("ID", 'organizers.event.id'),
              Column::make("Nombre", 'organizers.event.name'),
              Column::make("Estado", "organizers.event.eventStatus.description"),
 
-             // Column::make("Organizador", "organizers.user.id"),
-            //   Column::make("Created at", "created_at")
-            //   ->sortable(),
-            //   Column::make("Updated at", "updated_at")
-            //       ->sortable(),
          ];
 
 
-        // return [
-        //     LinkColumn::make('ver')
-        //     ->title(fn ($row) => 'VER EVENTO')
-        //     ->location(fn ($row) => route('evento', ['eventoId' => $row['organizers.event.id']])),
-        //     LinkColumn::make('editar')
-        //     ->title(fn ($row) => 'EDITAR EVENTO')
-        //     ->location(fn ($row) => route('edit-event', ['eventId' => $row['organizers.event.id']])),
-        //     Column::make("Id", "organizers.event.id")
-        //         ->sortable(),
-        //     Column::make("Nombre", "organizers.event.name"),
-        //     Column::make("Nombre Corto", "organizers.event.short_name"),
-        //     Column::make("Estado", 'organizers.event.eventStatus.description')
-        //     // Column::make("Nombre Organizador", "user.name"),
-        //     // Column::make("Apellido Organizador", 'user.surname')
-        //     // Column::make("Created at", "created_at")
-        //     //     ->sortable(),
-        //     // Column::make("Updated at", "updated_at")
-        //     //     ->sortable(),
-        // ];
     }
 
 
-    // public function edit()
-    // {
-    //     // Event::whereIn('events.id', $this->getSelected())->update(['event_status_id' => 1]);
 
-    //     $this->clearSelected();
-
-    //     return $this->customView();
-    // }
-
-    // public function customView(): string
-    // {
-    //     return 'includes.custom';
-    // }
 }
