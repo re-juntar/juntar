@@ -113,6 +113,9 @@ class AboutUsLegacy extends Component
             'link' => 'https://www.instagram.com/kevin_esp_/',
             'isDev' => true
         ],
+    ];
+
+    public $profesoras = [
         'NB' => [
             'nombre' => 'Natalia Baeza',
             'mensajes' => [
@@ -130,6 +133,21 @@ class AboutUsLegacy extends Component
             'isDev' => false
         ],
     ];
+
+    public function randomize_members($arr)
+    {
+        $keys = array_keys($arr);
+
+        shuffle($keys);
+
+        foreach ($keys as $key) {
+            $new[$key] = $arr[$key];
+        }
+
+        $arr = $new;
+
+        return $arr;
+    }
 
     public function render()
     {
