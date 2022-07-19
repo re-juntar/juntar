@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('academic_unit', function (Blueprint $table) {
+        Schema::create('academic_units', function (Blueprint $table) {
             $table->id();
             $table->string('name', 200);
-            $table->string('short_name', 100);
-            $table->string('image_logo', 200)->nullable();;
+            $table->string('short_name', 200);
+            $table->string('image_logo', 200)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('academic_unit');
+        Schema::dropIfExists('academic_units');
     }
 };

@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helper\Imageable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class AcademicUnit extends Model
+class AcademicUnits extends Model
 {
-    use HasFactory;
+    use HasFactory, Imageable;
 
     public $fillable = [
         'name',

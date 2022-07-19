@@ -32,9 +32,10 @@ class EndorsementsPage extends Component
     }
 
     public function store(Request $request){
+        //dd($request->academicUnit);
         $id = Auth::user()->id;
         $aval = new EndorsementRequest();
-        $solcAval = ['event_id'=>$request->eventId, 'academic_unit' => $request->academicUnit, 'user_id' => $id];
+        $solcAval = ['event_id'=>$request->eventId, 'academic_units_id' => $request->academicUnit, 'user_id' => $id];
         $aval->create($solcAval);
 
         return redirect()->to('/evento/'.$request->eventId);

@@ -59,7 +59,7 @@ class EndorsementTable extends DataTableComponent
             Column::make("#", "id"),
             Column::make("Nombre Evento", 'event.name')->searchable(),
             Column::make("Solicitante", "user.name")->searchable(),
-            Column::make("Unidad academica", "academic_unit"),
+            Column::make("Unidad academica", "academicUnits.short_name"),
             Column::make("Token", 'request_token'),
             Column::make("Fecha de revision", "revision_date"),
             Column::make('Estado', 'endorsed')
