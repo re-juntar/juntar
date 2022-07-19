@@ -213,11 +213,12 @@ $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
                 <div class="w-full px-[15px] flex items-center ">
                     <h2 class="uppercase text-[1.5rem]">Agenda</h2>
                     @if ($hasPermission)
-                        <livewire:create-presentation eventId="{{$event->id}}">
+                        <livewire:modal-create-presentation eventId="{{$event->id}}">
+                        <livewire:modal-edit-presentation eventId="{{$event->id}}">
                     @endif
                 </div>
-                <div class="px-[15px]">
-                    <livewire:presentation-table event="{{$event->id}}">
+                <div class="px-[15px]" id="presentations">
+                    <livewire:presentation-table event="{{$event->id}}" hasPermission="{{$hasPermission}}">
                 </div>
             </div>
         </div>

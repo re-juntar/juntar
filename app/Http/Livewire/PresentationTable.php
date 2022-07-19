@@ -2,17 +2,27 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\EventModality;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Presentation;
+use App\Models\UserRole;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
+use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class PresentationTable extends DataTableComponent
 {
     protected $model = Presentation::class;
 
-    public string $event;
+    public $event;
+    public $hasPermission;
+
+    public string $tableName = 'Presentations';
+
+    public array $presentations = [];
+
 
     public function builder(): Builder
     {
@@ -23,9 +33,11 @@ class PresentationTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
 
-        $this->setSearchDisabled();
+        $this->setHideBulkActionsWhenEmptyEnabled();
 
-        $this->setPaginationDisabled();
+        $this->setEmptyMessage('La agenda se encuentra vacía.');
+
+        $this->setSearchDisabled();
 
         $this->setColumnSelectDisabled();
     }
@@ -33,22 +45,55 @@ class PresentationTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            // Column::make("Id", "id")
-            //     ->sortable(),
-            Column::make("Nombre", "title"),
+            Column::make("IdPresentacion", "id")
+                ->hideIf(true),
+            Column::make("Nombre", "title")
+                ->hideIf(true),
+            Column::make("Nombre", 'title')
+                ->label(fn ($row, Column $column) => '
+                    <p>' . $row->title . '</p>')
+                ->html(),
+            Column::make("Descripcion", "description")
+                ->hideIf(true),
             Column::make("Fecha", "date"),
             Column::make("Hora Inicio", "start_time"),
-            Column::make("Hora Fin", "end_time"),
+            Column::make("Hora Fin", "end_time")
+                ->hideIf(true),
             Column::make("Presentadores", "exhibitors"),
-            Column::make("Resources", 'resources_link')->hideIf(true),
-            Column::make("Recursos")->label(fn ($row, Column $column) => '<a target="_blank" href="' . $row->resources_link . '"><i class="fa fa-paperclip text-awesome"></i></a>')->html(),
-            // LinkColumn::make('Recursos')
-            //     ->title(fn ($row) => 'Recursos')
-            //     ->location(fn ($row) => route('redirection', ['url' => $row['resources_link']])),
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
+            Column::make("Recursos")
+                ->label(fn ($row, Column $column) => '<a target="_blank" href="' . $row->resources_link . '"><i class="fa fa-paperclip text-awesome"></i></a>')
+                ->html()
+                ->unclickable(),
         ];
+    }
+
+    public function bulkActions(): array
+    {
+        if ($this->hasPermission) {
+            return [
+                'editPresentation' => 'Modificar',
+                'deletePresentation' => 'Eliminar',
+            ];
+        } else {
+            return [];
+        }
+    }
+
+    public function deletePresentation()
+    {
+        if ($this->hasPermission) {
+            foreach ($this->getSelected() as $selectedItem) {
+                Presentation::where('id', $selectedItem)->delete();
+            }
+            $this->clearSelected();
+        }
+    }
+
+    public function editPresentation()
+    {
+        if (isset($this->getSelected()[0])) {
+            $this->emit('showPresentationModalEdit', $this->getSelected()[0]);
+            $this->clearSelected();
+        }
     }
 }
