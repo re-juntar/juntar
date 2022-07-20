@@ -99,19 +99,12 @@
                             <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="category">
                                 <option disabled selected> Seleccione una categoria </option>
-                                <option value="5" {{ old('category') == 'otra' ? 'selected' : '' }}> Otra </option>
-                                <option value="1" {{ old('category') == 'seminario' ? 'selected' : '' }}> Seminario
-                                </option>
-                                <option value="2" {{ old('category') == 'congreso' ? 'selected' : '' }}> Congreso
-                                </option>
-                                <option value="3" {{ old('category') == 'diplomatura' ? 'selected' : '' }}>
-                                    Diplomatura </option>
-                                <option value="curso" {{ old('category') == 'curso' ? 'selected' : '' }}> Curso
-                                </option>
-                                <option value="4" {{ old('category') == 'taller' ? 'selected' : '' }}> Taller
-                                </option>
-                                <option value="festival" {{ old('category') == 'festival' ? 'selected' : '' }}> Festival
-                                </option>
+                                <option value="1" {{ old('category') == 'seminario' ? 'selected' : '' }}> Seminario </option>
+                                <option value="2" {{ old('category') == 'congreso' ? 'selected' : '' }}> Congreso </option>
+                                <option value="3" {{ old('category') == 'diplomatura' ? 'selected' : '' }}>Diplomatura </option>
+                                <option value="4" {{ old('category') == 'taller' ? 'selected' : '' }}> Taller </option>
+                                <option value="5" {{ old('category') == 'curso' ? 'selected' : '' }}> Curso </option>
+                                <option value="6" {{ old('category') == 'otra' ? 'selected' : '' }}> Otra </option>  
                             </select>
                             @error('category')
                                 <div class="flex items-center">
