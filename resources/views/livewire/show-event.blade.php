@@ -18,8 +18,40 @@
     $inscription_end_date = new DateTime($event->inscription_end_date);
     $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
 @endphp
+<div>
 
-<x-app-layout>
+    {{-- Flyer Modal --}}
+    <x-jet-dialog-modal wire:model="open">
+        <x-slot name="content">
+            <x-button
+                    class="bg-transparent text-black font-extrabold absolute top-4 right-4 z-10 hover:overscroll-auto hover:text-white-ghost"
+                    wire:click="$set('open', false)">X</x-button>
+
+            <div class="bg-white-ghost p-10">
+                <div class="mt-5">
+                    @if ($flyerSrc)
+                        <img class="rounded-lg w-full mx-auto" src="{{ asset($flyerSrc) }}" alt="Flyer del evento">
+                    @endif
+                </div>
+
+                <div class="flex justify-end">
+                    @if ($flyerSrc)
+                        <a class="my-5 text-[1rem]" href="{{ asset($flyerSrc) }}" download>
+                            <x-button class="text-[1rem]">
+                                <i class="fas fa-file-download mr-3"></i>Bajar
+                            </x-button>
+                        </a>
+                    @endif
+                    <x-button wire:click="$set('open', false)" class="ml-2 my-5 text-[1rem]">
+                        Cerrar
+                    </x-button>
+                </div>
+            </div>
+        </x-slot>
+    </x-jet-dialog-modal>
+
+
+    {{-- Body content --}}
     <x-hero>
         <h5 class="text-white-ghost uppercase font-medium text-[1.5rem] md:text-[2.5rem] mb-4 text-center leading-[1.2]">
             {{ $event->name }}
@@ -30,14 +62,13 @@
             @if ($event->endorsed)
                 <x-verified-badge></x-verified-badge>
             @endif
-
     </x-hero>
-    <div class="event bg-[#0B0D19] break-words	">
+
+    <div class="event bg-[#0B0D19] break-words">
         <div class="event-container max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto rounded-[0.25rem] py-[7vh] px-[3vh]">
             <div class="event-body bg-[#fff]">
 
                 <x-pink-header class="text-[#856404]  bg-[#fff3cd] uppercase h-auto">
-
                     @if($start_date > $today)
                         EL EVENTO NO HA COMENZADO
                     @elseif($start_date <= $today && $today <= $end_date)
@@ -45,8 +76,9 @@
                     @else
                         EL EVENTO YA HA TERMINADO
                     @endif
-
                 </x-pink-header>
+
+                {{-- Edit Event Nav --}}
                 @if ($hasPermission)
                     <x-pink-header  ader class="h-[50px]" style="justify-content: start">
                         <a href="{{route('edit-event', $event->id)}}">
@@ -72,6 +104,8 @@
                         @endif
                     </x-pink-header>
                 @endif
+
+                {{-- Organizer, Coorganizer, logo and flyer --}}
                 <div class="event-body-hero flex flex-col md:flex md:flex-row p-[15px] ">
                     <div class="general-info flex flex-col items-start w-full md:w-8/12 md:flex">
                         <p class="my-5 text-[16px] mb-[0.5rem] flex items-center justify-center"><i class="fa-regular fa-calendar mr-3"></i>{{ $event->start_date }}</p>
@@ -86,26 +120,19 @@
                                 @endforeach
                             </h3>
                         @endif
-                        @if ($event['image_flyer'])
-                            <a class="my-5 text-[1rem]" href="{{ asset($flyerSrc) }}" download>
-                                <x-button class="text-[1rem]">
+                        <div class="my-3">
+                            @if ($event['image_flyer'] && $flyerSrc)
+                                <x-button wire:click="$set('open', true)" class="text-[1rem]">
                                     <i class="fas fa-file-download mr-3"></i>Flyer
                                 </x-button>
-                            </a>
-                        @else
-                            <x-button class="bg-fogra-darkish text-[16px]">
-                                <i class="fa-solid fa-ban mr-3"></i>Flyer no Disponible
-                            </x-button>
-                        @endif
-                    </div>
-                    <div class="event-flyer-and-logo py-[1rem] flex flex-col items-center justify-center md:flex w-full md:w-4/12">
-                        <div class="event-flyer">
-                            @if ($event['image_flyer'])
-                                <img class="rounded-lg w-full max-w-[80%] mx-auto" src="{{ asset($flyerSrc) }}" alt="Flyer {{ $event->name }}">
                             @else
-                                {{ $flyerSrc }}
+                                <x-button class="bg-fogra-darkish text-[16px]">
+                                    <i class="fa-solid fa-ban mr-3"></i>Flyer no Disponible
+                                </x-button>
                             @endif
                         </div>
+                    </div>
+                    <div class="event-flyer-and-logo py-[1rem] flex flex-col items-center justify-center md:flex w-full md:w-4/12">
                         <div class="event-logo pt-[0.5rem]">
                             @if ($event['image_logo'])
                                 <img class="rounded-lg max-w-[50%] mx-auto" src="{{ asset($logoSrc) }}" alt="Logo {{ $event->name }}">
@@ -115,6 +142,8 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- Details on event, dates and inscription limits --}}
                 <div class="event-body-inscription flex flex-col md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
                     <div class="quota flex items-center w-full md:w-8/12 px-[15px]">
                         @if ($event->capacity > 0)
@@ -137,13 +166,14 @@
                         @else
 
                             @if($today < $end_date)
-                            {{--<a href="{{route('inscribir')}}">--}}<x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>{{--</a>--}}
+                               <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
                             @endif
 
                         @endif
 
                     </div>
                 </div>
+
                 <div class="event-body-main flex-col flex-wrap md:flex md:flex-row pb-[3rem] p-[15px]">
                     <div class="event-info flex flex-col items-start w-full md:w-8/12 xl:w-9/12 pr-3 pb-3">
                         <h2 class="text-[1.4rem] font-bold mb-[0.5rem]">Sobre este evento</h2>
@@ -160,6 +190,8 @@
                             <p>No hay descripcion del evento.</p>
                         @endif
                     </div>
+
+                    {{-- More event info on the right side --}}
                     <div class="more-event-info w-full md:w-4/12 xl:w-3/12  text-white-ghost px-[15px] bg-[#0B0D19]">
                         <ul class=" flex flex-col justify-center items-start w-10/12 mx-auto text-[1rem]">
                             <li class="py-[0.75rem]">
@@ -211,11 +243,12 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="pb-[3rem] p-[15px]">
                     <livewire:presentation-table event="{{ $event->id }}">
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
 
+</div>
