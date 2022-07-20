@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
+use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 
 class CoorganizerEventTable extends DataTableComponent
 {  
@@ -53,6 +54,10 @@ class CoorganizerEventTable extends DataTableComponent
             return ['default' => false];
         });
 
+        $this->setComponentWrapperAttributes([
+          'id' => 'eventos',
+          'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
+        ]);
         
 
     }
@@ -66,15 +71,35 @@ class CoorganizerEventTable extends DataTableComponent
     {   
         
          return [
-            LinkColumn::make('')
-                 ->title(fn ($row) => 'VER EVENTO')
-                 ->location(fn ($row) => route('evento', ['eventoId' => $row['organizers.event.id']])),
-            LinkColumn::make('')
-                 ->title(fn ($row) => 'EDITAR EVENTO')
-                 ->location(fn ($row) => route('edit-event', ['eventId' => $row['organizers.event.id']])),
-             Column::make("ID", 'organizers.event.id'),
-             Column::make("Nombre", 'organizers.event.name'),
-             Column::make("Estado", "organizers.event.eventStatus.description"),
+            Column::make("Nombre", 'organizers.event.name'),          
+             Column::make("ID", 'organizers.event.id')->collapseOnMobile(),             
+             Column::make("Estado", "organizers.event.eventStatus.description")->collapseOnMobile(),
+             ButtonGroupColumn::make('Acciones')
+             ->attributes(function($row) {
+                 return [
+                     'class' => 'space-x-2',
+                 ];
+             })
+             ->buttons([
+                 LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
+                     ->title(fn($row) => ' ')
+                     ->location(fn ($row) => route('evento', ['eventoId' => $row['organizers.event.id']]))
+                     ->attributes(function($row) {
+                         return [
+                             'class' => 'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
+                         ];
+                     }),
+                 LinkColumn::make('Edit')
+                     ->title(fn($row) => ' ' )
+                     ->location(fn ($row) => route('edit-event', ['eventId' => $row['organizers.event.id']]))
+                     ->attributes(function($row) {
+                         return [
+                             'target' => '_blank',
+                             'class' => ' text-red-500 border border-1 border-black rounded bg-blue-500  fa-solid fa-pen-to-square p-2 hover:no-underline',
+                         ];
+                     }),
+             ])->collapseOnMobile(),
+
 
          ];
 
