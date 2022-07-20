@@ -56,16 +56,16 @@ class UserEventsTable extends DataTableComponent
                   'class' => 'bg-white-ghost text-black',
                 ];
               }
-      
+
              return ['default' => false];
          });
-        
+
     }
 
     public function columns(): array
     {
         return [
-            Column::make("Nombre", "name"),            
+            Column::make("Nombre", "name"),
             Column::make("Id", "id")
                 ->sortable()->collapseOnMobile(),
             Column::make("Estado", 'eventStatus.description')->collapseOnMobile(),
@@ -78,7 +78,7 @@ class UserEventsTable extends DataTableComponent
             ->buttons([
                 LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
                     ->title(fn($row) => ' ')
-                    ->location(fn ($row) => route('evento', ['eventoId' => $row['id']]))
+                    ->location(fn ($row) => route('evento', ['id' => $row['id']]))
                     ->attributes(function($row) {
                         return [
                             'class' =>'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
@@ -86,7 +86,7 @@ class UserEventsTable extends DataTableComponent
                     }),
                 LinkColumn::make('Edit')
                     ->title(fn($row) => ' ' )
-                    ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']]))
+                    ->location(fn ($row) => route('edit-event', ['id' => $row['id']]))
                     ->attributes(function($row) {
                         return [
                             'target' => '_blank',
