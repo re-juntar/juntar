@@ -13,7 +13,7 @@ class ShowEvent extends Component
     public $event;
     public $organizer;
     public $coorganizer;
-    public $open = false;
+    public $openFlyerModal = false;
 
     public function mount($id)
     {

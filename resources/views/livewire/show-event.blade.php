@@ -21,11 +21,11 @@
 <div>
 
     {{-- Flyer Modal --}}
-    <x-jet-dialog-modal wire:model="open">
+    <x-jet-dialog-modal wire:model="openFlyerModal">
         <x-slot name="content">
             <x-button
                     class="bg-transparent text-black font-extrabold absolute top-4 right-4 z-10 hover:overscroll-auto hover:text-white-ghost"
-                    wire:click="$set('open', false)">X</x-button>
+                    wire:click="$set('openFlyerModal', false)">X</x-button>
 
             <div class="bg-white-ghost p-10">
                 <div class="mt-5">
@@ -42,7 +42,7 @@
                             </x-button>
                         </a>
                     @endif
-                    <x-button wire:click="$set('open', false)" class="ml-2 my-5 text-[1rem]">
+                    <x-button wire:click="$set('openFlyerModal', false)" class="ml-2 my-5 text-[1rem]">
                         Cerrar
                     </x-button>
                 </div>
@@ -122,7 +122,7 @@
                         @endif
                         <div class="my-3">
                             @if ($event['image_flyer'] && $flyerSrc)
-                                <x-button wire:click="$set('open', true)" class="text-[1rem]">
+                                <x-button wire:click="$set('openFlyerModal', true)" class="text-[1rem]">
                                     <i class="fas fa-file-download mr-3"></i>Flyer
                                 </x-button>
                             @else
