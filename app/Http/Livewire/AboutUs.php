@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Helper\Randomize_Members;
+
 use Livewire\Component;
 
 class AboutUs extends Component
 {
-
+    use Randomize_Members;
     public $miembrosv2 = [
         [
             'name' => 'Federico Díaz Aimar',
