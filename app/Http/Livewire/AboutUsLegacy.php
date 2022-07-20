@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Helper\Randomize_Members;
+
 use Livewire\Component;
 
 class AboutUsLegacy extends Component
 {
-
+    use Randomize_Members;
     public $miembros = [
         'DC' => [
             'nombre' => 'Damián Cabrio',
@@ -133,21 +135,6 @@ class AboutUsLegacy extends Component
             'isDev' => false
         ],
     ];
-
-    public function randomize_members($arr)
-    {
-        $keys = array_keys($arr);
-
-        shuffle($keys);
-
-        foreach ($keys as $key) {
-            $new[$key] = $arr[$key];
-        }
-
-        $arr = $new;
-
-        return $arr;
-    }
 
     public function render()
     {

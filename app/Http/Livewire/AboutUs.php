@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Helper\Randomize_Members;
+
 use Livewire\Component;
 
 class AboutUs extends Component
 {
-
+    use Randomize_Members;
     public $miembrosv2 = [
         [
             'name' => 'Federico Díaz Aimar',
@@ -109,21 +111,6 @@ class AboutUs extends Component
             'image' => 'AFL',
         ]
     ];
-
-    public function randomize_members($arr)
-    {
-        $keys = array_keys($arr);
-
-        shuffle($keys);
-
-        foreach ($keys as $key) {
-            $new[$key] = $arr[$key];
-        }
-
-        $arr = $new;
-
-        return $arr;
-    }
 
     public function render()
     {
