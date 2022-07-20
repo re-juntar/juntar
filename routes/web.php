@@ -17,6 +17,7 @@ use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\EventCategoryController;
 use App\Http\Livewire\Backend\EventCategoriesPage;
 use App\Http\Controllers\EventModalityController;
+use App\Http\Controllers\InscriptionController;
 use App\Http\Livewire\Backend\CreateEventModality;
 use App\Http\Livewire\Backend\CreateModality;
 use App\Http\Livewire\Backend\EditModality;
@@ -60,6 +61,8 @@ Route::post('/store-event', [EventController::class, 'store'])->name('store-even
 Route::get('/mis-inscripciones', [EventController::class, 'myInscriptions'])->name('my-inscriptions');
 
 Route::get('/mis-eventos', [EventController::class, 'myEvents'])->name('my-events');
+
+Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir'); 
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {

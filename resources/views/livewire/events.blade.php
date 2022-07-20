@@ -10,11 +10,13 @@
             <h2 class="text-white-ghost uppercase mb-2 font-medium leading-6 text-3xl">Mis eventos creados</h2>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden rounded-lg">
+                    <div class="overflow-hidden rounded-lg m-1">
                         <livewire:user-events-table>
                     </div>
-                    <div class="overflow-hidden rounded-lg">
+                    <h2 class="text-white-ghost mt-11 uppercase mb-5 font-medium leading-6 text-3xl">Eventos donde soy Coorganizador</h2>  
+                    <div class="overflow-hidden rounded-lg  ">
                         <livewire:coorganizer-event-table>
+           
                     </div>
                 </div>
             </div>

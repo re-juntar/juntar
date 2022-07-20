@@ -34,6 +34,31 @@ class UserEventsTable extends DataTableComponent
         $this->setQueryStringDisabled();
 
         $this->setColumnSelectDisabled();
+
+         $this->setComponentWrapperAttributes([
+             'id' => 'eventos',
+             'class' => ' text-black bg-gray-200 p-3',
+           ]);
+
+
+
+         $this->setTrAttributes(function($row, $index) {
+             if ($index % 2 === 0) {
+               return [
+                 'default' => false,
+                 'class' => 'bg-gray-300 text-black',
+               ];
+             }
+             else{
+                return [
+                  'default' => false,
+                  'class' => 'bg-white-ghost text-black',
+                ];
+              }
+      
+             return ['default' => false];
+         });
+        
     }
 
     public function columns(): array
@@ -42,13 +67,13 @@ class UserEventsTable extends DataTableComponent
             LinkColumn::make('')
                 ->title(fn ($row) => 'VER EVENTO')
                 ->location(fn ($row) => route('evento', ['eventoId' => $row['id']])),
-                LinkColumn::make('')
+        LinkColumn::make('')
                 ->title(fn ($row) => 'EDITAR EVENTO')
                 ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']])),
             Column::make("Id", "id")
                 ->sortable(),
             Column::make("Nombre", "name"),
-            Column::make("Nombre Corto", "short_name"),
+            // Column::make("Nombre Corto", "short_name"),
             Column::make("Estado", 'eventStatus.description')
             // Column::make("Nombre Organizador", "user.name"),
             // Column::make("Apellido Organizador", 'user.surname')
@@ -66,7 +91,6 @@ class UserEventsTable extends DataTableComponent
             'disable' => 'Deshabilitar',
             'end' => 'Finalizar',
             'makeDraft' => 'Hacer Borrador',
-            'edit' => 'Editar'
         ];
     }
 

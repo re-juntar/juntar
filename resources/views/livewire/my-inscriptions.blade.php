@@ -10,6 +10,7 @@
             <h2 class="text-white-ghost uppercase mb-2 font-medium leading-6 text-3xl">Mis inscripciones a eventos</h2>
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
+                    <livewire:inscription-table event="{{$eventId}}">
                     <div class="overflow-hidden rounded-lg">
 
                     </div>
