@@ -27,10 +27,13 @@ $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
         <h5 class="text-white-ghost uppercase font-medium text-[16px] md:text-[24px] mb-[0.5rem]"><i class="fa-regular fa-calendar mr-3"></i>{{ $event->start_date }}</h5>
         <h5 class="text-white-ghost uppercase font-medium text-[16px] md:text-[24px] mb-[0.5rem]"><i class="fa-solid fa-location-dot mr-3"></i>{{ $event->modality_description }}</h5>
         <h5 class="text-white-ghost uppercase font-medium text-[20px] mb-[0.5rem]">
-            @if ($endorsementRequest && $endorsementRequest->endorsed)
+            {{-- @if ($endorsementRequest && $endorsementRequest->endorsed)
             <x-verified-badge></x-verified-badge>
-            @endif
+            @endif --}}
 
+            @if ($endorsementRequest && $endorsementRequest->endorsed)
+                @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
+            @endif
     </x-hero>
     <div class="event bg-[#0B0D19] break-words	">
         <div class="event-container max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-7xl mx-auto rounded-[0.25rem] py-[7vh] px-[3vh]">

@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\FrontHome;
-use App\Http\Requests\ImageUploadRequest;
-use App\Models\EndorsementRequest;
-use App\Models\Event;
-use App\Models\EventModality;
-use App\Models\Presentation;
 use App\Models\User;
+use App\Models\Event;
+use App\Models\Presentation;
 use Illuminate\Http\Request;
+use App\Models\AcademicUnits;
+use App\Models\EventModality;
+use App\Http\Livewire\FrontHome;
+use App\Models\EndorsementRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ImageUploadRequest;
 
 class EventController extends Controller
 {
@@ -121,7 +122,8 @@ class EventController extends Controller
         }else{
             $endorsementRequest = $endorsementRequest[0];
         }
-        return view('pages.events.evento', ['event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'hasPermission' => $hasPermission, 'endorsementRequest' => $endorsementRequest]);
+        $academicUnits = AcademicUnits::all();
+        return view('pages.events.evento', ['event' => $event, 'coorganizers' => $coorganizers, 'organizer' => $organizer, 'hasPermission' => $hasPermission, 'endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits]);
     }
 
     /**
