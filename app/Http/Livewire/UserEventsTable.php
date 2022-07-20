@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Controllers\EventController;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Event;
@@ -57,30 +56,18 @@ class UserEventsTable extends DataTableComponent
                   'class' => 'bg-white-ghost text-black',
                 ];
               }
-      
+
              return ['default' => false];
          });
-        
+
     }
 
     public function columns(): array
     {
         return [
             Column::make("Nombre", "name"),
-        //     LinkColumn::make('Accion')
-        //         ->title(fn ($row) => 'VER EVENTO')
-        //         ->location(fn ($row) => route('evento', ['eventoId' => $row['id']]))->collapseOnMobile(),
-        // LinkColumn::make('Accion')                
-        //         ->title(fn ($row) => 'EDITAR EVENTO')
-        //         ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']]))
-        //         ->attributes(fn($row) => [
-        //             'class' => 'rounded-full text-white',
-        //             'alt' => $row->name . ' Avatar',
-        //         ]),             
             Column::make("Id", "id")
                 ->sortable()->collapseOnMobile(),
-            
-            // Column::make("Nombre Corto", "short_name"),
             Column::make("Estado", 'eventStatus.description')->collapseOnMobile(),
             ButtonGroupColumn::make('Acciones')
             ->attributes(function($row) {
@@ -91,7 +78,7 @@ class UserEventsTable extends DataTableComponent
             ->buttons([
                 LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
                     ->title(fn($row) => ' ')
-                    ->location(fn ($row) => route('evento', ['eventoId' => $row['id']]))
+                    ->location(fn ($row) => route('evento', ['id' => $row['id']]))
                     ->attributes(function($row) {
                         return [
                             'class' =>'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
@@ -99,20 +86,14 @@ class UserEventsTable extends DataTableComponent
                     }),
                 LinkColumn::make('Edit')
                     ->title(fn($row) => ' ' )
-                    ->location(fn ($row) => route('edit-event', ['eventId' => $row['id']]))
+                    ->location(fn ($row) => route('edit-event', ['id' => $row['id']]))
                     ->attributes(function($row) {
                         return [
                             'target' => '_blank',
                             'class' => 'text-red-500 border border-1 border-black rounded bg-blue-500  fa-solid fa-pen-to-square p-2 hover:no-underline',
                         ];
                     }),
-            ])->collapseOnMobile(),
-            // Column::make("Nombre Organizador", "user.name"),
-            // Column::make("Apellido Organizador", 'user.surname')
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
+            ])->collapseOnMobile()
         ];
     }
 

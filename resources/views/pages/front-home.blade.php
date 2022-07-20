@@ -31,25 +31,7 @@
         <div class="mx-auto infinite-scr">
             @foreach ($events as $event)
                 <x-card id="{{ $event->id }}" class="grid-item mb-4 md:mx-2 w-[300px]">
-                    {{-- @php
-                    $src = $event['image_flyer'];
-                    if ($event['image_flyer'] == null) {
-                        $src = 'images/public/event-card-placeholder.png';
-                    }
-                    @endphp
-                    <a href="#modal" wire:click="showModal({{ $event }})">
-                        <img class="rounded-lg" src="{{ asset($src) }}" alt="">
-                        <x-verified-badge class="absolute top-4 right-4 z-10" />
-                    </a> --}}
-
                     @livewire('event-card-responsive', ['event' => $event])
-
-                    {{-- <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
-                        <img class="w-10 h-10 rounded-full mr-2" src="{{ $event->user->profile_photo_url }}">
-                        <div class="font-bold text-xl uppercase text-white-ghost py-4">
-                            {{$event->user->name}} {{$event->user->surname}}
-                        </div>
-                    </div> --}}
                 </x-card>
             @endforeach
         </div>
