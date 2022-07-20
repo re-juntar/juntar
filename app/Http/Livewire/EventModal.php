@@ -4,13 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Event;
 use Livewire\Component;
-use App\Models\Presentation;
 
 class EventModal extends Component
 {
     public $open = false;
 
-    protected $listeners = ['showModal' => 'openModal'];
+    protected $listeners = ['showFrontHomeEventModal' => 'openModal'];
 
     public $event;
 
