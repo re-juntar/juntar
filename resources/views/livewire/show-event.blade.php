@@ -158,7 +158,7 @@
                     <div class="status w-full md:w-4/12 px-[15px]">
                         @if($event->pre_registration)
 
-                            @if($today < $inscription_end_date)
+                            @if($today > $inscription_end_date)
                             <a href="{{route('preinscripcionform', $event->id)}}"><x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button></a>
                             <p>Fecha limite: {{ $event->inscription_end_date }}</p>
                             @endif
@@ -166,7 +166,7 @@
                         @else
 
                             @if($today < $end_date)
-                               <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
+                            <a href="{{route('inscribir', $event->id )}}"> <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button></a>
                             @endif
 
                         @endif

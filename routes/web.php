@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\InscriptionController;
 
 // Livewire Front
 use App\Http\Livewire\FrontHome;
@@ -48,6 +49,8 @@ Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuild
 Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
 
 Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
+
+Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
