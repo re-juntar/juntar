@@ -28,6 +28,8 @@ use App\Http\Livewire\Backend\RolesPage;
 
 Route::get('/', FrontHome::class)->name('home');
 
+Route::get('/home', FrontHome::class);
+
 Route::get('/sobre-nosotros', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::get('/crear-evento', [EventController::class, 'create'])->name('create-event');

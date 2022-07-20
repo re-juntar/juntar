@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Livewire\Component;
 use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class EventController extends Component
+class EventController extends Controller
 {
     /**
      * Show the form for creating a new resource.
