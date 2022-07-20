@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Inscription;
-use App\Models\Presentation;
 use Illuminate\Database\Eloquent\Builder;
 
 class PreinscriptionTable extends DataTableComponent
@@ -39,12 +38,6 @@ class PreinscriptionTable extends DataTableComponent
             Column::make("Apellido", "user.surname"),
             Column::make("DNI", "user.dni"),
             Column::make("Fecha", "pre_inscription_date")
-            // Column::make("Id", "id")
-            //     ->sortable(),
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
         ];
     }
 

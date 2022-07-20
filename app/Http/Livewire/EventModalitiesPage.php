@@ -11,16 +11,9 @@ class EventModalitiesPage extends Component
     public $open = false;
     public $description;
 
-    // public $listener = ['render' => 'render'];
-
     protected $rules = [
         'description' => 'required|string|min:4',
     ];
-
-    // public function mount()
-    // {
-    //     $this->eventModality = new EventModality();
-    // }
 
     public function updated($propertyName)
     {
