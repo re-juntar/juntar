@@ -9,6 +9,7 @@ use App\Models\Presentation;
 class EventCardResponsive extends Component
 {
     public $event;
+    public $academicUnits;
 
     public function render()
     {

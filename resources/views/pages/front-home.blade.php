@@ -23,7 +23,7 @@
                         <x-verified-badge class="absolute top-4 right-4 z-10" />
                     </a> --}}
 
-                    @livewire('event-card-responsive', ['event' => $event])
+                    @livewire('event-card-responsive', ['event' => $event, 'academicUnits' => $academicUnits])
 
                     {{-- <div class="flex items-center bg-fogra-darkish rounded-lg mt-1">
                         <img class="w-10 h-10 rounded-full mr-2" src="{{ $event->user->profile_photo_url }}">
@@ -41,7 +41,7 @@
         </div>
     </section>
 
-    @livewire('event-modal')
+    @livewire('event-modal', ['academicUnits' => $academicUnits])
 
     <x-slot name="pageScripts">
         <script src="{{ asset('vendor/masonry.pkgd.js') }}"></script>

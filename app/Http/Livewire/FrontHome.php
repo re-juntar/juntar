@@ -6,6 +6,7 @@ use App\Models\Event;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
+use App\Models\AcademicUnits;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PermissionController;
 
@@ -17,6 +18,7 @@ class FrontHome extends Component
     {
         $eventController = new EventController();
         $events = $eventController->homeRequest($request);
-        return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
+        $academicUnits = AcademicUnits::all();
+        return view('pages.front-home', ['events' => $events, 'academicUnits' => $academicUnits])->layout(\App\View\Components\AppLayout::class);
     }
 }

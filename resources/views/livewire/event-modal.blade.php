@@ -62,9 +62,14 @@
 
                         <h3 class="font-bold mt-4">Modalidad: {{$event->eventModality->description}}</h3>
 
-                        @if(!is_null($event->endorsementRequest))
-                            @if($event->endorsementRequest->endorsed)
-                                <x-verified-badge class="mt-4" />
+                        @php
+                            $endorsementRequest = $event->endorsementRequest;
+                        @endphp
+                        @if(!is_null($endorsementRequest))
+                            @if($endorsementRequest->endorsed)
+                                <div class="mt-4">
+                                    @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
+                                </div>
                             @endif
                         @endif
 
