@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Livewire\FrontHome;
 use App\Models\Event;
+use App\Models\AcademicUnits;
+use App\Models\EndorsementRequest;
 
 class ShowEvent extends Component
 {
@@ -51,6 +53,15 @@ class ShowEvent extends Component
             return redirect()->action(FrontHome::class);
         }
 
-        return view('livewire.show-event', ['event' => $this->event, 'coorganizers' => $this->coorganizers, 'organizer' => $this->organizer, 'hasPermission' => $hasPermission])->layout(\App\View\Components\AppLayout::class);
+        // Endorsements
+        $endorsementRequest = EndorsementRequest::where('event_id', $this->event->id)->get('endorsement_requests.*');
+        if(count($endorsementRequest) == 0){
+            $endorsementRequest = null;
+        }else{
+            $endorsementRequest = $endorsementRequest[0];
+        }
+        $academicUnits = AcademicUnits::all();
+
+        return view('livewire.show-event', ['event' => $this->event, 'coorganizers' => $this->coorganizers, 'organizer' => $this->organizer, 'hasPermission' => $hasPermission,  'endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])->layout(\App\View\Components\AppLayout::class);
     }
 }

@@ -59,9 +59,9 @@
         <h5 class="text-white-ghost uppercase font-medium text-[16px] md:text-[24px] mb-[0.5rem]"><i class="fa-regular fa-calendar mr-3"></i>{{ $event->start_date }}</h5>
         <h5 class="text-white-ghost uppercase font-medium text-[16px] md:text-[24px] mb-[0.5rem]"><i class="fa-solid fa-location-dot mr-3"></i>{{ $event->modality_description }}</h5>
         <h5 class="text-white-ghost uppercase font-medium text-[20px] mb-[0.5rem]">
-            @if ($event->endorsed)
-                <x-verified-badge></x-verified-badge>
-            @endif
+        @if ($endorsementRequest && $endorsementRequest->endorsed)
+            @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
+        @endif
     </x-hero>
 
     <div class="event bg-[#0B0D19] break-words">
@@ -82,18 +82,21 @@
                 @if ($hasPermission)
                     <x-pink-header  ader class="h-[50px]" style="justify-content: start">
                         <a href="{{route('edit-event', $event->id)}}">
-                            <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-pen"></i> Editar
+                            <x-button class="h-full hover:bg-fogra-darkish">
+                                <i class="fa-solid fa-pen"></i>Editar
                             </x-button>
                         </a>
 
                         <a href="{{route('inscriptions', $event->id)}}">
-                            <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-eye"></i> Ver Inscriptos
+                            <x-button class="h-full hover:bg-fogra-darkish">
+                                <i class="fa-solid fa-eye"></i>Ver Inscriptos
                             </x-button>
                         </a>
 
                         @if($event->pre_registration)
                             <a href="{{ route('formbuilder', $event->id) }}">
-                                <x-button class="h-full hover:bg-fogra-darkish"><i class="fa-solid fa-clipboard"></i>
+                                <x-button class="h-full hover:bg-fogra-darkish">
+                                    <i class="fa-solid fa-clipboard"></i>
                                     @if(count($event->questions) == 0)
                                         Crear formulario de preinscipción
                                     @else
@@ -102,6 +105,18 @@
                                 </x-button>
                             </a>
                         @endif
+
+                        @if (!$endorsementRequest)
+                            @livewire('endorsement-button')
+                            @livewire('choose-endorsement', ['event' => $event])
+                        @elseif ($endorsementRequest->endorsed == 1)
+
+                        @elseif ($endorsementRequest->endorsed === 0)
+                            <h2 class="">La solicitud de aval fue rechazada</h2>
+                        @elseif ($endorsementRequest->endorsed === null)
+                            <h2 class="">La solicitud de aval ya fue enviada</h2>
+                        @endif
+
                     </x-pink-header>
                 @endif
 
