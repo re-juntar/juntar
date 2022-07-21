@@ -19,11 +19,15 @@ class ShowEvent extends Component
 
     public function mount($id)
     {
-        $this->event = Event::join('event_modalities', 'event_modalities.id', '=', 'events.event_modality_id')
+        $event = Event::join('event_modalities', 'event_modalities.id', '=', 'events.event_modality_id')
             ->join('event_categories', 'event_categories.id', '=', 'events.event_category_id')
             ->join('event_statuses', 'event_statuses.id', '=', 'events.event_status_id')
             ->where('events.id', $id)
-            ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description'])[0];
+            ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description']);
+
+        if (count($event) === 0) abort(404);
+
+        $this->event = $event[0];
         $this->organizer = $this->event->user;
         $this->coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')

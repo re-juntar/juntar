@@ -12,17 +12,13 @@ class EventsPage extends Component
     {
         $permission = [];
         $permissionController = new PermissionController();
-        if ($permissionController->isLogged()) {
-            $permission = $permissionController->isAdmin();
-            if ($permission['admin']) {
-                return view('pages.backend.events')->layout('layouts.back');
-                // return $this->render();
-            } else {
-                $events = Event::paginate(25);
-                return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
-            }
-        } else {
-            return view('livewire.backend.login-back');
+        $permission = $permissionController->isAdmin();
+
+        if (!$permission['admin']) {
+            $events = Event::paginate(25);
+            return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
         }
+
+        return view('pages.backend.events')->layout('layouts.back');
     }
 }
