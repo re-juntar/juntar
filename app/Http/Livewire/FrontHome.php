@@ -2,13 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Event;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use App\Models\AcademicUnits;
 use App\Http\Controllers\EventController;
-use App\Http\Controllers\PermissionController;
 
 class FrontHome extends Component
 {

@@ -28,4 +28,10 @@ class Inscription extends Model
     {
         return $this->hasOne('App\Models\Answer');
     }
+
+    public function store(Event $event, $userid){
+        
+    }
+
+
 }

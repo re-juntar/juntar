@@ -35,12 +35,6 @@ class InscriptionTable extends DataTableComponent
             Column::make("Apellido", "user.surname"),
             Column::make("DNI", "user.dni"),
             Column::make("Fecha", "inscription_date")
-            // Column::make("Id", "id")
-            //     ->sortable(),
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
         ];
     }
 
