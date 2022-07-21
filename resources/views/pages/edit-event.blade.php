@@ -16,12 +16,6 @@
                         <input hidden id="hiddenDate" value="{{ $event->inscription_end_date }}">
                         <input id="hiddenVenue" hidden value="{{ $event->venue }}">
                         <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
-                        <!-- <div class="mb-4">
-                                          <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
-                                          </select>
-                                        </div> -->
-
-
 
                         {{-- Nombre --}}
                         <p class="text-3xl text-red-600">Falta el event-store para tener la accion de crear evento y
@@ -157,12 +151,8 @@
                                 </div>
                             @enderror
                         </div>
-                        {{-- </div> --}}
                         {{-- Ingresar Numero de Participantes --}}
                         <div id='amount-of-participants-container' class='mt-2'>
-                            {{-- @if ($event->capacity != -1)
-                            <input id='amount-of-participants' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] w-full mb-[1rem]' name='capacity' value="{{$event->capacity}}" type='number' min='1'/>
-                        @endif --}}
                         </div>
                         @error('participants-limit')
                             <div class="flex items-center">

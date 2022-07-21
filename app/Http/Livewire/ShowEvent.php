@@ -33,8 +33,9 @@ class ShowEvent extends Component
 
     public function render()
     {
-        $hasPermission = false;
 
+        // Check for user permissions to update event data
+        $hasPermission = false;
         if (!is_null(Auth::user())) {
             $userId = Auth::user()->id;
             if ($userId == $this->event->user_id) {
@@ -62,6 +63,14 @@ class ShowEvent extends Component
         }
         $academicUnits = AcademicUnits::all();
 
-        return view('livewire.show-event', ['event' => $this->event, 'coorganizers' => $this->coorganizers, 'organizer' => $this->organizer, 'hasPermission' => $hasPermission,  'endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])->layout(\App\View\Components\AppLayout::class);
+        return view('livewire.show-event',
+        [
+            'event' => $this->event,
+            'coorganizers' => $this->coorganizers,
+            'organizer' => $this->organizer,
+            'hasPermission' => $hasPermission,
+            'endorsementRequest' => $endorsementRequest,
+            'academicUnits' => $academicUnits
+        ])->layout(\App\View\Components\AppLayout::class);
     }
 }

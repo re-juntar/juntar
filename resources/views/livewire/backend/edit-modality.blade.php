@@ -3,10 +3,7 @@
         <livewire:backend.event-modalities />
         <div class="sm:flex sm:items-center">
             <div class="mt-4 ">
-                {{-- <a href="{{ route('addModality') }}"> --}}
                 <x-button wire:click="$set('open',true)">Agregar Modalidad</x-button>
-                {{-- </a> --}}
-
             </div>
 
         </div>

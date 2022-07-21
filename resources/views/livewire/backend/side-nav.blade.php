@@ -67,18 +67,6 @@
                         {{ __('Roles') }}
                     </x-backend.side-nav-link>
                 </li>
-                {{-- <li class="relative">
-                    <x-backend.dropdown>
-                        <x-slot name="dropName">
-                            {{ __('Dropdown') }}
-                        </x-slot>
-                        <x-slot name="links">
-                            <x-backend.side-nav-link>
-                                {{ __('Link ') }}
-                            </x-backend.side-nav-link>
-                        </x-slot>
-                    </x-backend.dropdown>
-                </li> --}}
             </ul>
             <div class="bg-fogra-dark text-center bottom-0 absolute w-full">
                 <hr class="border-awesome m-0">
@@ -92,7 +80,6 @@
                     </x-slot>
                     <x-slot name="links">
                         <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}"
-                            {{-- :active="request()->routeIs('')" --}}>
                             {{ __('Perfil') }}
                         </x-backend.side-nav-link>
                         <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">
