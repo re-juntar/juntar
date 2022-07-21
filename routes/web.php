@@ -66,13 +66,11 @@ Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store')
 Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
     Route::get('/', BackHome::class)->name('back-home');
 
-    Route::get('/event-category', EventCategoriesPage::class)->name('event-category');
-
-    Route::get('/', BackHome::class)->name('back-home');
-
     Route::get('/usuarios', UsersPage::class)->name('users');
 
     Route::get('/eventos', EventsPage::class)->name('events');
+
+    Route::get('/categorias', EventCategoriesPage::class)->name('event-category');
 
     Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
@@ -81,8 +79,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
     Route::get('/modalidades/agregar', CreateModality::class)->name('addModality');
 
     Route::get('/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
-
-    Route::get('/avales', EndorsementsPage::class)->name('endorsements');
 
     Route::get('/roles', RolesPage::class)->name('roles');
 });
