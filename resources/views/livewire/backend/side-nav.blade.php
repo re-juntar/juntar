@@ -79,7 +79,7 @@
                         </div>
                     </x-slot>
                     <x-slot name="links">
-                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}"
+                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}">
                             {{ __('Perfil') }}
                         </x-backend.side-nav-link>
                         <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">
