@@ -31,7 +31,7 @@
         <div class="mx-auto infinite-scr">
             @foreach ($events as $event)
                 <x-card id="{{ $event->id }}" class="grid-item mb-4 md:mx-2 w-[300px]">
-                    @livewire('event-card-responsive', ['event' => $event])
+                    @livewire('event-card-responsive', ['event' => $event, 'academicUnits' => $academicUnits])
                 </x-card>
             @endforeach
         </div>

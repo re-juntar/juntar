@@ -109,6 +109,14 @@
                         @if (!$endorsementRequest)
                             @livewire('endorsement-button')
                             @livewire('choose-endorsement', ['event' => $event])
+
+                            {{-- <form method="POST" action="{{route('avales')}}" class="inline-block" enctype="multipart/form-data">
+                                @csrf_token
+                                <input type="hidden" for="eventId" name="eventId" id="eventId" value="{{$event->id}}">
+                                <x-button class="h-full hover:bg-fogra-darkish" type=submit> Solicitar aval
+                                </x-button>
+                            </form> --}}
+
                         @elseif ($endorsementRequest->endorsed == 1)
 
                         @elseif ($endorsementRequest->endorsed === 0)
