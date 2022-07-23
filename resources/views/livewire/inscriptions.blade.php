@@ -1,5 +1,5 @@
 
-<x-app-layout>
+
     <x-hero>
         <img class="max-w-full h-auto mb-4" src="{{ asset('images/logos/juntar-logo-w.svg') }}" alt="" />
         <h5 class="text-white-ghost uppercase font-medium text-xl mb-4">Sistema de gestión de eventos</h5>
@@ -20,4 +20,4 @@
             </div>
         </div>
     </section>
-</x-app-layout>
+
