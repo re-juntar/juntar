@@ -4,7 +4,7 @@
         <div class="create-event bg-[#0B0D19]">
             <div
                 class="create-event-container max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto rounded-[0.25rem] py-[3vh] px-[3vh]">
-                <x-pink-header>Editar Evento NOMBRE_EVENTO</x-pink-header>
+                <x-pink-header>Editar Evento {{$event->name}}</x-pink-header>
                 <div class="create-event-body bg-[#EFEFEF] p-[1.25rem]">
                     <p class="text-center mb-4">Cambie la informacion que desee y luego aplique los cambios con el boton de
                         "Guardar Cambios" que se encuentra al final del formulario.</p>
@@ -24,8 +24,6 @@
 
 
                         {{-- Nombre --}}
-                        <p class="text-3xl text-red-600">Falta el event-store para tener la accion de crear evento y
-                            create-event para tener lo de los coorganizadores y arreglos no pusheados en dev</p>
                         <div class="mb-4">
                             <x-input id='name' class="w-full" type='text' name='name'
                                 placeholder="Ingrese Nombre" value="{{ old('name', $event->name) }}" />
@@ -205,7 +203,7 @@
                             @enderror
                         </div>
                         {{-- Codigo Acreditacion --}}
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <x-label for="acreditation-code">Código Acreditación *</x-label>
                             <x-input id="acreditation-code" type="text" name="acreditation-code"
                                 placeholder='Ingrese código de acreditación'
@@ -215,7 +213,7 @@
                                     <p class="text-red-600">* {{ $message }}</p>
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
                         <p class="italic mb-[1rem]">Recordar: Los campos marcados con (*) son obligatorios.</p>
                         {{-- Cargar --}}
                         <x-button class="text-[13px]" type="submit"> Guardar Cambios </x-button>

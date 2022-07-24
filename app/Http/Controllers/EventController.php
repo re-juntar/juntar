@@ -34,25 +34,25 @@ class EventController extends Controller
     public function store(ImageUploadRequest $request, Event $event)
     {
         $event->storeEvent($request)->storeMedia($request);
-            $eventId = Event::max('id');
-            if (isset($request->coorganizer1)) {
-                $orgController1 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer1)->first();
-                $orgController1->store($user->id, $eventId);
-            }
+        $eventId = Event::max('id');
+        if (isset($request->coorganizer1)) {
+            $orgController1 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer1)->first();
+            $orgController1->store($user->id, $eventId);
+        }
 
-            if (isset($request->coorganizer2)) {
-                $orgController2 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer2)->first();
-                $orgController2->store($user->id, $eventId);
-            }
+        if (isset($request->coorganizer2)) {
+            $orgController2 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer2)->first();
+            $orgController2->store($user->id, $eventId);
+        }
 
-            if (isset($request->coorganizer3)) {
-                $orgController3 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer3)->first();
-                $orgController3->store($user->id, $eventId);
-            }
-            return redirect('evento/' . $eventId);
+        if (isset($request->coorganizer3)) {
+            $orgController3 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer3)->first();
+            $orgController3->store($user->id, $eventId);
+        }
+        return redirect('evento/' . $eventId);
     }
 
     /**
@@ -64,7 +64,11 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrfail($id);
-        return view('pages.edit-event', ['event' => $event]);
+        /* list($startDateDay, $startDateMonth, $startDateYear) = explode("/", $event->start_date);
+        list($endDateDay, $endDateMonth, $endDateYear) = explode("/", $event->end_date);
+        $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
+        $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay; */
+        return view('pages.edit-event', ['event' => $event, /* 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate */]);
     }
 
     /**
