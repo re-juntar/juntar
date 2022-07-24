@@ -78,6 +78,7 @@ class InscriptionTable extends DataTableComponent
 
     public function unsubscribe()
     {
+        
         $inscription = Inscription::find($this->getSelected());
         $event = Event::findOrFail($this->event);
         if ($event->pre_registration) {
