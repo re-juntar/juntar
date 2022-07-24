@@ -71,6 +71,7 @@
                         {{-- Nombre Corto --}}
                         <div class="mb-4">
                             <x-label for="short-name">Nombre corto del evento *</x-label>
+                            <div id="automaticSlug" class=" nombresCortos"></div>
                             <x-input id="short-name" class="w-full" type="text" name="short-name"
                                 placeholder='Ingrese nombre corto' value="{{ old('short-name') }}" />
                             @error('short-name')
@@ -82,8 +83,8 @@
                         <div class="mb-4">
                             <x-label for="description">Descripcion *</x-label>
                             <textarea id="description" class="block w-full" name="description" rows="10">
-                {{ old('description') }}
-              </textarea>
+                                {{ old('description') }}
+                            </textarea>
                             @error('description')
                                 <div class="flex items-center">
                                     <p class="text-red-600">{{ $message }}</p>
@@ -295,3 +296,95 @@
         </script>
     </x-slot>
 </x-app-layout>
+
+<script>
+    function generarOpcionesNombreCorto(nombreEvento) {
+    $('#automaticSlug').append(generarSlug(nombreEvento));
+    $('#automaticSlug').append(generarInicialesYear(nombreEvento));
+    $('#automaticSlug').append(generarCortoYear(nombreEvento));
+    $('#automaticSlug').append('<div class="col-12"><input type="radio" id="otro" name="shortName" value=""> <label for="otro">Otro: </label></div>');
+}
+
+function generarSlug(nombreEvento) {
+    var slug = nombreEvento.toLowerCase()
+            .replace(/[^\w ]+/g, '') //reemplaza caracteres alfanumericos
+            .replace(/ +/g, '-'); //
+
+    var html = '<div class="col-12"> <input type="radio" id="opc1" name="shortName" value="' + slug + '"> '
+            + '<label for="opc1"> ' + slug + '</label> </div>';
+    return html;
+}
+
+function generarInicialesYear(nombreEvento) {
+    var year = new Date().getFullYear();
+    var inicialesYear = nombreEvento.match(/\b(\w)/g)
+            .join('');
+    inicialesYear += year;
+    var html = '<div class="col-12"><input type="radio" id="opc2" name="shortName" value="' + inicialesYear + '"> '
+            + '<label for="opc2"> ' + inicialesYear + '</label>  </div>';
+    return html;
+}
+
+function generarCortoYear(nombreEvento) {
+    var year = new Date().getFullYear();
+    var cortoYear = year;
+//    cortoYear += "-" + nombreEvento.split(' ').slice(0, 2).join('-');
+    cortoYear += "-" + nombreEvento.toLowerCase().replace(/[^\w ]+/g, '') //reemplaza caracteres alfanumericos
+            .replace(/ +/g, '-').split('-').slice(0, 2).join('-')
+    //
+    var html = '<div class="col-12">  <input type="radio" id="opc3" name="shortName" value="' + cortoYear + '"> '
+            + '<label for="opc3"> ' + cortoYear + '</label>  </div>';
+    return html;
+}
+function generarOpcionesNombreCorto(nombreEvento) {
+    $('#automaticSlug').append(generarSlug(nombreEvento));
+    $('#automaticSlug').append(generarInicialesYear(nombreEvento));
+    $('#automaticSlug').append(generarCortoYear(nombreEvento));
+    $('#automaticSlug').append('<div class="col-12"><input type="radio" id="otro" name="shortName" value=""> <label for="otro">Otro: </label></div>');
+}
+    // nameInput = document.getElementById("name");
+    // nameInput.addEventListener("input", () => console.log(nameInput.value));
+    // console.log(nameInput.value);
+        //generar opciones de nombres cortos automaticamente
+
+    $('#name').keyup(function () {
+        $('#automaticSlug').html("");
+        if($(this).val() != "") {
+            generarOpcionesNombreCorto(eliminarDiacriticos($(this).val()));
+            
+        } /* else {
+
+            $('#automaticSlug').html("");
+        } */
+        
+    });
+    function eliminarDiacriticos(texto) {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+}
+    //    $('#evento-descripcionevento').click(function () {
+    //        alert($('#short-name').val());
+    //    });
+
+    //seleccion de nombres cortos
+    $(document).on('click', '.nombresCortos input:radio', function () {
+        if ($(this).attr('id') !== 'otro') {
+            $('#short-name').prop('readonly', true);
+            $('#short-name').prop( "disabled", true );;
+            $('#short-name').addClass('text-[#123123]');
+            $('#short-name').val($(this).val());
+        } else {
+            $('#short-name').prop('readonly', false);
+            $('#short-name').prop( "disabled", false );;
+
+        }
+    });
+        //Permite quitar la imagen logo cargada en el input file del formulario de carga y edicion
+    $("#remove-logo").click(function () {
+        $("#logo").val(null);
+    });
+
+    //Permite quitar la imagen flyer cargada en el input file del formulario de carga y edicion
+    $("#remove-flyer").click(function () {
+        $("#flyer").val(null);
+    });
+</script>
