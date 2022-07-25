@@ -21,7 +21,7 @@ return new class extends Migration
             //   ~> AcademicUnitUser::all()->where('user_id', $this->user->id);
             //   fails when re-opening the modal, laravel replaces 'user_id' by 'id'
             //   and fails since 'id' didn't existed in this table, hence the redundancy.
-            $table->foreignId('id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('id')->nullable()->onDelete('set null');
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('academic_unit_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();

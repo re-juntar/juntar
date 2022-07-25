@@ -182,12 +182,10 @@
 
                     <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
                         @if($event->pre_registration)
-                            @if($today > $inscription_end_date)
                                 <a href="{{route('preinscripcionform', $event->id)}}">
                                     <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
                                 </a>
                                 <p>Fecha limite: {{ $event->inscription_end_date }}</p>
-                            @endif
                         @else
                             @if($today < $end_date)
                                 <a href="{{route('inscribir', $event->id )}}">

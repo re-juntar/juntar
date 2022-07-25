@@ -40,7 +40,7 @@ class ShowEvent extends Component
         // Check for user permissions to update event data
         $hasPermission = false;
 
-        $userId = Auth::user()->id;
+        $userId = Auth::user() ? Auth::user()->id : null;
         if ($userId == $this->event->user_id) {
             $hasPermission = true;
         }
