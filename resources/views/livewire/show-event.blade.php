@@ -80,16 +80,16 @@
 
                 {{-- Edit Event Nav --}}
                 @if ($hasPermission)
-                    <x-pink-header  ader class="h-[50px]" style="justify-content: start">
+                    <x-pink-header header class="h-[50px]" style="justify-content: start">
                         <a href="{{route('edit-event', $event->id)}}">
                             <x-button class="h-full hover:bg-fogra-darkish">
-                                <i class="fa-solid fa-pen"></i>Editar
+                                <i class="fa-solid fa-pen"></i> Editar
                             </x-button>
                         </a>
 
                         <a href="{{route('inscriptions', $event->id)}}">
                             <x-button class="h-full hover:bg-fogra-darkish">
-                                <i class="fa-solid fa-eye"></i>Ver Inscriptos
+                                <i class="fa-solid fa-eye"></i> Ver Inscriptos
                             </x-button>
                         </a>
 
@@ -155,10 +155,10 @@
                             @endif
                         </div>
                     </div>
-                    <div class="event-flyer-and-logo py-[1rem] flex flex-col items-center justify-center md:flex w-full md:w-4/12">
-                        <div class="event-logo pt-[0.5rem]">
+                    <div class="event-flyer-and-logo flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                        <div class="event-logo">
                             @if ($event['image_logo'])
-                                <img class="rounded-lg max-w-[50%] mx-auto" src="{{ asset($logoSrc) }}" alt="Logo {{ $event->name }}">
+                                <img class="rounded-lg max-w-[80%] mx-auto" src="{{ asset($logoSrc) }}" alt="Logo {{ $event->name }}">
                             @else
                                 {{ $logoSrcNull }}
                             @endif
@@ -167,33 +167,34 @@
                 </div>
 
                 {{-- Details on event, dates and inscription limits --}}
-                <div class="event-body-inscription flex flex-col md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
-                    <div class="quota flex items-center w-full md:w-8/12 px-[15px]">
+                <div class="event-body-inscription px-[15px] flex justify-between md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
+                    <div class="flex flex-col items-center justify-center md:flex">
                         @if ($event->capacity > 0)
                             <p class="text-[1rem]">CUPOS DISPONIBLES: {{ $event->capacity }}
-                                @else
+                        @else
                             <p class="text-[1rem]">CUPOS ILIMITADOS</p>
                         @endif
+
                         @if ($event->pre_registration && $event->inscription_end_date)
                             <span class="text-[#ff0000] font-bold">&nbsp;*Requiere pre-inscripción* </span></p>
                         @endif
                     </div>
-                    <div class="status w-full md:w-4/12 px-[15px]">
+
+                    <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
                         @if($event->pre_registration)
-
                             @if($today > $inscription_end_date)
-                            <a href="{{route('preinscripcionform', $event->id)}}"><x-button class="bg-cyan-500 mr-2 text-[16px]">Preinscribirse</x-button></a>
-                            <p>Fecha limite: {{ $event->inscription_end_date }}</p>
+                                <a href="{{route('preinscripcionform', $event->id)}}">
+                                    <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
+                                </a>
+                                <p>Fecha limite: {{ $event->inscription_end_date }}</p>
                             @endif
-
                         @else
-
                             @if($today < $end_date)
-                            <a href="{{route('inscribir', $event->id )}}"> <x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button></a>
+                                <a href="{{route('inscribir', $event->id )}}">
+                                    <x-button class="bg-cyan-50 text-[16px]">Inscribirse</x-button>
+                                </a>
                             @endif
-
                         @endif
-
                     </div>
                 </div>
 
@@ -215,7 +216,7 @@
                     </div>
 
                     {{-- More event info on the right side --}}
-                    <div class="more-event-info w-full md:w-4/12 xl:w-3/12  text-white-ghost px-[15px] bg-[#0B0D19]">
+                    <div class="more-event-info flex flex-col items-center justify-center md:flex w-full md:w-4/12 xl:w-3/12  text-white-ghost px-[15px] bg-[#0B0D19]">
                         <ul class=" flex flex-col justify-center items-start w-10/12 mx-auto text-[1rem]">
                             <li class="py-[0.75rem]">
                                 <p class="mb-[1rem] font-bold">Fecha de Inicio:</p>
