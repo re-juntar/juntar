@@ -54,7 +54,7 @@ class UserTable extends DataTableComponent
             'revertRole' => 'Default',
             'makeAdmin' => 'Hacer Admin',
             'makeSuperUser' => 'Hacer Super Usuario',
-            'makeValidator' => 'Hacer Validador',
+            'makeValidator' => 'Hacer/Quitar Validador',
         ];
     }
 

@@ -23,14 +23,13 @@
                                         </label>
                                     </div>
                                 @endforeach
-                                Confirmar Unidades academicas que valida el usuario {{ $user->name }}
 
-                                <x-button class="h-full hover:bg-fogra-darkish" type=submit>
+                                <x-button type='submit'>
                                     Confirmar Unidades academicas que valida el usuario {{ $user->name }}
                                 </x-button>
                             @endif
                         </div>
-                      </div>
+                    </div>
                 </form>
             </div>
         </div>
