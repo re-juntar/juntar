@@ -17,9 +17,9 @@
                         <input id="hiddenVenue" hidden value="{{ $event->venue }}">
                         <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
                         <!-- <div class="mb-4">
-                                          <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
-                                          </select>
-                                        </div> -->
+                            <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
+                            </select>
+                        </div> -->
 
 
 
@@ -112,7 +112,7 @@
                         <div class="mb-4">
                             <x-label class="block" for="start-date">Fecha Inicio *</x-label>
                             <x-input class="block" id="start-date" type="date" name="start-date"
-                                value="{{ old('start-date', $event->start_date) }}" />
+                                value="{{ old('start-date', $formatedStartDate) }}" />
                             @error('start-date')
                                 <div class="flex items-center">
                                     <p class="text-red-600">* {{ $message }}</p>
@@ -123,7 +123,7 @@
                         <div class="mb-4">
                             <x-label class="block">Fecha Fin *</x-label>
                             <x-input class="block" id="end-date" type="date" name="end-date"
-                                value="{{ old('end-date', $event->end_date) }}" />
+                                value="{{ old('end-date', $formatedEndDate) }}" />
                             @error('end-date')
                                 <div class="flex items-center">
                                     <p class="text-red-600">* {{ $message }}</p>
@@ -223,8 +223,8 @@
         </div>
         </div>
     @else
-        <script></script>
-        window.location = "/login";
+        <script>
+            window.location = "/login";
         </script>
     @endauth
     <x-slot name="pageScripts">

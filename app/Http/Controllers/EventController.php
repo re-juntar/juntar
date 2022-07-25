@@ -64,11 +64,11 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrfail($id);
-        /* list($startDateDay, $startDateMonth, $startDateYear) = explode("/", $event->start_date);
-        list($endDateDay, $endDateMonth, $endDateYear) = explode("/", $event->end_date);
+        list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
+        list($endDateDay, $endDateMonth, $endDateYear) = explode("-", $event->end_date);
         $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
-        $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay; */
-        return view('pages.edit-event', ['event' => $event, /* 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate */]);
+        $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
+        return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate]);
     }
 
     /**
