@@ -11,12 +11,12 @@
             <section class="my-5 text-4xl text-awesome">
                 Nueva Categoria
             </section>
-                
+
                 <div class="mb-4 form-group">
                     <x-label for="description">Descripcion *</x-label>
                     <x-input class="w-full form-control" type='text' name='description'
                         placeholder="Descripcion" value="{{ old('description') }}" wire:model="description"/>
-                    <x-jet-input-error for='description' class="text-[1rem]"/>      
+                    <x-jet-input-error for='description' class="text-[1rem]"/>
                 </div>
 
                 {{-- Cargar --}}

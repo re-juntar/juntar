@@ -9,6 +9,12 @@ class UserRole extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'user_id';
+
+    protected $fillable = [
+        'role_id',
+    ];
+
     public function user() {
         return $this->belongsTo('App\Models\User');
     }

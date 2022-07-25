@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
+use App\Models\EventStatus;
+use App\Models\AcademicUnit;
 use App\Models\EventCategory;
 use App\Models\EventModality;
-use App\Models\EventStatus;
-use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,12 +20,42 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        /******************************ACACEMIC-UNIT******************************************/
+        $academicUnit1 = new AcademicUnit();
+        $academicUnit1->name = 'Facultad de Informatica';
+        $academicUnit1->short_name = 'FAI';
+        $academicUnit1->image_logo = 'asd';
+        $academicUnit1->save();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $academicUnit2 = new AcademicUnit();
+        $academicUnit2->name = 'Facultad de Economia y Administración';
+        $academicUnit2->short_name = 'FAEA';
+        $academicUnit2->image_logo = 'asd';
+        $academicUnit2->save();
+
+        $academicUnit3 = new AcademicUnit();
+        $academicUnit3->name = 'Facultad de Ingeniería';
+        $academicUnit3->short_name = 'FAIN';
+        $academicUnit3->image_logo = 'asd';
+        $academicUnit3->save();
+
+        $academicUnit4 = new AcademicUnit();
+        $academicUnit4->name = 'Facultad de Humanidades';
+        $academicUnit4->short_name = 'FAHU';
+        $academicUnit4->image_logo = 'asd';
+        $academicUnit4->save();
+
+        $academicUnit5 = new AcademicUnit();
+        $academicUnit5->name = 'Facultad de Ciencias del Ambiente y la Salud';
+        $academicUnit5->short_name = 'FACIAS';
+        $academicUnit5->image_logo = 'asd';
+        $academicUnit5->save();
+
+        $academicUnit6 = new AcademicUnit();
+        $academicUnit6->name = 'Facultad de Turismo';
+        $academicUnit6->short_name = 'FATU';
+        $academicUnit6->image_logo = 'asd';
+        $academicUnit6->save();
         /*******************************ROLES******************************************/
         $role1 = new Role();
         $role1->name = 'super_user';

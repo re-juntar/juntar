@@ -10,19 +10,6 @@ class EventModalitiesPage extends Component
 {
   public function render()
   {
-    $permission = [];
-    $permissionController = new PermissionController();
-    if ($permissionController->isLogged()) {
-      $permission = $permissionController->isAdmin();
-      if ($permission['admin']) {
-        return view('pages.backend.modalities')->layout('layouts.back');
-        // return $this->render();
-      } else {
-        $events = Event::paginate(25);
-        return view('pages.front-home', ['events' => $events])->layout(\App\View\Components\AppLayout::class);
-      }
-    } else {
-      return view('livewire.backend.login-back');
-    }
+    return view('pages.backend.modalities')->layout('layouts.back');
   }
 }
