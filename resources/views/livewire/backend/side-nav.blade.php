@@ -20,65 +20,44 @@
         <nav>
             <ul class="relative px-1 mt-2" :class="{ 'opacity-1': ham, 'opacity-0': !ham }">
                 <li class="relative">
-                    <form>
-                        <div class="flex items-center justify-center py-4 h-12">
-                            <input class="text-base text-gray-400 flex-grow outline-none px-2 rounded-lg" type="text"
-                                placeholder="Buscar" />
-                            <div class="absolute top-3 right-2">
-                                <button type="submit" class="text-black">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </li>
-                <li class="relative">
                     <x-backend.side-nav-link href="{{ route('back-home') }}" :active="request()->routeIs('back-home')">
                         {{ __('Inicio') }}
                     </x-backend.side-nav-link>
                 </li>
-                <li class="relative">
-                    <x-backend.side-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
-                        {{ __('Usuarios ') }}
-                    </x-backend.side-nav-link>
-                </li>
-                <li class="relative">
-                    <x-backend.side-nav-link href="{{ route('events') }}" :active="request()->routeIs('events')">
-                        {{ __('Eventos ') }}
-                    </x-backend.side-nav-link>
-                </li>
-                <li class="relative">
-                    <x-backend.side-nav-link href="{{ route('event-category') }}" :active="request()->routeIs('event-category')">
-                        {{ __('Categorias') }}
-                    </x-backend.side-nav-link>
-                </li>
+                @if($isAdmin)
+                    <li class="relative">
+                        <x-backend.side-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                            {{ __('Usuarios ') }}
+                        </x-backend.side-nav-link>
+                    </li>
+                    <li class="relative">
+                        <x-backend.side-nav-link href="{{ route('events') }}" :active="request()->routeIs('events')">
+                            {{ __('Eventos ') }}
+                        </x-backend.side-nav-link>
+                    </li>
+                    <li class="relative">
+                        <x-backend.side-nav-link href="{{ route('event-category') }}" :active="request()->routeIs('event-category')">
+                            {{ __('Categorias') }}
+                        </x-backend.side-nav-link>
+                    </li>
+                @endif
                 <li class="relative">
                     <x-backend.side-nav-link href="{{ route('endorsements') }}" :active="request()->routeIs('endorsements')">
                         {{ __('Avales ') }}
                     </x-backend.side-nav-link>
                 </li>
-                <li class="relative">
-                    <x-backend.side-nav-link href="{{ route('eventModalities') }}" :active="request()->routeIs('eventModalities')">
-                        {{ __('Modalidades') }}
-                    </x-backend.side-nav-link>
-                </li>
-                <li class="relative">
-                    <x-backend.side-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
-                        {{ __('Roles') }}
-                    </x-backend.side-nav-link>
-                </li>
-                {{-- <li class="relative">
-                    <x-backend.dropdown>
-                        <x-slot name="dropName">
-                            {{ __('Dropdown') }}
-                        </x-slot>
-                        <x-slot name="links">
-                            <x-backend.side-nav-link>
-                                {{ __('Link ') }}
-                            </x-backend.side-nav-link>
-                        </x-slot>
-                    </x-backend.dropdown>
-                </li> --}}
+                @if($isAdmin)
+                    <li class="relative">
+                        <x-backend.side-nav-link href="{{ route('eventModalities') }}" :active="request()->routeIs('eventModalities')">
+                            {{ __('Modalidades') }}
+                        </x-backend.side-nav-link>
+                    </li>
+                    <li class="relative">
+                        <x-backend.side-nav-link href="{{ route('roles') }}" :active="request()->routeIs('roles')">
+                            {{ __('Roles') }}
+                        </x-backend.side-nav-link>
+                    </li>
+                @endif
             </ul>
             <div class="bg-fogra-dark text-center bottom-0 absolute w-full">
                 <hr class="border-awesome m-0">
@@ -91,8 +70,7 @@
                         </div>
                     </x-slot>
                     <x-slot name="links">
-                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}"
-                            {{-- :active="request()->routeIs('')" --}}>
+                        <x-backend.side-nav-link class="text-md" href="{{ route('profile.show') }}">
                             {{ __('Perfil') }}
                         </x-backend.side-nav-link>
                         <x-backend.side-nav-link class="text-md" href="{{ route('home') }}">

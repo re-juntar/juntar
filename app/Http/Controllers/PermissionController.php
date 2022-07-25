@@ -9,19 +9,24 @@ use Illuminate\Support\Facades\Auth;
 
 class PermissionController extends Controller
 {
-    function isAdmin()
+    static function isAdmin()
     {
-        $admin = false;
         if (isset(Auth::user()->id)) {
             $userId = Auth::user()->id;
-
             $role = UserRole::where('user_id', '=', $userId)->first();
-            if ($role->role_id <= 3) {
-                $admin = $role->role_id;
-            }
-        }
 
-        return ['admin' => $admin];
+            return ($role->role_id <= 2);
+        } else return false;
+    }
+
+    static function isValidator()
+    {
+        if (isset(Auth::user()->id)) {
+            $userId = Auth::user()->id;
+            $role = UserRole::where('user_id', '=', $userId)->first();
+
+            return !($role->role_id > 3);
+        } else return false;
     }
 
     function isLogged()

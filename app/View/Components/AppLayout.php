@@ -13,11 +13,13 @@ class AppLayout extends Component
      * @return \Illuminate\View\View
      */
 
-    public $permission;
+    public $isAdmin;
+    public $isValidator;
 
     public function __construct(){
         $permissionController = new PermissionController();
-        $this->permission = $permissionController->isAdmin();
+        $this->isAdmin = $permissionController->isAdmin();
+        $this->isValidator = $permissionController->isValidator();
     }
 
     public function render()

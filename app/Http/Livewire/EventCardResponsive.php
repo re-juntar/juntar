@@ -7,6 +7,7 @@ use Livewire\Component;
 class EventCardResponsive extends Component
 {
     public $event;
+    public $academicUnits;
 
     public function render()
     {

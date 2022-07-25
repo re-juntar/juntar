@@ -11,9 +11,8 @@ class AboutUsController extends Controller
      */
     public function index()
     {
-        $permissionController = new PermissionController();
-        $permission = $permissionController->isAdmin();
+        $isAdmin = PermissionController::isAdmin();
 
-        return view('pages.about-us', compact('permission'));
+        return view('pages.about-us', ['isAdmin' => $isAdmin]);
     }
 }

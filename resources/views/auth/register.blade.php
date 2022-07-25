@@ -37,7 +37,6 @@
                 <x-jet-label for="country" value="{{ __('País (*)') }}" />
                 <x-jet-input id="country" class="block mt-1 w-full" type="text" name="country" :value="old('country')" />
             </div>
-            {{-- <input id="pais" hidden value=""> --}}
 
             <div class="mt-4">
                 <x-jet-label for="province" value="{{ __('Provincia (*)') }}" />

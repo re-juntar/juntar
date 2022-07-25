@@ -89,7 +89,6 @@ class UserEventsTable extends DataTableComponent
                     ->location(fn ($row) => route('edit-event', ['id' => $row['id']]))
                     ->attributes(function($row) {
                         return [
-                            'target' => '_blank',
                             'class' => 'text-red-500 border border-1 border-black rounded bg-blue-500  fa-solid fa-pen-to-square p-2 hover:no-underline',
                         ];
                     }),

@@ -6,6 +6,4 @@
     <div class="container">
         <livewire:inscription-table event="{{$eventId}}">
     </div>
-
-
 </div>
