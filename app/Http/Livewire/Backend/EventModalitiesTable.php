@@ -49,17 +49,8 @@ class EventModalitiesTable extends DataTableComponent
     {
         return [
             'editModality' => 'Modificar',
-            // 'deleteModality' => 'Eliminar',
         ];
     }
-
-    // public function deleteModality()
-    // {
-    //     foreach ($this->getSelected() as $selectedItem) {
-    //         EventModality::where('id', $selectedItem)->delete();
-    //     }
-    //     $this->clearSelected();
-    // }
 
     public function editModality()
     {
