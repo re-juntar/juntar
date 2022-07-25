@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -109,11 +110,14 @@ class EventController extends Controller
 
     public function myInscriptions()
     {
-        $permisssionController = new PermissionController();
-        if ($permisssionController->isLogged()) {
-            return view('livewire.my-inscriptions');
-        } else {
-            return redirect('login');
+        $user = User::find(Auth::user()->id);
+        $events = [];
+
+        foreach ($user->inscriptions as $inscription) {
+            $event = $inscription->event->get();
+            array_push($events, $event);
         }
+
+        return view('livewire.my-inscriptions', ['events' => $events]);
     }
 }
