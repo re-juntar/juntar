@@ -52,8 +52,8 @@
 <body class="font-sans antialiased min-h-screen">
     <x-jet-banner />
 
-    @if (isset($permission))
-        @livewire('nav-bar', ['permission' => $permission])
+    @if (isset($isAdmin) && isset($isValidator))
+        @livewire('nav-bar', ['isAdmin' => $isAdmin, 'isValidator' => $isValidator])
     @endif
 
     <!-- Page Content -->
