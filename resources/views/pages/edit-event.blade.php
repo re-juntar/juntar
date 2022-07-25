@@ -18,8 +18,6 @@
                         <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
 
                         {{-- Nombre --}}
-                        <p class="text-3xl text-red-600">Falta el event-store para tener la accion de crear evento y
-                            create-event para tener lo de los coorganizadores y arreglos no pusheados en dev</p>
                         <div class="mb-4">
                             <x-input id='name' class="w-full" type='text' name='name'
                                 placeholder="Ingrese Nombre" value="{{ old('name', $event->name) }}" />

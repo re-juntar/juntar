@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire\Backend;
 
-use App\Http\Controllers\EventCategoryController;
 use App\Models\EventCategory;
 use Livewire\Component;
-use Illuminate\Http\Request;
 
 class NewEventCategoryModal extends Component
 {
@@ -17,12 +15,12 @@ class NewEventCategoryModal extends Component
     protected $rules = [
         'description' => 'required|string|min:4'];
 
-    
+
     public function render()
     {
         return view('livewire.backend.modal-new-category');
     }
-    
+
     public function showNewCategoryModal()
     {
         $this->open = true;
@@ -31,16 +29,16 @@ class NewEventCategoryModal extends Component
     public function updated($propertyName){
         $this->validateOnly($propertyName,['description' => 'required|string|min:4']);
     }
-     
-    public function submit(){        
+
+    public function submit(){
         $validatedData = $this->validate();
 
         $eventCategory = new EventCategory();
-        
+
         $eventCategory->store($validatedData);
-        
+
         $this->reset('open', 'description');
-        
+
         return redirect()->to('/gestionar/event-category');
     }
 }

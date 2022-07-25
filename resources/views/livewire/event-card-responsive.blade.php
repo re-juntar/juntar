@@ -7,6 +7,7 @@
 
         $endorsementRequest = $event->endorsementRequest;
     @endphp
+
     <img class="rounded-lg" src="{{ asset($src) }}" alt="">
 
     @if(!is_null($endorsementRequest))

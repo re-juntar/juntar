@@ -13,14 +13,12 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 
 class CoorganizerEventTable extends DataTableComponent
-{  
+{
     protected $model = User::class;
 
     public string $tableName = 'coorganizerEvents';
 
     public array $organizerEvents = [];
-
-    
 
     public function configure(): void
     {
@@ -50,7 +48,7 @@ class CoorganizerEventTable extends DataTableComponent
                  'class' => 'bg-white-ghost text-black',
                ];
              }
-     
+
             return ['default' => false];
         });
 
@@ -58,8 +56,6 @@ class CoorganizerEventTable extends DataTableComponent
           'id' => 'eventos',
           'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
         ]);
-        
-
     }
 
     public function builder(): Builder
@@ -68,11 +64,11 @@ class CoorganizerEventTable extends DataTableComponent
     }
 
     public function columns(): array
-    {   
-        
+    {
+
          return [
-            Column::make("Nombre", 'organizers.event.name'),          
-             Column::make("ID", 'organizers.event.id')->collapseOnMobile(),             
+            Column::make("Nombre", 'organizers.event.name'),
+             Column::make("ID", 'organizers.event.id')->collapseOnMobile(),
              Column::make("Estado", "organizers.event.eventStatus.description")->collapseOnMobile(),
              ButtonGroupColumn::make('Acciones')
              ->attributes(function($row) {
@@ -83,7 +79,7 @@ class CoorganizerEventTable extends DataTableComponent
              ->buttons([
                  LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
                      ->title(fn($row) => ' ')
-                     ->location(fn ($row) => route('evento', ['eventoId' => $row['organizers.event.id']]))
+                     ->location(fn ($row) => route('evento', ['id' => $row['organizers.event.id']]))
                      ->attributes(function($row) {
                          return [
                              'class' => 'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
@@ -91,10 +87,9 @@ class CoorganizerEventTable extends DataTableComponent
                      }),
                  LinkColumn::make('Edit')
                      ->title(fn($row) => ' ' )
-                     ->location(fn ($row) => route('edit-event', ['eventId' => $row['organizers.event.id']]))
+                     ->location(fn ($row) => route('edit-event', ['id' => $row['organizers.event.id']]))
                      ->attributes(function($row) {
                          return [
-                             'target' => '_blank',
                              'class' => ' text-red-500 border border-1 border-black rounded bg-blue-500  fa-solid fa-pen-to-square p-2 hover:no-underline',
                          ];
                      }),

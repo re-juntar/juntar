@@ -25,11 +25,15 @@
                 <div
                     class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
                     @if($event->pre_registration)
-                    <a  href="{{route('preinscripcionform', $event->id)}}"> <x-button class="bg-cyan-500 mr-2">Pre Inscribirse</x-button></a>
+                        <a href="{{route('preinscripcionform', $event->id)}}">
+                            <x-button class="bg-cyan-500 mr-2">Pre Inscribirse</x-button>
+                        </a>
                     @else
-                    <a href="{{route('inscribir', $event->id )}}"><x-button class="bg-cyan-500 mr-2">Inscribirse</x-button></a>
+                        <a href="{{route('inscribir', $event->id )}}">
+                            <x-button class="bg-cyan-500 mr-2">Inscribirse</x-button>
+                        </a>
                     @endif
-                    
+
                     <x-button class="mr-2">Flyer</x-button>
                     <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
 
@@ -45,14 +49,14 @@
                         </h2>
 
                         @if(count($event->coorganizers) > 0)
-                        <div class="flex flex-row mt-1">
-                            <h2 class="text-lg font-semibold">Co-organiza: </h2>
-                            <ul class="text-lg ml-1">
-                                @foreach($event->coorganizers as $coorganizer)
-                                    <li>{{$coorganizer->user->name}} {{$coorganizer->user->surname}}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                            <div class="flex flex-row mt-1">
+                                <h2 class="text-lg font-semibold">Co-organiza: </h2>
+                                <ul class="text-lg ml-1">
+                                    @foreach($event->coorganizers as $coorganizer)
+                                        <li>{{$coorganizer->user->name}} {{$coorganizer->user->surname}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         @endif
 
                         <h3 class="font-bold mt-2">Fecha de inicio: {{$event->start_date}}</h3>
@@ -70,6 +74,7 @@
                         @php
                             $endorsementRequest = $event->endorsementRequest;
                         @endphp
+
                         @if(!is_null($endorsementRequest))
                             @if($endorsementRequest->endorsed)
                                 <div class="mt-4">

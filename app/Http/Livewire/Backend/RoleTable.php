@@ -34,11 +34,6 @@ class RoleTable extends DataTableComponent
             Column::make("ID", 'id')->collapseOnMobile(),
             Column::make("Nombre", 'name')->searchable(),
             Column::make("Descripcion", 'description')->searchable()->collapseOnMobile(),
-
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
         ];
     }
 

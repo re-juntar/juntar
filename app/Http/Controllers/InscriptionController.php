@@ -37,41 +37,37 @@ class InscriptionController extends Controller
     {
         $event = Event::findOrFail($eventId);
         $inscripcion = new Inscription();
-        
-        
+
+
         $inscriptos = Inscription::join('events', 'event_id', '=', 'inscriptions.event_id')
             ->join('users', 'users.id', '=', 'inscriptions.user_id')
             ->where('events.id', $eventId)
-            ->get(['users.id']);    
+            ->get(['users.id']);
         if(is_null(Auth::user())) {
             return redirect('login');
         }
         elseif (!is_null(Auth::user()) and count($inscriptos)==0 ) {
             $user = Auth::user();
-            $userId = $user->id;         
-            
+            $userId = $user->id;
+
             $inscripcion->user_id = $userId;
             $inscripcion->event_id = $event->id;
-            $inscripcion->status = 1;                        
-            $inscripcion->pre_inscription_date = date('Y-m-d');            
+            $inscripcion->status = 1;
+            $inscripcion->pre_inscription_date = date('Y-m-d');
             $inscripcion->inscription_date = date('Y-m-d');
             $inscripcion->accreditation = 1;
             $inscripcion->certification = "cetificado";
             $inscripcion->save();
             $arreglocontacto = ["name" => $user->name." ".$user->surname, "evento" =>$event->short_name, "fecha" => $event->start_date];
-            //  "email"=> $user->email,
-            //  "asunto"=> "inscripcion a ".$event->short_name,
-            // "detalle" => "gracias por usar nuestro sistema"];
-            //$nombre =$event->short_name;
             $correo = new InscriptionMail($arreglocontacto);
-            // dd($user->email);
-            Mail::to($user->email)->send($correo);
-            // dd(Mail::to('santiago.avilez@est.fi.uncoma.edu.ar')->send($correo));
-            return redirect('home')->with('message', 'Inscripto al evento correctamente!');  
+
+            if (!Mail::to($user->email)->send($correo)) abort(500);
+
+            return redirect('home')->with('message', 'Inscripto al evento correctamente!');
         }
         elseif (count($inscriptos)>0) {
             return redirect('home')->with('error', '   Ya estas inscripto en este evento!');
-        } 
+        }
     }
 
     /**

@@ -10,22 +10,16 @@ class RoleModal extends Component
 {
   public $open = false;
 
-  protected $listeners = ['showRoleModalEdit' => 'openModalEdit']; 
-   
+  protected $listeners = ['showRoleModalEdit' => 'openModalEdit'];
+
   public $name;
-  public $description; 
+  public $description;
   public $role;
 
   protected $rules = [
     'name' => 'required|string|min:2',
     'description' => 'required|string|min:2',
   ];
-
-  // protected $messages = [
-  //   'name.required' => 'Ingrese una nombre.',
-  //   'description.required' => 'Ingrese una descripcion.',
-  // ];
-
 
   public function render()
   {
@@ -41,14 +35,11 @@ class RoleModal extends Component
 
   public function submit()
   {
-    
     $validatedData = $this->validate();
 
     // Execution doesn't reach here if validation fails.
-    
-      $this->role->update($validatedData);
-      return redirect()->to('/gestionar/roles');
-    
+    $this->role->update($validatedData);
+    return redirect()->to('/gestionar/roles');
   }
 
 

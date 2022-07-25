@@ -23,9 +23,6 @@ return new class extends Migration
             $table->tinyInteger('accreditation');
             $table->string('certification', 200)->nullable();
             $table->timestamps();
-
-            // $table->foreign('users_id')->references('id')->on('users')->onDelete('set null');
-            // $table->foreign('events_id')->references('id')->on('events')->onDelete('set null');
         });
     }
 
