@@ -25,9 +25,9 @@ class EndorsementRequest extends Model
         return $this->belongsTo('App\Models\Event');
     }
 
-    public function academicUnits()
+    public function academicUnit()
     {
-        return $this->belongsTo('App\Models\AcademicUnits');
+        return $this->belongsTo('App\Models\AcademicUnit');
     }
 
     public function user()

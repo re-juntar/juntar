@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Livewire\FrontHome;
 use App\Models\Event;
-use App\Models\AcademicUnits;
+use App\Models\AcademicUnit;
 use App\Models\EndorsementRequest;
 
 class ShowEvent extends Component
@@ -37,23 +37,22 @@ class ShowEvent extends Component
 
     public function render()
     {
-
         // Check for user permissions to update event data
         $hasPermission = false;
-        if (!is_null(Auth::user())) {
-            $userId = Auth::user()->id;
-            if ($userId == $this->event->user_id) {
-                $hasPermission = true;
-            }
 
-            if (!$hasPermission && count($this->coorganizers) > 0) {
-                foreach ($this->coorganizers as $coorganizer) {
-                    if ($coorganizer->id == $userId) {
-                        $hasPermission = true;
-                    }
+        $userId = Auth::user()->id;
+        if ($userId == $this->event->user_id) {
+            $hasPermission = true;
+        }
+
+        if (!$hasPermission && count($this->coorganizers) > 0) {
+            foreach ($this->coorganizers as $coorganizer) {
+                if ($coorganizer->id == $userId) {
+                    $hasPermission = true;
                 }
             }
         }
+
         if (($this->event->status_description == "Draft" || $this->event->status_description == "Disabled") && !$hasPermission) {
             return redirect()->action(FrontHome::class);
         }
@@ -65,7 +64,7 @@ class ShowEvent extends Component
         }else{
             $endorsementRequest = $endorsementRequest[0];
         }
-        $academicUnits = AcademicUnits::all();
+        $academicUnits = AcademicUnit::all();
 
         return view('livewire.show-event',
         [

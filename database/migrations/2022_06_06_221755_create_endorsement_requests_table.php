@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('endorsement_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('event_id')->nullable()->constrained()->onDelete('set null');
-            $table->unsignedBigInteger('academic_units_id')->nullable();
+            $table->unsignedBigInteger('academic_unit_id')->nullable();
             $table->timestamp('request_date')->useCurrent();
             $table->string('request_token', 200)->nullable();
             $table->timestamp('revision_date')->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
 
-            $table->foreign('academic_units_id')->references('id')->on('academic_units');
+            $table->foreign('academic_unit_id')->references('id')->on('academic_units');
         });
     }
 
