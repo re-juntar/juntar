@@ -13,7 +13,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Livewire\FrontHome;
 use App\Http\Livewire\Inscriptions;
 use App\Http\Livewire\PreinscriptionForm;
-use App\Http\Livewire\EventModalitiesPage;
 use App\Http\Livewire\PreinscriptionFormBuilder;
 use App\Http\Livewire\ShowEvent;
 
@@ -22,8 +21,7 @@ use App\Http\Livewire\Backend\BackHome;
 use App\Http\Livewire\Backend\UsersPage;
 use App\Http\Livewire\Backend\EventsPage;
 use App\Http\Livewire\Backend\EventCategoriesPage;
-use App\Http\Livewire\Backend\CreateModality;
-use App\Http\Livewire\Backend\EditModality;
+use App\Http\Livewire\Backend\EventModalitiesPage;
 use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\RolesPage;
 
@@ -77,11 +75,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'gestionar'], funct
 
     Route::get('/eventos', EventsPage::class)->name('events');
 
-    Route::get('/modalidades', EventModalitiesPage::class,)->name('eventModalities');
-
-    Route::get('/modalidades/agregar', CreateModality::class)->name('addModality');
-
-    Route::get('/modalidades/editar/{id}', EditModality::class, 'render')->name('editModality');
+    Route::get('/modalidades', EventModalitiesPage::class,)->name('modalities');
 
     Route::get('/roles', RolesPage::class)->name('roles');
 });
