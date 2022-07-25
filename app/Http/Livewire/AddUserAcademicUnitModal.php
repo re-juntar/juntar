@@ -17,12 +17,7 @@ class AddUserAcademicUnitModal extends Component
 
     public function render()
     {
-        if (isset($this->user->id) && is_null($this->userAcademicUnits) ) {
-            $userAcademicUnits = AcademicUnitUser::all()
-                ->where('user_id', $this->user->id);
-
-            $this->userAcademicUnits = $userAcademicUnits;
-        }
+        
 
 
         $academicUnits = AcademicUnit::all();
@@ -30,6 +25,14 @@ class AddUserAcademicUnitModal extends Component
     }
 
     public function showAddUserAcademicUnitModal(User $user) {
+        $this->reset(['userAcademicUnits', 'user']);
+        if (isset($user->id) && is_null($this->userAcademicUnits) ) {
+            $userAcademicUnits = AcademicUnitUser::all()
+                ->where('user_id', $user->id);
+
+            $this->userAcademicUnits = $userAcademicUnits;
+        }
+
         $this->user = $user;
         $this->open = true;
     }

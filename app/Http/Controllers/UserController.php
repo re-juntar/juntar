@@ -41,6 +41,8 @@ class UserController extends Controller
         if (!$request->academicUnits || count($request->academicUnits) == 0) {
             foreach ($userAcademicUnits as $userAcademicUnit) {
                 $userAcademicUnit->delete();
+                
+                UserRole::where('user_id', $request->user_id)->first()->update(['role_id' => 4]);
             }
         } else {
             if (count($db_academic_unit_ids) == 0) {

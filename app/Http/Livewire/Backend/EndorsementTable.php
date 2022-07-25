@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Http\Controllers\PermissionController;
 use App\Models\AcademicUnitUser;
 use Carbon\Carbon;
 use App\Models\EndorsementRequest;
@@ -75,6 +76,9 @@ class EndorsementTable extends DataTableComponent
 
     public function builder(): Builder
     {
+        if(PermissionController::isAdmin()) return EndorsementRequest::where('events.id', '>', 0);
+
+        
         $userAcademicUnits = AcademicUnitUser::all()->where('user_id', Auth::user()->id);
 
         $userAcademicUnits = array_reduce(
