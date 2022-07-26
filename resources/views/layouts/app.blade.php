@@ -10,6 +10,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stlyefix.css') }}">
 
     {{-- jQuery --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -51,8 +52,8 @@
 <body class="font-sans antialiased min-h-screen">
     <x-jet-banner />
 
-    @if (isset($permission))
-        @livewire('nav-bar', ['permission' => $permission])
+    @if (isset($isAdmin) && isset($isValidator))
+        @livewire('nav-bar', ['isAdmin' => $isAdmin, 'isValidator' => $isValidator])
     @endif
 
     <!-- Page Content -->

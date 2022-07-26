@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AcademicUnitUser;
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -22,69 +25,50 @@ class UserController extends Controller
         return $response;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function updateUserAcademicUnits(Request $request)
     {
-        //
-    }
+        $userAcademicUnits = AcademicUnitUser::all()
+                ->where('user_id', $request->user_id);
+        $db_academic_unit_ids = array_reduce(
+            $userAcademicUnits->toArray(),
+            fn ($current, $userAcademicUnit) => [...$current, $userAcademicUnit['academic_unit_id']],
+            []
+        );
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $AU_checked_not_in_db = []; // Add to db
+        $AU_in_db_unchecked = []; // Delete from db
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        if (!$request->academicUnits || count($request->academicUnits) == 0) {
+            foreach ($userAcademicUnits as $userAcademicUnit) {
+                $userAcademicUnit->delete();
+                
+                UserRole::where('user_id', $request->user_id)->first()->update(['role_id' => 4]);
+            }
+        } else {
+            if (count($db_academic_unit_ids) == 0) {
+                $AU_checked_not_in_db = $request->academicUnits;
+            } else {
+                $AU_checked_not_in_db = array_diff($request->academicUnits, $db_academic_unit_ids);
+                $AU_in_db_unchecked = array_diff($db_academic_unit_ids, $request->academicUnits);
+            }
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        foreach ($AU_checked_not_in_db as $checked) {
+            $academicUnitUser = new AcademicUnitUser();
+            // See the create_academic_unit_users_table migration file
+            //   for details on setting user_id twice
+            $academicUnitUser->id = $request->user_id;
+            $academicUnitUser->user_id = $request->user_id;;
+            $academicUnitUser->academic_unit_id = $checked;
+            if ($academicUnitUser->save()) {
+                UserRole::where('user_id', $request->user_id)->update(['role_id' => 3]);
+            } else abort(500);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        foreach ($AU_in_db_unchecked as $unchecked) {
+            DB::table('academic_unit_users')->where('academic_unit_id', $unchecked)->delete();
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect('gestionar/usuarios');
     }
 }

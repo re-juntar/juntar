@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Helper\Randomize_Members;
+
 use Livewire\Component;
 
 class AboutUsLegacy extends Component
 {
-
+    use Randomize_Members;
     public $miembros = [
         'DC' => [
             'nombre' => 'Damián Cabrio',
@@ -113,6 +115,9 @@ class AboutUsLegacy extends Component
             'link' => 'https://www.instagram.com/kevin_esp_/',
             'isDev' => true
         ],
+    ];
+
+    public $profesoras = [
         'NB' => [
             'nombre' => 'Natalia Baeza',
             'mensajes' => [

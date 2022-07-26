@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -69,7 +68,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function organizers() {
         return $this->hasOne('App\Models\Organizer');
     }
-  
+
     public function events()
     {
         return $this->hasMany('App\Models\Event');
@@ -82,5 +81,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function userRole() {
         return $this->hasOne('App\Models\UserRole');
+    }
+
+    public function academicUnit() {
+        return $this->belongsToMany('App\Models\AcademicUnit');
     }
 }

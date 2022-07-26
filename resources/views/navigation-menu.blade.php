@@ -53,18 +53,11 @@
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ Auth::user()->name }}
-                                    {{-- {{ __('Administrar Cuenta') }} --}}
                                 </div>
 
                                 <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
-
-                                {{-- @if ($permission['admin'])
-                                    <x-jet-dropdown-link class="bg-awesome" href="{{ route('gestionar') }}">
-                                        {{ __('Gestionar') }}
-                                    </x-jet-dropdown-link>
-                                @endif --}}
 
                                 <div class="border-t border-gray-100"></div>
 
@@ -144,12 +137,6 @@
                     <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
-
-                    {{-- @if ($permission['admin'])
-                        <x-jet-responsive-nav-link href="{{ route('gestionar') }}">
-                            {{ __('Gestionar') }}
-                        </x-jet-responsive-nav-link>
-                    @endif --}}
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}" x-data>

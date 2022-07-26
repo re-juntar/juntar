@@ -15,14 +15,6 @@ class Role extends Model
         return $this->hasOne('App\Models\UserRole');
     }
 
-    // public function updateRole($request)
-    // {
-    //     $this->description = $request["description"];
-    //     $this->name = $request["name"];
-    //     $this->save();
-    //     return $this;
-    // }
-
     public function createRole($request)
     {
         $this->description = $request["description"];

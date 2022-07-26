@@ -7,7 +7,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\EventModality;
 use Illuminate\Support\Facades\Auth;
 
-class EventModalities extends DataTableComponent
+class EventModalitiesTable extends DataTableComponent
 {
     protected $model = EventModality::class;
 
@@ -21,14 +21,16 @@ class EventModalities extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setHideBulkActionsWhenEmptyEnabled();
-
         $this->setEmptyMessage('No se encontraron modalidades');
-
+        $this->setSearchDisabled();
+        $this->setColumnSelectDisabled();
         $this->setQueryStringDisabled();
-
         $this->setTableAttributes(['class' => ""]);
-
-        
+        $this->setConfigurableAreas([
+            'toolbar-left-start' => [
+                'livewire.backend.add-modality'
+            ],
+        ]);
     }
 
     public function columns(): array
@@ -40,22 +42,21 @@ class EventModalities extends DataTableComponent
             Column::make("Descripcion", "description")
                 ->sortable()
                 ->searchable(),
-            Column::make("Editar")->label(fn ($row, Column $column) => '<a class="text-awesome" href="' . route('editModality', ['id' => $row->id]) . '"><i class="fa-solid fa-pen-to-square"></i></a>')->html(),
         ];
     }
 
     public function bulkActions(): array
     {
         return [
-            'deleteModality' => 'Borrar',
+            'editModality' => 'Modificar',
         ];
     }
-    public function deleteModality()
+
+    public function editModality()
     {
-        foreach ($this->getSelected() as $selectedItem) {
-            EventModality::where('id', $selectedItem)->delete();
+        if (isset($this->getSelected()[0])) {
+            $this->emit('showModalityModalEdit', $this->getSelected()[0]);
+            $this->clearSelected();
         }
-        session()->flash('message', 'Product Deleted Successfully.');
-        $this->clearSelected();
     }
 }

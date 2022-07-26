@@ -125,7 +125,7 @@
                             <x-label for="category">Modalidad *</x-label>
                             <select id="modality" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="modality">
-                               
+
                                 <option disabled selected> Seleccione una modalidad </option>
                                 <option value="4" {{ old('modality') == 'otra' ? 'selected' : '' }}> Otra </option>
                                 <option value="1" {{ old('modality') == 'presencial' ? 'selected' : '' }}>

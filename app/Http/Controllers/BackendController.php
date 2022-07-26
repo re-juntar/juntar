@@ -9,12 +9,9 @@ class BackendController extends Controller
 {
     public function index()
     {
-        $permissionController = new PermissionController();
-        $permission = $permissionController->isAdmin();
-
-
-        if ($permission['admin']) {
-            return view('layouts.back', compact('permission'));
+        $isAdmin = PermissionController::isAdmin();
+        if ($isAdmin) {
+            return view('layouts.back', ['isAdmin' => $isAdmin]);
         } else {
             return redirect('home');
         }
