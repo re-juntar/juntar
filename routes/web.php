@@ -17,6 +17,7 @@ use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\EventCategoryController;
 use App\Http\Livewire\Backend\EventCategoriesPage;
 use App\Http\Controllers\EventModalityController;
+use App\Http\Controllers\InscriptionController;
 use App\Http\Livewire\Backend\CreateEventModality;
 use App\Http\Livewire\Backend\CreateModality;
 use App\Http\Livewire\Backend\EditModality;
@@ -27,6 +28,9 @@ use App\Models\EventModality;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\Backend\RolesPage;
 use App\Http\Livewire\PreinscriptionFormBuilder;
+use App\Mail\ContactanosMailable;
+use App\Mail\inscriptionMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,14 +65,34 @@ Route::get('/mis-inscripciones', [EventController::class, 'myInscriptions'])->na
 
 Route::get('/mis-eventos', [EventController::class, 'myEvents'])->name('my-events');
 
+
+
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])
+->group(function(){ 
+        Route::get('/home', FrontHome::class)->name('home');
+});
+
+
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {
     return view('mail.index');
 })->name('contact');
-Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
+  Route::post('exit', [ContactanosController::class, 'store'])->name('mail.store');
+
+  //===================================================================
+  //=================== test para mails ===============================
+  //===================================================================
+Route::get('testContact',function(){
+    $datos = ['name'=> 'Francisco', 'asunto'=>'contactanos','email'=>'fran.test@fi.uncoma.edu.ar','subject'=>'Perdio el evento','query'=>'No encuentro el evento creado el lunes 4/7'];
+    return  new ContactanosMailable($datos);
+    }); 
+Route::get('testinscription',function(){
+    $datos = ['name'=> 'Francisco', 'evento'=>'la gran estafa','fecha'=>'fran.test@fi.uncoma.edu.ar','lugar'=>'Perdio el evento','query'=>'No encuentro el evento creado el lunes 4/7'];
+    return  new inscriptionMail($datos);
+    }); 
 
 /********************** BACKEND *************************/
-Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
+    Route::group(['middleware' => ['auth'], 'prefix' => 'gestionar'], function () {
     Route::get('/', BackHome::class)->name('back-home');
 
     Route::get('/event-category', EventCategoriesPage::class)->name('event-category');
@@ -96,4 +120,6 @@ Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuild
 
 Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
 
-Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
+ Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
+ 
+Route::get('/enrolled/{eventId}', [InscriptionController::class,'store'])->name('enrolled');

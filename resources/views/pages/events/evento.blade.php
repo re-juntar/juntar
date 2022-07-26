@@ -142,7 +142,7 @@ $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
                         @else
                         
                             @if($today < $end_date)
-                            {{--<a href="{{route('inscribir')}}">--}}<x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>{{--</a>--}}
+                            <a href="{{route('enrolled',$event->id)}}"><x-button class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button></a>
                             @endif
 
                         @endif

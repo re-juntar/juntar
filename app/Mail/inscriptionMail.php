@@ -7,13 +7,14 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactanosMailable extends Mailable
+class inscriptionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = "JUNTAR";
-    
+    public $subject = 'Inscripcion a eventos JUNTAR';
     public $contacto;
+   
+
     /**
      * Create a new message instance.
      *
@@ -21,7 +22,9 @@ class ContactanosMailable extends Mailable
      */
     public function __construct($contacto)
     {
-        $this->contacto = $contacto;
+         $this->contacto = $contacto;
+        
+
     }
 
     /**
@@ -31,7 +34,12 @@ class ContactanosMailable extends Mailable
      */
     public function build()
     {
-       
-        return $this->markdown('mail.contact');
+               
+        return $this->markdown('mail.inscriptionEvent')
+                    
+                    ->attach(public_path( $this->contacto['img']),[
+                        'as' =>'flyer.jpg',
+                        'mine' => 'image/jpeg',
+                    ]);
     }
 }

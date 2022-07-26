@@ -27,6 +27,8 @@ class EventModalities extends DataTableComponent
         $this->setQueryStringDisabled();
 
         $this->setTableAttributes(['class' => ""]);
+
+        
     }
 
     public function columns(): array
