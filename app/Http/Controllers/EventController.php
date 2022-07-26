@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
+use App\Models\EventCategory;
 use App\Models\EventModality;
-use App\Models\Presentation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,12 +30,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        $permisssionController = new PermissionController();
-        if ($permisssionController->isLogged()) {
-            return view('pages.create-event');
-        } else {
-            return redirect('login');
-        }
+        $categories = EventCategory::all();
+        $modalities = EventModality::all();
+        return view('pages.create-event', ['categories' => $categories, 'modalities' => $modalities]);
     }
 
     /**
