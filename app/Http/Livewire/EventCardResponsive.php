@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Event;
 use Livewire\Component;
-use App\Models\Presentation;
 
 class EventCardResponsive extends Component
 {
     public $event;
+    public $academicUnits;
 
     public function render()
     {
@@ -16,6 +15,6 @@ class EventCardResponsive extends Component
     }
 
     public function showModal(){
-        $this->emit('showModal', $this->event);
+        $this->emit('showFrontHomeEventModal', $this->event);
     }
 }

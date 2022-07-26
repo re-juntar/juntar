@@ -6,7 +6,7 @@
         textInput.focus();
         textInput.select();
     }
-}" x-cloak>
+    }" x-cloak>
     <div class="p-2" x-show=!isEditing>
         <span x-on:click="isEditing = true; $nextTick(() => focus())">{{ $origName }}</span>
     </div>
@@ -16,10 +16,18 @@
                 class="border-0 truncate text-black focus:border-lh-yellow focus:ring focus:ring-lh-yellow focus:ring-opacity-50 h-7 rounded text-sm"
                 placeholder="100 characters max." x-ref="textInput" wire:model.lazy="newName"
                 x-on:keydown.enter="isEditing = false" x-on:keydown.escape="isEditing = false" />
-            <button type="button" class="pl-2 focus:outline-none" title="Cancel" x-on:click="isEditing = false"><i
-                    class="fas fa-undo-alt"></i></button>
-            <button type="submit" class="pl-1 focus:outline-none text-green-700" title="Save"
-                x-on:click="isEditing = false"><i class="fas fa-check"></i></button>
+            <button type="button"
+                    class="pl-2 focus:outline-none"
+                    title="Cancel"
+                    x-on:click="isEditing = false">
+                <i class="fas fa-undo-alt"></i>
+            </button>
+            <button type="submit"
+                    class="pl-1 focus:outline-none text-green-700"
+                    title="Save"
+                    x-on:click="isEditing = false">
+                <i class="fas fa-check"></i>
+            </button>
         </form>
         @error('newName')
             <small class="text-xs text-red-600">El campo no puede estar vacío</small>
