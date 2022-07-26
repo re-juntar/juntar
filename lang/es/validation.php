@@ -131,7 +131,22 @@ return [
 
     'custom' => [
         'name' =>[
-            'required'=>'En nombre es obligatorio',
+            'required'=>'El nombre es obligatorio',
+        ],
+        'surname' =>[
+            'required'=>'El apellido es obligatorio',
+        ],
+        'dni' =>[
+            'required'=>'El DNI es obligatorio',
+        ],
+        'country' =>[
+            'required'=>'El pais es obligatorio',
+        ],
+        'province' =>[
+            'required'=>'La provincia es obligatoria',
+        ],
+        'city' =>[
+            'required'=>'La ciudad es obligatoria',
         ],
         'email'=>[
             'required'=>'El email debe ser una cuenta valida',

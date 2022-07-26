@@ -59,7 +59,6 @@
             <x-jet-input-error for="name" class="mt-2" />
         </div>
         
-        {{-- Surname --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="surname" value="{{ __('Apellido') }}" />
             <x-jet-input id="surname" type="text" class="mt-1 block w-full" wire:model.defer="state.surname"
@@ -67,7 +66,6 @@
             <x-jet-input-error for="surname" class="mt-2" />
         </div>
 
-        {{-- DNI --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="dni" value="{{ __('DNI') }}" />
             <x-jet-input id="dni" type="text" class="mt-1 block w-full" wire:model.defer="state.dni"
@@ -75,15 +73,13 @@
             <x-jet-input-error for="dni" class="mt-2" />
         </div>
 
-        {{-- Country --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="country" value="{{ __('Country') }}" />
             <x-jet-input id="country" type="text" class="mt-1 block w-full" wire:model.defer="state.country"
                 autocomplete="country" />
             <x-jet-input-error for="country" class="mt-2" />
-        </div>
+        </div> 
 
-        {{-- Province --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="province" value="{{ __('Provincia') }}" />
             <x-jet-input id="province" type="text" class="mt-1 block w-full" wire:model.defer="state.province"
@@ -91,7 +87,6 @@
             <x-jet-input-error for="province" class="mt-2" />
         </div>
 
-        {{-- City --}}
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="city" value="{{ __('Ciudad') }}" />
             <x-jet-input id="city" type="text" class="mt-1 block w-full" wire:model.defer="state.city"
