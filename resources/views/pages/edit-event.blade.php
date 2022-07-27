@@ -17,9 +17,9 @@
                         <input id="hiddenVenue" hidden value="{{ $event->venue }}">
                         <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
                         <!-- <div class="mb-4">
-                                          <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
-                                          </select>
-                                        </div> -->
+                            <select id='showCoorganizers' multiple="(multiple)" class='block mt-1 w-full border-[#ced4da] rounded-[0.375rem] showCoorganizers' name='showCoorganizers'>
+                            </select>
+                        </div> -->
 
 
 
@@ -38,6 +38,7 @@
                         {{-- Nombre Corto --}}
                         <div class="mb-4">
                             <x-label for="short-name">Nombre corto del evento *</x-label>
+                            <div id="automaticSlug" class=" shortNames"></div>
                             <x-input id="short-name" class="w-full" type="text" name="short-name"
                                 placeholder='Ingrese nombre corto' value="{{ old('short-name', $event->short_name) }}" />
                             @error('short-name')
@@ -48,8 +49,8 @@
                         <div class="mb-4">
                             <x-label for="description">Descripcion *</x-label>
                             <textarea id="description" class="block w-full" name="description" rows="10">
-                {{ old('description', $event->description) }}
-              </textarea>
+                                {{ old('description', $event->description) }}
+                            </textarea>
                             @error('description')
                                 <div class="flex items-center">
                                     <p class="text-red-600">{{ $message }}</p>
@@ -225,8 +226,8 @@
         </div>
         </div>
     @else
-        <script></script>
-        window.location = "/login";
+        <script>
+            window.location = "/login";
         </script>
     @endauth
     <x-slot name="pageScripts">
@@ -234,7 +235,6 @@
         <script>
             CKEDITOR.replace('description');
         </script>
-
-        {{-- SElect2 --}}
+        <script src="{{asset('js/shortNameSuggestions.js')}}" defer></script>
     </x-slot>
 </x-app-layout>
