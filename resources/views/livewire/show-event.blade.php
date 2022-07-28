@@ -189,7 +189,7 @@
                         @else
                             @if($today < $end_date)
                                 <a href="{{route('inscribir', $event->id )}}">
-                                    <x-button class="bg-cyan-50 text-[16px]">Inscribirse</x-button>
+                                    <x-button class="text-[16px]">Inscribirse</x-button>
                                 </a>
                             @endif
                         @endif
