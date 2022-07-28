@@ -174,6 +174,9 @@ return [
         'preinscription-date' => [
             'required' => 'La fecha de preinscripcion es obligatoria.',
             'before_or_equal' => 'La fecha de preinscripcion debe ser una fecha anterior o igual a fecha de inicio.'
+        ],
+        'query' =>[
+            'required' => 'La consulta es obligatoria.'
         ]
     ],
 
@@ -200,7 +203,9 @@ return [
         'participants-limit' => 'limite de participantes',
         'preinscription' => 'preinscripcion',
         'preinscription-date' => 'fecha de preinscripcion',
-        'acreditation-code' => 'codigo de acreditacion'
+        'acreditation-code' => 'codigo de acreditacion',
+        'subject' => 'asunto'
+        
     ],
 
 ];

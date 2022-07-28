@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
+use App\Models\UserRole;
 use Livewire\Component;
 
 class EventCardResponsive extends Component
@@ -11,7 +13,8 @@ class EventCardResponsive extends Component
 
     public function render()
     {
-        return view('livewire.event-card-responsive');
+        $users = User::all();
+        return view('livewire.event-card-responsive', ['users' => $users]);
     }
 
     public function showModal(){
