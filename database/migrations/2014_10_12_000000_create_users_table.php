@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('province')->nullable();
             $table->string('city')->nullable();
-            $table->string('ua', 4)->nullable();
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
