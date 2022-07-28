@@ -68,13 +68,13 @@
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="dni" value="{{ __('DNI') }}" />
-            <x-jet-input id="dni" type="text" class="mt-1 block w-full" wire:model.defer="state.dni"
+            <x-jet-input id="dni" type="number" class="mt-1 block w-full" wire:model.defer="state.dni"
                 autocomplete="dni" />
             <x-jet-input-error for="dni" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="country" value="{{ __('Country') }}" />
+            <x-jet-label for="country" value="{{ __('Pais') }}" />
             <x-jet-input id="country" type="text" class="mt-1 block w-full" wire:model.defer="state.country"
                 autocomplete="country" />
             <x-jet-input-error for="country" class="mt-2" />
