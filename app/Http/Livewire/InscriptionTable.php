@@ -35,7 +35,7 @@ class InscriptionTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Inscription::whereIn('event_id', $this->events[0])->where('inscription_date', '<>', 'null');
+        return Inscription::whereIn('event_id', $this->events[0])->where('inscription_date', '<>', 'null', '1');
     }
 
     public function bulkActions(): array
