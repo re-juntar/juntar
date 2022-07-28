@@ -14,6 +14,10 @@
                             @break
 
                         @case('Checkbox')
+
+                            <label class="inline-block mb-2 font-semibold text-base" data-aire-component="label">
+                                {{ $field['label'] }}
+                            </label>
                             @foreach($field['options'] as $option)
                                 <x-aire::checkbox name="checkbox{{$loop->parent->index}}[]" label="{{$option}}" id="checkbox{{$loop->index}}" value="{{$option}}" wire:model="inputs.{{$field['QuestionId']}}.{{$loop->index}}" />
                             @endforeach
