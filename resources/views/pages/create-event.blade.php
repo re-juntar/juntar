@@ -100,19 +100,14 @@
                             <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="category">
                                 <option disabled selected> Seleccione una categoria </option>
-                                <option value="5" {{ old('category') == 'otra' ? 'selected' : '' }}> Otra </option>
-                                <option value="1" {{ old('category') == 'seminario' ? 'selected' : '' }}> Seminario
-                                </option>
-                                <option value="2" {{ old('category') == 'congreso' ? 'selected' : '' }}> Congreso
-                                </option>
-                                <option value="3" {{ old('category') == 'diplomatura' ? 'selected' : '' }}>
-                                    Diplomatura </option>
-                                <option value="curso" {{ old('category') == 'curso' ? 'selected' : '' }}> Curso
-                                </option>
-                                <option value="4" {{ old('category') == 'taller' ? 'selected' : '' }}> Taller
-                                </option>
-                                <option value="festival" {{ old('category') == 'festival' ? 'selected' : '' }}> Festival
-                                </option>
+
+                                @isset($categories)
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>
+                                            {{ $category->description }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                             @error('category')
                                 <div class="flex items-center">
@@ -126,15 +121,15 @@
                             <x-label for="category">Modalidad *</x-label>
                             <select id="modality" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="modality">
-                               
+
                                 <option disabled selected> Seleccione una modalidad </option>
-                                <option value="4" {{ old('modality') == 'otra' ? 'selected' : '' }}> Otra </option>
-                                <option value="1" {{ old('modality') == 'presencial' ? 'selected' : '' }}>
-                                    Presencial </option>
-                                <option value="2" {{ old('modality') == 'online' ? 'selected' : '' }}> Online
-                                </option>
-                                <option value="3" {{ old('modality') == 'presencial-y-online' ? 'selected' : '' }}>
-                                    Presencial y Online </option>
+                                @isset($modalities)
+                                    @foreach ($modalities as $modality)
+                                        <option value="{{ $modality->id }}" {{ old('modality') == $modality->id ? 'selected' : '' }}>
+                                            {{ $modality->description }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                             @error('modality')
                                 <div class="flex items-center">

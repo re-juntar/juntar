@@ -16,28 +16,13 @@ class UserTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');;
+        $this->setPrimaryKey('id');
+
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setEmptyMessage('No se encontraron usuarios');
 
         $this->setQueryStringDisabled();
-
-        // $this->setTableAttributes(['class' => "text-white-ghost"]);
-
-        // $this->setSecondaryHeaderTrAttributes(function ($rows) {
-        //     return ['class' => 'text-white-ghost'];
-        // });
-
-        // $this->setComponentWrapperAttributes([
-        //     'class' => 'text-white-ghost',
-        // ]);
-
-        // $this->setTbodyAttributes([
-        //     'id' => 'my-id',
-        //     'class' => 'this that'
-        // ]);
-
     }
 
     public function columns(): array
@@ -66,8 +51,10 @@ class UserTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
+            'revertRole' => 'Default',
             'makeAdmin' => 'Hacer Admin',
             'makeSuperUser' => 'Hacer Super Usuario',
+            'makeValidator' => 'Hacer/Quitar Validador',
         ];
     }
 
@@ -84,6 +71,20 @@ class UserTable extends DataTableComponent
         foreach ($this->getSelected() as $selectedItem) {
             UserRole::where('user_id', $selectedItem)->update(['role_id' => 1]);
         }
+        $this->clearSelected();
+    }
+
+    public function revertRole()
+    {
+        foreach ($this->getSelected() as $selectedItem) {
+            UserRole::where('user_id', $selectedItem)->update(['role_id' => 4]);
+        }
+        $this->clearSelected();
+    }
+
+    public function makeValidator()
+    {
+        $this->emit('showAddUserAcademicUnitModal', $this->getSelected()[0]);
         $this->clearSelected();
     }
 }

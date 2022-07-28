@@ -15,6 +15,8 @@ class EventModal extends Component
 
     public $presentations;
 
+    public $academicUnits;
+
     public function render()
     {
         return view('livewire.event-modal');

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Event;
 use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
-use App\Models\Event;
-use App\Models\User;
+use App\Models\EventCategory;
+use App\Models\EventModality;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -17,12 +20,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        $permisssionController = new PermissionController();
-        if ($permisssionController->isLogged()) {
-            return view('pages.create-event');
-        } else {
-            return redirect('login');
-        }
+        $categories = EventCategory::all();
+        $modalities = EventModality::all();
+        return view('pages.create-event', ['categories' => $categories, 'modalities' => $modalities]);
     }
 
     /**
@@ -109,11 +109,14 @@ class EventController extends Controller
 
     public function myInscriptions()
     {
-        $permisssionController = new PermissionController();
-        if ($permisssionController->isLogged()) {
-            return view('livewire.my-inscriptions');
-        } else {
-            return redirect('login');
+        $user = User::find(Auth::user()->id);
+        $events = [];
+
+        foreach ($user->inscriptions as $inscription) {
+            $event = $inscription->event->get();
+            array_push($events, $event);
         }
+
+        return view('livewire.my-inscriptions', ['events' => $events]);
     }
 }
