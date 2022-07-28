@@ -28,6 +28,32 @@ class PreinscriptionTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setQueryStringDisabled();
+
+        $this->setHideBulkActionsWhenEmptyEnabled();
+        $this->setQueryStringDisabled();
+        $this->setColumnSelectDisabled();
+
+        $this->setComponentWrapperAttributes([
+            'id' => 'Id',
+            'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
+          ]);
+
+          $this->setTrAttributes(function($row, $index) {
+            if ($index % 2 === 0) {
+              return [
+                'default' => false,
+                'class' => 'bg-gray-300 text-black',
+              ];
+            }
+            else{
+               return [
+                 'default' => false,
+                 'class' => 'bg-white-ghost text-black',
+               ];
+             }
+
+            return ['default' => false];
+        });
     }
 
     public function columns(): array
@@ -37,14 +63,15 @@ class PreinscriptionTable extends DataTableComponent
             Column::make("Nombre", 'user.name'),
             Column::make("Apellido", "user.surname"),
             Column::make("DNI", "user.dni"),
-            Column::make("Fecha", "pre_inscription_date")
+            Column::make("Fecha de pre-inscripcion", "pre_inscription_date")
         ];
     }
 
     public function bulkActions(): array
     {
         return [
-            "enroll" => "Inscribir"
+            "enroll" => "Inscribir",
+            "decline" => "Rechazar"
         ];
     }
 
@@ -53,6 +80,12 @@ class PreinscriptionTable extends DataTableComponent
         Inscription::whereIn('id', $this->getSelected())->update(['pre_inscription_date' => null]);
         Inscription::whereIn('id', $this->getSelected())->update(['inscription_date' => date('Y-m-d')]);
 
+        $this->clearSelected();
+        $this->emit('refreshComponent');
+    }
+    public function decline()
+    {
+        Inscription::whereIn('id', $this->getSelected())->delete();
         $this->clearSelected();
         $this->emit('refreshComponent');
     }
