@@ -23,9 +23,9 @@
 
 @foreach ($users as $user)
     @if ($user->id === $event->user_id)
-    <div class="flex items-center  text-white-ghost bg-fogra-dark pt-1 text-xl">
-        <img class="h-6 w-6 rounded-full object-cover" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}"/>
-        <h1 class="ml-1">{{$user->name.' '.$user->surname}}</h1>
+    <div class="flex items-center  text-white-ghost bg-fogra-dark pt-2 montserrat uppercase ">
+        <img class="h-10 w-10 rounded-full object-cover" src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}"/>
+        <h1 class="truncate ml-2">{{$user->name.' '.$user->surname}}</h1>
     </div>
     @endif
 @endforeach
