@@ -71,6 +71,7 @@
                         {{-- Nombre Corto --}}
                         <div class="mb-4">
                             <x-label for="short-name">Nombre corto del evento *</x-label>
+                            <div id="automaticSlug" class=" shortNames"></div>
                             <x-input id="short-name" class="w-full" type="text" name="short-name"
                                 placeholder='Ingrese nombre corto' value="{{ old('short-name') }}" />
                             @error('short-name')
@@ -82,8 +83,8 @@
                         <div class="mb-4">
                             <x-label for="description">Descripcion *</x-label>
                             <textarea id="description" class="block w-full" name="description" rows="10">
-                {{ old('description') }}
-              </textarea>
+                                {{ old('description') }}
+                            </textarea>
                             @error('description')
                                 <div class="flex items-center">
                                     <p class="text-red-600">{{ $message }}</p>
@@ -288,5 +289,7 @@
         <script>
             CKEDITOR.replace('description');
         </script>
+        <script src="{{asset('js/shortNameSuggestions.js')}}" defer></script>
     </x-slot>
 </x-app-layout>
+
