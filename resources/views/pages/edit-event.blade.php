@@ -193,7 +193,7 @@
                             @enderror
                         </div>
                         {{-- Codigo Acreditacion --}}
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <x-label for="acreditation-code">Código Acreditación *</x-label>
                             <x-input id="acreditation-code" type="text" name="acreditation-code"
                                 placeholder='Ingrese código de acreditación'
@@ -203,7 +203,7 @@
                                     <p class="text-red-600">* {{ $message }}</p>
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
                         <p class="italic mb-[1rem]">Recordar: Los campos marcados con (*) son obligatorios.</p>
                         {{-- Cargar --}}
                         <x-button class="text-[13px]" type="submit"> Guardar Cambios </x-button>

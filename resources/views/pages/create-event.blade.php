@@ -261,7 +261,7 @@
                         </div>
 
                         {{-- Codigo Acreditacion --}}
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <x-label for="acreditation-code">Código Acreditación *</x-label>
                             <x-input id="acreditation-code" type="text" name="acreditation-code"
                                 placeholder='Ingrese código de acreditación' value="{{ old('acreditation-code') }}" />
@@ -270,7 +270,7 @@
                                     <p class="text-red-600">{{ $message }}</p>
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
                         <p class="italic mb-[1rem]">Los campos marcados con (*) son obligatorios.</p>
 
                         {{-- Cargar --}}
