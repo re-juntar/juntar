@@ -107,16 +107,10 @@ class EventController extends Controller
         }
     }
 
+    public $event;
     public function myInscriptions()
-    {
-        $user = User::find(Auth::user()->id);
-        $events = [];
-
-        foreach ($user->inscriptions as $inscription) {
-            $event = $inscription->event->get();
-            array_push($events, $event);
-        }
-
-        return view('livewire.my-inscriptions', ['events' => $events]);
+    {   
+        
+        return view('livewire.my-inscriptions');
     }
 }

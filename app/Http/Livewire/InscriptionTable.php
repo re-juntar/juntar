@@ -3,35 +3,35 @@
 namespace App\Http\Livewire;
 
 use App\Models\Event;
+use App\Models\EventModality;
 use App\Models\Inscription;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
+use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 
 class InscriptionTable extends DataTableComponent
 {
-    protected $model = Inscription::class;
-
-    public string $event;
-    
+    protected $model = Inscriptions::class;
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    public function builder(): Builder
-    {
-        return Inscription::where('event_id', $this->event)->where('inscription_date', '<>', 'null');
-    }
-    
+    public array $inscriptions = [];
+
+    public $event;
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-     
-        $this->setHideBulkActionsWhenEmptyEnabled();
+        
         $this->setQueryStringDisabled();
-        $this->setColumnSelectDisabled();
+
+        $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setComponentWrapperAttributes([
-            'id' => 'Id',
+            'id' => 'inscriptions',
             'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
           ]);
 
@@ -56,17 +56,48 @@ class InscriptionTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            Column::make("#", "id")->hideIf(true),
+            Column::make("#", "event.id")->hideIf(true),
+            Column::make("Nombre de Evento", "event.name"),
+            Column::make("fecha de Inicio", "event.start_date"),
+            Column::make("Fecha de Inscripcion", "inscription_date"),
+            Column::make("Modalidad", "event.eventModality.description"),
+            Column::make("Link de evento", "event.meeting_link"),
+            Column::make("Ubicacion", "event.venue"),
+            ButtonGroupColumn::make('acciones')
+            ->attributes(function($row) {
+                return [
+                    'class' => 'space-x-2 ',
+                ];
+            })
+            ->buttons([
+                LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
+                    ->title(fn($row) => 'ver Evento')
+                    ->location(fn ($row) => route('evento', ['id' => $row['event.id']]))
+                    ->attributes(function($row) {
+                        return [
+                            'class' =>' border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
+                        ];
+                    }),
             
-            
-            Column::make("ID", "id")->hideIf(true),
-            Column::make("Nombre", "user.name"),
-            Column::make("Apellido", "user.surname"),
-            Column::make("DNI", "user.dni"),
-            Column::make("Mail", "user.email"),
-            Column::make("Fecha de inscripcion", "inscription_date"),
+                LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
+                ->title(fn($row) => 'ver PyR')
+                ->location(fn ($row) => route('evento', ['id' => $row['event.id']]))
+                ->attributes(function($row) {
+                    return [
+                        'class' =>'text-green-500 border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
+                        'wire:click' => '$emit("showPyRModal")',
+                    ];
+                }),
+            ])->collapseOnMobile()
         ];
     }
 
+    public function builder(): Builder
+    {
+        return Inscription::where(['inscriptions.user_id' => Auth::user()->id ])->where('inscription_date', '<>', 'null');
+    }
+    
     public function bulkActions(): array
     {
         return [
