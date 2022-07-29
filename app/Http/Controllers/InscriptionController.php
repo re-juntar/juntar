@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactanosMailable;
-use App\Mail\inscriptionMail;
+use App\Mail\InscriptionMail;
 use App\Models\Inscription;
 use App\Models\Event;
 use App\Models\User;
