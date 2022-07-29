@@ -191,10 +191,15 @@
                         </div>
                         {{-- Ingresar preisnscripcion --}}
                         <div class="mb-4">
-                            <input id='hiddenDate' hidden name='preinscription_date' type='date'
-                                value="{{ old('preinscription-date', $event->inscription_end_date) }}" />
+                            {{-- <input id='hiddenDate' hidden name='preinscription_date' type='date'
+                                value="{{ old('preinscription-date', $formatedInscriptionEndDate) }}" /> --}}
                             <div id='preinscription-date-container' class='mt-2'>
-
+                                <x-label for='preinscription-date'> Fecha límite de preinscripción * </x-label>
+                                @if($event->pre_registration)
+                                    <input id='preinscription-date' value='{{$formatedInscriptionEndDate}}' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem]' name='preinscription-date' type='date'/>
+                                @else
+                                    <input id='preinscription-date' value="NULL" class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem]' name='preinscription-date' type='date'/>
+                                @endif
                             </div>
                             @error('preinscription-date')
                                 <div class="flex items-center">
@@ -222,6 +227,7 @@
             </div>
         </div>
         </div>
+
     @else
         <script>
             window.location = "/login";

@@ -7,6 +7,8 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PermissionController;
 
 class EventController extends Controller
 {
@@ -64,11 +66,18 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrfail($id);
-        list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
-        list($endDateDay, $endDateMonth, $endDateYear) = explode("-", $event->end_date);
-        $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
-        $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
-        return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate]);
+        if (isset(Auth::user()->id) && Auth::user()->id == $event->user_id) {
+            list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
+            list($endDateDay, $endDateMonth, $endDateYear) = explode("-", $event->end_date);
+            list($inscriptionEndDateDay, $inscriptionEndDateMonth, $inscriptionEndDateYear) = explode("-", $event->inscription_end_date);
+            $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
+            $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
+            $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
+            // print_r($event);
+            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
