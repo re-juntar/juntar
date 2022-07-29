@@ -97,7 +97,7 @@ class InscriptionTable extends DataTableComponent
     {
         return Inscription::where(['inscriptions.user_id' => Auth::user()->id ])->where('inscription_date', '<>', 'null');
     }
-
+    
     public function bulkActions(): array
     {
         return [
@@ -107,8 +107,9 @@ class InscriptionTable extends DataTableComponent
 
     public function unsubscribe()
     {
-        $event = Event::findOrFail($this->getSelected()[0]);
-
+        
+        $inscription = Inscription::find($this->getSelected());
+        $event = Event::findOrFail($this->event);
         if ($event->pre_registration) {
             Inscription::whereIn('id', $this->getSelected())->update(['pre_inscription_date' => date('Y-m-d')]);
             Inscription::whereIn('id', $this->getSelected())->update(['inscription_date' => null]);
