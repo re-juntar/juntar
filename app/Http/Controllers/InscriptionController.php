@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactanosMailable;
-use App\Mail\inscriptionMail;
+use App\Mail\InscriptionMail;
 use App\Models\Inscription;
 use App\Models\Event;
 use App\Models\User;
@@ -56,7 +56,7 @@ class InscriptionController extends Controller
             $inscripcion->pre_inscription_date = date('Y-m-d');
             $inscripcion->inscription_date = date('Y-m-d');
             $inscripcion->accreditation = 1;
-            $inscripcion->certification = "cetificado";
+            $inscripcion->certification = "certificado";
             $inscripcion->save();
             $arreglocontacto = ["name" => $user->name." ".$user->surname, "evento" =>$event->short_name, "fecha" => $event->start_date];
             $correo = new InscriptionMail($arreglocontacto);
