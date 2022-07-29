@@ -7,14 +7,13 @@ use App\Models\Inscription;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class InscriptionTable extends DataTableComponent
 {
     protected $model = Inscription::class;
 
     public string $event;
+    
 
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -60,12 +59,11 @@ class InscriptionTable extends DataTableComponent
             
             
             Column::make("ID", "id")->hideIf(true),
-            // Column::make("Evento", "event.name"),
             Column::make("Nombre", "user.name"),
             Column::make("Apellido", "user.surname"),
             Column::make("DNI", "user.dni"),
-            Column::make("Fecha de inscripcion", "inscription_date")
-        
+            Column::make("Mail", "user.email"),
+            Column::make("Fecha de inscripcion", "inscription_date"),
         ];
     }
 

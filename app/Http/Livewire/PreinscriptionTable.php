@@ -6,14 +6,15 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Inscription;
 use Illuminate\Database\Eloquent\Builder;
+use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
+use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
+ 
 
 class PreinscriptionTable extends DataTableComponent
 {
     protected $model = Inscription::class;
 
     public string $event;
-
-    public string $tableName = "events";
 
     public array $events = [];
 
@@ -62,8 +63,33 @@ class PreinscriptionTable extends DataTableComponent
             Column::make("ID", "id")->hideIf(true),
             Column::make("Nombre", 'user.name'),
             Column::make("Apellido", "user.surname"),
+            Column::make("Mail", "user.email"),
             Column::make("DNI", "user.dni"),
-            Column::make("Fecha de pre-inscripcion", "pre_inscription_date")
+
+            Column::make("Fecha de pre-inscripcion", "pre_inscription_date"),
+         
+            
+            ButtonGroupColumn::make('Respuestas')
+            ->attributes(function($row) {
+                return [
+                    'class' => 'space-x-2',
+                ];
+            })
+            ->buttons([
+                LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
+                    ->title(fn($row) => ' ')
+                   
+                    // ->location(fn ($row) => route('respuestas', $row))
+                     ->location(fn ($row) => route('evento', ['id' => $row['id']]))
+
+                    ->attributes(function($row) {
+                        return [
+                            'class' =>'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
+                        ];
+                    }),
+            ])->collapseOnMobile()
+
+
         ];
     }
 
