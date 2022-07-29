@@ -28,6 +28,28 @@ class EndorsementTable extends DataTableComponent
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setQueryStringDisabled();
+
+        $this->setComponentWrapperAttributes([
+            'id' => 'eventos',
+            'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 overflow-hidden rounded-lg m-1 ',
+          ]);
+
+        $this->setTrAttributes(function($row, $index) {
+            if ($index % 2 === 0) {
+              return [
+                'default' => false,
+                'class' => 'bg-gray-300 text-black',
+              ];
+            }
+            else{
+               return [
+                 'default' => false,
+                 'class' => 'bg-white-ghost text-black',
+               ];
+             }
+
+            return ['default' => false];
+        });
     }
 
     public function filters(): array

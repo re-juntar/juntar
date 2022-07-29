@@ -19,6 +19,9 @@
     {{-- autocomplete --}}
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" defer></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/all.css') }}" rel="stylesheet">
 
@@ -47,6 +50,7 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src={{ asset('/js/register.js') }} defer></script>
+    <script src={{ asset('/js/alerts.js/') }} defer></script>
 </head>
 
 <body class="font-sans antialiased min-h-screen">

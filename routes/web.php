@@ -35,6 +35,7 @@ Route::get('/sobre-nosotros', [AboutUsController::class, 'index'])->name('about-
 Route::get('/crear-evento', [EventController::class, 'create'])->name('create-event');
 
 Route::get('/evento/{id}', ShowEvent::class)->name('evento');
+Route::post('/evento/{id}', ShowEvent::class)->name('evento');
 
 Route::get('/editar-evento/{id}', [EventController::class, 'edit'])->name('edit-event');
 
@@ -52,7 +53,7 @@ Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->n
 
 Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
 
-Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
+// Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
 
 /********************* MAILING **************************/
 Route::get('/contactanos', function () {

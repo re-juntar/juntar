@@ -83,7 +83,7 @@ class CoorganizerEventTable extends DataTableComponent
              ->buttons([
                  LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
                      ->title(fn($row) => ' ')
-                     ->location(fn ($row) => route('evento', ['eventoId' => $row['organizers.event.id']]))
+                     ->location(fn ($row) => route('evento', ['id' => $row['organizers.event.id']]))
                      ->attributes(function($row) {
                          return [
                              'class' => 'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
@@ -91,7 +91,7 @@ class CoorganizerEventTable extends DataTableComponent
                      }),
                  LinkColumn::make('Edit')
                      ->title(fn($row) => ' ' )
-                     ->location(fn ($row) => route('edit-event', ['eventId' => $row['organizers.event.id']]))
+                     ->location(fn ($row) => route('edit-event', ['id' => $row['organizers.event.id']]))
                      ->attributes(function($row) {
                          return [
                              'target' => '_blank',

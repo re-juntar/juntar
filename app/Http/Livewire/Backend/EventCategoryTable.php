@@ -14,6 +14,8 @@ class EventCategoryTable extends DataTableComponent
 
     public array $eventsCategory = [];
 
+    protected $listeners = ['deleteCategory'];
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
@@ -27,6 +29,30 @@ class EventCategoryTable extends DataTableComponent
                 'livewire.backend.add-event-category',
             ],
         ]);
+
+        $this->setComponentWrapperAttributes([
+            'id' => 'eventos',
+            'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 overflow-hidden rounded-lg m-1 ',
+          ]);
+
+        $this->setTrAttributes(function($row, $index) {
+            if ($index % 2 === 0) {
+              return [
+                'default' => false,
+                'class' => 'bg-gray-300 text-black',
+              ];
+            }
+            else{
+               return [
+                 'default' => false,
+                 'class' => 'bg-white-ghost text-black',
+               ];
+             }
+
+            return ['default' => false];
+        });
+
+
     }
 
     public function columns(): array
@@ -40,16 +66,29 @@ class EventCategoryTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
-            'delete' => 'Eliminar',
+            'confirmDeleteModality' => 'Eliminar',
             'update' => 'Modificar',
         ];
     }
 
-    public function delete()
+    public function deleteCategory()
     {
+        $this->clearSelected();
         EventCategory::whereIn('id', $this->getSelected())->delete();
 
         $this->clearSelected();
+    }
+
+    public function confirmDeleteModality()
+    {
+        $this->emit('confirmation', [            
+            'status' => 'Eliminado!',
+            'statusText' => 'Los registros an sido eliminados exitosamente!',
+            'text' => 'Estas por eliminar Categorias de evento, los eventos que sean creador posteriormente no podran tener estas Categorias!',
+            'method' => 'deleteCategory',
+            'component' => 'event-category-table',
+            'action' => 'Borrar'
+        ]);
     }
 
     public function update()
