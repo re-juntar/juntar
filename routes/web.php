@@ -32,6 +32,7 @@ Route::get('/home', FrontHome::class);
 Route::get('/sobre-nosotros', [AboutUsController::class, 'index'])->name('about-us');
 
 Route::get('/evento/{id}', ShowEvent::class)->name('evento');
+Route::post('/evento/{id}', ShowEvent::class)->name('evento');
 
 /********************** FRONTEND AUTH *************************/
 Route::group(['middleware' => 'auth'], function () {
