@@ -71,30 +71,29 @@ class UserEventsTable extends DataTableComponent
                 ->sortable()->collapseOnMobile(),
             Column::make("Estado", 'eventStatus.description')->collapseOnMobile(),
             ButtonGroupColumn::make('Acciones')
-                ->attributes(function ($row) {
-                    return [
-                        'class' => 'space-x-2',
-                    ];
-                })
-                ->buttons([
-                    LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
-                        ->title(fn ($row) => ' ')
-                        ->location(fn ($row) => route('evento', ['id' => $row['id']]))
-                        ->attributes(function ($row) {
-                            return [
-                                'class' => 'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
-                            ];
-                        }),
-                    LinkColumn::make('Edit')
-                        ->title(fn ($row) => ' ')
-                        ->location(fn ($row) => route('edit-event', ['id' => $row['id']]))
-                        ->attributes(function ($row) {
-                            return [
-                                'target' => '_blank',
-                                'class' => 'text-red-500 border border-1 border-black rounded bg-blue-500  fa-solid fa-pen-to-square p-2 hover:no-underline',
-                            ];
-                        }),
-                ])->collapseOnMobile()
+            ->attributes(function($row) {
+                return [
+                    'class' => 'space-x-2',
+                ];
+            })
+            ->buttons([
+                LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
+                    ->title(fn($row) => ' ')
+                    ->location(fn ($row) => route('evento', ['id' => $row['id']]))
+                    ->attributes(function($row) {
+                        return [
+                            'class' =>'fa-solid fa-eye border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
+                        ];
+                    }),
+                LinkColumn::make('Edit')
+                    ->title(fn($row) => ' ' )
+                    ->location(fn ($row) => route('edit-event', ['id' => $row['id']]))
+                    ->attributes(function($row) {
+                        return [
+                            'class' => 'text-red-500 border border-1 border-black rounded bg-blue-500  fa-solid fa-pen-to-square p-2 hover:no-underline',
+                        ];
+                    }),
+            ])->collapseOnMobile()
         ];
     }
 

@@ -53,7 +53,6 @@
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ Auth::user()->name }}
-                                    {{-- {{ __('Administrar Cuenta') }} --}}
                                 </div>
 
                                 <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
@@ -61,7 +60,7 @@
                                     {{ __('Perfil') }}
                                 </x-jet-dropdown-link>
 
-                                @if($permission['admin'])
+                                @if($isValidator)
                                     <x-jet-dropdown-link class="hover:bg-awesome hover:text-white-ghost"
                                         href="{{ route('back-home') }}">
                                         {{ __('Administración') }}
@@ -158,7 +157,7 @@
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
-                    @if($permission['admin'])
+                    @if($isAdmin)
                         <x-jet-responsive-nav-link href="{{ route('back-home') }}">
                             {{ __('Administración') }}
                         </x-jet-responsive-nav-link>

@@ -44,6 +44,16 @@
                             <x-button class="bg-fogra-darkish text-[16px]">
                                 <i class="fa-solid fa-ban mr-3"></i>Flyer no Disponible
                             </x-button>
+                        @php
+                            $endorsementRequest = $event->endorsementRequest;
+                        @endphp
+
+                        @if(!is_null($endorsementRequest))
+                            @if($endorsementRequest->endorsed)
+                                <div class="mt-4">
+                                    @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
+                                </div>
+                            @endif
                         @endif
                     
 

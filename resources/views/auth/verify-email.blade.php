@@ -5,7 +5,7 @@
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
-            {{ __('Antes de continuar, ¿podría verificar su correo electrónico clickeando en el link que le hemos enviado? Si no recivió el correo, le enviaremos otro encantadamente.') }}
+            {{ __('Antes de continuar. Debe verificar por unica vez  su correo electrónico clickeando en el link que le hemos enviado. Si no recibió el correo, haciendo click en el siguiente boton `re-enviar correo ` le enviaremos otro encantadamente.') }}
         </div>
 
         @if (session('status') == 'verification-link-sent')
@@ -25,18 +25,6 @@
                 </div>
             </form>
 
-            <div>
-                <a href="{{ route('profile.show') }}" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Editar Perfil') }}</a>
-
-                <form method="POST" action="{{ route('logout') }}" class="inline">
-                    @csrf
-
-                    <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 ml-2">
-                        {{ __('Cerrar Sesión') }}
-                    </button>
-                </form>
-            </div>
         </div>
     </x-jet-authentication-card>
 </x-guest-layout>

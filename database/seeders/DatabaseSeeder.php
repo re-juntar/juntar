@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\UserRoleController;
+use App\Models\Role;
+use App\Models\EventStatus;
+use App\Models\AcademicUnit;
 use App\Models\EventCategory;
 use App\Models\EventModality;
-use App\Models\EventStatus;
-use App\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,12 +20,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        /******************************ACACEMIC-UNIT******************************************/
+        $academicUnit1 = new AcademicUnit();
+        $academicUnit1->name = 'Facultad de Informatica';
+        $academicUnit1->short_name = 'FAI';
+        $academicUnit1->image_logo = 'logoFAI.png';
+        $academicUnit1->save();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $academicUnit2 = new AcademicUnit();
+        $academicUnit2->name = 'Facultad de Economia y Administración';
+        $academicUnit2->short_name = 'FAEA';
+        $academicUnit2->save();
+
+        $academicUnit3 = new AcademicUnit();
+        $academicUnit3->name = 'Facultad de Ingeniería';
+        $academicUnit3->short_name = 'FAIN';
+        $academicUnit3->image_logo = 'logoFAIN.png';
+        $academicUnit3->save();
+
+        $academicUnit4 = new AcademicUnit();
+        $academicUnit4->name = 'Facultad de Humanidades';
+        $academicUnit4->short_name = 'FAHU';
+        $academicUnit4->save();
+
+        $academicUnit5 = new AcademicUnit();
+        $academicUnit5->name = 'Facultad de Ciencias del Ambiente y la Salud';
+        $academicUnit5->short_name = 'FACIAS';
+        $academicUnit5->image_logo = 'logoFACIAS.png';
+        $academicUnit5->save();
+
+        $academicUnit6 = new AcademicUnit();
+        $academicUnit6->name = 'Facultad de Turismo';
+        $academicUnit6->short_name = 'FATU';
+        $academicUnit6->save();
         /*******************************ROLES******************************************/
         $role1 = new Role();
         $role1->name = 'super_user';
@@ -100,5 +129,48 @@ class DatabaseSeeder extends Seeder
         $category6 = new EventCategory();
         $category6->description = 'Otra';
         $category6->save();
+
+        /******************************USER******************************************/
+        $user = new User();
+        $user->name = 'Arif';
+        $user->surname = 'Lucero';
+        $user->dni = 30123123;
+        $user->country = 'Argentina';
+        $user->province = 'Neuquen';
+        $user->city = 'Neuquen';
+        $user->email = 'test@test.com';
+        $user->password = '$2y$10$3ZpoQdlYW4VO/yMK0rF9z.jpN4BoFRBO4sEPMc2qkmzjXp9eOVZA6'; // 12345678
+        $user->save();
+
+        $userRoleController = new UserRoleController();
+        $userRoleController->store(User::max('id'));
+
+        $user = new User();
+        $user->name = 'Nicolas';
+        $user->surname = 'Krueger';
+        $user->dni = 30123125;
+        $user->country = 'Argentina';
+        $user->province = 'Neuquen';
+        $user->city = 'Neuquen';
+        $user->email = 'test2@test.com';
+        $user->password = '$2y$10$3ZpoQdlYW4VO/yMK0rF9z.jpN4BoFRBO4sEPMc2qkmzjXp9eOVZA6'; // 12345678
+        $user->save();
+
+        $userRoleController = new UserRoleController();
+        $userRoleController->store(User::max('id'));
+
+        $user = new User();
+        $user->name = 'Jordan';
+        $user->surname = 'Butler';
+        $user->dni = 30123124;
+        $user->country = 'Argentina';
+        $user->province = 'Neuquen';
+        $user->city = 'Neuquen';
+        $user->email = 'test3@test.com';
+        $user->password = '$2y$10$3ZpoQdlYW4VO/yMK0rF9z.jpN4BoFRBO4sEPMc2qkmzjXp9eOVZA6'; // 12345678
+        $user->save();
+
+        $userRoleController = new UserRoleController();
+        $userRoleController->store(User::max('id'));
     }
 }

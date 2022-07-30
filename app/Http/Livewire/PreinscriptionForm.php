@@ -62,6 +62,7 @@ class PreinscriptionForm extends Component
             }
             $answer->save();
         }
+        
         return redirect(route('evento', $this->eventId));
     }
 }

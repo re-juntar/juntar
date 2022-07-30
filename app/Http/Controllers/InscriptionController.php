@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactanosMailable;
-use App\Mail\inscriptionMail;
+use App\Mail\InscriptionMail;
 use App\Models\Inscription;
 use App\Models\Event;
 use App\Models\User;
@@ -43,8 +43,7 @@ class InscriptionController extends Controller
             $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
             $array["icon"] = 'warning';
         }
-        else{
-            
+        else{            
             $inscripcion = new Inscription();
             $user = Auth::user();
             $userId = $user->id;            

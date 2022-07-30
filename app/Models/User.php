@@ -9,8 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -69,7 +68,7 @@ class User extends Authenticatable
     public function organizers() {
         return $this->hasOne('App\Models\Organizer');
     }
-  
+
     public function events()
     {
         return $this->hasMany('App\Models\Event');
@@ -82,5 +81,9 @@ class User extends Authenticatable
 
     public function userRole() {
         return $this->hasOne('App\Models\UserRole');
+    }
+
+    public function academicUnit() {
+        return $this->belongsToMany('App\Models\AcademicUnit');
     }
 }

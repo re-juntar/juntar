@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Backend;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Event;
+
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 
 class EventTable extends DataTableComponent
@@ -51,26 +51,30 @@ class EventTable extends DataTableComponent
             return ['default' => false];
         });
 
-        // $this->setTableAttributes(['class' => "text-white-ghost"]);
+       
     }
 
     public function columns(): array
     {
         return [
             LinkColumn::make('Evento')
-            ->title(fn ($row) => 'Ver')
-            ->location(fn ($row) => route('evento', ['id' => $row['id']])),
-            Column::make("ID Usuario", "user.id"),
-            Column::make("Nombre Usuario", "user.name"),
+                ->title(fn ($row) => 'Ver')
+                ->location(fn ($row) => route('evento', ['id' => $row['id']])),
+            Column::make("ID Usuario", "user.id")
+                ->format(function ($value) {
+                    if (!$value) return 'Evento con error';
+                    return $value;
+                })->sortable(),
+            Column::make("Nombre Usuario", "user.name")
+                ->format(function ($value) {
+                    if (!$value) return 'Evento con error';
+                    return $value;
+                })->sortable(),
             Column::make("ID Evento", 'id'),
             Column::make("Nombre", 'name'),
             Column::make("Estado", "eventStatus.description")->searchable(),
             Column::make("Modalidad", "eventModality.description"),
             Column::make("Cateogoria", "eventCategory.description")
-            // Column::make("Created at", "created_at")
-            //     ->sortable(),
-            // Column::make("Updated at", "updated_at")
-            //     ->sortable(),
         ];
     }
 
@@ -103,10 +107,6 @@ class EventTable extends DataTableComponent
             'component' => 'event-table',
             'action' => 'publicar'
         ]);
-        //$this->emit('publicar',$this->getSelected(), $method, $component,$action);
-        // Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 1]);
-
-        //$this->clearSelected();
     }
 
     public function disable()
@@ -122,9 +122,7 @@ class EventTable extends DataTableComponent
             'action' => 'Deshablitiar'
         ]);
 
-        // Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 2]);
-
-        // $this->clearSelected();
+       
 
     }
     public function confirmDisable()
@@ -167,13 +165,11 @@ class EventTable extends DataTableComponent
             'component' => 'event-table',
             'action' => 'Hacer Borrador'
         ]);
-        // Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 4]);
-        // $this->clearSelected();
+        
     }
     public function confirmMakeDraft()
     {
         Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 4]);
         $this->clearSelected();
-        // return redirect(request()->header('Referer'));
     }
 }
