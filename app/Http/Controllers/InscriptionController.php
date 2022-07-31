@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isNull;
 
+use App\Exports\inscriptionsExport;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class InscriptionController extends Controller
 {
 
@@ -136,4 +140,11 @@ class InscriptionController extends Controller
     {
         //
     }
+
+
+    public function export() 
+    {
+        return Excel::download(new inscriptionsExport, 'inscriptos.xlsx');
+    }
+
 }
