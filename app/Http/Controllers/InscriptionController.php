@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EventInscriptionsExport;
 use App\Mail\ContactanosMailable;
 use App\Mail\InscriptionMail;
 use App\Models\Inscription;
@@ -141,10 +142,9 @@ class InscriptionController extends Controller
         //
     }
 
-
     public function export() 
     {
-        return Excel::download(new inscriptionsExport, 'inscriptos.xlsx');
+        return Excel::download(new EventInscriptionsExport, 'inscriptos.xlsx');
     }
 
 }

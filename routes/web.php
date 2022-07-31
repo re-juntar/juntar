@@ -56,12 +56,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
    
-    Route::get('inscriptos/export/', [InscriptionController::class, 'export']);
     
-
+    
     Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
 });
 
+Route::get('/inscriptos-export', [InscriptionController::class, 'export']);
 /********************** VALIDATOR *************************/
 Route::group(['middleware' => ['auth', 'validator'], 'prefix' => 'gestionar'], function () {
     Route::get('/', BackHome::class)->name('back-home');

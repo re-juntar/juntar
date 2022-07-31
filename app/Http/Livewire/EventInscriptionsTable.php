@@ -14,7 +14,7 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-class EventInscriptionTable extends DataTableComponent
+class EventInscriptionsTable extends DataTableComponent
 {
     protected $model = Inscriptions::class;
 
@@ -123,9 +123,7 @@ class EventInscriptionTable extends DataTableComponent
         $this->emit('refreshComponent');
     }
 
-    public function export() 
-    {
-        return Excel::download(new inscriptionsExport, 'users.xlsx');
-    }
+    
+    
 
 }

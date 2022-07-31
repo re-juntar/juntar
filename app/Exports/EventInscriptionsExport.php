@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class inscriptionsExport implements FromCollection, FromQuery, WithMapping
+class EventInscriptionsExport implements FromCollection, FromQuery, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -19,14 +19,16 @@ class inscriptionsExport implements FromCollection, FromQuery, WithMapping
     }
     public function query()
     {
-        
+        return Inscription::query();
     }
     public function map($inscription): array
     {
-        return [
-            $inscription->user_id,
-            $$inscription->user->name,
-        ];
+            
+                return [  $inscription->user_id,
+                $inscription->user->name,
+            ];
+            
+            
     }
 
 }

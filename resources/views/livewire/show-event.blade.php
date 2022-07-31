@@ -94,7 +94,7 @@
                             </x-button>
                         </a>
 
-                        <a href="{{route('inscriptions', $event->id)}}">
+                        <a href="{{route('event-inscriptions', $event->id)}}">
                             <x-button class="h-full hover:bg-fogra-darkish">
                                 <i class="fa-solid fa-eye"></i> Ver Inscriptos
                             </x-button>
