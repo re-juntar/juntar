@@ -105,7 +105,7 @@
                         {{-- Fecha de Inicio --}}
                         <div class="mb-4">
                             <x-label class="block" for="start-date">Fecha Inicio *</x-label>
-                            <x-input required class="block" id="start-date" type="date" name="start-date"
+                            <x-input class="block" id="start-date" type="date" name="start-date"
                                 value="{{ old('start-date', $event->start_date) }}" />
                             @error('start-date')
                                 <div class="flex items-center">
@@ -116,7 +116,7 @@
                         {{-- Fecha de Fin --}}
                         <div class="mb-4">
                             <x-label class="block">Fecha Fin *</x-label>
-                            <x-input required class="block" id="end-date" type="date" name="end-date"
+                            <x-input class="block" id="end-date" type="date" name="end-date"
                                 value="{{ old('end-date', $event->end_date) }}" />
                             @error('end-date')
                                 <div class="flex items-center">

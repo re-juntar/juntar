@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('status');
             $table->date('pre_inscription_date')->nullable();
             $table->date('inscription_date')->nullable();
-            $table->tinyInteger('accreditation')->nullable();
+            $table->tinyInteger('accreditation');
             $table->string('certification', 200)->nullable();
             $table->timestamps();
         });

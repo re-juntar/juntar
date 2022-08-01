@@ -107,7 +107,6 @@ class EventController extends Controller
         }
     }
 
-    public $event;
     public function myInscriptions()
     {   
         
