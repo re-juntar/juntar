@@ -3,14 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\Event;
-use App\Models\EventModality;
 use App\Models\Inscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 
 class InscriptionTable extends DataTableComponent
 {
@@ -58,38 +55,30 @@ class InscriptionTable extends DataTableComponent
         return [
             Column::make("#", "id")->hideIf(true),
             Column::make("#", "event.id")->hideIf(true),
+            Column::make("fechas", "inscription_date")->hideIf(true),
+            Column::make("fechas", "event.end_date")->hideIf(true),
             Column::make("Nombre de Evento", "event.name"),
-            Column::make("fecha de Inicio", "event.start_date"),
-            Column::make("Fecha de Inscripcion", "inscription_date"),
+            Column::make("fechas", "event.start_date")
+                ->format(function ($value, $row, Column $column) {
+                    return '<p class=""><b>Fecha de inicio:</b> '.$row['event.start_date'].'</p>
+                    <p class=""><b>Fecha de inscripcion:</b> '.$row['inscription_date'].'</p>';
+                })->html(),
             Column::make("Modalidad", "event.eventModality.description"),
-            Column::make("Link de evento", "event.meeting_link"),
-            Column::make("Ubicacion", "event.venue"),
-            ButtonGroupColumn::make('acciones')
-            ->attributes(function($row) {
-                return [
-                    'class' => 'space-x-2 ',
-                ];
-            })
-            ->buttons([
-                LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
-                    ->title(fn($row) => 'ver Evento')
-                    ->location(fn ($row) => route('evento', ['id' => $row['event.id']]))
-                    ->attributes(function($row) {
-                        return [
-                            'class' =>' border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
-                        ];
-                    }),
-            
-                LinkColumn::make('View') // make() has no effect in this case but needs to be set anyway
-                ->title(fn($row) => 'ver PyR')
-                ->location(fn ($row) => route('evento', ['id' => $row['event.id']]))
-                ->attributes(function($row) {
-                    return [
-                        'class' =>'text-green-500 border border-1 border-black rounded p-2 text-blue-100 hover:no-underline',
-                        'wire:click' => '$emit("showPyRModal")',
-                    ];
-                }),
-            ])->collapseOnMobile()
+            Column::make("Ubicacion", "event.venue")->hideIf(true),
+            Column::make("Donde", "event.meeting_link")
+                ->format(function ($meeting_link, $row, Column $column) {
+                    if ($row['event.venue'] !== null && $meeting_link === null)return  '<p><b>Lugar : </b>'.$row['event.venue'].'</p>';
+                    if ($meeting_link !== null && $row['event.venue'] === null) return  '<p><b>Enlace: </b><a href='.$meeting_link.' class="text-awesome" target="_blank">link al Evento </a></p>';
+                    if ($meeting_link !== null && $row['event.venue'] !== null) return  '<p><b>Enlace: </b><a href='.$meeting_link.' class="text-awesome" target="_blank">link al Evento </a></p>
+                        <p><b>Lugar : </b>'.$row['event.venue'].'</p>';
+                    if ($meeting_link === null && $row['event.venue'] === null) return '<span class="flex justify-center">-</span>';
+                })->html(),
+            Column::make("", 'event.id')->format(
+                fn ($value, $row, Column $column) => view('livewire.add-specific-event')->withValue($value)
+            ),
+            Column::make("", 'id')->format(
+                fn ($value, $row, Column $column) => view('livewire.add-questions-and-anwers-button')->withValue($value)
+            ),
         ];
     }
 
@@ -107,9 +96,9 @@ class InscriptionTable extends DataTableComponent
 
     public function unsubscribe()
     {
-        $event = Event::findOrFail($this->getSelected()[0]);
+        $Inscription = Inscription::findOrFail($this->getSelected()[0]);
 
-        if ($event->pre_registration) {
+        if ($Inscription->pre_registration_date) {
             Inscription::whereIn('id', $this->getSelected())->update(['pre_inscription_date' => date('Y-m-d')]);
             Inscription::whereIn('id', $this->getSelected())->update(['inscription_date' => null]);
         } else {
