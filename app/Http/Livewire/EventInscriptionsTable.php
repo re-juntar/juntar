@@ -4,15 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Inscription;
 use App\Models\Event;
-use App\Models\EventModality;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
-use App\Exports\UsersExport;
-use Maatwebsite\Excel\Facades\Excel;
 
 class EventInscriptionsTable extends DataTableComponent
 {
