@@ -20,7 +20,7 @@ class QAndAModal extends Component
         $inscriptions = Inscription::all();
         $questions = Question::all();
         $answers = Answer::all();
-    return view('livewire.q-and-a-modal',['questions' => $questions, 'answers' => $answers, 'inscriptions' => $inscriptions]);
+        return view('livewire.q-and-a-modal',['questions' => $questions, 'answers' => $answers, 'inscriptions' => $inscriptions]);
     }
 
     public function showPyRModal($id)

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Event;
+use App\Models\Answer;
 use App\Models\Inscription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,22 +30,21 @@ class InscriptionTable extends DataTableComponent
         $this->setComponentWrapperAttributes([
             'id' => 'inscriptions',
             'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
-          ]);
+        ]);
 
-          $this->setTrAttributes(function($row, $index) {
+        $this->setTrAttributes(function($row, $index) {
             if ($index % 2 === 0) {
-              return [
-                'default' => false,
-                'class' => 'bg-gray-300 text-black',
-              ];
+                return [
+                    'default' => false,
+                    'class' => 'bg-gray-300 text-black',
+                ];
             }
             else{
-               return [
-                 'default' => false,
-                 'class' => 'bg-white-ghost text-black',
-               ];
-             }
-
+                return [
+                'default' => false,
+                'class' => 'bg-white-ghost text-black',
+                ];
+            }
             return ['default' => false];
         });
     }
@@ -77,7 +76,10 @@ class InscriptionTable extends DataTableComponent
                 fn ($value, $row, Column $column) => view('livewire.add-specific-event')->withValue($value)
             ),
             Column::make("", 'id')->format(
-                fn ($value, $row, Column $column) => view('livewire.add-questions-and-anwers-button')->withValue($value)
+                function ($value, $row, Column $column) {
+                    $answer = Answer::all()->where('inscription_id', $value);
+                    return view('livewire.add-questions-and-anwers', ['answer' => $answer])->withValue($value);
+                }
             ),
         ];
     }
@@ -96,9 +98,9 @@ class InscriptionTable extends DataTableComponent
 
     public function unsubscribe()
     {
-        $Inscription = Inscription::findOrFail($this->getSelected()[0]);
+        $inscription = Inscription::findOrFail($this->getSelected()[0]);
 
-        if ($Inscription->pre_registration_date) {
+        if ($inscription->pre_registration_date) {
             Inscription::whereIn('id', $this->getSelected())->update(['pre_inscription_date' => date('Y-m-d')]);
             Inscription::whereIn('id', $this->getSelected())->update(['inscription_date' => null]);
         } else {
