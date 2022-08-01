@@ -50,7 +50,6 @@ class PreinscriptionTable extends DataTableComponent
 
     public function enroll()
     {
-        Inscription::whereIn('id', $this->getSelected())->update(['pre_inscription_date' => null]);
         Inscription::whereIn('id', $this->getSelected())->update(['inscription_date' => date('Y-m-d')]);
 
         $this->clearSelected();
