@@ -33,20 +33,18 @@ class InscriptionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store( $eventId)
-    {
+    public function store($eventId)
+    {   
+        $array = [];
         $event = Event::findOrFail($eventId);
-        $inscripcion = new Inscription();
-
-
-        $inscriptos = Inscription::join('events', 'event_id', '=', 'inscriptions.event_id')
-            ->join('users', 'users.id', '=', 'inscriptions.user_id')
-            ->where('events.id', $eventId)
-            ->get(['users.id']);
-        if(is_null(Auth::user())) {
-            return redirect('login');
+        if(is_null(Auth::user())){            
+            $array["redirect"] = true;
+            $array["title"] = 'No estas logeado!';
+            $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
+            $array["icon"] = 'warning';
         }
-        elseif (!is_null(Auth::user()) and count($inscriptos)==0 ) {
+        else{            
+            $inscripcion = new Inscription();
             $user = Auth::user();
             $userId = $user->id;
 
@@ -68,6 +66,8 @@ class InscriptionController extends Controller
         elseif (count($inscriptos)>0) {
             return redirect('home')->with('error', '   Ya estas inscripto en este evento!');
         }
+        //dd($array);
+        return $array;
     }
 
     /**

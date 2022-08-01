@@ -28,6 +28,8 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src={{ asset('/js/alerts.js/') }} defer></script>
 </head>
 
 <body class="font-sans antialiased min-h-screen">
