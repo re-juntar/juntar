@@ -81,7 +81,7 @@
 
                             <h3 class="font-bold mt-2">Fecha de inicio: {{ $event->start_date }}</h3>
 
-                            <h3 class="font-bold mt-1">Fecha de finalización: {{ $event->start_date }}</h3>
+                            <h3 class="font-bold mt-1">Fecha de finalización: {{ $event->end_date }}</h3>
 
                             @if (!is_null($event->pre_registration))
                                 @if ($event->pre_registration)
