@@ -13,10 +13,9 @@
                     <div class="overflow-hidden rounded-lg m-1">
                         <livewire:user-events-table>
                     </div>
-                    <h2 class="text-white-ghost mt-11 uppercase mb-5 font-medium leading-6 text-3xl">Eventos donde soy Coorganizador</h2>  
+                    <h2 class="text-white-ghost mt-11 uppercase mb-5 font-medium leading-6 text-3xl">Eventos donde soy Coorganizador</h2>
                     <div class="overflow-hidden rounded-lg  ">
                         <livewire:coorganizer-event-table>
-           
                     </div>
                 </div>
             </div>

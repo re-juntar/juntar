@@ -11,7 +11,7 @@ class ContactanosMailable extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $subject = "Organizacion JUNTAR";
+    public $subject = "JUNTAR";
     
     public $contacto;
     /**
@@ -31,6 +31,7 @@ class ContactanosMailable extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.contactanos');
+       
+        return $this->markdown('mail.contact');
     }
 }

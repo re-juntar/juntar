@@ -12,6 +12,10 @@ class Event extends Model
 {
     use HasFactory, Imageable;
 
+    public $fillable = [
+        'capacity',
+    ];
+
     //RELATIONSHIPS
     public function eventCategory()
     {

@@ -4,8 +4,6 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Question;
-use Illuminate\Http\Request;
-use App\Http\Controllers\PermissionController;
 
 class PreinscriptionFormBuilder extends Component
 {

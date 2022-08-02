@@ -14,29 +14,40 @@ class UserTable extends DataTableComponent
     public string $tableName = 'users';
     public array $users = [];
 
+    protected $listeners = ['confirmAdmin', 'confirmSuper'];
+
+
     public function configure(): void
     {
-        $this->setPrimaryKey('id');;
+        $this->setPrimaryKey('id');
+
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setEmptyMessage('No se encontraron usuarios');
 
         $this->setQueryStringDisabled();
 
-        // $this->setTableAttributes(['class' => "text-white-ghost"]);
+        $this->setComponentWrapperAttributes([
+            'id' => 'eventos',
+            'class' => 'text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 overflow-hidden rounded-lg m-1 >',
+          ]);
 
-        // $this->setSecondaryHeaderTrAttributes(function ($rows) {
-        //     return ['class' => 'text-white-ghost'];
-        // });
+        $this->setTrAttributes(function($row, $index) {
+            if ($index % 2 === 0) {
+              return [
+                'default' => false,
+                'class' => 'bg-gray-300 text-black',
+              ];
+            }
+            else{
+               return [
+                 'default' => false,
+                 'class' => 'bg-white-ghost text-black',
+               ];
+             }
 
-        // $this->setComponentWrapperAttributes([
-        //     'class' => 'text-white-ghost',
-        // ]);
-
-        // $this->setTbodyAttributes([
-        //     'id' => 'my-id',
-        //     'class' => 'this that'
-        // ]);
+            return ['default' => false];
+        });
 
     }
 
@@ -66,13 +77,26 @@ class UserTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
+            'revertRole' => 'Default',
             'makeAdmin' => 'Hacer Admin',
             'makeSuperUser' => 'Hacer Super Usuario',
+            'makeValidator' => 'Hacer/Quitar Validador',
         ];
     }
 
     public function makeAdmin()
     {
+        $this->emit('confirmation', [            
+            'status' => 'Administrador!',
+            'statusText' => 'Los usuarios han sido cambiado a rol adminisitrador exitosamente!',
+            'text' => 'Estas por cambiar el rol de los usuarios seleccionados a rol Administrador! ',
+            'method' => 'confirmAdmin',
+            'component' => 'user-table',
+            'action' => 'hacer Adminisitrador'
+        ]);
+    }
+
+    public function confirmAdmin(){
         foreach ($this->getSelected() as $selectedItem) {
             UserRole::where('user_id', $selectedItem)->update(['role_id' => 2]);
         }
@@ -80,10 +104,36 @@ class UserTable extends DataTableComponent
     }
 
     public function makeSuperUser()
-    {
+    {   
+        $this->emit('confirmation', [            
+            'status' => 'Super Usuario!',
+            'statusText' => 'Los usuarios han sido cambiado a rol Super Usuario exitosamente!',
+            'text' => 'Estas por cambiar el rol de los usuarios seleccionados a rol Super Usuario! ',
+            'method' => 'confirmSuper',
+            'component' => 'user-table',
+            'action' => 'hacer Super Usuario'
+        ]);
+
+    }
+
+    public function confirmSuper(){
         foreach ($this->getSelected() as $selectedItem) {
             UserRole::where('user_id', $selectedItem)->update(['role_id' => 1]);
         }
+        $this->clearSelected();
+    }
+
+    public function revertRole()
+    {
+        foreach ($this->getSelected() as $selectedItem) {
+            UserRole::where('user_id', $selectedItem)->update(['role_id' => 4]);
+        }
+        $this->clearSelected();
+    }
+
+    public function makeValidator()
+    {
+        $this->emit('showAddUserAcademicUnitModal', $this->getSelected()[0]);
         $this->clearSelected();
     }
 }

@@ -2,12 +2,15 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Http\Controllers\PermissionController;
+use App\Models\AcademicUnitUser;
 use Carbon\Carbon;
 use App\Models\EndorsementRequest;
 
 use Illuminate\Database\Eloquent\Builder;
 use phpDocumentor\Reflection\DocBlock\Tag;
 use Illuminate\Database\DBAL\TimestampType;
+use Illuminate\Support\Facades\Auth;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
@@ -28,6 +31,28 @@ class EndorsementTable extends DataTableComponent
         $this->setHideBulkActionsWhenEmptyEnabled();
 
         $this->setQueryStringDisabled();
+
+        $this->setComponentWrapperAttributes([
+            'id' => 'eventos',
+            'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 overflow-hidden rounded-lg m-1 ',
+          ]);
+
+        $this->setTrAttributes(function($row, $index) {
+            if ($index % 2 === 0) {
+              return [
+                'default' => false,
+                'class' => 'bg-gray-300 text-black',
+              ];
+            }
+            else{
+               return [
+                 'default' => false,
+                 'class' => 'bg-white-ghost text-black',
+               ];
+             }
+
+            return ['default' => false];
+        });
     }
 
     public function filters(): array
@@ -50,7 +75,7 @@ class EndorsementTable extends DataTableComponent
                     }
                 }),
         ];
-        
+
     }
 
     public function columns(): array
@@ -59,6 +84,7 @@ class EndorsementTable extends DataTableComponent
             Column::make("#", "id"),
             Column::make("Nombre Evento", 'event.name')->searchable(),
             Column::make("Solicitante", "user.name")->searchable(),
+            Column::make("Unidad academica", "academicUnit.short_name"),
             Column::make("Token", 'request_token'),
             Column::make("Fecha de revision", "revision_date"),
             Column::make('Estado', 'endorsed')
@@ -68,6 +94,22 @@ class EndorsementTable extends DataTableComponent
                     return $row->endorsed == 1 ? 'Avalado' : 'Denegado';
                 })->sortable(),
         ];
+    }
+
+    public function builder(): Builder
+    {
+        if(PermissionController::isAdmin()) return EndorsementRequest::where('events.id', '>', 0);
+
+        
+        $userAcademicUnits = AcademicUnitUser::all()->where('user_id', Auth::user()->id);
+
+        $userAcademicUnits = array_reduce(
+            $userAcademicUnits->toArray(),
+            fn ($current, $userAcademicUnit) => [...$current, $userAcademicUnit['academic_unit_id']],
+            []
+        );
+
+        return EndorsementRequest::whereIn('academic_unit_id', $userAcademicUnits)->where('events.id', '>', 0);
     }
 
     public function bulkActions(): array
@@ -87,7 +129,7 @@ class EndorsementTable extends DataTableComponent
     }
     public function denyEndorsement()
     {
-        EndorsementRequest::whereIn('id', $this->getSelected())->update(['endorsed' => 0]);
+        EndorsementRequest::whereIn('id', $this->getSelected())->update(['endorsed' => 0, 'revision_date' => Carbon::now()]);
 
         $this->clearSelected();
     }
