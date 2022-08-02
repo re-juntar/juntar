@@ -38,6 +38,7 @@
                     <img class="shadow-lg rounded-lg" src="{{ asset($src) }}" alt="">
                 </div>
 
+
                 <div class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
                     {{-- Logeado --}}
                     @if(!is_null(Auth::user()))
@@ -45,6 +46,7 @@
                     @if(count($arrIsEnrolled) == 1)
                         <a href="{{route('unsubscribe', $event->id )}}">
                             <x-button class="text-[16px] ">Desinscribirse</x-button>
+
                         </a>
                     {{-- Logeado pero No Inscripto --}}
                     @else
@@ -76,6 +78,7 @@
                     <x-button>Flyer</x-button>
                     <x-button class="bg-fogra-darkish text-white-ghost">Compartir</x-button>
 
+
                     <div class="container mt-4">
                         <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
                         <a class="text-2xl text-red-600" href={{ route('evento', $event->id) }}
@@ -83,51 +86,52 @@
 
                         <div class="container mt-2">
 
-                        <h2 class="text-lg font-semibold">Organiza:
-                            <span class="font-normal">{{$event->user->name}} {{$event->user->surname}}</span>
-                        </h2>
+                            <h2 class="text-lg font-semibold">Organiza:
+                                <span class="font-normal">{{ $event->user->name }} {{ $event->user->surname }}</span>
+                            </h2>
 
-                        @if(count($event->coorganizers) > 0)
-                            <div class="flex flex-row mt-1">
-                                <h2 class="text-lg font-semibold">Co-organiza: </h2>
-                                <ul class="text-lg ml-1">
-                                    @foreach($event->coorganizers as $coorganizer)
-                                        <li>{{$coorganizer->user->name}} {{$coorganizer->user->surname}}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <h3 class="font-bold mt-2">Fecha de inicio: {{$event->start_date}}</h3>
-
-                        <h3 class="font-bold mt-1">Fecha de finalización: {{$event->start_date}}</h3>
-
-                        @if(!is_null($event->pre_registration))
-                            @if($event->pre_registration)
-                                <h3 class="font-bold mt-1">Fecha límite de preinscripción: {{$event->inscription_end_date}}</h3>
-                            @endif
-                        @endif
-
-                        <h3 class="font-bold mt-4">Modalidad: {{$event->eventModality->description}}</h3>
-
-                        @php
-                            $endorsementRequest = $event->endorsementRequest;
-                        @endphp
-
-                        @if(!is_null($endorsementRequest))
-                            @if($endorsementRequest->endorsed)
-                                <div class="mt-4">
-                                    @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
+                            @if (count($event->coorganizers) > 0)
+                                <div class="flex flex-row mt-1">
+                                    <h2 class="text-lg font-semibold">Co-organiza: </h2>
+                                    <ul class="text-lg ml-1">
+                                        @foreach ($event->coorganizers as $coorganizer)
+                                            <li>{{ $coorganizer->user->name }} {{ $coorganizer->user->surname }}</li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             @endif
-                        @endif
 
-                        <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
-                        {!! $event->description !!}
+                            <h3 class="font-bold mt-2">Fecha de inicio: {{ $event->start_date }}</h3>
+
+                            <h3 class="font-bold mt-1">Fecha de finalización: {{ $event->start_date }}</h3>
+
+                            @if (!is_null($event->pre_registration))
+                                @if ($event->pre_registration)
+                                    <h3 class="font-bold mt-1">Fecha límite de preinscripción:
+                                        {{ $event->inscription_end_date }}</h3>
+                                @endif
+                            @endif
+
+                            <h3 class="font-bold mt-4">Modalidad: {{ $event->eventModality->description }}</h3>
+
+                            @php
+                                $endorsementRequest = $event->endorsementRequest;
+                            @endphp
+
+                            @if (!is_null($endorsementRequest))
+                                @if ($endorsementRequest->endorsed)
+                                    <div class="mt-4">
+                                        @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
+                                    </div>
+                                @endif
+                            @endif
+
+                            <h2 class="text-2xl font-bold mt-4">Sobre este evento</h2>
+                            {!! $event->description !!}
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
         </x-slot>
     @endif
 </x-jet-dialog-modal>

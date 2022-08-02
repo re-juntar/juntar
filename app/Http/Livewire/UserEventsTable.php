@@ -6,6 +6,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Event;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Queue\ListenerOptions;
 use Illuminate\Support\Facades\Auth;
 use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
@@ -18,6 +19,8 @@ class UserEventsTable extends DataTableComponent
     public string $tableName = "userEventsTable";
 
     public array $userEventsTable = [];
+
+    protected $listeners = ['confirmpublish', 'confirmMakeDraft', 'confirmDisable', 'confirmEnd'];
 
     public function builder(): Builder
     {
@@ -36,30 +39,28 @@ class UserEventsTable extends DataTableComponent
 
         $this->setColumnSelectDisabled();
 
-         $this->setComponentWrapperAttributes([
-             'id' => 'eventos',
-             'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
-           ]);
+        $this->setComponentWrapperAttributes([
+            'id' => 'eventos',
+            'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
+        ]);
 
 
 
-         $this->setTrAttributes(function($row, $index) {
-             if ($index % 2 === 0) {
-               return [
-                 'default' => false,
-                 'class' => 'bg-gray-300 text-black',
-               ];
-             }
-             else{
+        $this->setTrAttributes(function ($row, $index) {
+            if ($index % 2 === 0) {
                 return [
-                  'default' => false,
-                  'class' => 'bg-white-ghost text-black',
+                    'default' => false,
+                    'class' => 'bg-gray-300 text-black',
                 ];
-              }
+            } else {
+                return [
+                    'default' => false,
+                    'class' => 'bg-white-ghost text-black',
+                ];
+            }
 
-             return ['default' => false];
-         });
-
+            return ['default' => false];
+        });
     }
 
     public function columns(): array
@@ -106,28 +107,95 @@ class UserEventsTable extends DataTableComponent
         ];
     }
 
-    public function publish()
+    public function confirmpublish()
     {
+
         Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 1]);
 
         $this->clearSelected();
     }
+
+    public function publish()
+    {
+        $this->emit('confirmation', [
+            'selected' => $this->getSelected(),
+            'status' => 'Publicado!',
+            'statusText' => 'Los eventos han sido publicados exitosamente!',
+            'text' => 'Estas por cambiar el estado de los eventos a publico!',
+            'method' => 'confirmpublish',
+            'component' => 'user-events-table',
+            'action' => 'publicar'
+        ]);
+        //$this->emit('publicar',$this->getSelected(), $method, $component,$action);
+        // Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 1]);
+
+        //$this->clearSelected();
+    }
+
     public function disable()
+    {
+
+        $this->emit('confirmation', [
+            'selected' => $this->getSelected(),
+            'status' => 'Eliminado!',
+            'statusText' => 'Los eventos han sido deshabilitados exitosamente!',
+            'text' => 'Estas por deshabilitar un evento, esta accion es irreversible! ',
+            'method' => 'confirmDisable',
+            'component' => 'user-events-table',
+            'action' => 'Deshablitiar'
+        ]);
+
+        // Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 2]);
+
+        // $this->clearSelected();
+
+    }
+    public function confirmDisable()
     {
         Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 2]);
 
         $this->clearSelected();
     }
+
     public function end()
     {
+
+        $this->emit('confirmation', [
+            'selected' => $this->getSelected(),
+            'status' => 'Finalizado!',
+            'statusText' => 'Los eventos han sido Finalizados exitosamente!',
+            'text' => 'Estas por cambiar el estado de los eventos a finalizado! ',
+            'method' => 'confirmEnd',
+            'component' => 'user-events-table',
+            'action' => 'Finalizar Evento'
+        ]);
+    }
+
+
+    public function confirmEnd(){
         Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 3]);
 
         $this->clearSelected();
     }
+
     public function makeDraft()
     {
+        $this->emit('confirmation', [
+            'selected' => $this->getSelected(),
+            'status' => 'Borrador!',
+            'statusText' => 'Los eventos se cambiaron a estado borrador exitosamente!',
+            'text' => 'Estas por cambiar el estado de los eventos a borrador!',
+            'method' => 'confirmMakeDraft',
+            'component' => 'user-events-table',
+            'action' => 'Hacer Borrador'
+        ]);
+        // Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 4]);
+        // $this->clearSelected();
+    }
+    public function confirmMakeDraft()
+    {
         Event::whereIn('id', $this->getSelected())->update(['event_status_id' => 4]);
-
         $this->clearSelected();
+        // return redirect(request()->header('Referer'));
     }
 }

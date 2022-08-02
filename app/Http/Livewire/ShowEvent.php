@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Controllers\InscriptionController;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Livewire\FrontHome;
 use App\Models\Event;
 use App\Models\AcademicUnit;
@@ -20,6 +20,8 @@ class ShowEvent extends Component
     public $openFlyerModal = false;
     use Is_Enrolled;
 
+
+    protected $listeners = ['inscription','confirm' =>'confirmInscription'];
 
     public function mount($id)
     {
@@ -86,4 +88,45 @@ class ShowEvent extends Component
             ]
         )->layout(\App\View\Components\AppLayout::class);
     }
+
+    public function confirmInscription($event)
+    {   
+        //dd($event);     
+        if(is_null(Auth::user())){
+            $array= [];
+            $array["title"] = 'No estas logeado!';
+            $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
+            $array["icon"] = 'warning';
+            $array["redirect"] = true;
+            $this->emit('ins', $array);
+        }
+        else{
+            
+            $this->emit('confirmationInscription', [
+                'selected' => $event,
+                'status' => 'Inscripto!',
+                'statusText' => 'Te has inscrito exitosamente al evento!',
+                'text' => 'Estas por inscribirte al Evento ' . $event["name"] . '!',
+                'method' => 'inscription',
+                'eventid' => $event["id"],
+                'component' => 'show-event',
+                'action' => 'Incribirme'
+            ]);
+            //dd($event);
+        }
+        //$evento = $this->storeInscription($event["id"]);
+        //dd($event["id"]);
+
+    }
+    public function inscription($eventid)
+    {
+        $ins = new InscriptionController;
+        $evento = $ins->store($eventid);
+        // if ($evento["redirect"]) {
+        //     return redirect('login');
+        // }
+
+        $this->emit('ins', $evento);
+    }    
+
 }

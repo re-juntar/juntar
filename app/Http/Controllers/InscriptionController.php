@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactanosMailable;
-use App\Mail\InscriptionMail;
+use App\Mail\inscriptionMail;
 use App\Models\Inscription;
 use App\Models\Event;
 use App\Models\User;
@@ -35,6 +35,7 @@ class InscriptionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store($eventId)
+
     {
         $event = Event::findOrFail($eventId);
         $inscripcion = new Inscription();
@@ -106,6 +107,15 @@ class InscriptionController extends Controller
         }
     }
 
+
+    // {   
+        // $array = [];
+        // if(is_null(Auth::user())){            
+            // $array["redirect"] = true;
+            // $array["title"] = 'No estas logeado!';
+            // $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
+            // $array["icon"] = 'warning';
+        // }
 
 
 

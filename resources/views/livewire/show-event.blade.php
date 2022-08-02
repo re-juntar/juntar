@@ -35,21 +35,28 @@
                     @endif
                 </div>
 
-                <div class="flex justify-end">
-                    @if ($flyerSrc)
-                        <a class="my-5 text-[1rem]" href="{{ asset($flyerSrc) }}" download>
-                            <x-button class="text-[1rem]">
-                                <i class="fas fa-file-download mr-3"></i>Bajar
-                            </x-button>
-                        </a>
-                    @endif
-                    <x-button wire:click="$set('openFlyerModal', false)" class="ml-2 my-5 text-[1rem]">
-                        Cerrar
-                    </x-button>
-                </div>
+                
             </div>
         </x-slot>
+
+        <x-slot name="footer">
+           
+                @if ($flyerSrc)
+                    <a class=" text-[1rem]" href="{{ asset($flyerSrc) }}" download>
+                        <x-button class="text-[1rem]">
+                            <i class="fas fa-file-download mr-3"></i>Bajar
+                        </x-button>
+                    </a>
+                @endif
+                <x-button wire:click="$set('openFlyerModal', false)" class="ml-2 text-[1rem]">
+                    Cerrar
+                </x-button>
+            
+        </x-slot>
     </x-jet-dialog-modal>
+
+    
+
 
 
     {{-- Body content --}}
@@ -209,6 +216,7 @@
                                 @endif
                                 {{-- Inscripcion a tiempo --}}
                             </div>
+
                         @endif
                     {{-- No Logeado --}}
                     @else
@@ -298,3 +306,6 @@
     </div>
 
 </div>
+
+
+
