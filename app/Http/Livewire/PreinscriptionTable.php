@@ -21,7 +21,7 @@ class PreinscriptionTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        return Inscription::where('event_id', $this->event)->where('inscription_date', '=', 'null');
+        return Inscription::where('event_id', $this->event)->where('inscription_date', '=', null);
     }
 
     public function configure(): void

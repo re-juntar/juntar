@@ -5,12 +5,9 @@ namespace App\Http\Livewire;
 use App\Models\Event;
 use App\Models\Answer;
 use App\Models\Inscription;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
 
 class EventInscriptionsTable extends DataTableComponent
 {
@@ -58,6 +55,7 @@ class EventInscriptionsTable extends DataTableComponent
         return [
             Column::make("#", "id")->hideIf(true),
             Column::make("Nombre", "user.name")->hideIf(true),
+            Column::make("pre_inscription_date", "pre_inscription_date")->hideIf(true),
             Column::make("Nombre Apellido", "user.surname")
             ->format(function ($value, $row, Column $column) {
                 return '<p class="">'.$row['user.name'].' '.$row['user.surname'].'</p>';
@@ -69,7 +67,8 @@ class EventInscriptionsTable extends DataTableComponent
             Column::make("", 'id')->format(
                 function ($value, $row, Column $column) {
                     $answer = Answer::all()->where('inscription_id', $value);
-                    return view('livewire.add-questions-and-anwers', ['answer' => $answer])->withValue($value);
+                    $preIncriptionDate = $row['pre_inscription_date'];
+                    return view('livewire.add-questions-and-anwers', ['answer' => $answer, 'preIncriptionDate' => $preIncriptionDate])->withValue($value);
                 }
             ),
         ];
