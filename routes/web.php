@@ -51,11 +51,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuilder::class)->name('formbuilder');
 
-    Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
+    Route::get('/evento/{eventId}/formulario-preinscripcion', PreinscriptionForm::class)->name('preinscripcionform');
 
     Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('inscriptions');
 
-    Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
+    Route::get('/evento/{eventId}/inscribir', [InscriptionController::class, 'store'])->name('inscribir');
+
+    Route::get('/evento/{eventId}/desinscribir', [InscriptionController::class, 'unsubscribe'])->name('unsubscribe');
 });
 
 /********************** VALIDATOR *************************/

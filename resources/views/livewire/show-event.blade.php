@@ -17,9 +17,10 @@
 
     $inscription_end_date = new DateTime($event->inscription_end_date);
     $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
+
+    $arrIsEnrolled = $this->is_enrolled($event->id);
 @endphp
 <div>
-
     {{-- Flyer Modal --}}
     <x-jet-dialog-modal wire:model="openFlyerModal">
         <x-slot name="content">
@@ -167,9 +168,9 @@
                 </div>
 
                 {{-- Details on event, dates and inscription limits --}}
-                <div class="event-body-inscription px-[15px] flex justify-between md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
+                <div class="event-body-inscription px-[15px] flex flex-col justify-between md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
                     <div class="flex flex-col items-center justify-center md:flex">
-                        @if ($event->capacity > 0)
+                        @if ($event->capacity >= 0)
                             <p class="text-[1rem]">CUPOS DISPONIBLES: {{ $event->capacity }}
                         @else
                             <p class="text-[1rem]">CUPOS ILIMITADOS</p>
@@ -180,20 +181,43 @@
                         @endif
                     </div>
 
-                    <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
-                        @if($event->pre_registration)
-                                <a href="{{route('preinscripcionform', $event->id)}}">
-                                    <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
+                    {{-- Logeado --}}
+                    @if(!is_null(Auth::user()))
+                        {{-- Logeado pero Ya Inscripto --}}
+                        @if(count($arrIsEnrolled) == 1)
+                            <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                                <a href="{{route('unsubscribe', $event->id )}}">
+                                    <x-button class="text-[16px] ">Desinscribirse</x-button>
                                 </a>
-                                <p>Fecha limite: {{ $event->inscription_end_date }}</p>
+                            </div>
+                        {{-- Logeado pero No Inscripto --}}
                         @else
-                            @if($today < $end_date)
-                                <a href="{{route('inscribir', $event->id )}}">
-                                    <x-button class="text-[16px]">Inscribirse</x-button>
-                                </a>
-                            @endif
+                            <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                                {{-- Preinscripcion --}}
+                                @if($event->pre_registration && $today <= $inscription_end_date && $event->capacity > 0 && $event->event_status_id == 1)
+                                        <a href="{{route('preinscripcionform', $event->id)}}">
+                                            <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
+                                        </a>
+                                        <p>Fecha limite: {{ $event->inscription_end_date }}</p>
+                                {{-- Inscripcion/ preinscripcion? pasada la fecha --}}
+                                @elseif(!$event->pre_registration && $today < $end_date && $event->capacity > 0 && $event->event_status_id == 1)
+                                    <a href="{{route('inscribir', $event->id )}}">
+                                        <x-button class="bg-cyan-500 text-[16px]">Inscribirse</x-button>
+                                    </a>
+                                @elseif(($event->pre_registration && $today > $inscription_end_date || $event->capacity == 0 || $today > $end_date || $event->event_status_id != 1))
+                                    <x-button class="bg-slate-500 text-[16px] hover:cursor-not-allowed" disabled>Inscribirse</x-button>
+                                @endif
+                                {{-- Inscripcion a tiempo --}}
+                            </div>
                         @endif
-                    </div>
+                    {{-- No Logeado --}}
+                    @else
+                        <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                            <a href="{{route('login')}}">
+                                <x-button class="bg-cyan-500 text-[16px]">Iniciar Sesión</x-button>
+                            </a>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="event-body-main flex-col flex-wrap md:flex md:flex-row pb-[3rem] p-[15px]">
