@@ -175,8 +175,8 @@
                 </div>
 
                 {{-- Details on event, dates and inscription limits --}}
-                <div class="event-body-inscription px-[15px] flex flex-col justify-between md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
-                    <div class="flex flex-col items-center justify-center md:flex">
+                <div class="event-body-inscription px-[15px] flex flex-col justify-between sm:flex sm:flex-row py-[3vh] bg-[#F2F2F2]">
+                    <div class="flex flex-col sm:flex sm:flex-row items-center justify-center md:flex">
                         @if ($event->capacity >= 0)
                             <p class="text-[1rem]">CUPOS DISPONIBLES: {{ $event->capacity }}
                         @else
@@ -184,7 +184,7 @@
                         @endif
 
                         @if ($event->pre_registration && $event->inscription_end_date)
-                            <span class="text-[#ff0000] font-bold">&nbsp;*Requiere pre-inscripción* </span></p>
+                            <span class="text-[#ff0000] font-bold">&nbsp;*Requiere pre-inscripción* *Fecha Limite: {{$event->inscription_end_date}}*</span></p>
                         @endif
                     </div>
 
@@ -201,13 +201,12 @@
                         @else
                             <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
                                 {{-- Preinscripcion --}}
-                                @if($event->pre_registration && $today <= $inscription_end_date && $event->capacity > 0 && $event->event_status_id == 1)
+                                @if($event->pre_registration && $today <= $inscription_end_date && $event->capacity != 0 && $event->event_status_id == 1)
                                         <a href="{{route('preinscripcionform', $event->id)}}">
                                             <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
                                         </a>
-                                        <p>Fecha limite: {{ $event->inscription_end_date }}</p>
                                 {{-- Inscripcion/ preinscripcion? pasada la fecha --}}
-                                @elseif(!$event->pre_registration && $today < $end_date && $event->capacity > 0 && $event->event_status_id == 1)
+                                @elseif(!$event->pre_registration && $today < $end_date && $event->capacity != 0 && $event->event_status_id == 1)
                                     <a href="{{route('inscribir', $event->id )}}">
                                         <x-button class="bg-cyan-500 text-[16px]">Inscribirse</x-button>
                                     </a>

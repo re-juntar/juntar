@@ -44,7 +44,7 @@ class InscriptionController extends Controller
         if (is_null(Auth::user())) {
             return redirect('login');
         } else {
-            if ($event->capacity > 0 && $today <= $end_date && $event->event_status_id == 1 && $event->pre_registration == 0) {
+            if ($event->capacity != 0 && $today <= $end_date && $event->event_status_id == 1 && $event->pre_registration == 0) {
                 $arrEnrolledUser = $this->is_enrolled($eventId);
                 if (count($arrEnrolledUser) == 0) {
                     $user = Auth::user();
@@ -59,7 +59,9 @@ class InscriptionController extends Controller
                     $inscripcion->inscription_date = date('Y-m-d');
                     $inscripcion->save();
                     $arreglocontacto = ["name" => $user->name . " " . $user->surname, "evento" => $event->short_name, "fecha" => $event->start_date];
-                    $event->decrement('capacity', 1);
+                    if ($event->capacity > 0) {
+                        $event->decrement('capacity', 1);
+                    }
                     /*                      $correo = new InscriptionMail($arreglocontacto); */
 
                     /* if (!Mail::to($user->email)->send($correo)) abort(500); */
@@ -94,7 +96,7 @@ class InscriptionController extends Controller
                     }
                 }
                 if ($allDeleted == count($answers)) {
-                    if ($inscription->delete()) {
+                    if ($inscription->delete() && $event->capacity >= 0) {
                         $event->increment('capacity', 1);
                         return redirect('home')->with('message', 'Desinscripto del evento correctamente!');
                     } else {
@@ -109,13 +111,13 @@ class InscriptionController extends Controller
 
 
     // {   
-        // $array = [];
-        // if(is_null(Auth::user())){            
-            // $array["redirect"] = true;
-            // $array["title"] = 'No estas logeado!';
-            // $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
-            // $array["icon"] = 'warning';
-        // }
+    // $array = [];
+    // if(is_null(Auth::user())){            
+    // $array["redirect"] = true;
+    // $array["title"] = 'No estas logeado!';
+    // $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
+    // $array["icon"] = 'warning';
+    // }
 
 
 
