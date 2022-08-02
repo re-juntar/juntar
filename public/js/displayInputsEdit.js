@@ -42,7 +42,7 @@ $(document).ready(function () {
         let div =
             "<x-label for='amount-of-participants'> Ingrese número de participantes * </x-label> <input " +
             (hiddenCapacity != -1 ? "value='" + hiddenCapacity + "' " : "") +
-            "id='amount-of-participants' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem] w-full' name='capacity' type='number' min='1'/>";
+            "id='amount-of-participants' name='amount-of-participants' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem] w-full' name='capacity' type='number' min='1'/>";
         if ($("#si-limite-participantes").is(":checked")) {
             $("#amount-of-participants-container").append(div);
         } else if ($("#no-limite-participantes").is(":checked")) {
