@@ -86,4 +86,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function academicUnit() {
         return $this->belongsToMany('App\Models\AcademicUnit');
     }
+
+    
 }

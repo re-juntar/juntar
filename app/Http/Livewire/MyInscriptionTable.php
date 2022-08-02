@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 
-class InscriptionTable extends DataTableComponent
+class MyInscriptionTable extends DataTableComponent
 {
     protected $model = Inscriptions::class;
 
@@ -56,6 +56,7 @@ class InscriptionTable extends DataTableComponent
             Column::make("#", "event.id")->hideIf(true),
             Column::make("fechas", "inscription_date")->hideIf(true),
             Column::make("fechas", "event.end_date")->hideIf(true),
+            Column::make("pre_inscription_date", "pre_inscription_date")->hideIf(true),
             Column::make("Nombre de Evento", "event.name"),
             Column::make("fechas", "event.start_date")
                 ->format(function ($value, $row, Column $column) {
@@ -78,7 +79,8 @@ class InscriptionTable extends DataTableComponent
             Column::make("", 'id')->format(
                 function ($value, $row, Column $column) {
                     $answer = Answer::all()->where('inscription_id', $value);
-                    return view('livewire.add-questions-and-anwers', ['answer' => $answer])->withValue($value);
+                    $preIncriptionDate = $row['pre_inscription_date'];
+                    return view('livewire.add-questions-and-anwers', ['answer' => $answer, 'preIncriptionDate' => $preIncriptionDate])->withValue($value);
                 }
             ),
         ];

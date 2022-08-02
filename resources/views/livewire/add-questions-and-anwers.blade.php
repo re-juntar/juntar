@@ -8,6 +8,8 @@
             </button>
         </div>
     @else
-    <p class="flex justify-center text-black">Sin Respuestas</p>
+        @if ($preIncriptionDate)
+            <p class="flex justify-center text-black">Sin Respuestas</p>
+        @endif
     @endif
 </div>
