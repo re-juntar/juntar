@@ -32,7 +32,7 @@ class PreinscriptionForm extends Component
         $today = strtotime(date('d-m-Y'));
         $inscription_end_date = strtotime($event->inscription_end_date);
         $arrEnrolledUser = $this->is_enrolled($eventId);
-        if ($event->pre_registration && $today <= $inscription_end_date && !is_null(Auth::user()) && count($arrEnrolledUser) == 0  && $event->capacity > 0) {
+        if ($event->pre_registration && $today <= $inscription_end_date && !is_null(Auth::user()) && count($arrEnrolledUser) == 0  && $event->capacity != 0) {
             foreach (Question::where('event_id', $eventId)->cursor() as $question) {
                 $field['QuestionId'] = $question->id;
                 $field['type'] = $question->type;
@@ -57,14 +57,16 @@ class PreinscriptionForm extends Component
         $inscription_end_date = strtotime($event->inscription_end_date);
         $arrEnrolledUser = $this->is_enrolled($this->eventId);
         if (!is_null(Auth::user())) {
-            if ($event->pre_registration && $today <= $inscription_end_date && count($arrEnrolledUser) == 0 && $event->capacity > 0) {
+            if ($event->pre_registration && $today <= $inscription_end_date && count($arrEnrolledUser) == 0 && $event->capacity != 0) {
                 $inscription = new Inscription();
                 $inscription->user_id = Auth::user()->id;
                 $inscription->event_id = $this->eventId;
                 $inscription->status = 1;
                 $inscription->pre_inscription_date = date('Y-m-d');
                 $inscription->save();
-                $event->decrement('capacity', 1);
+                if ($event->capacity > 0) {
+                    $event->decrement('capacity', 1);
+                }
 
                 foreach ($this->inputs as $index => $input) {
                     $answer = new Answer();
