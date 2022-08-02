@@ -49,53 +49,52 @@
                             @enderror
                         </div>
                         {{-- Categoria --}}
-                        {{-- ver para update --}}
                         @php
-                            $category = $event->event_category_id;
+                            $eventCategoryId = $event->event_category_id;
                         @endphp
+                        {{-- Categoria --}}
                         <div class="mb-4">
                             <x-label for="category">Categoria *</x-label>
                             <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="category">
-                                <option value='1' @if ($category == 1) selected @endif>Seminario
-                                </option>
-                                <option value='2' @if ($category == 2) selected @endif>Congreso</option>
-                                <option value='3' @if ($category == 3) selected @endif>Diplomatura
-                                </option>
-                                <option value='4' @if ($category == 4) selected @endif>Taller</option>
-                                <option value='5' @if ($category == 5) selected @endif>Otra</option>
-
+                                <option disabled selected> Seleccione una categoria </option>
+                                @isset($categories)
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ $eventCategoryId == $category->id ? 'selected' : '' }}>
+                                            {{ $category->description }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                             @error('category')
                                 <div class="flex items-center">
-                                    <p class="text-red-600">* {{ $message }}</p>
+                                    <p class="text-red-600">{{ $message }}</p>
                                 </div>
                             @enderror
                         </div>
                         {{-- Modalidad --}}
                         @php
-                            $modality = $event->event_modality_id;
+                            $eventModalityId = $event->event_modality_id;
                         @endphp
+                        {{-- Modalidad --}}
                         <div class="mb-4">
                             <x-label for="category">Modalidad *</x-label>
                             <select id="modality" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="modality">
-                                {{-- <option disabled selected> Seleccione una modalidad </option> --}}
-                                <option value='1' @if ($modality == 1) selected @endif>Presencial</option>
-                                <option value='2' @if ($modality == 2) selected @endif>Online
-                                </option>
-                                <option value='3' @if ($modality == 3) selected @endif>Presencial y Online
-                                </option>
-                                <option value='4' @if ($modality == 4) selected @endif>
-                                    otra</option>
-
+                                <option disabled selected> Seleccione una modalidad </option>
+                                @isset($modalities)
+                                    @foreach ($modalities as $modality)
+                                        <option value="{{ $modality->id }}" {{ $eventModalityId == $modality->id ? 'selected' : '' }}>
+                                            {{ $modality->description }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                             @error('modality')
                                 <div class="flex items-center">
-                                    <p class="text-red-600">* {{ $message }}</p>
+                                    <p class="text-red-600">{{ $message }}</p>
                                 </div>
                             @enderror
-
                         </div>
                         {{-- lugares y meet --}}
 
@@ -131,13 +130,12 @@
                                 <x-label>¿Posee limite de participantes?</x-label>
                                 <div>
                                     <input type="radio" id="no-limite-participantes" name="participants-limit"
-                                        value="0" {{ $event->capacity == -1 ? 'checked' : '' }}>
+                                        value="-1" {{ $event->capacity == -1 ? 'checked' : '' }}>
                                     <x-label class="mb-[0]" for="no-limite-participantes">No</x-label>
                                 </div>
                                 <div>
                                     <input type="radio" id="si-limite-participantes" name="participants-limit"
                                         value="1" {{ $event->capacity != -1 ? 'checked "' : '' }}>
-
                                     <x-label class="mb-[0]" for="si-limite-participantes">Si</x-label>
 
 

@@ -65,6 +65,8 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $categories = EventCategory::all();
+        $modalities = EventModality::all();
         $event = Event::findOrfail($id);
         if (isset(Auth::user()->id) && Auth::user()->id == $event->user_id) {
             list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
@@ -74,7 +76,7 @@ class EventController extends Controller
             $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
             $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
             // print_r($event);
-            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate]);
+            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities]);
         } else {
             abort(403);
         }
@@ -121,8 +123,8 @@ class EventController extends Controller
     }
 
     public function myInscriptions()
-    {   
-        
+    {
+
         return view('livewire.my-inscriptions');
     }
 }
