@@ -51,11 +51,11 @@
                         {{-- Categoria --}}
                         {{-- ver para update --}}
                         @php
-                            $category = $event->event_category_id;
+                            //$category = $event->event_category_id;
                         @endphp
                         <div class="mb-4">
                             <x-label for="category">Categoria *</x-label>
-                            <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
+                            {{-- <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="category">
                                 <option value='1' @if ($category == 1) selected @endif>Seminario
                                 </option>
@@ -65,6 +65,28 @@
                                 <option value='4' @if ($category == 4) selected @endif>Taller</option>
                                 <option value='5' @if ($category == 5) selected @endif>Otra</option>
 
+                            </select> --}}
+                            <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
+                                name="category">
+                                <option disabled selected> Seleccione una categoria </option>
+
+                                @isset($categories)
+                                    @foreach ($categories as $category)
+                                        @if ($category->category_status)
+                                            @if ($category->id == $event->event_category_id &&
+                                             $event->event_category_id != null)
+                                                <option value="{{ $category->id }}" selected>
+                                                    {{ $category->description }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $category->id }}"
+                                                    {{ old('category') == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->description }}
+                                                </option>
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                @endisset
                             </select>
                             @error('category')
                                 <div class="flex items-center">
@@ -222,6 +244,6 @@
         <script>
             CKEDITOR.replace('description');
         </script>
-        <script src="{{asset('js/shortNameSuggestions.js')}}" defer></script>
+        <script src="{{ asset('js/shortNameSuggestions.js') }}" defer></script>
     </x-slot>
 </x-app-layout>

@@ -64,7 +64,9 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrfail($id);
-        return view('pages.edit-event', ['event' => $event]);
+        $categories = EventCategory::all();
+        $modalities = EventModality::all();
+        return view('pages.edit-event', ['event' => $event, 'categories' => $categories]);
     }
 
     /**
