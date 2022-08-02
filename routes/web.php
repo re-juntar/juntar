@@ -46,11 +46,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuilder::class)->name('formbuilder');
 
-    Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
-    
     Route::get('/evento/{eventId}/inscriptos', EventInscriptions::class)->name('event-inscriptions');
-    
-    Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
+
+    Route::get('/evento/{eventId}/formulario-preinscripcion', PreinscriptionForm::class)->name('preinscripcionform');
+
+    Route::get('/evento/{eventId}/inscribir', [InscriptionController::class, 'store'])->name('inscribir');
+
+    Route::get('/evento/{eventId}/desinscribir', [InscriptionController::class, 'unsubscribe'])->name('unsubscribe');
 });
 
 Route::get('/inscriptos-export', [InscriptionController::class, 'export']);
