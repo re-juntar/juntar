@@ -5,7 +5,8 @@ namespace App\Http\Livewire;
 use App\Http\Controllers\InscriptionController;
 use App\Models\Event;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
+use App\Helper\Is_Enrolled;
+
 
 class EventModal extends Component
 {
@@ -18,6 +19,8 @@ class EventModal extends Component
     public $presentations;
 
     public $academicUnits;
+
+    use Is_Enrolled;
 
     public function render()
     {
