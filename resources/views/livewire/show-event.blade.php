@@ -89,21 +89,21 @@
                 {{-- Edit Event Nav --}}
                 @if ($hasPermission)
                     <x-pink-header header class="h-[50px]" style="justify-content: start">
-                        <a href="{{route('edit-event', $event->id)}}">
-                            <x-button class="h-full hover:bg-fogra-darkish">
+                        <a href="{{route('edit-event', $event->id)}}" class="flex items-center">
+                            <x-button class="h-full hover:bg-fogra-darkish text-[12px] md:text-[1.25rem] text-sm py-[0rem] px-[0.3rem] sm:py-[0.1rem] sm:px-[0.5rem] md:py-[0.2rem] md:px-[0.5rem] lg:py-[0.1rem] lg:px-[0.5rem] xl:py-[0.5rem] xl:px-[1rem]">
                                 <i class="fa-solid fa-pen"></i> Editar
                             </x-button>
                         </a>
 
-                        <a href="{{route('event-inscriptions', $event->id)}}">
-                            <x-button class="h-full hover:bg-fogra-darkish">
+                        <a href="{{route('event-inscriptions', $event->id)}}" class="flex items-center">
+                            <x-button class="h-full hover:bg-fogra-darkish text-[12px] md:text-[1.25rem] text-sm py-[0rem] px-[0.3rem] sm:py-[0.1rem] sm:px-[0.5rem] md:py-[0.2rem] md:px-[0.5rem] lg:py-[0.1rem] lg:px-[0.5rem] xl:py-[0.5rem] xl:px-[1rem]">
                                 <i class="fa-solid fa-eye"></i> Ver Inscriptos
                             </x-button>
                         </a>
 
                         @if($event->pre_registration)
-                            <a href="{{ route('formbuilder', $event->id) }}">
-                                <x-button class="h-full hover:bg-fogra-darkish">
+                            <a href="{{ route('formbuilder', $event->id) }}" class="flex items-center">
+                                <x-button class="h-full hover:bg-fogra-darkish text-[9px] sm:text-[1rem] md:text-[1.25rem]  text-sm py-[0rem] px-[0.1rem] sm:py-[0.1rem] sm:px-[0.1rem] md:py-[0.2rem] md:px-[0.5rem] lg:py-[0.1rem] lg:px-[0.5rem] xl:py-[0.5rem] xl:px-[1rem]">
                                     <i class="fa-solid fa-clipboard"></i>
                                     @if(count($event->questions) == 0)
                                         Crear formulario de preinscipción
@@ -115,11 +115,14 @@
                         @endif
 
                         @if (!$endorsementRequest)
-                            @livewire('endorsement-button')
+                            {{-- <div class="flex"> --}}
+                                @livewire('endorsement-button')
+                            {{-- </div> --}}
                             @livewire('choose-endorsement', ['event' => $event])
 
                             {{-- <form method="POST" action="{{route('avales')}}" class="inline-block" enctype="multipart/form-data">
-                                @csrf_token
+                                @csrf
+                                <input type="hidden" for="academicUnit" id="academicUnit" name="academicUnit" value="1">
                                 <input type="hidden" for="eventId" name="eventId" id="eventId" value="{{$event->id}}">
                                 <x-button class="h-full hover:bg-fogra-darkish" type=submit> Solicitar aval
                                 </x-button>
@@ -128,9 +131,9 @@
                         @elseif ($endorsementRequest->endorsed == 1)
 
                         @elseif ($endorsementRequest->endorsed === 0)
-                            <h2 class="">La solicitud de aval fue rechazada</h2>
+                            <h2 class="text-[12px] text-black"">La solicitud de aval fue rechazada</h2>
                         @elseif ($endorsementRequest->endorsed === null)
-                            <h2 class="">La solicitud de aval ya fue enviada</h2>
+                            <h2 class="text-[12px] text-black">La solicitud de aval ya fue enviada</h2>
                         @endif
 
                     </x-pink-header>

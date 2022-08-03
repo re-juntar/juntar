@@ -1,6 +1,4 @@
 <div
-    {{ $attributes->merge(['class' => 'flex items-center justify-center bg-awesome rounded-t-[0.25rem] h-[72px]']) }}>
-    <h2 {{ $attributes->merge(['class' => 'text-[1.5rem] md:text-[2rem] text-center text-white-ghost ']) }}>
-        {{ $slot }}
-    </h2>
+    {{ $attributes->merge(['class' => 'flex items-center justify-center bg-awesome h-[72px] text-[1.5rem] text-center text-white-ghost']) }}>
+    {{ $slot }}
 </div>
