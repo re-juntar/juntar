@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Event;
 use App\Models\User;
 use App\Models\Inscription;
 use GuzzleHttp\Psr7\Query;
@@ -13,39 +14,51 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class EventInscriptionsExport implements FromCollection, FromQuery, WithMapping, ShouldAutoSize, WithHeadings
 {
+
+    protected $eventId;
+
+    public function __construct($eventId)
+    {
+        $this->eventId = $eventId;
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
      
-        return Inscription::with('user')->get();
+        return Inscription::all()->where('event_id', $this->eventId);
     }
 
     public function query()
     {
-        return Inscription::query()->with('user');
+        return Inscription::query();
     }
 
     
     
     public function map($inscription): array
     {
+
+if ($this->eventId == $inscription->event->id)
         return [  
-            $inscription->user->name,
             $inscription->user->surname,
+            $inscription->user->name,
             $inscription->user->dni,
             $inscription->user->email,
             $inscription->inscription_date,
             $inscription->event->id,
         ];
+  else   
+  return [  
+    ];
     
     }
     public function headings(): array
     {
         return [
-            'NOMBRE',
             'APELLIDO',
+            'NOMBRE',
             'DNI',
             'MAIL',
             'INSCRIPTION',

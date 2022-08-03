@@ -20,9 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class InscriptionController extends Controller
 {
-
-
-    /**
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -68,9 +66,9 @@ class InscriptionController extends Controller
 
             return redirect('home')->with('message', 'Inscripto al evento correctamente!');
         }
-        elseif (count($inscriptos)>0) {
-            return redirect('home')->with('error', '   Ya estas inscripto en este evento!');
-        }
+        // elseif (count($inscriptos)>0) {
+        //     return redirect('home')->with('error', '   Ya estas inscripto en este evento!');
+        // }
         //dd($array);
         return $array;
     }
@@ -120,9 +118,9 @@ class InscriptionController extends Controller
         //
     }
 
-    public function export() 
+    public function export($eventId) 
     {
-        return Excel::download(new EventInscriptionsExport, 'inscriptos.xlsx');
+        return Excel::download(new EventInscriptionsExport($eventId), 'inscriptos.xlsx');
     }
 
 }
