@@ -26,7 +26,7 @@
                     class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
                     <a href={{ route('evento', $event->id) }} id={{ $event->id }}>
                         <x-button class="text-[1rem] my-1 bg-slate-600">
-                            <i class="fa-solid fa-eye mr-1"></i> Ver Más 
+                            <i class="fa-solid fa-eye mr-1"></i> Ver Más
                         </x-button>
                     </a>
                     @if ($event->pre_registration)
@@ -34,7 +34,7 @@
                             <x-button class="bg-cyan-500 my-1 mr-2">Pre Inscribirse</x-button>
                         </a>
                     @else
-                        <x-button  wire:click='confirm({{ $event }})' class="bg-cyan-500 my-1 mr-2 text-[16px]">
+                        <x-button wire:click='confirm({{ $event }})' class="bg-cyan-500 my-1 mr-2 text-[16px]">
                             Inscribirse</x-button>
                     @endif
 
@@ -63,7 +63,7 @@
                     @endif
 
                     <div class="container mt-4">
-                        <h1 class="text-3xl font-bold mb-3">{{ $event->name }}</h1>                        
+                        <h1 class="text-3xl font-bold mb-3">{{ $event->name }}</h1>
 
                         <div class="container mt-2">
 
