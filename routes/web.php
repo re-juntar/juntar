@@ -26,6 +26,7 @@ use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\RolesPage;
 
 Route::get('/', FrontHome::class)->name('home');
+Route::post('/', FrontHome::class)->name('home');
 
 Route::get('/home', FrontHome::class);
 

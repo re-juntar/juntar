@@ -34,25 +34,25 @@ class EventController extends Controller
     public function store(ImageUploadRequest $request, Event $event)
     {
         $event->storeEvent($request)->storeMedia($request);
-            $eventId = Event::max('id');
-            if (isset($request->coorganizer1)) {
-                $orgController1 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer1)->first();
-                $orgController1->store($user->id, $eventId);
-            }
+        $eventId = Event::max('id');
+        if (isset($request->coorganizer1)) {
+            $orgController1 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer1)->first();
+            $orgController1->store($user->id, $eventId);
+        }
 
-            if (isset($request->coorganizer2)) {
-                $orgController2 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer2)->first();
-                $orgController2->store($user->id, $eventId);
-            }
+        if (isset($request->coorganizer2)) {
+            $orgController2 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer2)->first();
+            $orgController2->store($user->id, $eventId);
+        }
 
-            if (isset($request->coorganizer3)) {
-                $orgController3 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer3)->first();
-                $orgController3->store($user->id, $eventId);
-            }
-            return redirect('evento/' . $eventId);
+        if (isset($request->coorganizer3)) {
+            $orgController3 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer3)->first();
+            $orgController3->store($user->id, $eventId);
+        }
+        return redirect('evento/' . $eventId);
     }
 
     /**
@@ -92,6 +92,25 @@ class EventController extends Controller
                 ->where('event_status_id', '<>', 2)
                 ->orderBy('start_date', 'asc')
                 ->paginate(25);
+        }elseif (isset($filter['filter1'])) {
+            $response = Event::where('event_modality_id', '=', 1)
+                ->where('event_status_id', '<>', 4)
+                ->where('event_status_id', '<>', 2)
+                ->orderBy('start_date', 'asc')
+                ->paginate(25);
+        }elseif (isset($filter['filter2'])) {
+            $response = Event::where('event_modality_id', '=', 2)
+                ->where('event_status_id', '<>', 4)
+                ->where('event_status_id', '<>', 2)
+                ->orderBy('start_date', 'asc')
+                ->paginate(25);
+        }
+        elseif (isset($filter['filter3'])) {
+            $response = Event::where('event_modality_id', '=', 3 )
+                ->where('event_status_id', '<>', 4)
+                ->where('event_status_id', '<>', 2)
+                ->orderBy('start_date', 'asc')
+                ->paginate(25);
         } else {
             $response = Event::where('event_status_id', '<>', 4)->where('event_status_id', '<>', 2)->orderBy('start_date', 'asc')->paginate(25);
         }
@@ -111,8 +130,8 @@ class EventController extends Controller
 
     public $event;
     public function myInscriptions()
-    {   
-        
+    {
+
         return view('livewire.my-inscriptions');
     }
 }

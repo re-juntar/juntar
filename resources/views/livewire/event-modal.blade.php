@@ -7,7 +7,7 @@
         <x-slot name="content">
 
             <x-button
-                class="bg-transparent text-black font-extrabold absolute top-4 right-4 z-10 hover:overscroll-auto hover:text-white-ghost"
+                class="bg-transparent text-black font-extrabold absolute top-3 right-3 z-10 hover:overscroll-auto hover:text-white-ghost"
                 wire:click="$set('open', false)">X</x-button>
 
             <div class="bg-white-ghost md:min-h-[60vh] md:relative">
@@ -24,23 +24,28 @@
 
                 <div
                     class="p-4 overscroll-contain md:absolute md:w-2/4 md:overflow-y-scroll md:ml-[50%] md:inset-y-0 md:left-0">
+                    <a href={{ route('evento', $event->id) }} id={{ $event->id }}>
+                        <x-button class="text-[1rem] my-1 bg-slate-600">
+                            <i class="fa-solid fa-eye mr-1"></i> Ver Más 
+                        </x-button>
+                    </a>
                     @if ($event->pre_registration)
                         <a href="{{ route('preinscripcionform', $event->id) }}">
-                            <x-button class="bg-cyan-500 mr-2">Pre Inscribirse</x-button>
+                            <x-button class="bg-cyan-500 my-1 mr-2">Pre Inscribirse</x-button>
                         </a>
                     @else
-                        <x-button wire:click='confirm({{ $event }})' class="bg-cyan-500 mr-1 text-[16px]">
+                        <x-button  wire:click='confirm({{ $event }})' class="bg-cyan-500 my-1 mr-2 text-[16px]">
                             Inscribirse</x-button>
                     @endif
 
                     @if ($event['image_flyer'])
                         <a class=" text-[1rem] mr-1" href="{{ asset($event['image_flyer']) }}" download>
-                            <x-button class="text-[1rem]">
+                            <x-button class="text-[1rem] mt-1">
                                 <i class="fas fa-file-download mr-3"></i>Flyer
                             </x-button>
                         </a>
                     @else
-                        <x-button class="bg-fogra-darkish text-[16px]">
+                        <x-button class="bg-fogra-darkish text-[16px] mt-1">
                             <i class="fa-solid fa-ban mr-3"></i>Flyer no Disponible
                         </x-button>
                         @php
@@ -54,13 +59,11 @@
                                 </div>
                             @endif
                         @endif
-                        
+
                     @endif
 
                     <div class="container mt-4">
-                        <h1 class="text-2xl font-bold">{{ $event->name }}</h1>
-                        <a class="text-2xl text-red-600" href={{ route('evento', $event->id) }}
-                            id={{ $event->id }}>Ver mas</a>
+                        <h1 class="text-3xl font-bold mb-3">{{ $event->name }}</h1>                        
 
                         <div class="container mt-2">
 
