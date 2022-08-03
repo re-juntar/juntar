@@ -21,7 +21,7 @@ class ShowEvent extends Component
     use Is_Enrolled;
 
 
-    protected $listeners = ['inscription','confirm' =>'confirmInscription'];
+    protected $listeners = ['inscription', 'confirm' => 'confirmInscription'];
 
     public function mount($id)
     {
@@ -38,7 +38,7 @@ class ShowEvent extends Component
         $this->coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
             ->where('events.id', $id)
-            ->get(['users.name', 'users.surname']);
+            ->get(['users.id']);
         /*         $this->isEnrolled = Inscription::join('events', 'event_id', '=', 'inscriptions.event_id')
             ->join('users', 'users.id', '=', 'inscriptions.user_id')
             ->where('events.id', $id)
@@ -90,18 +90,17 @@ class ShowEvent extends Component
     }
 
     public function confirmInscription($event)
-    {   
+    {
         //dd($event);     
-        if(is_null(Auth::user())){
-            $array= [];
+        if (is_null(Auth::user())) {
+            $array = [];
             $array["title"] = 'No estas logeado!';
             $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
             $array["icon"] = 'warning';
             $array["redirect"] = true;
             $this->emit('ins', $array);
-        }
-        else{
-            
+        } else {
+
             $this->emit('confirmationInscription', [
                 'selected' => $event,
                 'status' => 'Inscripto!',
@@ -127,6 +126,5 @@ class ShowEvent extends Component
         // }
 
         $this->emit('ins', $evento);
-    }    
-
+    }
 }

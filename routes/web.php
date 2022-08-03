@@ -13,11 +13,15 @@ use App\Http\Livewire\Backend\EventsPage;
 use App\Http\Livewire\PreinscriptionForm;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactanosController;
+use App\Http\Controllers\CreatePresentationController;
 use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\PresentationController;
 use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\PreinscriptionFormBuilder;
 use App\Http\Livewire\Backend\EventCategoriesPage;
 use App\Http\Livewire\Backend\EventModalitiesPage;
+use App\Http\Livewire\CreatePresentation;
+use App\Http\Livewire\EditPresentation;
 
 Route::get('/', FrontHome::class)->name('home');
 
@@ -53,6 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/evento/{eventId}/inscribir', [InscriptionController::class, 'store'])->name('inscribir');
 
     Route::get('/evento/{eventId}/desinscribir', [InscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+
+    Route::get('/evento/{eventId}/crear-presentacion', CreatePresentation::class)->name('create-presentation');
+
+    Route::get('/evento/{eventId}/editar-presentacion/{presentationId}', EditPresentation::class)->name('edit-presentation');
 });
 
 Route::get('/inscriptos-export', [InscriptionController::class, 'export']);

@@ -9,7 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Presentation extends Model
 {
     use HasFactory;
-
+    public $fillable = [
+        'event_id', 'title',
+        'description',
+        'date',
+        'start_time',
+        'end_time',
+        'exhibitors',
+        'resources_link',
+    ];
     public function event()
     {
         return $this->belongsTo('App\Models\Event');

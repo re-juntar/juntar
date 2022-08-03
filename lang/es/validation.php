@@ -130,11 +130,11 @@ return [
     */
 
     'custom' => [
-        'name' =>[
-            'required'=>'En nombre es obligatorio',
+        'name' => [
+            'required' => 'En nombre es obligatorio',
         ],
-        'email'=>[
-            'required'=>'El email debe ser una cuenta valida',
+        'email' => [
+            'required' => 'El email debe ser una cuenta valida',
         ],
         'attribute-name' => [
             'rule-name' => 'custom-message',
@@ -148,6 +148,9 @@ return [
         'modality' => [
             'required' => 'La modalidad es obligatoria.',
         ],
+        'date' => [
+            'required' => 'La fecha es obligatoria.',
+        ],
         'start-date' => [
             'required' => 'La fecha de inicio es obligatoria.',
             'before_or_equal' => 'La fecha de inicio debe ser menor o igual a la fecha de fin.'
@@ -156,11 +159,19 @@ return [
             'required' => 'La fecha de fin es obligatoria.',
             'after_or_equal' => 'La fecha de fin debe ser igual o mayor a la fecha de inicio.'
         ],
+        'start_time' => [
+            'required' => 'La hora de inicio es obligatoria.',
+            'before_or_equal' => 'La hora de inicio debe ser igual o mayor a la hora de fin.'
+        ],
+        'end_time' => [
+            'required' => 'La hora de fin es obligatoria.',
+            'after_or_equal' => 'La hora de fin debe ser igual o mayor a la hora de inicio.'
+        ],
         'preinscription-date' => [
             'required' => 'La fecha de preinscripcion es obligatoria.',
             'before_or_equal' => 'La fecha de preinscripcion debe ser una fecha anterior o igual a fecha de inicio.'
         ],
-        'query' =>[
+        'query' => [
             'required' => 'La consulta es obligatoria.'
         ]
     ],
@@ -180,17 +191,23 @@ return [
         'name' => 'nombre',
         'short-name' => 'nombre corto',
         'description' => 'descripcion',
+        'date' => 'fecha',
         'place' => 'lugar',
         'category' => 'categoria',
         'modality' => 'modalidad',
         'start-date' => 'fecha de inicio',
         'end-date' => 'fecha de fin',
+        'start_time' => 'hora de inicio',
+        'end_time' => 'hora de fin',
         'participants-limit' => 'limite de participantes',
         'preinscription' => 'preinscripcion',
         'preinscription-date' => 'fecha de preinscripcion',
         'acreditation-code' => 'codigo de acreditacion',
-        'subject' => 'asunto'
-        
+        'subject' => 'asunto',
+        'exhibitors' => 'expositor',
+        'resources_link' => 'recurso',
+        'title' => 'titulo'
+
     ],
 
 ];
