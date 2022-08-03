@@ -10,6 +10,8 @@ use App\Models\EventCategory;
 use App\Models\EventModality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PermissionController;
+
 
 class EventController extends Controller
 {
@@ -63,10 +65,21 @@ class EventController extends Controller
      */
     public function edit($id)
     {
-        $event = Event::findOrfail($id);
         $categories = EventCategory::all();
         $modalities = EventModality::all();
-        return view('pages.edit-event', ['event' => $event, 'categories' => $categories]);
+        $event = Event::findOrfail($id);
+        if (isset(Auth::user()->id) && Auth::user()->id == $event->user_id) {
+            list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
+            list($endDateDay, $endDateMonth, $endDateYear) = explode("-", $event->end_date);
+            list($inscriptionEndDateDay, $inscriptionEndDateMonth, $inscriptionEndDateYear) = explode("-", $event->inscription_end_date);
+            $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
+            $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
+            $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
+            // print_r($event);
+            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -128,7 +141,6 @@ class EventController extends Controller
         }
     }
 
-    public $event;
     public function myInscriptions()
     {
 

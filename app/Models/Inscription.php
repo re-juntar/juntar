@@ -32,6 +32,7 @@ class Inscription extends Model
     public function store(Event $event, $userid){
         
     }
+   
 
 
 }

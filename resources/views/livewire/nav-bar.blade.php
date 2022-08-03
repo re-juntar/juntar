@@ -134,15 +134,6 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             @auth
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                        {{ __('Inicio') }}
-                    </x-jet-responsive-nav-link>
-                    <x-jet-responsive-nav-link href="{{ route('create-event') }}" :active="request()->routeIs('create-event')">
-                        {{ __('Crear Evento') }}
-                    </x-jet-responsive-nav-link>
-                </div>
-
                 <div class="flex items-center px-4">
                     @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                         <div class="shrink-0 mr-3">
@@ -163,9 +154,26 @@
                         {{ __('Perfil') }}
                     </x-jet-responsive-nav-link>
 
-                    @if ($isAdmin)
+                    <div class="space-y-1">
+                        <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
+                            {{ __('Inicio') }}
+                        </x-jet-responsive-nav-link>
+                        <x-jet-responsive-nav-link href="{{ route('create-event') }}" :active="request()->routeIs('create-event')">
+                            {{ __('Crear Evento') }}
+                        </x-jet-responsive-nav-link>
+                    </div>
+
+                    @if($isAdmin)
                         <x-jet-responsive-nav-link href="{{ route('back-home') }}">
                             {{ __('Administración') }}
+                        </x-jet-responsive-nav-link>
+
+                        <x-jet-responsive-nav-link href="{{ route('my-events') }}">
+                            {{ __('Mis Eventos') }}
+                        </x-jet-responsive-nav-link>
+
+                        <x-jet-responsive-nav-link href="{{ route('my-inscriptions') }}">
+                            {{ __('Mis Inscripciones') }}
                         </x-jet-responsive-nav-link>
                     @endif
 
@@ -176,7 +184,6 @@
                             {{ __('Cerrar Sesión') }}
                         </x-jet-responsive-nav-link>
                     </form>
-
                 </div>
             @else
                 <div class="pt-2 pb-3 space-y-1">

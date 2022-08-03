@@ -4,23 +4,26 @@ namespace App\Http\Livewire;
 
 use App\Models\Answer;
 use Livewire\Component;
-use App\Models\Question;
 
 class QAndAModal extends Component
 {
-    public $open = true;
-
+    public $open = false;
+    
+    public $idInscription;
+    
     protected $listeners = ['showPyRModal'];
 
     public function render()
     {   
-        $questions = Question::all();
-        $answers = Answer::all();
-        return view('livewire.q-and-a-modal',['questions' => $questions, 'answers' => $answers]);
+        $questionsAndAnswers = Answer::join('questions', 'questions.id', '=', 'answers.question_id')
+            ->where('answers.inscription_id', $this->idInscription)
+            ->get();
+        return view('livewire.q-and-a-modal', ['questionsAndAnswers' => $questionsAndAnswers]);
     }
 
-    public function showPyRModal()
+    public function showPyRModal($id)
     {
         $this->open = true;
+        $this->idInscription = $id;
     }
 }

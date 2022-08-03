@@ -17,9 +17,10 @@
 
     $inscription_end_date = new DateTime($event->inscription_end_date);
     $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
+
+    $arrIsEnrolled = $this->is_enrolled($event->id);
 @endphp
 <div>
-
     {{-- Flyer Modal --}}
     <x-jet-dialog-modal wire:model="openFlyerModal">
         <x-slot name="content">
@@ -88,21 +89,21 @@
                 {{-- Edit Event Nav --}}
                 @if ($hasPermission)
                     <x-pink-header header class="h-[50px]" style="justify-content: start">
-                        <a href="{{route('edit-event', $event->id)}}">
-                            <x-button class="h-full hover:bg-fogra-darkish">
+                        <a href="{{route('edit-event', $event->id)}}" class="flex items-center">
+                            <x-button class="h-full hover:bg-fogra-darkish text-[12px] md:text-[1.25rem] text-sm py-[0rem] px-[0.3rem] sm:py-[0.1rem] sm:px-[0.5rem] md:py-[0.2rem] md:px-[0.5rem] lg:py-[0.1rem] lg:px-[0.5rem] xl:py-[0.5rem] xl:px-[1rem]">
                                 <i class="fa-solid fa-pen"></i> Editar
                             </x-button>
                         </a>
 
-                        <a href="{{route('inscriptions', $event->id)}}">
-                            <x-button class="h-full hover:bg-fogra-darkish">
+                        <a href="{{route('event-inscriptions', $event->id)}}" class="flex items-center">
+                            <x-button class="h-full hover:bg-fogra-darkish text-[12px] md:text-[1.25rem] text-sm py-[0rem] px-[0.3rem] sm:py-[0.1rem] sm:px-[0.5rem] md:py-[0.2rem] md:px-[0.5rem] lg:py-[0.1rem] lg:px-[0.5rem] xl:py-[0.5rem] xl:px-[1rem]">
                                 <i class="fa-solid fa-eye"></i> Ver Inscriptos
                             </x-button>
                         </a>
 
                         @if($event->pre_registration)
-                            <a href="{{ route('formbuilder', $event->id) }}">
-                                <x-button class="h-full hover:bg-fogra-darkish">
+                            <a href="{{ route('formbuilder', $event->id) }}" class="flex items-center">
+                                <x-button class="h-full hover:bg-fogra-darkish text-[9px] sm:text-[1rem] md:text-[1.25rem]  text-sm py-[0rem] px-[0.1rem] sm:py-[0.1rem] sm:px-[0.1rem] md:py-[0.2rem] md:px-[0.5rem] lg:py-[0.1rem] lg:px-[0.5rem] xl:py-[0.5rem] xl:px-[1rem]">
                                     <i class="fa-solid fa-clipboard"></i>
                                     @if(count($event->questions) == 0)
                                         Crear formulario de preinscipción
@@ -114,11 +115,14 @@
                         @endif
 
                         @if (!$endorsementRequest)
-                            @livewire('endorsement-button')
+                            {{-- <div class="flex"> --}}
+                                @livewire('endorsement-button')
+                            {{-- </div> --}}
                             @livewire('choose-endorsement', ['event' => $event])
 
                             {{-- <form method="POST" action="{{route('avales')}}" class="inline-block" enctype="multipart/form-data">
-                                @csrf_token
+                                @csrf
+                                <input type="hidden" for="academicUnit" id="academicUnit" name="academicUnit" value="1">
                                 <input type="hidden" for="eventId" name="eventId" id="eventId" value="{{$event->id}}">
                                 <x-button class="h-full hover:bg-fogra-darkish" type=submit> Solicitar aval
                                 </x-button>
@@ -127,9 +131,9 @@
                         @elseif ($endorsementRequest->endorsed == 1)
 
                         @elseif ($endorsementRequest->endorsed === 0)
-                            <h2 class="">La solicitud de aval fue rechazada</h2>
+                            <h2 class="text-[12px] text-black"">La solicitud de aval fue rechazada</h2>
                         @elseif ($endorsementRequest->endorsed === null)
-                            <h2 class="">La solicitud de aval ya fue enviada</h2>
+                            <h2 class="text-[12px] text-black">La solicitud de aval ya fue enviada</h2>
                         @endif
 
                     </x-pink-header>
@@ -174,31 +178,56 @@
                 </div>
 
                 {{-- Details on event, dates and inscription limits --}}
-                <div class="event-body-inscription px-[15px] flex justify-between md:flex md:flex-row py-[3vh] bg-[#F2F2F2]">
-                    <div class="flex flex-col items-center justify-center md:flex">
-                        @if ($event->capacity > 0)
+                <div class="event-body-inscription px-[15px] flex flex-col justify-between sm:flex sm:flex-row py-[3vh] bg-[#F2F2F2]">
+                    <div class="flex flex-col sm:flex sm:flex-row items-center justify-center md:flex">
+                        @if ($event->capacity >= 0)
                             <p class="text-[1rem]">CUPOS DISPONIBLES: {{ $event->capacity }}
                         @else
                             <p class="text-[1rem]">CUPOS ILIMITADOS</p>
                         @endif
 
                         @if ($event->pre_registration && $event->inscription_end_date)
-                            <span class="text-[#ff0000] font-bold">&nbsp;*Requiere pre-inscripción* </span></p>
+                            <span class="text-[#ff0000] font-bold">&nbsp;*Requiere pre-inscripción* *Fecha Limite: {{$event->inscription_end_date}}*</span></p>
                         @endif
                     </div>
 
-                    <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
-                        @if($event->pre_registration)
-                                <a href="{{route('preinscripcionform', $event->id)}}">
-                                    <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
+                    {{-- Logeado --}}
+                    @if(!is_null(Auth::user()))
+                        {{-- Logeado pero Ya Inscripto --}}
+                        @if(count($arrIsEnrolled) == 1)
+                            <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                                <a href="{{route('unsubscribe', $event->id )}}">
+                                    <x-button class="text-[16px] ">Desinscribirse</x-button>
                                 </a>
-                                <p>Fecha limite: {{ $event->inscription_end_date }}</p>
+                            </div>
+                        {{-- Logeado pero No Inscripto --}}
                         @else
-                            @if($today < $end_date)
-                             <x-button wire:click='confirmInscription({{$event}})' class="bg-cyan-500 mr-2 text-[16px]">Inscribirse</x-button>
-                            @endif
+                            <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                                {{-- Preinscripcion --}}
+                                @if($event->pre_registration && $today <= $inscription_end_date && $event->capacity != 0 && $event->event_status_id == 1)
+                                        <a href="{{route('preinscripcionform', $event->id)}}">
+                                            <x-button class="bg-cyan-500 text-[16px]">Preinscribirse</x-button>
+                                        </a>
+                                {{-- Inscripcion/ preinscripcion? pasada la fecha --}}
+                                @elseif(!$event->pre_registration && $today < $end_date && $event->capacity != 0 && $event->event_status_id == 1)
+                                    <a href="{{route('inscribir', $event->id )}}">
+                                        <x-button class="bg-cyan-500 text-[16px]">Inscribirse</x-button>
+                                    </a>
+                                @elseif(($event->pre_registration && $today > $inscription_end_date || $event->capacity == 0 || $today > $end_date || $event->event_status_id != 1))
+                                    <x-button class="bg-slate-500 text-[16px] hover:cursor-not-allowed" disabled>Inscribirse</x-button>
+                                @endif
+                                {{-- Inscripcion a tiempo --}}
+                            </div>
+
                         @endif
-                    </div>
+                    {{-- No Logeado --}}
+                    @else
+                        <div class="flex flex-col items-center justify-center md:flex w-full md:w-4/12">
+                            <a href="{{route('login')}}">
+                                <x-button class="bg-cyan-500 text-[16px]">Iniciar Sesión</x-button>
+                            </a>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="event-body-main flex-col flex-wrap md:flex md:flex-row pb-[3rem] p-[15px]">
@@ -272,13 +301,19 @@
                 </div>
 
                 <div class="pb-[3rem] p-[15px]">
-                    <livewire:presentation-table event="{{ $event->id }}">
+                    <div class="flex items-center">
+                        <h2 class="uppercase text-[1.5rem] bold">Agenda</h2>
+                        @if($hasPermission)
+                            <a class="text-[2rem] ml-2" href="{{route('create-presentation', $event->id)}}"><i class="fa-solid fa-plus fa-2xs"></i></a>
+                        @endif
+                    </div>
+                    <livewire:presentation-table event="{{ $event->id }}" hasPermission="{{$hasPermission}}">
                 </div>
             </div>
         </div>
     </div>
 
+    @livewire('modal-more-information-presentation')
 </div>
-
 
 

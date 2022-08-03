@@ -4,7 +4,7 @@
         <div class="create-event bg-[#0B0D19]">
             <div
                 class="create-event-container max-w-md md:max-w-3xl lg:max-w-4xl xl:max-w-6xl mx-auto rounded-[0.25rem] py-[3vh] px-[3vh]">
-                <x-pink-header>Editar Evento NOMBRE_EVENTO</x-pink-header>
+                <x-pink-header>Editar Evento {{$event->name}}</x-pink-header>
                 <div class="create-event-body bg-[#EFEFEF] p-[1.25rem]">
                     <p class="text-center mb-4">Cambie la informacion que desee y luego aplique los cambios con el boton de
                         "Guardar Cambios" que se encuentra al final del formulario.</p>
@@ -49,23 +49,13 @@
                             @enderror
                         </div>
                         {{-- Categoria --}}
-                        {{-- ver para update --}}
                         @php
                             //$category = $event->event_category_id;
+                            $eventCategoryId = $event->event_category_id;
                         @endphp
+                        {{-- Categoria --}}
                         <div class="mb-4">
-                            <x-label for="category">Categoria *</x-label>
-                            {{-- <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
-                                name="category">
-                                <option value='1' @if ($category == 1) selected @endif>Seminario
-                                </option>
-                                <option value='2' @if ($category == 2) selected @endif>Congreso</option>
-                                <option value='3' @if ($category == 3) selected @endif>Diplomatura
-                                </option>
-                                <option value='4' @if ($category == 4) selected @endif>Taller</option>
-                                <option value='5' @if ($category == 5) selected @endif>Otra</option>
-
-                            </select> --}}
+                            <x-label for="category">Categoria *</x-label>                            
                             <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="category">
                                 <option disabled selected> Seleccione una categoria </option>
@@ -90,34 +80,33 @@
                             </select>
                             @error('category')
                                 <div class="flex items-center">
-                                    <p class="text-red-600">* {{ $message }}</p>
+                                    <p class="text-red-600">{{ $message }}</p>
                                 </div>
                             @enderror
                         </div>
                         {{-- Modalidad --}}
                         @php
-                            $modality = $event->event_modality_id;
+                            $eventModalityId = $event->event_modality_id;
                         @endphp
+                        {{-- Modalidad --}}
                         <div class="mb-4">
                             <x-label for="category">Modalidad *</x-label>
                             <select id="modality" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="modality">
-                                {{-- <option disabled selected> Seleccione una modalidad </option> --}}
-                                <option value='1' @if ($modality == 1) selected @endif>Presencial</option>
-                                <option value='2' @if ($modality == 2) selected @endif>Online
-                                </option>
-                                <option value='3' @if ($modality == 3) selected @endif>Presencial y Online
-                                </option>
-                                <option value='4' @if ($modality == 4) selected @endif>
-                                    otra</option>
-
+                                <option disabled selected> Seleccione una modalidad </option>
+                                @isset($modalities)
+                                    @foreach ($modalities as $modality)
+                                        <option value="{{ $modality->id }}" {{ $eventModalityId == $modality->id ? 'selected' : '' }}>
+                                            {{ $modality->description }}
+                                        </option>
+                                    @endforeach
+                                @endisset
                             </select>
                             @error('modality')
                                 <div class="flex items-center">
-                                    <p class="text-red-600">* {{ $message }}</p>
+                                    <p class="text-red-600">{{ $message }}</p>
                                 </div>
                             @enderror
-
                         </div>
                         {{-- lugares y meet --}}
 
@@ -127,8 +116,8 @@
                         {{-- Fecha de Inicio --}}
                         <div class="mb-4">
                             <x-label class="block" for="start-date">Fecha Inicio *</x-label>
-                            <x-input required class="block" id="start-date" type="date" name="start-date"
-                                value="{{ old('start-date', $event->start_date) }}" />
+                            <x-input class="block" id="start-date" type="date" name="start-date"
+                                value="{{ old('start-date', $formatedStartDate) }}" />
                             @error('start-date')
                                 <div class="flex items-center">
                                     <p class="text-red-600">* {{ $message }}</p>
@@ -138,8 +127,8 @@
                         {{-- Fecha de Fin --}}
                         <div class="mb-4">
                             <x-label class="block">Fecha Fin *</x-label>
-                            <x-input required class="block" id="end-date" type="date" name="end-date"
-                                value="{{ old('end-date', $event->end_date) }}" />
+                            <x-input class="block" id="end-date" type="date" name="end-date"
+                                value="{{ old('end-date', $formatedEndDate) }}" />
                             @error('end-date')
                                 <div class="flex items-center">
                                     <p class="text-red-600">* {{ $message }}</p>
@@ -153,13 +142,12 @@
                                 <x-label>¿Posee limite de participantes?</x-label>
                                 <div>
                                     <input type="radio" id="no-limite-participantes" name="participants-limit"
-                                        value="0" {{ $event->capacity == -1 ? 'checked' : '' }}>
+                                        value="-1" {{ $event->capacity == -1 ? 'checked' : '' }}>
                                     <x-label class="mb-[0]" for="no-limite-participantes">No</x-label>
                                 </div>
                                 <div>
                                     <input type="radio" id="si-limite-participantes" name="participants-limit"
                                         value="1" {{ $event->capacity != -1 ? 'checked "' : '' }}>
-
                                     <x-label class="mb-[0]" for="si-limite-participantes">Si</x-label>
 
 
@@ -203,10 +191,15 @@
                         </div>
                         {{-- Ingresar preisnscripcion --}}
                         <div class="mb-4">
-                            <input id='hiddenDate' hidden name='preinscription_date' type='date'
-                                value="{{ old('preinscription-date', $event->inscription_end_date) }}" />
+                            {{-- <input id='hiddenDate' hidden name='preinscription_date' type='date'
+                                value="{{ old('preinscription-date', $formatedInscriptionEndDate) }}" /> --}}
                             <div id='preinscription-date-container' class='mt-2'>
-
+                                <x-label for='preinscription-date'> Fecha límite de preinscripción * </x-label>
+                                @if($event->pre_registration)
+                                    <input id='preinscription-date' value='{{$formatedInscriptionEndDate}}' class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem]' name='preinscription-date' type='date'/>
+                                @else
+                                    <input id='preinscription-date' value="NULL" class='block border-[1px] border-solid border-[#CED4DA] rounded-[0.25rem] py-[0.375rem] px-[0.75rem] mb-[1rem]' name='preinscription-date' type='date'/>
+                                @endif
                             </div>
                             @error('preinscription-date')
                                 <div class="flex items-center">
@@ -215,7 +208,7 @@
                             @enderror
                         </div>
                         {{-- Codigo Acreditacion --}}
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <x-label for="acreditation-code">Código Acreditación *</x-label>
                             <x-input id="acreditation-code" type="text" name="acreditation-code"
                                 placeholder='Ingrese código de acreditación'
@@ -225,7 +218,7 @@
                                     <p class="text-red-600">* {{ $message }}</p>
                                 </div>
                             @enderror
-                        </div>
+                        </div> --}}
                         <p class="italic mb-[1rem]">Recordar: Los campos marcados con (*) son obligatorios.</p>
                         {{-- Cargar --}}
                         <x-button class="text-[13px]" type="submit"> Guardar Cambios </x-button>
@@ -234,6 +227,7 @@
             </div>
         </div>
         </div>
+
     @else
         <script>
             window.location = "/login";

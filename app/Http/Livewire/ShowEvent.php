@@ -9,6 +9,8 @@ use App\Http\Livewire\FrontHome;
 use App\Models\Event;
 use App\Models\AcademicUnit;
 use App\Models\EndorsementRequest;
+use App\Models\Inscription;
+use App\Helper\Is_Enrolled;
 
 class ShowEvent extends Component
 {
@@ -16,8 +18,10 @@ class ShowEvent extends Component
     public $organizer;
     public $coorganizer;
     public $openFlyerModal = false;
+    use Is_Enrolled;
 
-    protected $listeners = ['inscription','confirm' =>'confirmInscription'];
+
+    protected $listeners = ['inscription', 'confirm' => 'confirmInscription'];
 
     public function mount($id)
     {
@@ -34,7 +38,11 @@ class ShowEvent extends Component
         $this->coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
             ->where('events.id', $id)
-            ->get(['users.name', 'users.surname']);
+            ->get(['users.id']);
+        /*         $this->isEnrolled = Inscription::join('events', 'event_id', '=', 'inscriptions.event_id')
+            ->join('users', 'users.id', '=', 'inscriptions.user_id')
+            ->where('events.id', $id)
+            ->get(['users.id']); */
     }
 
     public function render()
@@ -56,42 +64,43 @@ class ShowEvent extends Component
         }
 
         if (($this->event->status_description == "Draft" || $this->event->status_description == "Disabled") && !$hasPermission) {
-            return redirect()->action(FrontHome::class);
+            abort(403);
         }
 
         // Endorsements
         $endorsementRequest = EndorsementRequest::where('event_id', $this->event->id)->get('endorsement_requests.*');
-        if(count($endorsementRequest) == 0){
+        if (count($endorsementRequest) == 0) {
             $endorsementRequest = null;
-        }else{
+        } else {
             $endorsementRequest = $endorsementRequest[0];
         }
         $academicUnits = AcademicUnit::all();
 
-        return view('livewire.show-event',
-        [
-            'event' => $this->event,
-            'coorganizers' => $this->coorganizers,
-            'organizer' => $this->organizer,
-            'hasPermission' => $hasPermission,
-            'endorsementRequest' => $endorsementRequest,
-            'academicUnits' => $academicUnits
-        ])->layout(\App\View\Components\AppLayout::class);
+        return view(
+            'livewire.show-event',
+            [
+                'event' => $this->event,
+                'coorganizers' => $this->coorganizers,
+                'organizer' => $this->organizer,
+                'hasPermission' => $hasPermission,
+                'endorsementRequest' => $endorsementRequest,
+                'academicUnits' => $academicUnits
+            ]
+        )->layout(\App\View\Components\AppLayout::class);
     }
 
     public function confirmInscription($event)
-    {   
+    {
         //dd($event);     
-        if(is_null(Auth::user())){
-            $array= [];
+        if (is_null(Auth::user())) {
+            $array = [];
             $array["title"] = 'No estas logeado!';
             $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
             $array["icon"] = 'warning';
             $array["redirect"] = true;
             $this->emit('ins', $array);
-        }
-        else{
-            
+        } else {
+
             $this->emit('confirmationInscription', [
                 'selected' => $event,
                 'status' => 'Inscripto!',
@@ -117,6 +126,5 @@ class ShowEvent extends Component
         // }
 
         $this->emit('ins', $evento);
-    }    
-
+    }
 }

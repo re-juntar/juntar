@@ -12,6 +12,10 @@ class Event extends Model
 {
     use HasFactory, Imageable;
 
+    public $fillable = [
+        'capacity',
+    ];
+
     //RELATIONSHIPS
     public function eventCategory()
     {
@@ -117,8 +121,8 @@ class Event extends Model
         $this->end_date = $request['end-date'];
         $this->endorsed = 0;
 
-        if (isset($request['participants-limit'])) {
-            $this->capacity = $request['participants-limit'];
+        if (isset($request['participants-limit']) && isset($request['amount-of-participants'])) {
+            $this->capacity = $request['amount-of-participants'];
         } else {
             $this->capacity = -1;
         }

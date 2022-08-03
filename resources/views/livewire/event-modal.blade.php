@@ -1,8 +1,24 @@
+<?php
+    if(isset($event)){
+        $today = strtotime(date('d-m-Y'));
+
+        $start_date = new DateTime($event->start_date);
+        $start_date = strtotime($start_date->format('d-m-Y'));
+
+        $end_date = new DateTime($event->end_date);
+        $end_date = strtotime($end_date->format('d-m-Y'));
+
+        $inscription_end_date = new DateTime($event->inscription_end_date);
+        $inscription_end_date = strtotime($inscription_end_date->format('d-m-Y'));
+
+        $arrIsEnrolled = $this->is_enrolled($event->id);
+    }
+?>
 <x-jet-dialog-modal wire:model="open">
     @if (!isset($event))
-        <x-slot name="content">
-            <h1 class="text-awesome">No event loaded</h1>
-        </x-slot>
+    <x-slot name="content">
+        <h1 class="text-awesome">No event loaded</h1>
+    </x-slot>
     @else
         <x-slot name="content">
 
@@ -29,13 +45,27 @@
                             <i class="fa-solid fa-eye mr-1"></i> Ver Más
                         </x-button>
                     </a>
-                    @if ($event->pre_registration)
-                        <a href="{{ route('preinscripcionform', $event->id) }}">
-                            <x-button class="bg-cyan-500 my-1 mr-2">Pre Inscribirse</x-button>
-                        </a>
-                    @else
-                        <x-button wire:click='confirm({{ $event }})' class="bg-cyan-500 my-1 mr-2 text-[16px]">
-                            Inscribirse</x-button>
+                    @if($today <= $inscription_end_date && $event->capacity != 0 && $event->event_status_id == 1)
+                        @if ($event->pre_registration)
+                            @if(count($arrIsEnrolled) == 1)
+                                <a href="{{route('unsubscribe', $event->id )}}">
+                                    <x-button class="text-[16px] ">Desinscribirse</x-button>
+                                </a>
+                            @else   
+                                <a href="{{ route('preinscripcionform', $event->id) }}">
+                                    <x-button class="bg-cyan-500 my-1 mr-2">Pre Inscribirse</x-button>
+                                </a>
+                            @endif                        
+                        @else                        
+                            @if(count($arrIsEnrolled) == 1)
+                                <a href="{{route('unsubscribe', $event->id )}}">
+                                    <x-button class="text-[16px] ">Desinscribirse</x-button>
+                                </a>
+                            @else                             
+                                <x-button wire:click='confirm({{ $event }})' class="bg-cyan-500 my-1 mr-2 text-[16px]">
+                                Inscribirse</x-button>
+                            @endif
+                        @endif
                     @endif
 
                     @if ($event['image_flyer'])
@@ -43,25 +73,13 @@
                             <x-button class="text-[1rem] mt-1">
                                 <i class="fas fa-file-download mr-3"></i>Flyer
                             </x-button>
-                        </a>
+                        </a>                    
                     @else
                         <x-button class="bg-fogra-darkish text-[16px] mt-1">
                             <i class="fa-solid fa-ban mr-3"></i>Flyer no Disponible
                         </x-button>
-                        @php
-                            $endorsementRequest = $event->endorsementRequest;
-                        @endphp
-
-                        @if (!is_null($endorsementRequest))
-                            @if ($endorsementRequest->endorsed)
-                                <div class="mt-4">
-                                    @livewire('verified-badge', ['endorsementRequest' => $endorsementRequest, 'academicUnits' => $academicUnits])
-                                </div>
-                            @endif
-                        @endif
-
-                    @endif
-
+                    @endif    
+                    
                     <div class="container mt-4">
                         <h1 class="text-3xl font-bold mb-3">{{ $event->name }}</h1>
 
@@ -84,7 +102,7 @@
 
                             <h3 class="font-bold mt-2">Fecha de inicio: {{ $event->start_date }}</h3>
 
-                            <h3 class="font-bold mt-1">Fecha de finalización: {{ $event->start_date }}</h3>
+                            <h3 class="font-bold mt-1">Fecha de finalización: {{ $event->end_date }}</h3>
 
                             @if (!is_null($event->pre_registration))
                                 @if ($event->pre_registration)

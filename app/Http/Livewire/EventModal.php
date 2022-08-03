@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Http\Controllers\InscriptionController;
 use App\Models\Event;
 use Livewire\Component;
+use App\Helper\Is_Enrolled;
 use Illuminate\Support\Facades\Auth;
 
 class EventModal extends Component
@@ -18,6 +19,8 @@ class EventModal extends Component
     public $presentations;
 
     public $academicUnits;
+
+    use Is_Enrolled;
 
     public function render()
     {
@@ -42,6 +45,7 @@ class EventModal extends Component
     public function confirm($event)
     {
         //dd($event);
+        
         if (is_null(Auth::user())) {
             $array = [];
             $array["title"] = 'No estas logeado!';
