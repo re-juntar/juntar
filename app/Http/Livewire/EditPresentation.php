@@ -17,6 +17,7 @@ class EditPresentation extends Component
         'date' => 'required',
         'start_time' => 'required|before_or_equal:end_time',
         'end_time' => 'required',
+        'exhibitors' => '',
         'resources_link' => 'max:255',
     ];
 
@@ -43,6 +44,7 @@ class EditPresentation extends Component
             'date' => 'required',
             'start_time' => 'required|before_or_equal:end_time',
             'end_time' => 'required',
+            'exhibitors' => '',
             'resources_link' => 'max:255',
         ]);
     }
