@@ -60,9 +60,15 @@
                                 <th class="pl-4 py-4  text-fogra-darkish   dark:text-gray-400">
                                     Recursos
                                 </th>
-                                <th class="pl-4 py-4  text-fogra-darkish  col-span-2 dark:text-gray-400">
-                                    <a target="_blank" href="{{$presentation->resources_link}}" rel="noopener noreferrer"><i class="fa fa-paperclip text-awesome"></i></a>                                    
-                                </th>
+                                @if($presentation->resources_link)
+                                    <th class="pl-4 py-4  text-fogra-darkish  col-span-2 dark:text-gray-400">
+                                        <a target="_blank" href="{{$presentation->resources_link}}" rel="noopener noreferrer"><i class="fa fa-paperclip text-awesome"></i></a>           
+                                    </th>
+                                @else       
+                                    <th class="pl-4 py-4  text-fogra-darkish col-span-2 dark:text-gray-400">
+                                        Sin Recursos
+                                    </th>           
+                                @endif       
                             </tr>
 
                         </tbody>
