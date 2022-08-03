@@ -1,4 +1,4 @@
-<x-jet-form-section submit="updateProfileInformation">
+<x-jet-form-section submit="update">
     <x-slot name="title">
         {{ __('Información del Perfil') }}
     </x-slot>
@@ -54,42 +54,42 @@
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('Nombre') }}" />
-            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="state.name"
+            <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name"
                 autocomplete="name" />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="surname" value="{{ __('Apellido') }}" />
-            <x-jet-input id="surname" type="text" class="mt-1 block w-full" wire:model.defer="state.surname"
+            <x-jet-input id="surname" type="text" class="mt-1 block w-full" wire:model.defer="surname"
                 autocomplete="surname" />
             <x-jet-input-error for="surname" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="dni" value="{{ __('DNI') }}" />
-            <x-jet-input id="dni" type="number" class="mt-1 block w-full" wire:model.defer="state.dni"
+            <x-jet-input disabled id="dni" type="number" class="mt-1 block w-full" wire:model.defer="dni"
                 autocomplete="dni" />
             <x-jet-input-error for="dni" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="country" value="{{ __('Pais') }}" />
-            <x-jet-input id="country" type="text" class="mt-1 block w-full" wire:model.defer="state.country"
+            <x-jet-input id="country" type="text" class="mt-1 block w-full" wire:model.defer="country"
                 autocomplete="country" />
             <x-jet-input-error for="country" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="province" value="{{ __('Provincia') }}" />
-            <x-jet-input id="province" type="text" class="mt-1 block w-full" wire:model.defer="state.province"
+            <x-jet-input id="province" type="text" class="mt-1 block w-full" wire:model.defer="province"
                 autocomplete="province" />
             <x-jet-input-error for="province" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="city" value="{{ __('Ciudad') }}" />
-            <x-jet-input id="city" type="text" class="mt-1 block w-full" wire:model.defer="state.city"
+            <x-jet-input id="city" type="text" class="mt-1 block w-full" wire:model.defer="city"
                 autocomplete="city" />
             <x-jet-input-error for="city" class="mt-2" />
         </div>
@@ -97,7 +97,7 @@
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('Correo Electrónico') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="email" />
             <x-jet-input-error for="email" class="mt-2" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && !$this->user->hasVerifiedEmail())
