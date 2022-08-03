@@ -120,7 +120,8 @@ class InscriptionController extends Controller
 
     public function export($eventId) 
     {
-        return Excel::download(new EventInscriptionsExport($eventId), 'inscriptos.xlsx');
+      return (new EventInscriptionsExport($eventId))->download("insriptos.xlsx");
+// return Excel::download(new EventInscriptionsExport($eventId), 'inscriptos.xlsx');
     }
 
 }
