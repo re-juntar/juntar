@@ -90,6 +90,7 @@ class PresentationTable extends DataTableComponent
                 Presentation::where('id', $selectedItem)->delete();
             }
             $this->clearSelected();
+            return redirect('evento/' . $this->event);
         }
     }
 
