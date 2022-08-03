@@ -12,7 +12,7 @@
 
             <div class="bg-white-ghost md:min-h-[60vh] md:relative">
 
-                <div class="flex justify-center rounded-lg p-4 h-full md:w-2/4">
+                <div class="flex justify-center rounded-lg p-4 mt-7 h-full md:w-2/4">
                     @php
                         $src = $event['image_flyer'];
                         if ($event['image_flyer'] == null) {
