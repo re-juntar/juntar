@@ -298,13 +298,19 @@
                 </div>
 
                 <div class="pb-[3rem] p-[15px]">
-                    <livewire:presentation-table event="{{ $event->id }}">
+                    <div class="flex items-center">
+                        <h2 class="uppercase text-[1.5rem] bold">Agenda</h2>
+                        @if($hasPermission)
+                            <a class="text-[2rem] ml-2" href="{{route('create-presentation', $event->id)}}"><i class="fa-solid fa-plus fa-2xs"></i></a>
+                        @endif
+                    </div>
+                    <livewire:presentation-table event="{{ $event->id }}" hasPermission="{{$hasPermission}}">
                 </div>
             </div>
         </div>
     </div>
 
+    @livewire('modal-more-information-presentation')
 </div>
-
 
 
