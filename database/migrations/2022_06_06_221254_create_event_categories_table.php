@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('event_categories', function (Blueprint $table) {
             $table->id();
             $table->string('description', 100);
+            $table->tinyInteger('category_status')->default('1');
             $table->timestamps();
         });
     }

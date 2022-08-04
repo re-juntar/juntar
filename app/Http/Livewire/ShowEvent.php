@@ -21,7 +21,7 @@ class ShowEvent extends Component
     use Is_Enrolled;
 
 
-    protected $listeners = ['inscription','confirm' =>'confirmInscription'];
+    protected $listeners = ['inscription', 'confirm' => 'confirmInscription','preinscription','unsuscribe'];
 
     public function mount($id)
     {
@@ -38,7 +38,7 @@ class ShowEvent extends Component
         $this->coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
             ->where('events.id', $id)
-            ->get(['users.name', 'users.surname']);
+            ->get(['users.id']);
         /*         $this->isEnrolled = Inscription::join('events', 'event_id', '=', 'inscriptions.event_id')
             ->join('users', 'users.id', '=', 'inscriptions.user_id')
             ->where('events.id', $id)
@@ -89,19 +89,67 @@ class ShowEvent extends Component
         )->layout(\App\View\Components\AppLayout::class);
     }
 
-    public function confirmInscription($event)
-    {   
-        //dd($event);     
-        if(is_null(Auth::user())){
-            $array= [];
+
+    public function confirmUnsuscribe($event){
+        $this->emit('confirmationInscription', [
+            'selected' => $event,
+            'text' => 'Estas por desinscribirte del Evento ' . $event["name"] . '!',
+            'method' => 'unsuscribe',
+            'eventid' => $event["id"],
+            'component' => 'show-event',
+            'action' => 'Desinscribirme'
+        ]);
+    }
+
+    public function unsuscribe($eventid){
+        $ins = new InscriptionController;
+        $evento = $ins->unsubscribe($eventid);      
+
+        $this->emit('ins', [            
+            'title' => 'Desinscrito!',
+            'text' => 'Te has desinscrito exitosamente del evento!',
+            'icon' => 'success'
+        ]);
+    }
+
+    public function confirmPreRegistration($event){
+        //dd($event);
+        if (is_null(Auth::user())) {
+            $array = [];
             $array["title"] = 'No estas logeado!';
             $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
             $array["icon"] = 'warning';
             $array["redirect"] = true;
             $this->emit('ins', $array);
-        }
-        else{
+        } else {
+            $this->emit('confirmationInscription', [
+                'selected' => $event,
+                'text' => 'Estas por pre inscribirte al Evento ' . $event["name"] . '!',
+                'method' => 'preinscription',
+                'eventid' => $event["id"],
+                'component' => 'show-event',
+                'action' => 'Pre incribirme'
+            ]);
             
+        }
+    }
+
+    public function preinscription($eventid){
+        return redirect('/evento/'.$eventid.'/formulario-preinscripcion');
+    }
+
+    public function confirmInscription($event)
+    {
+        //dd($event);     
+        if (is_null(Auth::user())) {
+            $array = [];
+            $array["title"] = 'No estas logeado!';
+            $array["text"] = 'Debes Ingresar para poder inscribirte al evento, deseas logearte?';
+            $array["icon"] = 'warning';
+            $array["redirect"] = true;
+            $this->emit('ins', $array);
+        } else {
+
             $this->emit('confirmationInscription', [
                 'selected' => $event,
                 'status' => 'Inscripto!',
@@ -121,12 +169,12 @@ class ShowEvent extends Component
     public function inscription($eventid)
     {
         $ins = new InscriptionController;
-        $evento = $ins->store($eventid);
-        // if ($evento["redirect"]) {
-        //     return redirect('login');
-        // }
+        $evento = $ins->store($eventid);       
 
-        $this->emit('ins', $evento);
-    }    
-
+        $this->emit('ins', [            
+            'title' => 'Inscripto!',
+            'text' => 'Te has inscrito exitosamente al evento!',
+            'icon' => 'success'
+        ]);
+    }
 }

@@ -43,21 +43,7 @@ livewire.on('confirmationInscription', e => {
         if (result.isConfirmed) {
 
             livewire.emitTo(e.component, e.method, e.eventid);
-            console.log(e.method,e.component )
-            
-            //  Swal.fire(                              
-            //      e.status,
-            //      e.statusText,
-            //      'success',                
-                              
-            //  ).then((result) => {
-            //      if (result.isConfirmed) {
-            //          location.reload();
-            //      }
-            //      else {    
-            //          location.reload();
-            //       }             
-            //  })            
+            console.log(e.method,e.component )          
         }
     })
 });
