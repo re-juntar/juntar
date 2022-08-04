@@ -24,6 +24,7 @@ use App\Http\Livewire\CreatePresentation;
 use App\Http\Livewire\EditPresentation;
 
 Route::get('/', FrontHome::class)->name('home');
+Route::post('/', FrontHome::class)->name('home');
 
 Route::get('/home', FrontHome::class);
 

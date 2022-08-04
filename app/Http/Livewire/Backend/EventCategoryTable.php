@@ -14,7 +14,7 @@ class EventCategoryTable extends DataTableComponent
 
     public array $eventsCategory = [];
 
-    protected $listeners = ['deleteCategory'];
+    protected $listeners = ['deleteCategory', 'activeCategory'];
 
     public function configure(): void
     {
@@ -60,6 +60,10 @@ class EventCategoryTable extends DataTableComponent
         return [
             Column::make("#", "id"),
             Column::make("Categoria", "description"),
+            Column::make("estado", "category_status")
+            ->format(function ($value, $row, Column $column) {
+                return $row->category_status == 1 ? 'Activo' : 'Deshabilitado';
+            }), 
         ];
     }
 
@@ -67,23 +71,50 @@ class EventCategoryTable extends DataTableComponent
     {
         return [
             'confirmDeleteModality' => 'Eliminar',
+            'confirmActiveModality' => 'Habilitar',
             'update' => 'Modificar',
         ];
     }
 
     public function deleteCategory()
     {
-        $this->clearSelected();
-        EventCategory::whereIn('id', $this->getSelected())->delete();
+        //$this->clearSelected();
+
+        foreach ($this->getSelected() as $selectedItem) {
+            EventCategory::where('id', $selectedItem)->update(['category_status' => 0]);;
+        }        
 
         $this->clearSelected();
+    }
+
+    public function activeCategory()
+    {
+        //$this->clearSelected();
+
+        foreach ($this->getSelected() as $selectedItem) {
+            EventCategory::where('id', $selectedItem)->update(['category_status' => 1]);;
+        }        
+
+        $this->clearSelected();
+    }
+
+    public function confirmActiveModality()
+    {
+        $this->emit('confirmation', [            
+            'status' => 'Activado!',
+            'statusText' => 'Los registros han sido activadas exitosamente!',
+            'text' => 'Estas por habilitar una categoria que estaba anteriormente deshabilitada!',
+            'method' => 'activeCategory',
+            'component' => 'event-category-table',
+            'action' => 'Activar'
+        ]);
     }
 
     public function confirmDeleteModality()
     {
         $this->emit('confirmation', [            
             'status' => 'Eliminado!',
-            'statusText' => 'Los registros an sido eliminados exitosamente!',
+            'statusText' => 'Las categorias han sido deshabilitadas exitosamente!',
             'text' => 'Estas por eliminar Categorias de evento, los eventos que sean creador posteriormente no podran tener estas Categorias!',
             'method' => 'deleteCategory',
             'component' => 'event-category-table',
