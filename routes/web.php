@@ -58,13 +58,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/evento/{eventId}/inscribir', [InscriptionController::class, 'store'])->name('inscribir');
 
     Route::get('/evento/{eventId}/desinscribir', [InscriptionController::class, 'unsubscribe'])->name('unsubscribe');
+    
+    Route::get('/descargar-listado-inscriptos/{eventId}', [InscriptionController::class, 'export'])->name('descargar.inscriptos');
 
     Route::get('/evento/{eventId}/crear-presentacion', CreatePresentation::class)->name('create-presentation');
 
     Route::get('/evento/{eventId}/editar-presentacion/{presentationId}', EditPresentation::class)->name('edit-presentation');
 });
 
-Route::get('/inscriptos-export', [InscriptionController::class, 'export']);
+
 /********************** VALIDATOR *************************/
 Route::group(['middleware' => ['auth', 'validator'], 'prefix' => 'gestionar'], function () {
     Route::get('/', BackHome::class)->name('back-home');
