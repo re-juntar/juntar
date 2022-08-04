@@ -1,31 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-// Laravel controllers
+use App\Http\Livewire\FrontHome;
+use App\Http\Livewire\ShowEvent;
+use App\Http\Livewire\Backend\BackHome;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserController;
+use App\Http\Livewire\Backend\RolesPage;
+use App\Http\Livewire\Backend\UsersPage;
+use App\Http\Livewire\EventInscriptions;
+use App\Http\Livewire\Backend\EventsPage;
+use App\Http\Livewire\PreinscriptionForm;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactanosController;
 use App\Http\Controllers\InscriptionController;
-use App\Http\Controllers\UserController;
-
-// Livewire Front
-use App\Http\Livewire\FrontHome;
-use App\Http\Livewire\Inscriptions;
-use App\Http\Livewire\PreinscriptionForm;
+use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\PreinscriptionFormBuilder;
-use App\Http\Livewire\ShowEvent;
-
-// Livewire Back
-use App\Http\Livewire\Backend\BackHome;
-use App\Http\Livewire\Backend\UsersPage;
-use App\Http\Livewire\Backend\EventsPage;
 use App\Http\Livewire\Backend\EventCategoriesPage;
 use App\Http\Livewire\Backend\EventModalitiesPage;
-use App\Http\Livewire\Backend\EndorsementsPage;
-use App\Http\Livewire\Backend\RolesPage;
-use App\Http\Livewire\EventInscriptions;
-use App\Models\Inscription;
 
 Route::get('/', FrontHome::class)->name('home');
 
@@ -54,14 +46,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/crear-formulario-preinscripcion/{eventId}', PreinscriptionFormBuilder::class)->name('formbuilder');
 
-    Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
+    Route::get('/evento/{eventId}/inscriptos', EventInscriptions::class)->name('event-inscriptions');
+
+    Route::get('/evento/{eventId}/formulario-preinscripcion', PreinscriptionForm::class)->name('preinscripcionform');
+
+    Route::get('/evento/{eventId}/inscribir', [InscriptionController::class, 'store'])->name('inscribir');
+
+    Route::get('/evento/{eventId}/desinscribir', [InscriptionController::class, 'unsubscribe'])->name('unsubscribe');
     
-    Route::get('/inscriptos/{eventId}', EventInscriptions::class)->name('event-inscriptions');
-    
-    Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
+    Route::get('/descargar-listado-inscriptos/{eventId}', [InscriptionController::class, 'export'])->name('descargar.inscriptos');
 });
 
-Route::get('/descargar-listado-inscriptos/{eventId}', [InscriptionController::class, 'export'])->name('descargar.inscriptos');
 
 /********************** VALIDATOR *************************/
 Route::group(['middleware' => ['auth', 'validator'], 'prefix' => 'gestionar'], function () {

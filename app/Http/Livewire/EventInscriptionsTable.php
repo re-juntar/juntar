@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Inscription;
 use App\Models\Event;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Answer;
+use App\Models\Inscription;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
@@ -30,21 +30,21 @@ class EventInscriptionsTable extends DataTableComponent
         $this->setComponentWrapperAttributes([
             'id' => 'inscriptions',
             'class' => ' text-black bg-gray-200 pt-3 pb-1 lg:p-3 px-3 ',
-          ]);
+        ]);
 
-          $this->setTrAttributes(function($row, $index) {
+        $this->setTrAttributes(function($row, $index) {
             if ($index % 2 === 0) {
-              return [
+                return [
                 'default' => false,
                 'class' => 'bg-gray-300 text-black',
-              ];
+                ];
             }
             else{
-               return [
-                 'default' => false,
-                 'class' => 'bg-white-ghost text-black',
-               ];
-             }
+                return [
+                'default' => false,
+                'class' => 'bg-white-ghost text-black',
+                ];
+            }
 
             return ['default' => false];
         });
@@ -54,17 +54,29 @@ class EventInscriptionsTable extends DataTableComponent
     {
         return [
             Column::make("#", "id")->hideIf(true),
-            Column::make("Nombre", "user.name"),
-            Column::make("Apellido", "user.surname"),
+            Column::make("Nombre", "user.name")->hideIf(true),
+            Column::make("pre_inscription_date", "pre_inscription_date")->hideIf(true),
+            Column::make("Nombre Apellido", "user.surname")
+            ->format(function ($value, $row, Column $column) {
+                return '<p class="">'.$row['user.name'].' '.$row['user.surname'].'</p>';
+            })->html(),
             Column::make("Dni", "user.dni"),
             Column::make("Mail", "user.email"),
             Column::make("Fecha de Inscripcion", "inscription_date"),
+
+            Column::make("", 'id')->format(
+                function ($value, $row, Column $column) {
+                    $answer = Answer::all()->where('inscription_id', $value);
+                    $preIncriptionDate = $row['pre_inscription_date'];
+                    return view('livewire.add-questions-and-anwers', ['answer' => $answer, 'preIncriptionDate' => $preIncriptionDate])->withValue($value);
+                }
+            ),
         ];
     }
 
     public function builder(): Builder
-    {
-        return Inscription::where(['inscriptions.user_id' => Auth::user()->id ])->where('inscription_date', '<>', 'null');
+    {   
+        return Inscription::where('event_id', $this->event)->where('inscription_date', '<>', 'null');
     }
     
     public function bulkActions(): array

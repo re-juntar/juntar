@@ -10,6 +10,8 @@ use App\Models\EventCategory;
 use App\Models\EventModality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PermissionController;
+
 
 class EventController extends Controller
 {
@@ -34,25 +36,25 @@ class EventController extends Controller
     public function store(ImageUploadRequest $request, Event $event)
     {
         $event->storeEvent($request)->storeMedia($request);
-            $eventId = Event::max('id');
-            if (isset($request->coorganizer1)) {
-                $orgController1 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer1)->first();
-                $orgController1->store($user->id, $eventId);
-            }
+        $eventId = Event::max('id');
+        if (isset($request->coorganizer1)) {
+            $orgController1 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer1)->first();
+            $orgController1->store($user->id, $eventId);
+        }
 
-            if (isset($request->coorganizer2)) {
-                $orgController2 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer2)->first();
-                $orgController2->store($user->id, $eventId);
-            }
+        if (isset($request->coorganizer2)) {
+            $orgController2 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer2)->first();
+            $orgController2->store($user->id, $eventId);
+        }
 
-            if (isset($request->coorganizer3)) {
-                $orgController3 = new OrganizerController();
-                $user = User::where('email', '=', $request->coorganizer3)->first();
-                $orgController3->store($user->id, $eventId);
-            }
-            return redirect('evento/' . $eventId);
+        if (isset($request->coorganizer3)) {
+            $orgController3 = new OrganizerController();
+            $user = User::where('email', '=', $request->coorganizer3)->first();
+            $orgController3->store($user->id, $eventId);
+        }
+        return redirect('evento/' . $eventId);
     }
 
     /**
@@ -63,8 +65,21 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $categories = EventCategory::all();
+        $modalities = EventModality::all();
         $event = Event::findOrfail($id);
-        return view('pages.edit-event', ['event' => $event]);
+        if (isset(Auth::user()->id) && Auth::user()->id == $event->user_id) {
+            list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
+            list($endDateDay, $endDateMonth, $endDateYear) = explode("-", $event->end_date);
+            list($inscriptionEndDateDay, $inscriptionEndDateMonth, $inscriptionEndDateYear) = explode("-", $event->inscription_end_date);
+            $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
+            $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
+            $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
+            // print_r($event);
+            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -108,8 +123,8 @@ class EventController extends Controller
     }
 
     public function myInscriptions()
-    {   
-        
+    {
+
         return view('livewire.my-inscriptions');
     }
 }
