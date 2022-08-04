@@ -9,7 +9,7 @@
                 </a>
             </div>
 
-            <div class="lg:hidden flex items-center w-full ml-1">
+            <div class="lg:hidden md:hidden sm:hidden flex items-center w-full ml-1">
                 @livewire('search-sort-form-responsive')
             </div>
             <!-- Hamburger -->

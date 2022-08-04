@@ -70,11 +70,14 @@ class EventController extends Controller
         $event = Event::findOrfail($id);
         if (isset(Auth::user()->id) && Auth::user()->id == $event->user_id) {
             list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
+            $formatedInscriptionEndDate = "";
             list($endDateDay, $endDateMonth, $endDateYear) = explode("-", $event->end_date);
-            list($inscriptionEndDateDay, $inscriptionEndDateMonth, $inscriptionEndDateYear) = explode("-", $event->inscription_end_date);
+            if(isset($event->inscription_end_date)){
+                list($inscriptionEndDateDay, $inscriptionEndDateMonth, $inscriptionEndDateYear) = explode("-", $event->inscription_end_date);
+                $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
+            }
             $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
             $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
-            $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
             // print_r($event);
             return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities]);
         } else {
@@ -103,31 +106,37 @@ class EventController extends Controller
             $response = Event::where('name', 'like', '%' . $search . '%')
                 ->where('event_status_id', '<>', 4)
                 ->where('event_status_id', '<>', 2)
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->paginate(25);
         }elseif (isset($filter['filter1'])) {
             $response = Event::where('event_modality_id', '=', 1)
                 ->where('event_status_id', '<>', 4)
                 ->where('event_status_id', '<>', 2)
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->paginate(25);
         }elseif (isset($filter['filter2'])) {
             $response = Event::where('event_modality_id', '=', 2)
                 ->where('event_status_id', '<>', 4)
                 ->where('event_status_id', '<>', 2)
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
                 ->paginate(25);
         }
         elseif (isset($filter['filter3'])) {
             $response = Event::where('event_modality_id', '=', 3 )
                 ->where('event_status_id', '<>', 4)
                 ->where('event_status_id', '<>', 2)
-                ->orderBy('start_date', 'asc')
+                ->orderBy('start_date', 'desc')
+                ->paginate(25);
+        }
+        elseif (isset($filter['filter4'])) {
+            $response = Event::where('event_modality_id', '=', 4 )
+                ->where('event_status_id', '<>', 4)
+                ->where('event_status_id', '<>', 2)
+                ->orderBy('start_date', 'desc')
                 ->paginate(25);
         } else {
-            $response = Event::where('event_status_id', '<>', 4)->where('event_status_id', '<>', 2)->orderBy('start_date', 'asc')->paginate(25);
+            $response = Event::where('event_status_id', '<>', 4)->where('event_status_id', '<>', 2)->orderBy('start_date', 'desc')->paginate(25);
         }
-
         return $response;
     }
 

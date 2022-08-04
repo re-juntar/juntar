@@ -6,10 +6,10 @@
 
     <section class="flex  bg-fogra-darkish w-full">
 
-        <div class=" w-full  pt-3 pb-2 lg:w-1/2 ">
+        <div class=" w-full sm:w-1/2 flex sm:justify-end justify-center  pt-3 pb-2 lg:w-1/2 ">
             @livewire('filter-front-modalities')
         </div>
-        <div class="hidden lg:flex  justify-self-center  w-2/3   ">
+        <div class="hidden lg:flex sm:flex lg:justify-self-center justify-start  w-2/3   ">
             @livewire('search-sort-form')
             <div>
 
