@@ -251,51 +251,51 @@ $arrIsEnrolled = $this->is_enrolled($event->id);
                     {{-- More event info on the right side --}}
                     <div
                         class="more-event-info flex flex-col items-center justify-center md:flex w-full md:w-4/12 xl:w-3/12  text-white-ghost px-[15px] bg-[#0B0D19]">
-                        <ul class=" flex flex-col justify-center items-start w-10/12 mx-auto text-[1rem]">
+                        <ul class=" flex flex-col justify-center items-start w-full mx-auto text-[1rem]">
                             <li class="py-[0.75rem]">
-                                <p class="mb-[1rem] font-bold">Fecha de Inicio:</p>
+                                <p class="mb-[0.3rem] font-bold">Fecha de Inicio:</p>
                                 <span>{{ $event->start_date }}</span>
                             </li>
                             <li class="py-[0.75rem]">
-                                <p class="mb-[1rem] font-bold">Fecha de Finalización:</p>
+                                <p class="mb-[0.3rem] font-bold">Fecha de Finalización:</p>
                                 <span>{{ $event->end_date }}</span>
                             </li>
 
                             @if ($event->pre_registration && $event->inscription_end_date)
                                 <li class="py-[0.75rem]">
-                                    <p class="mb-[1rem] font-bold">Fecha Límite de Preinscripción:</p>
+                                    <p class="mb-[0.3rem] font-bold">Fecha Límite de Preinscripción:</p>
                                     <span>{{ $event->inscription_end_date }}</span>
                                 </li>
                             @endif
 
                             @if ($event->venue)
                                 <li class="py-[0.75rem]">
-                                    <p class="mb-[1rem] font-bold">Lugar:</p>
+                                    <p class="mb-[0.3rem] font-bold">Lugar:</p>
                                     <span>{{ $event->venue }}</span>
                                 </li>
                             @endif
 
                             @if ($event->meeting_link)
-                                <li class="py-[0.75rem]">
-                                    <p class="mb-[1rem] font-bold">Enlace:</p>
-                                    <span>{{ $event->meeting_link }}</span>
+                                <li class="py-[0.75rem] w-full">
+                                    <p class="mb-[0.3rem] font-bold overflow-ellipsis">Enlace: </p>
+                                    <span><a href={{ $event->meeting_link }}>{{ $event->meeting_link }}</a></span>
                                 </li>
                             @endif
 
                             <li class="py-[0.75rem]">
-                                <p class="mb-[1rem] font-bold">Modalidad: </p>
+                                <p class="mb-[0.3rem] font-bold">Modalidad: </p>
                                 <span>{{ $event->modality_description }}</span>
                             </li>
 
                             @if ($event->capacity != -1)
                                 <li class="py-[0.75rem]">
-                                    <p class="mb-[1rem] font-bold">Capacidad: </p>
+                                    <p class="mb-[0.3rem] font-bold">Capacidad: </p>
                                     <span>{{ $event->capacity }}</span>
                                 </li>
                             @endif
 
                             <li class="py-[0.75rem]">
-                                <p class="mb-[1rem] font-bold">Fecha Publicación: </p>
+                                <p class="mb-[0.3rem] font-bold">Fecha Publicación: </p>
                                 <span>{{ $event->updated_at }}</span>
                             </li>
                         </ul>

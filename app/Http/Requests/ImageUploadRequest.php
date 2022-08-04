@@ -31,12 +31,12 @@ class ImageUploadRequest extends FormRequest
             'meet' => 'max:300|string',
             'category' => 'required',
             'modality' => 'required',
-            'start-date' => 'required|before_or_equal:end-date',
-            'end-date' => 'required',
+            'start-date' => 'required|before_or_equal:end-date|date',
+            'end-date' => 'required|date',
             'logo' => 'required|image|mimes:jpeg,png,jpg',
             'flyer' => 'required|image|mimes:jpeg,png,jpg',
-            'amount-of-participants' => 'min:1',
-            'preinscription-date' => 'before_or_equal:start-date',            
+            'amount-of-participants' => 'min:1|max:100000000',
+            'preinscription-date' => 'before_or_equal:start-date',
         ];
     }
 }

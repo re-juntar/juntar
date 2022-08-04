@@ -75,19 +75,19 @@ class DatabaseSeeder extends Seeder
         $role4->save();
         /*******************************STATUS******************************************/
         $status1 = new EventStatus();
-        $status1->description = 'Active';
+        $status1->description = 'Activo';
         $status1->save();
 
         $status2 = new EventStatus();
-        $status2->description = 'Disabled';
+        $status2->description = 'Deshabilitado';
         $status2->save();
 
         $status3 = new EventStatus();
-        $status3->description = 'Finished';
+        $status3->description = 'Finalizado';
         $status3->save();
 
         $status4 = new EventStatus();
-        $status4->description = 'Draft';
+        $status4->description = 'Borrador';
         $status4->save();
         /**********************************MODALITY*************************************/
         $modality1 = new EventModality();
