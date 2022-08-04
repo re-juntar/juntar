@@ -2,11 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\Event;
-use App\Models\User;
 use App\Models\Inscription;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMapping;

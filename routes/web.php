@@ -24,6 +24,7 @@ use App\Http\Livewire\Backend\EventCategoriesPage;
 use App\Http\Livewire\Backend\EventModalitiesPage;
 use App\Http\Livewire\Backend\EndorsementsPage;
 use App\Http\Livewire\Backend\RolesPage;
+use App\Http\Livewire\EventInscriptions;
 use App\Models\Inscription;
 
 Route::get('/', FrontHome::class)->name('home');
@@ -55,7 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/formulario-preinscripcion/{eventId}', PreinscriptionForm::class)->name('preinscripcionform');
     
-    Route::get('/inscriptos/{eventId}', Inscriptions::class)->name('event-inscriptions');
+    Route::get('/inscriptos/{eventId}', EventInscriptions::class)->name('event-inscriptions');
     
     Route::get('/inscribir/{eventId}', [InscriptionController::class, 'store'])->name('inscribir');
 });

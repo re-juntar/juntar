@@ -15,6 +15,6 @@ class EventInscriptions extends Component
     
     public function render()
     {
-        return view('livewire.eventinscriptions', ['eventId' => $this->eventId])->layout(\App\View\Components\AppLayout::class);
+        return view('livewire.event-inscriptions', ['eventId' => $this->eventId])->layout(\App\View\Components\AppLayout::class);
     }
 }

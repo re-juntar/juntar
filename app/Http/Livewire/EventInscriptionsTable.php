@@ -90,7 +90,5 @@ class EventInscriptionsTable extends DataTableComponent
         $this->emit('refreshComponent');
     }
 
-    
-    
 
 }
