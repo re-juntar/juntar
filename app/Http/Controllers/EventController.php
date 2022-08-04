@@ -77,11 +77,12 @@ class EventController extends Controller
             if(isset($event->inscription_end_date)){
                 list($inscriptionEndDateDay, $inscriptionEndDateMonth, $inscriptionEndDateYear) = explode("-", $event->inscription_end_date);
                 $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
+            } else {
+                $formatedInscriptionEndDate = $event->inscription_end_date;
             }
             $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
             $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
 
-            $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
             return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities, 'coorganizers' => $coorganizers]);
 
         } else {

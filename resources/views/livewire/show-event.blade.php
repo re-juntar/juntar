@@ -251,7 +251,7 @@ $arrIsEnrolled = $this->is_enrolled($event->id);
                     {{-- More event info on the right side --}}
                     <div
                         class="more-event-info flex flex-col items-center justify-center md:flex w-full md:w-4/12 xl:w-3/12  text-white-ghost px-[15px] bg-[#0B0D19]">
-                        <ul class=" flex flex-col justify-center items-start w-full mx-auto text-[1rem]">
+                        <ul class="flex flex-col w-full text-[1rem]">
                             <li class="py-[0.75rem]">
                                 <p class="mb-[0.3rem] font-bold">Fecha de Inicio:</p>
                                 <span>{{ $event->start_date }}</span>
