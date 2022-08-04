@@ -11,13 +11,77 @@
 
                     <form method="POST" action="{{ route('update-event') }}" enctype="multipart/form-data">
                         @csrf
-
+                        <input hidden value="{{ Auth::user()->id }}" id="hiddenUserId">
                         <input hidden name="eventId" id="eventId" value="{{ $event->id }}">
                         <input hidden id="hiddenDate" value="{{ $event->inscription_end_date }}">
                         <input id="hiddenVenue" hidden value="{{ $event->venue }}">
                         <input id="hiddenmeeting" hidden value="{{ $event->meeting_link }}">
+                        
+                        {{-- Agregar Coorganizador --}}
+                        <div class="mb-4">
+                            <fieldset id="requires-coorganizer">
+                                <x-label>¿Requiere coorganizador? *</x-label>
+                                <div>
+                                    <input type="radio" id="no-coorganizer" name="requires-coorganizer"
+                                        value="no-coorganizer" checked
+                                        {{ old('requires-coorganizer') == 'no-coorganizer' ? 'checked' : '' }} />
+                                    <x-label class="mb-[0]" for="no-coorganizer">No</x-label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="yes-coorganizer" name="requires-coorganizer"
+                                        value="yes-coorganizer"
+                                        {{ old('requires-coorganizer') == 'yes-coorganizer' ? 'checked' : '' }} />
+                                    <x-label class="mb-[0]" for="yes-coorganizer">Si</x-label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        
+                        {{-- Ingresar Nombre del Coorganizador --}}
+                        <div id="" class="mb-4">
+                            <div id='coorganizer-container'
+                                class='mt-2 {{ old('requires-coorganizer') != 'yes-coorganizer' ? 'hidden' : '' }}'>
+                                <x-dropdown-multiselect id="coorganizer-dropdown">
+                                    <input id="coorganizer1" name="coorganizer1" class="coorganizer hidden" type="text"
+                                        value="{{ old('coorganizer1', $event->coorganizer1) }}">
+                                    <input id="coorganizer2" name="coorganizer2" class="coorganizer hidden" type="text"
+                                        value="{{ old('coorganizer2', $event->coorganizer2) }}">
+                                    <input id="coorganizer3" name="coorganizer3" class="coorganizer hidden" type="text"
+                                        value="{{ old('coorganizer3', $event->coorganizer3) }}">
+                                </x-dropdown-multiselect>
+                            </div>
+                            @error('coorganizer')
+                                <div class="flex items-center">
+                                    <p class="text-red-600">{{ $message }}</p>
+                                </div>
+                            @enderror
+                        </div>
+                        {{-- Coorganizadores Actualez --}}
+                        <div class="mb-4">
+                            <x-label>Coorganizadores Actuales: </x-label>
+                            <div class="flex">
+                                @foreach($coorganizers as $coorganizer)
+                                <a href="{{route('delete-coorganizer', ['eventId' => $event->id,'coorganizerId' => $coorganizer->id])}}">
+                                    <div class="flex justify-center items-center ml-4 my-1  font-medium py-1 px-2 bg-white-ghost rounded-full border border-black">
+                                        <div class="text-xs font-normal leading-none flex-initial">              
+                                            {{$coorganizer->email}}
+                                        </div>
+                                        <div class="flex flex-auto flex-row-reverse">
+                                            <svg class="fill-current h-6 w-6 " role="button" viewBox="0 0 20 20">
+                                                <path
+                                                    d="M14.348,14.849c-0.469,0.469-1.229,0.469-1.697,0L10,11.819l-2.651,3.029c-0.469,0.469-1.229,0.469-1.697,0
+                                                c-0.469-0.469-0.469-1.229,0-1.697l2.758-3.15L5.651,6.849c-0.469-0.469-0.469-1.228,0-1.697s1.228-0.469,1.697,0L10,8.183
+                                                l2.651-3.031c0.469-0.469,1.228-0.469,1.697,0s0.469,1.229,0,1.697l-2.758,3.152l2.758,3.15
+                                                C14.817,13.62,14.817,14.38,14.348,14.849z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                                @endforeach
+                            </div>
+                        </div>
                         {{-- Nombre --}}
                         <div class="mb-4">
+                            <x-label for="name">Nombre del evento *</x-label>
                             <x-input id='name' class="w-full" type='text' name='name'
                                 placeholder="Ingrese Nombre" value="{{ old('name', $event->name) }}" />
                             @error('name')

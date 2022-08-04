@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/store-event', [EventController::class, 'store'])->name('store-event');
 
+    Route::get('/editar-evento/{eventId}/eliminar-coorganizador/{coorganizerId}', [EventController::class, 'deleteCoorganizer'])->name('delete-coorganizer');
+
     Route::get('/mis-inscripciones', [EventController::class, 'myInscriptions'])->name('my-inscriptions');
 
     Route::get('/mis-eventos', [EventController::class, 'myEvents'])->name('my-events');

@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Event;
-use App\Http\Livewire\FrontHome;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\EventCategory;
 use App\Models\EventModality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PermissionController;
-
+use App\Models\Organizer;
 
 class EventController extends Controller
 {
@@ -67,6 +66,9 @@ class EventController extends Controller
     {
         $categories = EventCategory::all();
         $modalities = EventModality::all();
+        $coorganizers = Organizer::where('event_id', '=', $id)
+            ->join('users', 'users.id', '=', 'organizers.user_id')
+            ->get();
         $event = Event::findOrfail($id);
         if (isset(Auth::user()->id) && Auth::user()->id == $event->user_id) {
             list($startDateDay, $startDateMonth, $startDateYear) = explode("-", $event->start_date);
@@ -75,8 +77,7 @@ class EventController extends Controller
             $formatedStartDate = $startDateYear . '-' . $startDateMonth . '-' . $startDateDay;
             $formatedEndDate = $endDateYear . '-' . $endDateMonth . '-' . $endDateDay;
             $formatedInscriptionEndDate = $inscriptionEndDateYear . '-' . $inscriptionEndDateMonth . '-' . $inscriptionEndDateDay;
-            // print_r($event);
-            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities]);
+            return view('pages.edit-event', ['event' => $event, 'formatedStartDate' => $formatedStartDate, 'formatedEndDate' => $formatedEndDate,  'formatedInscriptionEndDate' => $formatedInscriptionEndDate, 'categories' => $categories, 'modalities' => $modalities, 'coorganizers' => $coorganizers]);
         } else {
             abort(403);
         }
@@ -92,8 +93,62 @@ class EventController extends Controller
     public function update(Request $request)
     {
         $event = Event::find($request->eventId);
+        $coorganizers = Organizer::where('event_id', '=', $request->eventId)
+            ->join('users', 'users.id', '=', 'organizers.user_id')
+            ->get();
+        $totalCoorganizers = count($coorganizers);
+        if ($totalCoorganizers < 3) {
+            if (isset($request->coorganizer1)) {
+                $orgController1 = new OrganizerController();
+                $user = User::where('email', '=', $request->coorganizer1)->first();
+                $arrIsCoorganizer1 = Organizer::where('event_id', '=', $request->eventId)
+                    ->join('users', 'users.id', '=', 'organizers.user_id')
+                    ->where('users.id', '=', $user->id)
+                    ->get();
+                if (count($arrIsCoorganizer1) == 0 && $totalCoorganizers < 3) {
+                    $orgController1->store($user->id, $request->eventId);
+                    $totalCoorganizers++;
+                }
+            }
+
+            if (isset($request->coorganizer2)) {
+                $orgController2 = new OrganizerController();
+                $user = User::where('email', '=', $request->coorganizer2)->first();
+                $arrIsCoorganizer2 = Organizer::where('event_id', '=', $request->eventId)
+                    ->join('users', 'users.id', '=', 'organizers.user_id')
+                    ->where('users.id', '=', $user->id)
+                    ->get();
+                if (count($arrIsCoorganizer2) == 0 && $totalCoorganizers < 3) {
+                    $orgController2->store($user->id, $request->eventId);
+                }
+            }
+
+            if (isset($request->coorganizer3)) {
+                $orgController3 = new OrganizerController();
+                $user = User::where('email', '=', $request->coorganizer3)->first();
+                $arrIsCoorganizer3 = Organizer::where('event_id', '=', $request->eventId)
+                    ->join('users', 'users.id', '=', 'organizers.user_id')
+                    ->where('users.id', '=', $user->id)
+                    ->get();
+                if (count($arrIsCoorganizer3) == 0 && $totalCoorganizers < 3) {
+                    $orgController3->store($user->id, $request->eventId);
+                }
+            }
+        }
         $event->updateEvent($request);
-        return redirect()->action(FrontHome::class);
+        return redirect(route('evento', $request->eventId));
+    }
+
+    public function deleteCoorganizer($eventId, $coorganizerId)
+    {
+        $event = Event::findOrFail($eventId);
+        if (!is_null(Auth::user()) && Auth::user()->id == $event->user_id) {
+            Organizer::where('event_id', '=', $eventId)
+                ->join('users', 'users.id', '=', 'organizers.user_id')
+                ->where('organizers.user_id', '=', $coorganizerId)
+                ->delete();
+            return redirect(route('edit-event', $eventId));
+        } else abort(403);
     }
 
     public function homeRequest($filter)

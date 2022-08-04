@@ -40,7 +40,7 @@
         </x-slot>
 
         <x-slot name="footer">
-           
+        
                 @if ($flyerSrc)
                     <a class=" text-[1rem]" href="{{ asset($flyerSrc) }}" download>
                         <x-button class="text-[1rem]">
@@ -148,11 +148,14 @@
                         <h3 class="mt-5 text-[1rem]">Evento organizado por <b>{{ $organizer->name }}
                                 {{ $organizer->surname }}</b></h3>
                         @if($coorganizers && count($coorganizers) > 0)
-                            <h3 class="text-[1rem] mb-[0.5rem]">Coorganizado por:
-                                @foreach ($coorganizers as $coorganizer)
-                                    <span><b>{{$coorganizer->name}} {{$coorganizer->surname}}</b>.</span>
-                                @endforeach
-                            </h3>
+                            <div class="mb-4 flex">
+                                <x-label>Coorganizadores Actuales: </x-label>
+                                <div class="ml-1 flex flex-col">
+                                    @foreach($coorganizers as $coorganizer)
+                                        <b>{{$coorganizer->name}} {{$coorganizer->surname}}</b>
+                                    @endforeach
+                                </div>
+                            </div>
                         @endif
                         <div class="my-3">
                             @if ($event['image_flyer'] && $flyerSrc)

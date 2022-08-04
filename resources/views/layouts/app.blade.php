@@ -34,7 +34,7 @@
     @endif
 
     @if (Route::currentRouteName() == 'edit-event')
-        <script src={{ asset('/js/displayInputsEdit.js/') }}></script>
+        <script src={{ asset('/js/displayInputsEdit.js') }}></script>
         <link rel="stylesheet" href="{{ asset('vendor/ckeditor/contents.css') }}">
     @endif
 
