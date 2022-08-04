@@ -72,7 +72,7 @@ class ShowEvent extends Component
             }
         }
 
-        if (($this->event->status_description == "Draft" || $this->event->status_description == "Disabled") && !$hasPermission) {
+        if (($this->event->event_status_id == 4 || $this->event->event_status_id == 2) && !$hasPermission) {
             abort(403);
         }
 
@@ -112,9 +112,9 @@ class ShowEvent extends Component
 
     public function unsuscribe($eventid){
         $ins = new InscriptionController;
-        $evento = $ins->unsubscribe($eventid);      
+        $evento = $ins->unsubscribe($eventid);
 
-        $this->emit('ins', [            
+        $this->emit('ins', [
             'title' => 'Desinscrito!',
             'text' => 'Te has desinscrito exitosamente del evento!',
             'icon' => 'success'
@@ -139,7 +139,7 @@ class ShowEvent extends Component
                 'component' => 'show-event',
                 'action' => 'Pre incribirme'
             ]);
-            
+
         }
     }
 
@@ -149,7 +149,7 @@ class ShowEvent extends Component
 
     public function confirmInscription($event)
     {
-        //dd($event);     
+        //dd($event);
         if (is_null(Auth::user())) {
             $array = [];
             $array["title"] = 'No estas logeado!';
@@ -178,9 +178,9 @@ class ShowEvent extends Component
     public function inscription($eventid)
     {
         $ins = new InscriptionController;
-        $evento = $ins->store($eventid);       
+        $evento = $ins->store($eventid);
 
-        $this->emit('ins', [            
+        $this->emit('ins', [
             'title' => 'Inscripto!',
             'text' => 'Te has inscrito exitosamente al evento!',
             'icon' => 'success'
