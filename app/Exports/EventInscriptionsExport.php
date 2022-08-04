@@ -37,7 +37,6 @@ if ($this->eventId == $inscription->event->id)
             $inscription->user->dni,
             $inscription->user->email,
             $inscription->inscription_date,
-            $inscription->event->id,
         ];
   else   
   return [  
@@ -52,7 +51,6 @@ if ($this->eventId == $inscription->event->id)
             'DNI',
             'MAIL',
             'INSCRIPTION',
-            'Id del evento',
         ];
     }
 }
