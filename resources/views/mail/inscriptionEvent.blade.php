@@ -13,10 +13,9 @@
 * Lugar del evento: {{ $contacto['lugar'] }}  
 ---
 ### Desripcion del evento
-@component('mail::panel')
+@component('mail::panel') 
  
- 
- #La informacion del evento sera inviada de forma adjunta en esta mail. Gracias por participar!!
+{!! $contacto['descripcion'] !!}  
 @endcomponent
 
         

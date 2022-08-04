@@ -114,19 +114,31 @@
                         </div>
                         {{-- Categoria --}}
                         @php
+                            //$category = $event->event_category_id;
                             $eventCategoryId = $event->event_category_id;
                         @endphp
                         {{-- Categoria --}}
                         <div class="mb-4">
-                            <x-label for="category">Categoria *</x-label>
+                            <x-label for="category">Categoria *</x-label>                            
                             <select id="category" class="block mt-1 w-full border-[#ced4da] rounded-[0.375rem]"
                                 name="category">
                                 <option disabled selected> Seleccione una categoria </option>
+
                                 @isset($categories)
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ $eventCategoryId == $category->id ? 'selected' : '' }}>
-                                            {{ $category->description }}
-                                        </option>
+                                        @if ($category->category_status)
+                                            @if ($category->id == $event->event_category_id &&
+                                             $event->event_category_id != null)
+                                                <option value="{{ $category->id }}" selected>
+                                                    {{ $category->description }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $category->id }}"
+                                                    {{ old('category') == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->description }}
+                                                </option>
+                                            @endif
+                                        @endif
                                     @endforeach
                                 @endisset
                             </select>
@@ -290,6 +302,6 @@
         <script>
             CKEDITOR.replace('description');
         </script>
-        <script src="{{asset('js/shortNameSuggestions.js')}}" defer></script>
+        <script src="{{ asset('js/shortNameSuggestions.js') }}" defer></script>
     </x-slot>
 </x-app-layout>

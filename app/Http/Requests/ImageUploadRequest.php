@@ -36,7 +36,7 @@ class ImageUploadRequest extends FormRequest
             'logo' => 'required|image|mimes:jpeg,png,jpg',
             'flyer' => 'required|image|mimes:jpeg,png,jpg',
             'amount-of-participants' => 'min:1',
-            'preinscription-date' => 'before_or_equal:start-date',
+            'preinscription-date' => 'before_or_equal:start-date',            
         ];
     }
 }

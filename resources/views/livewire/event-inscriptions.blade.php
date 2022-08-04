@@ -15,10 +15,25 @@
                     </div>
                 </div>
             </div>
+            
+            
 
             <h2 class="text-white-ghost uppercase mb-2 font-medium leading-6 text-3xl">Inscriptos </h2>
+            
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                
+                
+                <div class=" py-4 inline-block min-w-full sm:px-6 lg:px-8 " >
+                    <a class="inline px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out" 
+                    data-icon="arrow-alt-circle-up"
+                    href="{{route('descargar.inscriptos',$eventId)}}"
+                    
+                    >Exportar listado
+                </a>            
+                </div>
                 <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">     
+                    
+
                     <div class="overflow-hidden rounded-lg  ">
                         <livewire:event-inscriptions-table  event="{{$eventId}}">
                         @livewire('q-and-a-modal')

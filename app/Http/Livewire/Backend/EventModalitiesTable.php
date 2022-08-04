@@ -70,32 +70,12 @@ class EventModalitiesTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
-            'confirmDeleteModality' => 'Borrar',
             'editModality' => 'Modificar'
         ];
     }
 
 
-    public function confirmDeleteModality()
-    {
-        $this->emit('confirmation', [
-            'status' => 'Eliminado!',
-            'statusText' => 'Los registros an sido eliminados exitosamente!',
-            'text' => 'Estas por eliminar modalidades de evento, los eventos que sean creador posteriormente no podran tener estas modalidades!',
-            'method' => 'deletemodality',
-            'component' => 'event-modalities',
-            'action' => 'Borrar'
-        ]);
-    }
-
-    public function deletemodality()
-    {
-        $this->clearSelected();
-        foreach ($this->getSelected() as $selectedItem) {
-            EventModality::where('id', $selectedItem)->delete();
-        }
-    }
-
+    
     public function editModality()
     {
         if (isset($this->getSelected()[0])) {

@@ -103,9 +103,12 @@
 
                                 @isset($categories)
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>
-                                            {{ $category->description }}
-                                        </option>
+                                        @if ($category->category_status)
+                                            <option value="{{ $category->id }}"
+                                                {{ old('category') == $category->id ? 'selected' : '' }}>
+                                                {{ $category->description }}
+                                            </option>
+                                        @endif
                                     @endforeach
                                 @endisset
                             </select>
@@ -125,7 +128,8 @@
                                 <option disabled selected> Seleccione una modalidad </option>
                                 @isset($modalities)
                                     @foreach ($modalities as $modality)
-                                        <option value="{{ $modality->id }}" {{ old('modality') == $modality->id ? 'selected' : '' }}>
+                                        <option value="{{ $modality->id }}"
+                                            {{ old('modality') == $modality->id ? 'selected' : '' }}>
                                             {{ $modality->description }}
                                         </option>
                                     @endforeach
@@ -289,7 +293,6 @@
         <script>
             CKEDITOR.replace('description');
         </script>
-        <script src="{{asset('js/shortNameSuggestions.js')}}" defer></script>
+        <script src="{{ asset('js/shortNameSuggestions.js') }}" defer></script>
     </x-slot>
 </x-app-layout>
-
