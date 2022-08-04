@@ -11,12 +11,12 @@ use App\Models\AcademicUnit;
 use App\Models\EndorsementRequest;
 use App\Models\Inscription;
 use App\Helper\Is_Enrolled;
+use App\Models\Organizer;
 
 class ShowEvent extends Component
 {
     public $event;
     public $organizer;
-    public $coorganizer;
     public $openFlyerModal = false;
     use Is_Enrolled;
 
@@ -38,23 +38,32 @@ class ShowEvent extends Component
         $this->coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
             ->join('users', 'users.id', '=', 'organizers.user_id')
             ->where('events.id', $id)
-            ->get(['users.id']);
-        /*         $this->isEnrolled = Inscription::join('events', 'event_id', '=', 'inscriptions.event_id')
-            ->join('users', 'users.id', '=', 'inscriptions.user_id')
-            ->where('events.id', $id)
-            ->get(['users.id']); */
+            ->get(['users.id', 'users.name', 'users.surname']);
     }
 
     public function render()
     {
         // Check for user permissions to update event data
+        $event = Event::join('event_modalities', 'event_modalities.id', '=', 'events.event_modality_id')
+            ->join('event_categories', 'event_categories.id', '=', 'events.event_category_id')
+            ->join('event_statuses', 'event_statuses.id', '=', 'events.event_status_id')
+            ->where('events.id', $this->event->id)
+            ->get(['events.*', 'event_modalities.description as modality_description', 'event_categories.description as category_description', 'event_statuses.description as status_description']);
+
+        if (count($event) === 0) abort(404);
+
+        $this->event = $event[0];
+        $this->organizer = $this->event->user;
+        $this->coorganizers = Event::join('organizers', 'organizers.event_id', '=', 'events.id')
+            ->join('users', 'users.id', '=', 'organizers.user_id')
+            ->where('events.id', $this->event->id)
+            ->get(['users.id', 'users.name', 'users.surname']);
         $hasPermission = false;
 
         $userId = Auth::user() ? Auth::user()->id : null;
         if ($userId == $this->event->user_id) {
             $hasPermission = true;
         }
-
         if (!$hasPermission && count($this->coorganizers) > 0) {
             foreach ($this->coorganizers as $coorganizer) {
                 if ($coorganizer->id == $userId) {

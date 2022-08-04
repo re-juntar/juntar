@@ -138,7 +138,7 @@ function dropdown() {
         loadOptions() {
             // Gets users
             const usersResponse = $.ajax({
-                url: "http://juntar.test/api/users",
+                url: "/api/users",
                 method: "POST",
                 dataType: "json",
                 async: false,

@@ -34,11 +34,7 @@ class EventModal extends Component
         $this->open = true;
     }
     public function openFlyerModal($event)
-    {   
-        //dd($event);
-        //$this->open = false;
-        
-        // dd($event);        
+    {
         $this->emit('flyer');
     }
 
@@ -92,8 +88,7 @@ class EventModal extends Component
 
     public function confirm($event)
     {
-        //dd($event);
-        
+
         if (is_null(Auth::user())) {
             $array = [];
             $array["title"] = 'No estas logeado!';
@@ -111,24 +106,13 @@ class EventModal extends Component
                 'component' => 'event-modal',
                 'action' => 'Incribirme'
             ]);
-            //dd($event);
         }
-        //$evento = $this->storeInscription($event["id"]);
-        //dd($event["id"]);
     }
 
     public function inscription($eventid)
     {
         $ins = new InscriptionController;
         $evento = $ins->store($eventid);
-        // if ($evento["redirect"]) {
-        //     return redirect('login');
-        // }
-
-        $this->emit('ins', [            
-            'title' => 'Inscripto!',
-            'text' => 'Te has inscrito exitosamente al evento!',
-            'icon' => 'success'
-        ]);
+        $this->emit('ins', $evento);
     }
 }
