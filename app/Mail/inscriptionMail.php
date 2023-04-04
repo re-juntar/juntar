@@ -14,7 +14,7 @@ class InscriptionMail extends Mailable
     use Queueable, SerializesModels;
 
     public $subject = "Inscripcion a Evento";
-    public $contacto;
+    public $datos;
 
     /**
      * Create a new message instance.
@@ -23,7 +23,7 @@ class InscriptionMail extends Mailable
      */
     public function __construct($datos)
     {
-        $this->contacto = $datos;
+        $this->datos = $datos;
     }
 
     /**
@@ -33,7 +33,6 @@ class InscriptionMail extends Mailable
      */
     public function build()
     {
-        
-        return $this->markdown('mail.inscriptionEvent');
+        return $this->view('mail.inscription');
     }
 }

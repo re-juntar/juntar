@@ -35,8 +35,8 @@
     @livewire('event-modal', ['academicUnits' => $academicUnits])
 
     <x-slot name="pageScripts">
-        <script src="{{ asset('vendor/masonry.pkgd.js') }}"></script>
-        <script src="{{ asset('vendor/infinite-scroll.pkgd.js') }}"></script>
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
         <script>
             var msnry = new Masonry('.infinite-scr', {
                 itemSelector: ".grid-item",
